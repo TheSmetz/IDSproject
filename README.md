@@ -1,9 +1,9 @@
 GRUPPO : Trash-it
 
-Andrea Falaschini (098390)
-Matteo Guerrini (097993)
-Diego Miccio (098036)
-Matteo Iommi (097643)
+Andrea Falaschini -> 098390
+Matteo Guerrini -> 097993
+Diego Miccio -> 098036
+Matteo Iommi -> 097643
 
 
 
