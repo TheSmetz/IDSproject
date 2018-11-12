@@ -1,4 +1,5 @@
 GRUPPO : Trash-it
+
 Andrea Falaschini (098390)
 Matteo Guerrini (097993)
 Diego Miccio (098036)
@@ -8,6 +9,7 @@ Matteo Iommi (097643)
 
 
 DESCRIZIONE PROGETTO INGEGNERIA DEL SOFTWARE
+
 Realizzazione di un progetto rivolto ai cittadini residenti nei comuni italiani e ai turisti che soggiornano nel nostro Paese.
 Si vuole fornire una soluzione al problema crescente dell’immondizia nelle città, attraverso un sistema di smistamento automatizzato che aiuti i comuni nello smaltimento dei rifiuti e che renda i cittadini più consapevoli delle semplici regole relative alla raccolta differenziata.
 L’idea è quella di creare un impianto in cui l’utente possa inserire uno o più prodotti che, una volta raggiunto l’interno del macchinario, vengano smistati negli appositi contenitori di rifiuti.
