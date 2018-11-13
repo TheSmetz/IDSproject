@@ -13,7 +13,7 @@ public class Tessera {
     public String getNome() {
         return nome;
     }
-    
+
 
     public String getCognome() {
         return cognome;
