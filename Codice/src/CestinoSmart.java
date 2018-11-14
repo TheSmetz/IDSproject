@@ -4,8 +4,22 @@ public class CestinoSmart {
 
     public CestinoSmart(){} //costruttore
 
-    public void getIntegrita(){}
-    public void setIntegrita(){}
+    public boolean isBocchetta() {
+        return bocchetta;
+    }
+
+    public void setBocchetta(boolean bocchetta) {
+        this.bocchetta = bocchetta;
+    }
+
+    public boolean isIntegrita() {
+        return integrita;
+    }
+
+    public void setIntegrita(boolean integrita) {
+        this.integrita = integrita;
+    }
+
     public void chiamaAssistenza(){}
     public void scansionaTessera(){}
 }
