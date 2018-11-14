@@ -4,5 +4,13 @@ public class OperatoreEcologico extends EnteSmaltimento {
 
     public OperatoreEcologico(){}
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public void ritiroCestinoPieno(){}
 }
