@@ -11,4 +11,19 @@ public class Timer {
    private void ripristinoSessione(){}
    public void notifyTimerSessione(){}
 
+   public boolean isSessione() {
+      return sessione;
+   }
+
+   public int getTimerBocchetta() {
+      return timerBocchetta;
+   }
+
+   public int getTimerOperazione() {
+      return timerOperazione;
+   }
+
+   public void setSessione(boolean sessione) {
+      this.sessione = sessione;
+   }
 }
