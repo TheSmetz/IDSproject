@@ -4,8 +4,19 @@ public class Cestino extends CestinoSmart{
 
     public Cestino(){} //costruttore
 
-    public void getCapienza(){}
-    public void setCapienza(){}
-    public void getSensore(){}
-    public void setSensore(){}
+    public int getCapienza() {
+        return capienza;
+    }
+
+    public void setCapienza(int capienza) {
+        this.capienza = capienza;
+    }
+
+    public boolean isSensore() {
+        return sensore;
+    }
+
+    public void setSensore(boolean sensore) {
+        this.sensore = sensore;
+    }
 }
