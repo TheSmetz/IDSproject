@@ -8,13 +8,13 @@ public class Main {
 				true, true);
 		Prodotto Giornale = new Prodotto("hwgyue23", "Gazzetta", "Giornale carta", true, false, false, false);
 		
-		System.out.println("\n Stampa prodotto Birra\n");
+		System.out.println("\n Stampa prodotto -> Birra\n");
 		Birra.getMateriale();
 		Birra.getNomeProdotto();
 		Birra.getCodiceABarre();
 		Birra.getDescrizione();
 		
-		System.out.println("\n Stampa prodotto Giornale\n");
+		System.out.println("\n Stampa prodotto -> Giornale\n");
 		Giornale.getMateriale();
 		Giornale.getNomeProdotto();
 		Giornale.getCodiceABarre();
