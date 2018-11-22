@@ -1,0 +1,85 @@
+Generale:
+
+Ripensare a uml senza include e extend, poi considerarli ( ok )
+
+Descrizione piu generica per obbiettivi e meno tecnica (ok)
+
+Rivedere ext e include
+
+Aggiungere CONFERIMENTO PRODOTTO(gettare prodotto) che include la SCANSION PRODOTTO(con include, conferimento non ha senso senza scansione) attivato dall'utente, post cond: prodotto nel corretto bidone riciclo  (OK)
+
+INCLUDE  un meccanismo di riuso, vabene anche per un solo caso ma srebbe meglio per più casi d'uso
+
+EXTEND non è obbligatoria, esempio: verifica premi alla cassa dpo aver pagato, la raccolta punti non c'è sempre quindi non può essere messo include,
+
+SCANSIONE deve essere incluso da altri casi d'uso come ad esempio DETTAGLI PRODOTTO(devo scansionare il prodotto)
+
+
+
+Casi d'uso singoli:
+
+SCANSIONE:
+
+non codice a barre ma identificazione generica
+Descrizione caso d'uso: perche l'utente fa tale operazione non come
+Flow: alla fine
+Assump: sessione attiva su touchscreen ( ok)
+
+
+GUADAGNO PUNTI:estensione di conferimento, opzionale (ok)
+
+
+RITIRO PREMIO: caso d'uso direttamente a contatto con l'utente (ok)
+
+
+accumulo punti extend  <--------- policy accumulo ( da fare )
+
+tessera su conferisci, potrebbe essere  parte dell'extend di conferisci ancora meglio come caso d'uso ( tipo Autenticazione ) ( riconoscimento cittadino ) (ok)
+
+
+
+
+Attivazione sistema : caso d'suo iniziale....   Raccolgo punti quando il timer scade /  quando la sessione termina   
+ (?)
+
+scansione <<<<---- include ------- autenticazione  (ok)
+
+
+post condizione accumolo punti.
+
+Timer meglio Chiusura Sessione attivat dal tempo  (ok)
+
+Timer molto piu semplice, dopo 10 sec dall'ultima operazione chiudo sessione ( esempio) ( da fare)
+
+Disattivare gli altri casi d'uso precedenti .... sistema blocca laser, sistema blocca le altre sessioni . 
+
+
+
+
+
+
+( da fare ancora )
+Diagrmma classi:
+il cestino non ha una relazione con la tessera anche se richiede l'id della tessera scannerizzata.... tessera no relazione con  cestino ma con utente
+
+Meglio piu gestore--- gestore tessere, gestore prodotti
+
+
+
+
+Sequence diagram ---- arrivo , avvio sessione, oggetto lettoremartcode che prende bar e lo passa al cestinoSmart .... scansione, se barcode tessera, avvia GestioneTessera --- se barcode prodotto , avvia GestioneProdotto
+
+
+Selettore cestino  (((policy, comuni diversi , regole diverse ) 
+
+
+Timer al CestinoSMart 
+
+
+
+-------
+appunti :
+
+conferimento collegato con timer ?
+da rivedere tutti i flow?
+extend nel flow di chi va?
