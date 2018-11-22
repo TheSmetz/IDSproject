@@ -78,7 +78,7 @@ Timer al CestinoSMart
 
 
 -------
-appunti :
+appunti ciò:
 
 conferimento collegato con timer ?
 da rivedere tutti i flow?
