@@ -1,4 +1,0 @@
-/*
-    !/Trash-It GUI
-    /Trash-It GUI/*
-    !/Trash-It GUI/src/
