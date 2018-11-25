@@ -27,6 +27,8 @@ public class Main extends JFrame {
 			public void run() {
 				try {
 					Main frame = new Main();
+					frame.setLocationRelativeTo(null);
+			        frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
