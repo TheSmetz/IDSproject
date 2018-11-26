@@ -32,14 +32,14 @@ public class db_Connection {
 			ResultSet rsProdotti = stmtPersone.executeQuery(SQLProdotti);
 			
 			//output
-			System.out.println("\n----- PRODOTTI -----\n  v\n");
+			System.out.println("\n----- PRODOTTI -----\n");
 			while (rsProdotti.next()) {
 				int id_col = rsProdotti.getInt("codiceABarre");
 				String descrizione_col = rsProdotti.getString("descrizione");
 				System.out.println(id_col + " " + descrizione_col);
 			}
 			
-			System.out.println("\n----- PERSONE -----\n  v\n");
+			System.out.println("\n----- PERSONE -----\n");
 			while (rsPersone.next()) {
 				int id_col = rsPersone.getInt("id");
 				String first_name = rsPersone.getString("nome");
