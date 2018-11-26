@@ -1,3 +1,4 @@
+package Gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;

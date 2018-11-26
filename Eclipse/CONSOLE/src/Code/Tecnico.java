@@ -1,3 +1,4 @@
+package Code;
 
 
 public class Tecnico extends EnteSmaltimento {
