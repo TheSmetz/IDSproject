@@ -44,7 +44,7 @@ public class TimerMain extends JFrame {
 	 */
 	public TimerMain() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 337, 330);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -53,7 +53,7 @@ public class TimerMain extends JFrame {
 		JLabel lblNewLabel = new JLabel("00 : 10");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(0, 88, 428, 64);
+		lblNewLabel.setBounds(15, 27, 284, 64);
 		contentPane.add(lblNewLabel);
 
 		JButton btnRicomincia = new JButton("Ricomincia");
@@ -63,7 +63,7 @@ public class TimerMain extends JFrame {
 				time = 10;
 			}
 		});
-		btnRicomincia.setBounds(34, 168, 128, 60);
+		btnRicomincia.setBounds(15, 107, 284, 60);
 		contentPane.add(btnRicomincia);
 
 		JButton btnChiudi = new JButton("Chiudi");
@@ -73,7 +73,7 @@ public class TimerMain extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnChiudi.setBounds(263, 168, 133, 60);
+		btnChiudi.setBounds(15, 191, 284, 60);
 		contentPane.add(btnChiudi);
 
 		Timer timer = new Timer();
