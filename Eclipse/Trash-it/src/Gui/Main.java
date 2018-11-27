@@ -320,7 +320,7 @@ public class Main extends JFrame {
 		contentPane.add(btnPanel3);
 		
 		JLabel background = new JLabel("New label");
-		background.setIcon(new ImageIcon(Main.class.getResource("/gui/images/home.jpg")));
+		background.setIcon(new ImageIcon(Main.class.getResource("/Gui/images/home.jpg")));
 		background.setBounds(0, -19, 1297, 766);
 		contentPane.add(background);
 	}
