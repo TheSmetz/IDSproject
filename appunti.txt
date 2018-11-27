@@ -40,7 +40,7 @@ tessera su conferisci, potrebbe essere  parte dell'extend di conferisci ancora m
 
 
 Attivazione sistema : caso d'suo iniziale....   Raccolgo punti quando il timer scade /  quando la sessione termina   
- (?)
+ (ok)
 
 scansione <<<<---- include ------- autenticazione  (ok)
 
@@ -49,10 +49,13 @@ post condizione accumolo punti.
 
 Timer meglio Chiusura Sessione attivat dal tempo  (ok)
 
-Timer molto piu semplice, dopo 10 sec dall'ultima operazione chiudo sessione ( esempio) ( da fare)
+Timer molto piu semplice, dopo 10 sec dall'ultima operazione chiudo sessione ( esempio) ( ok)
 
+
+
+-----------------------------------------------------------------------------------
 Disattivare gli altri casi d'uso precedenti .... sistema blocca laser, sistema blocca le altre sessioni . 
-
+------------------------------------------------------------------------------------
 
 
 
@@ -83,3 +86,7 @@ appunti ciò:
 conferimento collegato con timer ?
 da rivedere tutti i flow?
 extend nel flow di chi va?
+
+
+
+( timer bocchetta? ) ( descrizione guadagno punti) ( descrizione ritiro premio)
