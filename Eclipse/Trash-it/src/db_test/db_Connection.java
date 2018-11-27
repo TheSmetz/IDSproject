@@ -11,13 +11,13 @@ public class db_Connection {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			String host = "jdbc:mysql://localhost:3306/trashit";	//database name
+			String host = "jdbc:mysql://localhost:3306/trash-it";	//database name
 			String password = "";
 			String username = "root";
 			Connection con = DriverManager.getConnection(host, username, password);		//connessione
 
-			Statement stmtProdotti = con.createStatement();
-			Statement stmtPersone = con.createStatement();
+			Statement stmtProdotto = con.createStatement();
+			Statement stmtPersona = con.createStatement();
 			
 			//query inserimento
 			//Statement stmtInserimento = con.createStatement();
@@ -26,24 +26,24 @@ public class db_Connection {
 			//stmtInserimento2.executeUpdate("INSERT INTO prodotti " + "VALUES(505, 'Portatile, indifferenziato')");
 			
 			//query select
-			String SQLPersone = "SELECT * FROM persone";
-			String SQLProdotti = "SELECT * FROM prodotti";
-			ResultSet rsPersone = stmtProdotti.executeQuery(SQLPersone);
-			ResultSet rsProdotti = stmtPersone.executeQuery(SQLProdotti);
+			String SQLPersona = "SELECT * FROM persona";
+			String SQLProdotto = "SELECT * FROM prodotto";
+			ResultSet rsPersona = stmtProdotto.executeQuery(SQLPersona);
+			ResultSet rsProdotto = stmtPersona.executeQuery(SQLProdotto);
 			
 			//output
 			System.out.println("\n----- PRODOTTI -----\n");
-			while (rsProdotti.next()) {
-				int id_col = rsProdotti.getInt("codiceABarre");
-				String descrizione_col = rsProdotti.getString("descrizione");
+			while (rsProdotto.next()) {
+				String id_col = rsProdotto.getString("barcode");
+				String descrizione_col = rsProdotto.getString("descrizione");
 				System.out.println(id_col + " " + descrizione_col);
 			}
 			
 			System.out.println("\n----- PERSONE -----\n");
-			while (rsPersone.next()) {
-				int id_col = rsPersone.getInt("id");
-				String first_name = rsPersone.getString("nome");
-				String last_name = rsPersone.getString("cognome");
+			while (rsPersona.next()) {
+				String id_col = rsPersona.getString("codicefiscale");
+				String first_name = rsPersona.getString("nome");
+				String last_name = rsPersona.getString("cognome");
 				System.out.println(id_col + " " + first_name + " " + last_name);
 			}
 

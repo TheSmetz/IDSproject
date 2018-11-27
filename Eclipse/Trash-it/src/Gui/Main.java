@@ -1,10 +1,18 @@
 package Gui;
 
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.CardLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JButton;
@@ -12,9 +20,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame {
@@ -50,10 +61,13 @@ public class Main extends JFrame {
 		
 	}
 
+
 	/**
 	 * Create the frame.
 	 */
 	public Main() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/Gui/images/icon.png")));
+		setTitle("Trash-it");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1315, 794);
 		contentPane = new JPanel();
@@ -72,9 +86,10 @@ public class Main extends JFrame {
 		homePanel.setLayout(null);
 		
 		JLabel lblBenvenuti = new JLabel("BENVENUTO");
+		lblBenvenuti.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBenvenuti.setForeground(Color.WHITE);
 		lblBenvenuti.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
-		lblBenvenuti.setBounds(251, 117, 183, 57);
+		lblBenvenuti.setBounds(0, 50, 710, 57);
 		homePanel.add(lblBenvenuti);
 		
 		JLabel lblInfo = new JLabel("info");
@@ -104,7 +119,7 @@ public class Main extends JFrame {
 		lblGettareProdotto.setForeground(Color.WHITE);
 		lblGettareProdotto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGettareProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
-		lblGettareProdotto.setBounds(12, 117, 683, 57);
+		lblGettareProdotto.setBounds(0, 50, 710, 57);
 		gttPanel.add(lblGettareProdotto);
 		
 		JLabel lblGettareProdottoNella = new JLabel("Gettare Prodotto nella bocchetta");
@@ -139,7 +154,7 @@ public class Main extends JFrame {
 		gttPanel.add(label_6);
 		
 		JLabel label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon(Main.class.getResource("/gui/images/logo.jpg")));
+		label_4.setIcon(new ImageIcon(Main.class.getResource("/Gui/images/logo.png")));
 		label_4.setBounds(760, 117, 397, 414);
 		gttPanel.add(label_4);
 		
@@ -147,7 +162,7 @@ public class Main extends JFrame {
 		lblScansioneProdotto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblScansioneProdotto.setForeground(Color.WHITE);
 		lblScansioneProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
-		lblScansioneProdotto.setBounds(12, 117, 683, 57);
+		lblScansioneProdotto.setBounds(0, 50, 710, 57);
 		scanPanel.add(lblScansioneProdotto);
 		
 		JButton btnProdottoVisualizzatoCorretto = new JButton("SI");
@@ -161,7 +176,7 @@ public class Main extends JFrame {
 		btnProdottoVisualizzatoCorretto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		btnProdottoVisualizzatoCorretto.setContentAreaFilled(false);
 		btnProdottoVisualizzatoCorretto.setBorderPainted(false);
-		btnProdottoVisualizzatoCorretto.setBounds(220, 483, 79, 57);
+		btnProdottoVisualizzatoCorretto.setBounds(220, 543, 79, 57);
 		scanPanel.add(btnProdottoVisualizzatoCorretto);
 		
 		JLabel label_1 = new JLabel("TRASH-IT");
@@ -182,23 +197,34 @@ public class Main extends JFrame {
 		btnNo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		btnNo.setContentAreaFilled(false);
 		btnNo.setBorderPainted(false);
-		btnNo.setBounds(355, 483, 79, 57);
+		btnNo.setBounds(355, 543, 79, 57);
 		scanPanel.add(btnNo);
 		
-		JLabel lblProdottoScansionatoCorretto = new JLabel("Prodotto scansionato corretto?");
+		JLabel lblProdottoScansionatoCorretto = new JLabel("Il prodotto scansionato \u00E8 corretto?");
+		lblProdottoScansionatoCorretto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProdottoScansionatoCorretto.setForeground(Color.WHITE);
 		lblProdottoScansionatoCorretto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 25));
-		lblProdottoScansionatoCorretto.setBounds(149, 215, 359, 57);
+		lblProdottoScansionatoCorretto.setBounds(0, 215, 711, 57);
 		scanPanel.add(lblProdottoScansionatoCorretto);
 		
 		JLabel lblImmagineProdotto = new JLabel("immagine prodotto");
-		lblImmagineProdotto.setBounds(267, 312, 222, 160);
+		lblImmagineProdotto.setBounds(220, 215, 269, 257);
 		scanPanel.add(lblImmagineProdotto);
 		
 		JLabel label_3 = new JLabel("");
-		label_3.setIcon(new ImageIcon(Main.class.getResource("/gui/images/logo.jpg")));
+		label_3.setIcon(new ImageIcon(Main.class.getResource("/Gui/images/logo.png")));
 		label_3.setBounds(760, 117, 397, 414);
 		scanPanel.add(label_3);
+		
+		JButton btnGetImg = new JButton("get IMG");
+		btnGetImg.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			}
+		});
+		btnGetImg.setBounds(39, 312, 97, 25);
+		scanPanel.add(btnGetImg);
 		
 		
 		JButton btnPanel1 = new JButton("HOME");
@@ -220,7 +246,8 @@ public class Main extends JFrame {
 		contentPane.add(btnPanel2);
 		
 		//
-		JButton btnScansionaProdotto = new JButton("Scansiona Prodotto");
+		JButton btnScansionaProdotto = new JButton("");
+		btnScansionaProdotto.setIcon(new ImageIcon(Main.class.getResource("/Gui/images/scanner.png")));
 		btnScansionaProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		btnScansionaProdotto.setForeground(Color.WHITE);
 		//seguenti tre lineee per impostare JButton trasparente
@@ -230,15 +257,58 @@ public class Main extends JFrame {
 		btnScansionaProdotto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(scanPanel);
+				
+//get image
+				
+				
+				try {
+					String host = "jdbc:mysql://localhost:3306/trash-it";	//database name
+					String password = "";
+					String username = "root";
+					Connection con = DriverManager.getConnection(host, username, password);		//connessione
+
+					Statement stmtProdotto = con.createStatement();
+					String SQLProdotto = "SELECT * FROM prodotto WHERE barcode = '4006381115575'";
+					ResultSet rsProdotto = stmtProdotto.executeQuery(SQLProdotto);
+					
+					//output
+					System.out.println("\n----- PRODOTTO -----\n");
+					while (rsProdotto.next()) {
+						String br = rsProdotto.getString("barcode");
+						//String descrizione_col = rsProdotti.getString("descrizione");
+						System.out.println("Barcode: " + br);
+						
+						String desc = rsProdotto.getString("descrizione");
+						//String descrizione_col = rsProdotti.getString("descrizione");
+						System.out.println("Descrizione: " + desc);
+						
+						byte[] img = rsProdotto.getBytes("immagine");
+						ImageIcon image = new ImageIcon(img);
+						Image im = image.getImage();
+						Image myImg = im.getScaledInstance(lblImmagineProdotto.getWidth(), lblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
+						ImageIcon newImage = new ImageIcon(myImg);
+						lblImmagineProdotto.setIcon(newImage);
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+				}			
 			}
 		});
-		btnScansionaProdotto.setBounds(224, 286, 242, 57);
+		btnScansionaProdotto.setBounds(273, 350, 135, 96);
 		homePanel.add(btnScansionaProdotto);
 		
 		JLabel logo_label = new JLabel("");
-		logo_label.setIcon(new ImageIcon(Main.class.getResource("/gui/images/logo.jpg")));
+		logo_label.setIcon(new ImageIcon(Main.class.getResource("/Gui/images/logo.png")));
 		logo_label.setBounds(760, 117, 397, 414);
 		homePanel.add(logo_label);
+		
+		JLabel lblScansionaProdotto = new JLabel("Scansiona Prodotto");
+		lblScansionaProdotto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblScansionaProdotto.setForeground(Color.WHITE);
+		lblScansionaProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
+		lblScansionaProdotto.setBounds(0, 222, 710, 57);
+		homePanel.add(lblScansionaProdotto);
 		
 		JButton btnPanel3 = new JButton("GttProdotto");
 		btnPanel3.addActionListener(new ActionListener() {
@@ -249,9 +319,9 @@ public class Main extends JFrame {
 		btnPanel3.setBounds(309, 13, 97, 25);
 		contentPane.add(btnPanel3);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(Main.class.getResource("/gui/images/home.jpg")));
-		lblNewLabel.setBounds(0, -19, 1297, 766);
-		contentPane.add(lblNewLabel);
+		JLabel background = new JLabel("New label");
+		background.setIcon(new ImageIcon(Main.class.getResource("/gui/images/home.jpg")));
+		background.setBounds(0, -19, 1297, 766);
+		contentPane.add(background);
 	}
 }
