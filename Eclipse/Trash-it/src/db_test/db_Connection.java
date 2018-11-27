@@ -36,7 +36,7 @@ public class db_Connection {
 			while (rsProdotto.next()) {
 				String id_col = rsProdotto.getString("barcode");
 				String descrizione_col = rsProdotto.getString("descrizione");
-				System.out.println(id_col + " " + descrizione_col);
+				System.out.println(id_col + " -> " + descrizione_col);
 			}
 			
 			System.out.println("\n----- PERSONE -----\n");
@@ -44,7 +44,7 @@ public class db_Connection {
 				String id_col = rsPersona.getString("codicefiscale");
 				String first_name = rsPersona.getString("nome");
 				String last_name = rsPersona.getString("cognome");
-				System.out.println(id_col + " " + first_name + " " + last_name);
+				System.out.println(id_col + " -> " + first_name + " " + last_name);
 			}
 
 		} catch (SQLException e) {
