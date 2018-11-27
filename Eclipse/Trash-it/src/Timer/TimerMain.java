@@ -18,8 +18,8 @@ import java.awt.event.ActionEvent;
 public class TimerMain extends JFrame {
 
 	private JPanel contentPane;
-	
-	private int time = 9;
+
+	private int time = 10;
 
 	/**
 	 * Launch the application.
@@ -49,23 +49,23 @@ public class TimerMain extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("00 : 10");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(0, 88, 428, 64);
-		contentPane.add(lblNewLabel); 
-		
+		contentPane.add(lblNewLabel);
+
 		JButton btnRicomincia = new JButton("Ricomincia");
 		btnRicomincia.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnRicomincia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				time = 9;
+				time = 10;
 			}
 		});
 		btnRicomincia.setBounds(34, 168, 128, 60);
 		contentPane.add(btnRicomincia);
-		
+
 		JButton btnChiudi = new JButton("Chiudi");
 		btnChiudi.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnChiudi.addActionListener(new ActionListener() {
@@ -75,18 +75,21 @@ public class TimerMain extends JFrame {
 		});
 		btnChiudi.setBounds(263, 168, 133, 60);
 		contentPane.add(btnChiudi);
-		
+
 		Timer timer = new Timer();
-		TimerTask task = new TimerTask(){
-	        public void run(){
-	            if (time >= 0) {
-	                lblNewLabel.setText("00 : 0" + time--);
-	            }else {
-	            	lblNewLabel.setText("Tempo Scaduto");
-	            }
-	        }
-	    };
-	    timer.scheduleAtFixedRate(task, 0, 1000);
-        
+		TimerTask task = new TimerTask() {
+			public void run() {
+				if (time == 10) {
+					lblNewLabel.setText("00 : " + time);
+					time--;
+				} else if (time >= 0) {
+					lblNewLabel.setText("00 : 0" + time--);
+				} else {
+					lblNewLabel.setText("Tempo Scaduto");
+				}
+			}
+		};
+		timer.scheduleAtFixedRate(task, 0, 1000);
+
 	}
 }
