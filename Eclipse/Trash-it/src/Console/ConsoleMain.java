@@ -1,6 +1,6 @@
 package Console;
 
-public class Main {
+public class ConsoleMain {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
