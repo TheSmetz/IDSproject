@@ -29,7 +29,7 @@ import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
-public class Main extends JFrame {
+public class GuiMain extends JFrame {
 
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;
@@ -41,7 +41,7 @@ public class Main extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main frame = new Main();
+					GuiMain frame = new GuiMain();
 					frame.setLocationRelativeTo(null);
 			        frame.setResizable(false);
 					frame.setVisible(true);
@@ -66,8 +66,8 @@ public class Main extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Main() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/Gui/images/aaa.png")));
+	public GuiMain() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GuiMain.class.getResource("/Gui/images/aaa.png")));
 		setTitle("Trash-it");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 794);
@@ -147,7 +147,7 @@ public class Main extends JFrame {
 		
 		JLabel label_4 = new JLabel("");
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setIcon(new ImageIcon(Main.class.getResource("/Gui/images/logo.png")));
+		label_4.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
 		label_4.setBounds(0, 0, 418, 488);
 		gttPanel.add(label_4);
 		
@@ -161,7 +161,7 @@ public class Main extends JFrame {
 		
 		//prodotto corretto
 		
-		ImageIcon corretto = new ImageIcon(Main.class.getResource("/Gui/images/whitebutton.png"));
+		ImageIcon corretto = new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png"));
 		JButton btnProdottoVisualizzatoCorretto = new JButton("Prodotto errato", corretto);
 		btnProdottoVisualizzatoCorretto.setVerticalTextPosition(JButton.CENTER);
 		btnProdottoVisualizzatoCorretto.setHorizontalTextPosition(JButton.CENTER);		
@@ -184,7 +184,7 @@ public class Main extends JFrame {
 		scanPanel.add(btnProdottoVisualizzatoCorretto);
 		
 		//errato
-		ImageIcon errato = new ImageIcon(Main.class.getResource("/Gui/images/greenbutton.png"));
+		ImageIcon errato = new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbutton.png"));
 		JButton btnProdottoVisualizzatoErrato = new JButton("Prodotto corretto", errato);
 		btnProdottoVisualizzatoErrato.setVerticalTextPosition(JButton.CENTER);
 		btnProdottoVisualizzatoErrato.setHorizontalTextPosition(JButton.CENTER);		
@@ -221,7 +221,7 @@ public class Main extends JFrame {
 		
 		JLabel label_3 = new JLabel("");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setIcon(new ImageIcon(Main.class.getResource("/Gui/images/logo.png")));
+		label_3.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
 		label_3.setBounds(0, 0, 418, 488);
 		scanPanel.add(label_3);
 		
@@ -245,7 +245,7 @@ public class Main extends JFrame {
 		contentPane.add(btnPanel2);
 		
 		//Avvia scansione
-		ImageIcon scan_icon = new ImageIcon(Main.class.getResource("/Gui/images/greenbutton.png"));
+		ImageIcon scan_icon = new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbutton.png"));
 		JButton btnScansionaProdotto = new JButton("Avvia scansione", scan_icon);
 		btnScansionaProdotto.setVerticalTextPosition(JButton.CENTER);
 		btnScansionaProdotto.setHorizontalTextPosition(JButton.CENTER);
@@ -270,7 +270,7 @@ public class Main extends JFrame {
 					Connection con = DriverManager.getConnection(host, username, password);		//connessione
 
 					Statement stmtProdotto = con.createStatement();
-					String SQLProdotto = "SELECT * FROM prodotto WHERE nome = 'levissima 50cl'";
+					String SQLProdotto = "SELECT * FROM prodotto WHERE nome = 'igieneplus'";
 					ResultSet rsProdotto = stmtProdotto.executeQuery(SQLProdotto);
 					
 					//output
@@ -302,7 +302,7 @@ public class Main extends JFrame {
 		
 		JLabel logo_label = new JLabel("");
 		logo_label.setHorizontalAlignment(SwingConstants.CENTER);
-		logo_label.setIcon(new ImageIcon(Main.class.getResource("/Gui/images/logo.png")));
+		logo_label.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
 		logo_label.setBounds(0, 0, 418, 488);
 		homePanel.add(logo_label);
 		
@@ -324,7 +324,7 @@ public class Main extends JFrame {
 		
 		JLabel background = new JLabel("");
 		background.setBounds(0, -14, 1045, 761);
-		background.setIcon(new ImageIcon(Main.class.getResource("/Gui/images/home.jpg")));
+		background.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/home.jpg")));
 		contentPane.add(background);
 	}
 }
