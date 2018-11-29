@@ -30,6 +30,7 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 import javax.swing.JTextPane;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class GuiMain extends JFrame {
@@ -46,6 +47,7 @@ public class GuiMain extends JFrame {
 	private String descrizioneProdotto; // decrizione
 	private byte[] imgProdotto; // immagine
 	protected String[] args;
+	private JTextField hometxtInputBarcode;	//input barcode
 
 	/**
 	 * Launch the application.
@@ -73,8 +75,36 @@ public class GuiMain extends JFrame {
 		layeredPane.revalidate();
 
 	}
+	
+	public static boolean verifyBarcode(String s) {
 
-	public void searchDBProduct(String query) {
+		boolean corretto = false;
+		int lenght = s.length();
+		
+		System.out.println("---INPUT BARCODE--- ");
+		System.out.println("Text: " + s);
+		System.out.println("Lunghezza: " + lenght);
+		
+		
+		char[] sequenza = s.toCharArray();
+		
+		if (lenght == 13) {
+			for (int i = 0; i < 13; i++) {
+				try {
+					Integer.parseInt(Character.toString(sequenza[i]));
+					corretto = true;
+					
+				} catch (Exception e) {
+					corretto = false;
+				}
+			}
+		}
+		System.out.println("Corretto: " + corretto);
+		return corretto;
+		}
+	
+
+	public void searchDBProduct(String barcodeQuery) {
 		try {
 			String host = "jdbc:mysql://localhost:3306/trash-it"; // database name
 			String password = "";
@@ -82,7 +112,7 @@ public class GuiMain extends JFrame {
 			Connection con = DriverManager.getConnection(host, username, password); // connessione
 
 			Statement stmtProdotto = con.createStatement();
-			String SQLProdotto = query; // "SELECT * FROM prodotto WHERE nome = 'igieneplus'"
+			String SQLProdotto = "SELECT * FROM prodotto WHERE barcode = "+barcodeQuery; // "SELECT * FROM prodotto WHERE nome = 'igieneplus'"
 			ResultSet rsProdotto = stmtProdotto.executeQuery(SQLProdotto);
 
 			// output
@@ -465,7 +495,6 @@ public class GuiMain extends JFrame {
 		JButton homebtnScansionaProdotto = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		homebtnScansionaProdotto.setVerticalTextPosition(JButton.CENTER);
 		homebtnScansionaProdotto.setHorizontalTextPosition(JButton.CENTER);
-
 		homebtnScansionaProdotto.setBorderPainted(false);
 		homebtnScansionaProdotto.setMargin(new Insets(0, 0, 0, 0));
 		// btnScansionaProdotto.setIcon(new
@@ -475,10 +504,17 @@ public class GuiMain extends JFrame {
 		homebtnScansionaProdotto.setContentAreaFilled(false);
 		homebtnScansionaProdotto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(scanPanel);
-
+				//leggo il barcode in input
+				barcodeProdotto = hometxtInputBarcode.getText();				
+				
+				//8029241107035	igiene plus
+				//4006381115575 stabilo
+				//8001050026066 levissima
+				
 				// eseguo ricerca prodotto
-				searchDBProduct("SELECT * FROM prodotto WHERE nome = 'levissima 50cl'");
+				searchDBProduct(barcodeProdotto);
+				
+				switchPanel(scanPanel);
 
 				// output
 				if (connectionFail == false) {
@@ -489,7 +525,7 @@ public class GuiMain extends JFrame {
 					ImageIcon image = new ImageIcon(imgProdotto);
 					Image im = image.getImage();
 					Image myImg = im.getScaledInstance(scanlblImmagineProdotto.getWidth(),
-							scanlblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
+					scanlblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
 					ImageIcon newImage = new ImageIcon(myImg);
 					scanlblImmagineProdotto.setIcon(newImage);
 				} else {
@@ -516,6 +552,20 @@ public class GuiMain extends JFrame {
 		homelblScansionaProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
 		homelblScansionaProdotto.setBounds(416, 97, 629, 57);
 		homePanel.add(homelblScansionaProdotto);
+		
+		hometxtInputBarcode = new JTextField();
+		hometxtInputBarcode.setHorizontalAlignment(SwingConstants.CENTER);
+		hometxtInputBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		hometxtInputBarcode.setBounds(595, 321, 272, 44);
+		hometxtInputBarcode.setOpaque(false);
+		homePanel.add(hometxtInputBarcode);
+		hometxtInputBarcode.setColumns(10);
+		
+		JLabel homeInputBackground = new JLabel("");
+		homeInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
+		homeInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png")));
+		homeInputBackground.setBounds(426, 295, 607, 96);
+		homePanel.add(homeInputBackground);
 		
 		
 		JLabel background = new JLabel("");
