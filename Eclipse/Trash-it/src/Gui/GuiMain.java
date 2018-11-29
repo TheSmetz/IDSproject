@@ -154,7 +154,7 @@ public class GuiMain extends JFrame {
 		errlblErroreProdotto.setBounds(416, 0, 629, 57);
 		errorPanel.add(errlblErroreProdotto);
 		
-		JButton errbtnTornaIndietro = new JButton("Ritenta scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png")));
+		JButton errbtnTornaIndietro = new JButton("Ritenta scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
 		errbtnTornaIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -196,6 +196,7 @@ public class GuiMain extends JFrame {
 		errorPanel.add(errlblLogo);
 		
 		JTextPane errtxtpnNonStato = new JTextPane();
+		errtxtpnNonStato.setEditable(false);
 		errtxtpnNonStato.setFont(new Font("Tahoma", Font.PLAIN, 25));		
 		//allign center
 		SimpleAttributeSet centerText = new SimpleAttributeSet();
@@ -212,6 +213,13 @@ public class GuiMain extends JFrame {
 		layeredPane.add(scanPanel, "name_47730555398847");
 		scanPanel.setOpaque(false);
 		scanPanel.setLayout(null);
+		
+		//ASSISTENZA PANEL
+		JPanel assPanel = new JPanel();
+		assPanel.setLayout(null);
+		assPanel.setOpaque(false);
+		layeredPane.add(assPanel, "name_8556421918800");
+		
 
 		// GTT PANEL
 		JPanel gttPanel = new JPanel();
@@ -221,6 +229,8 @@ public class GuiMain extends JFrame {
 
 		// BOTTONI NAVIGAZIONE SCHEDE (provvisori)
 		JButton btnPanel1 = new JButton("HOME");
+		btnPanel1.setBackground(Color.WHITE);
+		btnPanel1.setForeground(Color.BLACK);
 		btnPanel1.setBounds(60, 13, 97, 25);
 		btnPanel1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -230,6 +240,8 @@ public class GuiMain extends JFrame {
 		contentPane.add(btnPanel1);
 
 		JButton btnPanel2 = new JButton("ScProdotto");
+		btnPanel2.setBackground(Color.WHITE);
+		btnPanel2.setForeground(Color.BLACK);
 		btnPanel2.setBounds(189, 13, 97, 25);
 		btnPanel2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -239,6 +251,8 @@ public class GuiMain extends JFrame {
 		contentPane.add(btnPanel2);
 
 		JButton btnPanel3 = new JButton("GttProdotto");
+		btnPanel3.setBackground(Color.WHITE);
+		btnPanel3.setForeground(Color.BLACK);
 		btnPanel3.setBounds(309, 13, 97, 25);
 		btnPanel3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -246,7 +260,20 @@ public class GuiMain extends JFrame {
 			}
 		});
 		contentPane.add(btnPanel3);
-
+		
+		JButton btnAsspanel = new JButton("AssPanel");
+		btnAsspanel.setBackground(Color.WHITE);
+		btnAsspanel.setForeground(Color.BLACK);
+		btnAsspanel.setBounds(440, 13, 97, 25);
+		btnAsspanel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(assPanel);				
+			}
+		});
+		contentPane.add(btnAsspanel);
+		
+		
+		
 		// contenuti GTT
 		JLabel gttlblConferimentoProdotto = new JLabel("CONFERIMENTO PRODOTTO");
 		gttlblConferimentoProdotto.setForeground(Color.BLACK);
@@ -256,8 +283,12 @@ public class GuiMain extends JFrame {
 		gttPanel.add(gttlblConferimentoProdotto);
 
 		JButton gttbtnProblemiAssistenza = new JButton("Problemi? Assistenza");
+		gttbtnProblemiAssistenza.setVerticalTextPosition(JButton.CENTER);
+		gttbtnProblemiAssistenza.setHorizontalTextPosition(JButton.CENTER);
+		gttbtnProblemiAssistenza.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
 		gttbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				switchPanel(assPanel);
 			}
 		});
 		gttbtnProblemiAssistenza.setOpaque(false);
@@ -288,6 +319,7 @@ public class GuiMain extends JFrame {
 		gttPanel.add(gttlblDescrizione);
 
 		JTextPane gttTxtIstruzioni = new JTextPane();
+		gttTxtIstruzioni.setEditable(false);
 		gttTxtIstruzioni.setFont(new Font("Tahoma", Font.PLAIN, 25));		
 		//allign center
 		SimpleAttributeSet centerIstruzioni = new SimpleAttributeSet();
@@ -298,19 +330,58 @@ public class GuiMain extends JFrame {
 		gttTxtIstruzioni.setText("Non \u00E8 stato possibile recuperare l'immagine del prodotto");
 		gttTxtIstruzioni.setBounds(416, 86, 629, 73);
 		gttPanel.add(gttTxtIstruzioni);
+		
+		
+		//contenuti assistenza
+		JLabel lblAssistenza = new JLabel("ASSISTENZA");
+		lblAssistenza.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAssistenza.setForeground(Color.BLACK);
+		lblAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
+		lblAssistenza.setBounds(416, 0, 629, 57);
+		assPanel.add(lblAssistenza);
+				
+		JLabel label_1 = new JLabel("info");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setForeground(Color.BLACK);
+		label_1.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
+		label_1.setBounds(0, 571, 418, 57);
+		assPanel.add(label_1);
+				
+		JLabel label_2 = new JLabel("");
+		label_2.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		label_2.setHorizontalAlignment(SwingConstants.CENTER);
+		label_2.setBounds(0, 0, 418, 488);
+		assPanel.add(label_2);
+				
+		JTextPane txtpnTel = new JTextPane();
+		txtpnTel.setEditable(false);
+		txtpnTel.setText("Telefono:");
+		String newLine = System.getProperty("line.separator");    
+		txtpnTel.setText(txtpnTel.getText() + newLine + "Email:");
+		txtpnTel.setOpaque(false);
+		txtpnTel.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		txtpnTel.setBounds(416, 86, 629, 73);
+		//allign center
+		SimpleAttributeSet centerAss = new SimpleAttributeSet();
+		StyleConstants.setAlignment(centerAss, StyleConstants.ALIGN_CENTER);
+		StyledDocument docAss = txtpnTel.getStyledDocument();
+		docAss.setParagraphAttributes(0, 104, centerAss, false);
+		assPanel.add(txtpnTel);
 
+
+		// contenuti SCAN
 		JLabel scanlblScansioneProdotto = new JLabel("SCANSIONE PRODOTTO");
 		scanlblScansioneProdotto.setHorizontalAlignment(SwingConstants.CENTER);
 		scanlblScansioneProdotto.setForeground(Color.BLACK);
 		scanlblScansioneProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
 		scanlblScansioneProdotto.setBounds(416, 0, 629, 57);
 		scanPanel.add(scanlblScansioneProdotto);
-
-		// contenuti SCAN
+		
+		
 		// prodotto corretto
 
 		ImageIcon errato = new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png"));
-		JButton scanbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", errato);
+		JButton scanbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
 		scanbtnProdottoVisualizzatoErrato.setVerticalTextPosition(JButton.CENTER);
 		scanbtnProdottoVisualizzatoErrato.setHorizontalTextPosition(JButton.CENTER);
 		scanbtnProdottoVisualizzatoErrato.setBorderPainted(false);
@@ -328,12 +399,12 @@ public class GuiMain extends JFrame {
 		scanbtnProdottoVisualizzatoErrato.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		scanbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
 		scanbtnProdottoVisualizzatoErrato.setBorderPainted(false);
-		scanbtnProdottoVisualizzatoErrato.setBounds(417, 549, 628, 57);
+		scanbtnProdottoVisualizzatoErrato.setBounds(749, 449, 255, 57);
 		scanPanel.add(scanbtnProdottoVisualizzatoErrato);
 
 		// errato
 		ImageIcon corretto = new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbutton.png"));
-		JButton scanbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", corretto);
+		JButton scanbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		scanbtnProdottoVisualizzatoCorretto.setVerticalTextPosition(JButton.CENTER);
 		scanbtnProdottoVisualizzatoCorretto.setHorizontalTextPosition(JButton.CENTER);
 		scanbtnProdottoVisualizzatoCorretto.setBorderPainted(false);
@@ -354,7 +425,7 @@ public class GuiMain extends JFrame {
 		scanbtnProdottoVisualizzatoCorretto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		scanbtnProdottoVisualizzatoCorretto.setContentAreaFilled(false);
 		scanbtnProdottoVisualizzatoCorretto.setBorderPainted(false);
-		scanbtnProdottoVisualizzatoCorretto.setBounds(417, 466, 628, 57);
+		scanbtnProdottoVisualizzatoCorretto.setBounds(470, 449, 255, 57);
 		scanPanel.add(scanbtnProdottoVisualizzatoCorretto);
 
 		JLabel scanlblInfo = new JLabel("info");
@@ -374,12 +445,24 @@ public class GuiMain extends JFrame {
 		scanlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
 		scanlblLogo.setBounds(0, 0, 418, 488);
 		scanPanel.add(scanlblLogo);
+		
+		JButton btnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		btnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
+		btnProblemiAssistenza.setOpaque(false);
+		btnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
+		btnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnProblemiAssistenza.setForeground(Color.BLACK);
+		btnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		btnProblemiAssistenza.setContentAreaFilled(false);
+		btnProblemiAssistenza.setBorderPainted(false);
+		btnProblemiAssistenza.setBounds(416, 613, 628, 57);
+		scanPanel.add(btnProblemiAssistenza);
 
 		// contenuti HOME
 
 		// Avvia scansione
 		ImageIcon scan_icon = new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbutton.png"));
-		JButton homebtnScansionaProdotto = new JButton("Avvia scansione", scan_icon);
+		JButton homebtnScansionaProdotto = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		homebtnScansionaProdotto.setVerticalTextPosition(JButton.CENTER);
 		homebtnScansionaProdotto.setHorizontalTextPosition(JButton.CENTER);
 
@@ -433,7 +516,8 @@ public class GuiMain extends JFrame {
 		homelblScansionaProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
 		homelblScansionaProdotto.setBounds(416, 97, 629, 57);
 		homePanel.add(homelblScansionaProdotto);
-
+		
+		
 		JLabel background = new JLabel("");
 		background.setBounds(0, -14, 1045, 761);
 		background.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/home.jpg")));
