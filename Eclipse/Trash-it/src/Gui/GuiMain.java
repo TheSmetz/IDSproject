@@ -45,6 +45,7 @@ public class GuiMain extends JFrame {
 	private String nomeProdotto; // nome
 	private String descrizioneProdotto; // decrizione
 	private byte[] imgProdotto; // immagine
+	protected String[] args;
 
 	/**
 	 * Launch the application.
@@ -156,6 +157,8 @@ public class GuiMain extends JFrame {
 		JButton errbtnTornaIndietro = new JButton("Ritenta scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png")));
 		errbtnTornaIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				GuiMain.main(args);
 				switchPanel(homePanel);				
 			}
 		});
