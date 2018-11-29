@@ -478,7 +478,7 @@ public class GuiMain extends JFrame {
 				switchPanel(scanPanel);
 
 				// eseguo ricerca prodotto
-				searchDBProduct("SELECT * FROM prodotto WHERE nome = 'igieneplus'");
+				searchDBProduct("SELECT * FROM prodotto WHERE nome = 'levissima 50cl'");
 
 				// output
 				if (connectionFail == false) {
