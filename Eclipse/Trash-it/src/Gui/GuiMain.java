@@ -11,6 +11,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import java.awt.CardLayout;
 import javax.swing.JLayeredPane;
@@ -136,6 +139,70 @@ public class GuiMain extends JFrame {
 		homelblInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
 		homelblInfo.setBounds(0, 571, 418, 57);
 		homePanel.add(homelblInfo);
+		
+		//ERROR PANEL
+		JPanel errorPanel = new JPanel();
+		errorPanel.setLayout(null);
+		errorPanel.setOpaque(false);
+		layeredPane.add(errorPanel, "name_2585705284100");
+		
+		JLabel errlblErroreProdotto = new JLabel("ERRORE PRODOTTO");
+		errlblErroreProdotto.setHorizontalAlignment(SwingConstants.CENTER);
+		errlblErroreProdotto.setForeground(Color.BLACK);
+		errlblErroreProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
+		errlblErroreProdotto.setBounds(416, 0, 629, 57);
+		errorPanel.add(errlblErroreProdotto);
+		
+		JButton errbtnTornaIndietro = new JButton("Ritenta scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png")));
+		errbtnTornaIndietro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(homePanel);				
+			}
+		});
+		errbtnTornaIndietro.setVerticalTextPosition(SwingConstants.CENTER);
+		errbtnTornaIndietro.setOpaque(false);
+		errbtnTornaIndietro.setMargin(new Insets(0, 0, 0, 0));
+		errbtnTornaIndietro.setHorizontalTextPosition(SwingConstants.CENTER);
+		errbtnTornaIndietro.setForeground(Color.BLACK);
+		errbtnTornaIndietro.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		errbtnTornaIndietro.setContentAreaFilled(false);
+		errbtnTornaIndietro.setBorderPainted(false);
+		errbtnTornaIndietro.setBounds(417, 549, 628, 57);
+		errorPanel.add(errbtnTornaIndietro);
+		
+		JLabel errInfo = new JLabel("info");
+		errInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		errInfo.setForeground(Color.BLACK);
+		errInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
+		errInfo.setBounds(0, 571, 418, 57);
+		errorPanel.add(errInfo);
+		
+		JLabel errlblErrorImage = new JLabel("Image Not Found");
+		errlblErrorImage.setFont(new Font("Tahoma", Font.BOLD, 20));
+		errlblErrorImage.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/errorimage.png")));
+		errlblErrorImage.setHorizontalAlignment(SwingConstants.CENTER);
+		errlblErrorImage.setHorizontalTextPosition(JLabel.CENTER);
+		errlblErrorImage.setVerticalTextPosition(JLabel.BOTTOM);
+		errlblErrorImage.setBounds(416, 128, 629, 309);
+		errorPanel.add(errlblErrorImage);
+		
+		JLabel errlblLogo = new JLabel("");
+		errlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		errlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		errlblLogo.setBounds(0, 0, 418, 488);
+		errorPanel.add(errlblLogo);
+		
+		JTextPane errtxtpnNonStato = new JTextPane();
+		errtxtpnNonStato.setFont(new Font("Tahoma", Font.PLAIN, 25));		
+		//allign center
+		SimpleAttributeSet centerText = new SimpleAttributeSet();
+		StyleConstants.setAlignment(centerText, StyleConstants.ALIGN_CENTER);
+		StyledDocument doc = errtxtpnNonStato.getStyledDocument();
+		doc.setParagraphAttributes(0, 104, centerText, false);
+		errtxtpnNonStato.setOpaque(false);
+		errtxtpnNonStato.setText("Non \u00E8 stato possibile recuperare l'immagine del prodotto");
+		errtxtpnNonStato.setBounds(416, 86, 629, 73);
+		errorPanel.add(errtxtpnNonStato);
 
 		// SCAN PANEL
 		JPanel scanPanel = new JPanel();
@@ -218,10 +285,15 @@ public class GuiMain extends JFrame {
 		gttPanel.add(gttlblDescrizione);
 
 		JTextPane gttTxtIstruzioni = new JTextPane();
-		gttTxtIstruzioni.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		gttTxtIstruzioni.setText("Gettare il prodotto nella bocchetta seguendo le istruzioni:");
-		gttTxtIstruzioni.setBounds(416, 129, 629, 126);
+		gttTxtIstruzioni.setFont(new Font("Tahoma", Font.PLAIN, 25));		
+		//allign center
+		SimpleAttributeSet centerIstruzioni = new SimpleAttributeSet();
+		StyleConstants.setAlignment(centerIstruzioni, StyleConstants.ALIGN_CENTER);
+		StyledDocument docIstruzioni = gttTxtIstruzioni.getStyledDocument();
+		docIstruzioni.setParagraphAttributes(0, 104, centerIstruzioni, false);
 		gttTxtIstruzioni.setOpaque(false);
+		gttTxtIstruzioni.setText("Non \u00E8 stato possibile recuperare l'immagine del prodotto");
+		gttTxtIstruzioni.setBounds(416, 86, 629, 73);
 		gttPanel.add(gttTxtIstruzioni);
 
 		JLabel scanlblScansioneProdotto = new JLabel("SCANSIONE PRODOTTO");
@@ -234,8 +306,8 @@ public class GuiMain extends JFrame {
 		// contenuti SCAN
 		// prodotto corretto
 
-		ImageIcon corretto = new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png"));
-		JButton scanbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", corretto);
+		ImageIcon errato = new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png"));
+		JButton scanbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", errato);
 		scanbtnProdottoVisualizzatoErrato.setVerticalTextPosition(JButton.CENTER);
 		scanbtnProdottoVisualizzatoErrato.setHorizontalTextPosition(JButton.CENTER);
 		scanbtnProdottoVisualizzatoErrato.setBorderPainted(false);
@@ -245,7 +317,7 @@ public class GuiMain extends JFrame {
 		scanbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
 		scanbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switchPanel(gttPanel);
+				switchPanel(homePanel);
 			}
 		});
 		scanbtnProdottoVisualizzatoErrato.setOpaque(false);
@@ -257,8 +329,8 @@ public class GuiMain extends JFrame {
 		scanPanel.add(scanbtnProdottoVisualizzatoErrato);
 
 		// errato
-		ImageIcon errato = new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbutton.png"));
-		JButton scanbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", errato);
+		ImageIcon corretto = new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbutton.png"));
+		JButton scanbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", corretto);
 		scanbtnProdottoVisualizzatoCorretto.setVerticalTextPosition(JButton.CENTER);
 		scanbtnProdottoVisualizzatoCorretto.setHorizontalTextPosition(JButton.CENTER);
 		scanbtnProdottoVisualizzatoCorretto.setBorderPainted(false);
@@ -335,7 +407,10 @@ public class GuiMain extends JFrame {
 					ImageIcon newImage = new ImageIcon(myImg);
 					scanlblImmagineProdotto.setIcon(newImage);
 				} else {
-					System.out.println("\nNon è stato possibile ottenere il prodotto"); //connectionFail == true
+					System.out.println("\nNon e' stato possibile ottenere il prodotto"); //connectionFail == true
+					
+					//pannello di errore
+					switchPanel(errorPanel);
 				}
 
 			}
