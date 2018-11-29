@@ -119,14 +119,14 @@ public class GuiMain extends JFrame {
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
 
+		// INIZIALIZZAZIONE PANEL
+
+		// HOME PANEL
 		JPanel homePanel = new JPanel();
 		layeredPane.add(homePanel, "name_47697602642643");
 		homePanel.setOpaque(false);
 		homePanel.setLayout(null);
-
-		// INIZIALIZZAZIONE PANEL
-
-		// HOME PANEL
+		
 		JLabel homelblBenvenuto = new JLabel("BENVENUTO");
 		homelblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblBenvenuto.setForeground(Color.BLACK);
