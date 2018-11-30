@@ -505,7 +505,10 @@ public class GuiMain extends JFrame {
 		homebtnScansionaProdotto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//leggo il barcode in input
-				barcodeProdotto = hometxtInputBarcode.getText();				
+				barcodeProdotto = hometxtInputBarcode.getText();
+				
+				//verifico che sia un barcode della forma corretta
+				verifyBarcode(barcodeProdotto);
 				
 				//8029241107035	igiene plus
 				//4006381115575 stabilo
