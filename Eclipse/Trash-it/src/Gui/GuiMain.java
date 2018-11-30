@@ -48,6 +48,7 @@ public class GuiMain extends JFrame {
 	private byte[] imgProdotto; // immagine
 	protected String[] args;
 	private JTextField hometxtInputBarcode;	//input barcode
+	private JTextField hometxtBarcode;
 	
 
 	public void switchPanel(JPanel panelName) {
@@ -361,7 +362,7 @@ public class GuiMain extends JFrame {
 		JLabel gttlblDescrizione = new JLabel("descrizione prodotto");
 		gttlblDescrizione.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		gttlblDescrizione.setHorizontalAlignment(SwingConstants.CENTER);
-		gttlblDescrizione.setBounds(416, 336, 629, 180);
+		gttlblDescrizione.setBounds(416, 336, 629, 136);
 		gttPanel.add(gttlblDescrizione);
 
 		JTextPane gttTxtIstruzioni = new JTextPane();
@@ -381,6 +382,11 @@ public class GuiMain extends JFrame {
 		gttlblImmagineProdotto.setHorizontalAlignment(SwingConstants.CENTER);
 		gttlblImmagineProdotto.setBounds(600, 128, 269, 257);
 		gttPanel.add(gttlblImmagineProdotto);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/trash.gif")));
+		lblNewLabel.setBounds(675, 448, 109, 145);
+		gttPanel.add(lblNewLabel);
 		
 		
 		//contenuti assistenza
@@ -598,15 +604,15 @@ public class GuiMain extends JFrame {
 		hometxtInputBarcode = new JTextField();
 		hometxtInputBarcode.setHorizontalAlignment(SwingConstants.CENTER);
 		hometxtInputBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		hometxtInputBarcode.setBounds(595, 321, 272, 44);
+		hometxtInputBarcode.setBounds(632, 384, 212, 44);
 		hometxtInputBarcode.setOpaque(false);
 		homePanel.add(hometxtInputBarcode);
 		hometxtInputBarcode.setColumns(10);
 		
 		JLabel homeInputBackground = new JLabel("");
 		homeInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
-		homeInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png")));
-		homeInputBackground.setBounds(426, 295, 607, 96);
+		homeInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonsmall.png")));
+		homeInputBackground.setBounds(430, 357, 615, 96);
 		homePanel.add(homeInputBackground);
 		
 		JButton homebtnAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
@@ -624,6 +630,14 @@ public class GuiMain extends JFrame {
 		homebtnAssistenza.setBorderPainted(false);
 		homebtnAssistenza.setBounds(416, 613, 628, 57);
 		homePanel.add(homebtnAssistenza);
+		
+		JLabel hometxtBarcode = new JLabel();
+		hometxtBarcode.setHorizontalAlignment(SwingConstants.CENTER);
+		hometxtBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		hometxtBarcode.setText("Barcode:");
+		hometxtBarcode.setBounds(426, 321, 619, 49);
+		hometxtBarcode.setOpaque(false);
+		homePanel.add(hometxtBarcode);
 		
 		
 		
