@@ -363,7 +363,7 @@ public class GuiMain extends JFrame {
 		
 		JLabel gttlblImmagineProdotto = new JLabel("immagine prodotto");
 		gttlblImmagineProdotto.setHorizontalAlignment(SwingConstants.CENTER);
-		gttlblImmagineProdotto.setBounds(563, 130, 269, 257);
+		gttlblImmagineProdotto.setBounds(600, 128, 269, 257);
 		gttPanel.add(gttlblImmagineProdotto);
 		
 		
@@ -483,6 +483,11 @@ public class GuiMain extends JFrame {
 		scanPanel.add(scanlblLogo);
 		
 		JButton btnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		btnProblemiAssistenza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(assPanel);
+			}
+		});
 		btnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
 		btnProblemiAssistenza.setOpaque(false);
 		btnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
