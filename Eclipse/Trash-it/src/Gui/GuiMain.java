@@ -38,7 +38,7 @@ public class GuiMain extends JFrame {
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;
 
-	private boolean connectionFail = false; // se c'Ã¨ un errore con la connessione, gestisco errore visualizzazione
+	private boolean connectionFail = false; // se c'è un errore con la connessione, gestisco errore visualizzazione
 											// prodotto
 
 	// descrizione prodotto
@@ -48,24 +48,7 @@ public class GuiMain extends JFrame {
 	private byte[] imgProdotto; // immagine
 	protected String[] args;
 	private JTextField hometxtInputBarcode;	//input barcode
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GuiMain frame = new GuiMain();
-					frame.setLocationRelativeTo(null);
-					frame.setResizable(false);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	public void switchPanel(JPanel panelName) {
 
@@ -164,12 +147,17 @@ public class GuiMain extends JFrame {
 		homelblBenvenuto.setBounds(416, 0, 629, 57);
 		homePanel.add(homelblBenvenuto);
 
-		JLabel homelblInfo = new JLabel("info");
-		homelblInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		homelblInfo.setForeground(Color.BLACK);
-		homelblInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
-		homelblInfo.setBounds(0, 571, 418, 57);
-		homePanel.add(homelblInfo);
+		JButton homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		homebtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
+		homebtnInfo.setOpaque(false);
+		homebtnInfo.setMargin(new Insets(0, 0, 0, 0));
+		homebtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
+		homebtnInfo.setForeground(Color.BLACK);
+		homebtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		homebtnInfo.setContentAreaFilled(false);
+		homebtnInfo.setBorderPainted(false);
+		homebtnInfo.setBounds(0, 571, 418, 57);
+		homePanel.add(homebtnInfo);
 		
 		//ERROR PANEL
 		JPanel errorPanel = new JPanel();
@@ -203,12 +191,18 @@ public class GuiMain extends JFrame {
 		errbtnTornaIndietro.setBounds(417, 549, 628, 57);
 		errorPanel.add(errbtnTornaIndietro);
 		
-		JLabel errInfo = new JLabel("info");
-		errInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		errInfo.setForeground(Color.BLACK);
-		errInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
-		errInfo.setBounds(0, 571, 418, 57);
-		errorPanel.add(errInfo);
+		
+		JButton errbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		errbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
+		errbtnInfo.setOpaque(false);
+		errbtnInfo.setMargin(new Insets(0, 0, 0, 0));
+		errbtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
+		errbtnInfo.setForeground(Color.BLACK);
+		errbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		errbtnInfo.setContentAreaFilled(false);
+		errbtnInfo.setBorderPainted(false);
+		errbtnInfo.setBounds(0, 571, 418, 57);
+		errorPanel.add(errbtnInfo);
 		
 		JLabel errlblErrorImage = new JLabel("Image Not Found");
 		errlblErrorImage.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -329,12 +323,17 @@ public class GuiMain extends JFrame {
 		gttbtnProblemiAssistenza.setBounds(416, 613, 629, 57);
 		gttPanel.add(gttbtnProblemiAssistenza);
 
-		JLabel gttlblInfo = new JLabel("info");
-		gttlblInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		gttlblInfo.setForeground(Color.BLACK);
-		gttlblInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
-		gttlblInfo.setBounds(0, 571, 418, 57);
-		gttPanel.add(gttlblInfo);
+		JButton gttbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		gttbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
+		gttbtnInfo.setOpaque(false);
+		gttbtnInfo.setMargin(new Insets(0, 0, 0, 0));
+		gttbtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
+		gttbtnInfo.setForeground(Color.BLACK);
+		gttbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		gttbtnInfo.setContentAreaFilled(false);
+		gttbtnInfo.setBorderPainted(false);
+		gttbtnInfo.setBounds(0, 571, 418, 57);
+		gttPanel.add(gttbtnInfo);
 
 		JLabel gttlblLogo = new JLabel("");
 		gttlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -375,12 +374,17 @@ public class GuiMain extends JFrame {
 		lblAssistenza.setBounds(416, 0, 629, 57);
 		assPanel.add(lblAssistenza);
 				
-		JLabel label_1 = new JLabel("info");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setForeground(Color.BLACK);
-		label_1.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
-		label_1.setBounds(0, 571, 418, 57);
-		assPanel.add(label_1);
+		JButton assbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		assbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
+		assbtnInfo.setOpaque(false);
+		assbtnInfo.setMargin(new Insets(0, 0, 0, 0));
+		assbtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
+		assbtnInfo.setForeground(Color.BLACK);
+		assbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		assbtnInfo.setContentAreaFilled(false);
+		assbtnInfo.setBorderPainted(false);
+		assbtnInfo.setBounds(0, 571, 418, 57);
+		assPanel.add(assbtnInfo);
 				
 		JLabel label_2 = new JLabel("");
 		label_2.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
@@ -464,13 +468,6 @@ public class GuiMain extends JFrame {
 		scanbtnProdottoVisualizzatoCorretto.setBounds(470, 449, 255, 57);
 		scanPanel.add(scanbtnProdottoVisualizzatoCorretto);
 
-		JLabel scanlblInfo = new JLabel("info");
-		scanlblInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		scanlblInfo.setForeground(Color.BLACK);
-		scanlblInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
-		scanlblInfo.setBounds(0, 571, 418, 57);
-		scanPanel.add(scanlblInfo);
-
 		JLabel scanlblImmagineProdotto = new JLabel("immagine prodotto");
 		scanlblImmagineProdotto.setHorizontalAlignment(SwingConstants.CENTER);
 		scanlblImmagineProdotto.setBounds(600, 128, 269, 257);
@@ -498,6 +495,18 @@ public class GuiMain extends JFrame {
 		btnProblemiAssistenza.setBorderPainted(false);
 		btnProblemiAssistenza.setBounds(416, 613, 628, 57);
 		scanPanel.add(btnProblemiAssistenza);
+		
+		JButton scanbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		scanbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
+		scanbtnInfo.setOpaque(false);
+		scanbtnInfo.setMargin(new Insets(0, 0, 0, 0));
+		scanbtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
+		scanbtnInfo.setForeground(Color.BLACK);
+		scanbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		scanbtnInfo.setContentAreaFilled(false);
+		scanbtnInfo.setBorderPainted(false);
+		scanbtnInfo.setBounds(0, 571, 418, 57);
+		scanPanel.add(scanbtnInfo);
 
 		// contenuti HOME
 
@@ -589,4 +598,23 @@ public class GuiMain extends JFrame {
 		background.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/home.jpg")));
 		contentPane.add(background);
 	}
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GuiMain frame = new GuiMain();
+					frame.setLocationRelativeTo(null);
+					frame.setResizable(false);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }
+
