@@ -345,7 +345,7 @@ public class GuiMain extends JFrame {
 		JLabel gttlblDescrizione = new JLabel("descrizione prodotto");
 		gttlblDescrizione.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		gttlblDescrizione.setHorizontalAlignment(SwingConstants.CENTER);
-		gttlblDescrizione.setBounds(416, 260, 629, 180);
+		gttlblDescrizione.setBounds(416, 336, 629, 180);
 		gttPanel.add(gttlblDescrizione);
 
 		JTextPane gttTxtIstruzioni = new JTextPane();
@@ -360,6 +360,11 @@ public class GuiMain extends JFrame {
 		gttTxtIstruzioni.setText("Non \u00E8 stato possibile recuperare l'immagine del prodotto");
 		gttTxtIstruzioni.setBounds(416, 86, 629, 73);
 		gttPanel.add(gttTxtIstruzioni);
+		
+		JLabel gttlblImmagineProdotto = new JLabel("immagine prodotto");
+		gttlblImmagineProdotto.setHorizontalAlignment(SwingConstants.CENTER);
+		gttlblImmagineProdotto.setBounds(563, 130, 269, 257);
+		gttPanel.add(gttlblImmagineProdotto);
 		
 		
 		//contenuti assistenza
@@ -408,9 +413,9 @@ public class GuiMain extends JFrame {
 		scanPanel.add(scanlblScansioneProdotto);
 		
 		
-		// prodotto corretto
+		// prodotto errato
 
-		ImageIcon errato = new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png"));
+		
 		JButton scanbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
 		scanbtnProdottoVisualizzatoErrato.setVerticalTextPosition(JButton.CENTER);
 		scanbtnProdottoVisualizzatoErrato.setHorizontalTextPosition(JButton.CENTER);
@@ -432,8 +437,8 @@ public class GuiMain extends JFrame {
 		scanbtnProdottoVisualizzatoErrato.setBounds(749, 449, 255, 57);
 		scanPanel.add(scanbtnProdottoVisualizzatoErrato);
 
-		// errato
-		ImageIcon corretto = new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbutton.png"));
+		// prodotto corretto
+		
 		JButton scanbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		scanbtnProdottoVisualizzatoCorretto.setVerticalTextPosition(JButton.CENTER);
 		scanbtnProdottoVisualizzatoCorretto.setHorizontalTextPosition(JButton.CENTER);
@@ -447,6 +452,7 @@ public class GuiMain extends JFrame {
 				switchPanel(gttPanel);
 				// prendo il valore dalla variabile globale
 				gttlblDescrizione.setText(descrizioneProdotto);
+				gttPanel.remove(gttTxtIstruzioni);
 			}
 
 		});
@@ -491,7 +497,7 @@ public class GuiMain extends JFrame {
 		// contenuti HOME
 
 		// Avvia scansione
-		ImageIcon scan_icon = new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbutton.png"));
+		
 		JButton homebtnScansionaProdotto = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		homebtnScansionaProdotto.setVerticalTextPosition(JButton.CENTER);
 		homebtnScansionaProdotto.setHorizontalTextPosition(JButton.CENTER);
@@ -531,6 +537,8 @@ public class GuiMain extends JFrame {
 					scanlblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
 					ImageIcon newImage = new ImageIcon(myImg);
 					scanlblImmagineProdotto.setIcon(newImage);
+					gttlblImmagineProdotto.setIcon(newImage);
+					
 				} else {
 					System.out.println("\nNon e' stato possibile ottenere il prodotto"); //connectionFail == true
 					
