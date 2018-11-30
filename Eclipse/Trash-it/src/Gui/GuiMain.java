@@ -140,6 +140,7 @@ public class GuiMain extends JFrame {
 		homePanel.setOpaque(false);
 		homePanel.setLayout(null);
 		
+		
 		JLabel homelblBenvenuto = new JLabel("BENVENUTO");
 		homelblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblBenvenuto.setForeground(Color.BLACK);
@@ -158,6 +159,12 @@ public class GuiMain extends JFrame {
 		homebtnInfo.setBorderPainted(false);
 		homebtnInfo.setBounds(0, 571, 418, 57);
 		homePanel.add(homebtnInfo);
+		
+		//ASSISTENZA PANEL
+		JPanel assPanel = new JPanel();
+		assPanel.setLayout(null);
+		assPanel.setOpaque(false);
+		layeredPane.add(assPanel, "name_8556421918800");
 		
 		//ERROR PANEL
 		JPanel errorPanel = new JPanel();
@@ -188,8 +195,24 @@ public class GuiMain extends JFrame {
 		errbtnTornaIndietro.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		errbtnTornaIndietro.setContentAreaFilled(false);
 		errbtnTornaIndietro.setBorderPainted(false);
-		errbtnTornaIndietro.setBounds(417, 549, 628, 57);
+		errbtnTornaIndietro.setBounds(416, 464, 628, 57);
 		errorPanel.add(errbtnTornaIndietro);
+		
+		JButton errbtnAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		errbtnAssistenza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(assPanel);
+			}
+		});
+		errbtnAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
+		errbtnAssistenza.setMargin(new Insets(0, 0, 0, 0));
+		errbtnAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
+		errbtnAssistenza.setForeground(Color.BLACK);
+		errbtnAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		errbtnAssistenza.setContentAreaFilled(false);
+		errbtnAssistenza.setBorderPainted(false);
+		errbtnAssistenza.setBounds(416, 613, 628, 57);
+		errorPanel.add(errbtnAssistenza);
 		
 		
 		JButton errbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
@@ -237,12 +260,6 @@ public class GuiMain extends JFrame {
 		layeredPane.add(scanPanel, "name_47730555398847");
 		scanPanel.setOpaque(false);
 		scanPanel.setLayout(null);
-		
-		//ASSISTENZA PANEL
-		JPanel assPanel = new JPanel();
-		assPanel.setLayout(null);
-		assPanel.setOpaque(false);
-		layeredPane.add(assPanel, "name_8556421918800");
 		
 
 		// GTT PANEL
@@ -591,6 +608,23 @@ public class GuiMain extends JFrame {
 		homeInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png")));
 		homeInputBackground.setBounds(426, 295, 607, 96);
 		homePanel.add(homeInputBackground);
+		
+		JButton homebtnAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		homebtnAssistenza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(assPanel);
+			}
+		});
+		homebtnAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
+		homebtnAssistenza.setMargin(new Insets(0, 0, 0, 0));
+		homebtnAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
+		homebtnAssistenza.setForeground(Color.BLACK);
+		homebtnAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		homebtnAssistenza.setContentAreaFilled(false);
+		homebtnAssistenza.setBorderPainted(false);
+		homebtnAssistenza.setBounds(416, 613, 628, 57);
+		homePanel.add(homebtnAssistenza);
+		
 		
 		
 		JLabel background = new JLabel("");
