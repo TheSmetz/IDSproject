@@ -520,7 +520,7 @@ public class GuiMain extends JFrame {
 				switchPanel(scanPanel);
 
 				// output
-				if (connectionFail == false) {
+				if (connectionFail == false && verifyBarcode(barcodeProdotto)) {
 					System.out.println("\n----- PRODOTTO -----\n");
 					System.out.println("Barcode:" + barcodeProdotto);
 					System.out.println("Nome:" + nomeProdotto);
