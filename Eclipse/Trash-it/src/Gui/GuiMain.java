@@ -46,9 +46,9 @@ public class GuiMain extends JFrame {
 	private String nomeProdotto; // nome
 	private String descrizioneProdotto; // decrizione
 	private byte[] imgProdotto; // immagine
+	private int puntiProdotto; //punti
 	protected String[] args;
 	private JTextField hometxtInputBarcode;	//input barcode
-	private JTextField hometxtBarcode;
 	
 
 	public void switchPanel(JPanel panelName) {
@@ -105,6 +105,7 @@ public class GuiMain extends JFrame {
 				nomeProdotto = rsProdotto.getString("nome");
 				descrizioneProdotto = rsProdotto.getString("descrizione");
 				imgProdotto = rsProdotto.getBytes("immagine");
+				puntiProdotto = rsProdotto.getInt("punti");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -367,7 +368,8 @@ public class GuiMain extends JFrame {
 
 		JTextPane gttTxtIstruzioni = new JTextPane();
 		gttTxtIstruzioni.setEditable(false);
-		gttTxtIstruzioni.setFont(new Font("Tahoma", Font.PLAIN, 25));		
+		gttTxtIstruzioni.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		
 		//allign center
 		SimpleAttributeSet centerIstruzioni = new SimpleAttributeSet();
 		StyleConstants.setAlignment(centerIstruzioni, StyleConstants.ALIGN_CENTER);
@@ -385,8 +387,15 @@ public class GuiMain extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/trash.gif")));
-		lblNewLabel.setBounds(675, 448, 109, 145);
+		lblNewLabel.setBounds(557, 455, 109, 145);
 		gttPanel.add(lblNewLabel);
+		
+		//punti
+		JLabel gttlblPunti = new JLabel("Punti");
+		gttlblPunti.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		gttlblPunti.setHorizontalAlignment(SwingConstants.CENTER);
+		gttlblPunti.setBounds(716, 485, 209, 88);
+		gttPanel.add(gttlblPunti);
 		
 		
 		//contenuti assistenza
@@ -478,6 +487,9 @@ public class GuiMain extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(gttPanel);
 				// prendo il valore dalla variabile globale
+				
+				
+				gttlblPunti.setText("Punti prodotto: " + String.valueOf(puntiProdotto));
 				gttlblDescrizione.setText(descrizioneProdotto);
 				gttPanel.remove(gttTxtIstruzioni);
 			}
@@ -568,6 +580,7 @@ public class GuiMain extends JFrame {
 					System.out.println("Barcode:" + barcodeProdotto);
 					System.out.println("Nome:" + nomeProdotto);
 					System.out.println("Descrizione:" + descrizioneProdotto);
+					System.out.println("Punti: " + puntiProdotto);
 					ImageIcon image = new ImageIcon(imgProdotto);
 					Image im = image.getImage();
 					Image myImg = im.getScaledInstance(scanlblImmagineProdotto.getWidth(),
