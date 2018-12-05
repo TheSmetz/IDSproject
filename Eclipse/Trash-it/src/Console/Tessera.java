@@ -72,7 +72,7 @@ public class Tessera implements GestoreTessera {
 		return punti;
 	}
 	
-	//metodi override
+	//override metodi
 
 	@Override
 	public boolean verificaValidita(int ID) {

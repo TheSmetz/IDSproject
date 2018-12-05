@@ -54,6 +54,26 @@ public class Prodotto implements GestoreProdotto{
 		System.out.println(materiali);
 		;
 	} // specifica i/il tipo/i di materiale/i del prodotto
+	
+	
+	//override metodi
+	
+	@Override
+	public boolean verificaPresenza(String codiceABarre) {
+		
+		//if tessera nel db = true
+		return false;
+	}
+
+	@Override
+	public void getDatiProdotto(String codiceABarre) {
+		
+	}
+
+	@Override
+	public String scansioneCodiceABarreProdotto() {
+		return codiceABarre;
+	}
 
 	
 }
