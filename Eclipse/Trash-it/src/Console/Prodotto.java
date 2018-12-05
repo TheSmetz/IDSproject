@@ -2,7 +2,7 @@ package Console;
 
 import java.util.ArrayList;
 
-public class Prodotto {
+public class Prodotto implements GestoreProdotto{
 	private String codiceABarre;
 	private String nomeProdotto;
 	private String descrizione;
