@@ -93,9 +93,8 @@ public class Tessera implements GestoreTessera {
 		
 	}
 
-	@Override
-	public int accreditaPunti(int ID) {
-		return 0;
+	public void accreditaPunti(int ID, int amountPunti) {
+		punti = punti + amountPunti;
 	}
 
 	@Override

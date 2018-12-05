@@ -7,7 +7,7 @@ public interface GestoreTessera {
 	
 	public void getDatiTessera(int ID);
 	
-	public int accreditaPunti(int ID);
+	public void accreditaPunti(int ID, int amountPunti);
 	
 	public String ScansioneIDTessera();		
 	
