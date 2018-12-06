@@ -10,7 +10,7 @@ public interface GestoreProdotto{
 	
 	public void creaConnessione();
 	
-	public boolean verificaPresenza(String codiceABarre);
+	public boolean verificaPresenza();
 	
 	public void getDatiProdotto();
 	

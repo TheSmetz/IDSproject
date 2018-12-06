@@ -22,18 +22,11 @@ public class Prodotto implements GestoreProdotto{
 	private int puntiProdotto;
 	
 	
-	//costruttore
+	//costruttore, in input solo il codice a barre (scansione)
 	public Prodotto(String codiceABarre) {
 		this.codiceABarreProdotto = codiceABarre;
-		//this.nomeProdotto = nomeProdotto;
-		//this.descrizioneProdotto = descrizione;
-		//this.materialeCarta = materialeCarta;
-		//this.materialePlastica = materialePlastica;
-		//this.materialeVetro = materialeVetro;
-		//this.materialeIndifferenziato = materialeIndifferenziato;
 	}
 	
-	// costruttore
 
 	public void getCodiceABarre() {
 		// return this.codiceABarre;
@@ -51,6 +44,7 @@ public class Prodotto implements GestoreProdotto{
 	}
 
 	@Override
+	//imposto gli altri attibuti con i dati ottenuti dal database
 	public void creaConnessione() {
 		
 		String host = "jdbc:mysql://localhost:3306/trash-it";
@@ -63,10 +57,7 @@ public class Prodotto implements GestoreProdotto{
 			String query = "SELECT * FROM prodotto WHERE barcode = " + codiceABarreProdotto;
 			ResultSet rsProdotto = stmtProdotto.executeQuery(query);
 			
-			//System.out.println(rsProdotto.next());
-			
-			if (rsProdotto.next()) {
-	
+			if (rsProdotto.next()) {	
 				//this.codiceABarre = rsProdotto.getString("barcode");
 				this.nomeProdotto = rsProdotto.getString("nome");
 				this.descrizioneProdotto = rsProdotto.getString("descrizione");
@@ -77,47 +68,43 @@ public class Prodotto implements GestoreProdotto{
 				this.imgProdotto = rsProdotto.getBytes("immagine");
 				this.puntiProdotto = rsProdotto.getInt("punti");				
 				this.presenza = true;
-			}
-			
-			
-			
-			
+			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public boolean verificaPresenza(String codiceABarre) {
+	public boolean verificaPresenza() {
 		return this.presenza;
 	}
 
 	@Override
 	public void getDatiProdotto() {
-		System.out.println(this.codiceABarreProdotto);
-		System.out.println(this.nomeProdotto);
-		System.out.println(this.descrizioneProdotto);
-		System.out.println(this.materialeCarta);
-		System.out.println(this.materialePlastica);
-		System.out.println(this.materialeVetro);
-		System.out.println(this.materialeIndifferenziato);
-		//System.out.println(this.imgProdotto);
-		System.out.println(this.puntiProdotto);				
-		System.out.println(this.presenza);
+		
+		System.out.println("--- " + this.nomeProdotto + " ---"+
+		 "\nCodice a barre: " + this.codiceABarreProdotto +
+		"\nDescrizione: " + this.descrizioneProdotto +
+		"\nCarta: " + this.materialeCarta +
+		"\nPlastica: " + this.materialePlastica +
+		"\nVetro: " + this.materialeVetro +
+		"\nIndifferenziato: " + this.materialeIndifferenziato +
+		"\nImmagine: " + this.imgProdotto +
+		"\nPunti: " + this.puntiProdotto);
 	}
 
 	@Override
 	public String scansioneCodiceABarreProdotto() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	public static void main(String[] args) {
 		
+		//test
 		Prodotto igieneplus = new Prodotto("8029241107035");
 		igieneplus.creaConnessione();
 		igieneplus.getDatiProdotto();
-		
+		System.out.println("\nPresenza: " + igieneplus.verificaPresenza());		
 	}
 	
 }
