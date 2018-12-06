@@ -15,7 +15,7 @@ public class CreateConnection {
 	
 	private Connection dbCon;
 	private Statement stmtProdotto;
-	//private ResultSet rsProdotto;
+	public ResultSet rsProdotto;
 	
 	public CreateConnection() {
 		this.host = "jdbc:mysql://localhost:3306/trash-it";
@@ -26,8 +26,14 @@ public class CreateConnection {
 			dbCon = DriverManager.getConnection(host, username, password);	//connessione
 			stmtProdotto = dbCon.createStatement();
 			String query = "SELECT * FROM prodotto WHERE nome = 'igieneplus'";
-			ResultSet rsProdotto = stmtProdotto.executeQuery(query);
+			rsProdotto = stmtProdotto.executeQuery(query);
 			
+			while (rsProdotto.next()) {
+				System.out.println("ciao");
+			}
+			
+			//else System.out.println("bella");
+				
 			
 			
 			//Connection con = DriverManager.getConnection(host, username, password); // connessione
@@ -36,10 +42,10 @@ public class CreateConnection {
 			//String SQLProdotto = "SELECT * FROM prodotto WHERE barcode = " + barcode; // "SELECT * FROM prodotto WHERE nome = 'igieneplus'"
 			//ResultSet rsProdotto = stmtProdotto.executeQuery(SQLProdotto);
 			
-			while (rsProdotto.next()) {
-				String barcode = rsProdotto.getString("barcode");
-				System.out.println(barcode);
-			}
+//			while (rsProdotto.next()) {
+//				String barcode = rsProdotto.getString("barcode");
+//				System.out.println(barcode);
+//			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -96,7 +102,7 @@ public class CreateConnection {
 //		}
 //	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		
 		CreateConnection trash = new CreateConnection();
 		
