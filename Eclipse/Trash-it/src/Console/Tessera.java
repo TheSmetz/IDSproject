@@ -1,105 +1,79 @@
 package Console;
 
 import java.util.Date;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Tessera implements GestoreTessera {
-	private String nome;
-	private String cognome;
-	private String ID;
-	private Date validita;
-	private String residenzaAttuale;
-	private Date dataNascita;
-	private int punti;
+	protected int idTessera;
+	protected String codiceFiscale;
+	protected String nome;
+	protected String cognome;
+	protected String citta;
+	protected Date scadenza ;	//Date firstDate1 = new Date(int year, int month, int date);
+	protected int punti;
 	
-	//costruttore
-	public Tessera() {
-	}
 	
-	////getters and setters
-	public Date getValidita() {
-		return validita;
-	}
-
-	public void setValidita(Date validita) {
-		this.validita = validita;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-
-	public void setID(String iD) {
-		ID = iD;
-	}
-
-	public void setResidenzaAttuale(String residenzaAttuale) {
-		this.residenzaAttuale = residenzaAttuale;
-	}
-
-	public void setDataNascita(Date dataNascita) {
-		this.dataNascita = dataNascita;
-	}
-
-	public void setPunti(int punti) {
-		this.punti = punti;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public String getCognome() {
-		return cognome;
-	}
-
-	public String getID() {
-		return ID;
-	}
-
-	public String getResidenzaAttuale() {
-		return residenzaAttuale;
-	}
-
-	public Date getDataNascita() {
-		return dataNascita;
-	}
-
 	public int getPunti() {
 		return punti;
 	}
+	public void setPunti(int punti) {
+		this.punti = punti;
+	}
+	public int getIdTessera() {
+		return idTessera;
+	}
+	public String getCodiceFiscale() {
+		return codiceFiscale;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public String getCognome() {
+		return cognome;
+	}
+	public String getCitta() {
+		return citta;
+	}
+	public Date getScadenza() {
+		return scadenza;
+	}
 	
-	//override metodi
-
 	@Override
-	public boolean verificaValidita(int ID) {
-		
-		//if tessera valida
+	public boolean verificaValidita() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDateTime localDate = LocalDateTime.now();
+		System.out.println(dtf.format(localDate));
+		System.out.println();
 		return false;
 	}
-
 	@Override
-	public boolean verificaPresenza(int ID) {
-		
-		//if tessera nel db = true
+	public boolean verificaPresenza() {
+		// TODO Auto-generated method stub
 		return false;
 	}
-
 	@Override
-	public void getDatiTessera(int ID) {
+	public void getDati() {
+		//connessione database e estrazione dati
 		
 	}
-
-	public void accreditaPunti(int ID, int amountPunti) {
-		punti = punti + amountPunti;
-	}
-
 	@Override
-	public String ScansioneIDTessera() {
-		return ID;
-		
+	public void accreditoPunti(int acPunti) {
+		int puntiAttuali = getPunti();
+		setPunti(puntiAttuali + acPunti);		
 	}
+	@Override
+	public void addebitoPunti(int adPunti) {
+		int puntiAttuali = getPunti();
+		setPunti(puntiAttuali - adPunti);		
+	}
+	
+
+
+	public static void main(String[] args) {
+		Tessera t = new Tessera();
+		t.verificaValidita();
+	}
+
 }
