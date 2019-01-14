@@ -12,7 +12,6 @@ public class Prodotto implements GestoreProdotto{
 	//attributi
 	private String codiceABarreProdotto; //id
 	private String nomeProdotto;
-//	private String  descrizioneProdotto;
 	
 	//componenti da convertire
 	private String primoComponente;
@@ -21,18 +20,14 @@ public class Prodotto implements GestoreProdotto{
 	private String quartoComponente;
 	
 	//componenti finali
-	ArrayList<Componente> componenti=new ArrayList<Componente>(); //Gestisce uno o piu componenti di un prodotto
-	Componente Plastica=new Componente(Materiale.Plastica,"Plastica");
-	Componente Carta=new Componente(Materiale.Carta,"Carta");
-	Componente Indifferenziato=new Componente(Materiale.Indifferenziato,"Indifferenziato");
-	Componente Vetro=new Componente(Materiale.Vetro,"Vetro");
-	
+	ArrayList<Materiale> componenti=new ArrayList<Materiale>(); //Gestisce uno o piu componenti di un prodotto
+		
 	private byte[] imgProdotto;
 	private int puntiProdotto;
 	
 	private boolean presenza;
 	
-	public void setComponenti(Componente m) {
+	public void setComponenti(Materiale m) {
 		if(!componenti.contains(m))
 		componenti.add(m);
 	}
@@ -62,39 +57,6 @@ public class Prodotto implements GestoreProdotto{
 		return quartoComponente;
 	}
 	
-	//finali
-	public Componente getPlastica() {
-		return Plastica;
-	}
-
-	public void setPlastica(Componente plastica) {
-		Plastica = plastica;
-	}
-
-	public Componente getCarta() {
-		return Carta;
-	}
-
-	public void setCarta(Componente carta) {
-		Carta = carta;
-	}
-
-	public Componente getIndifferenziato() {
-		return Indifferenziato;
-	}
-
-	public void setIndifferenziato(Componente indifferenziato) {
-		Indifferenziato = indifferenziato;
-	}
-
-	public Componente getVetro() {
-		return Vetro;
-	}
-
-	public void setVetro(Componente vetro) {
-		Vetro = vetro;
-	}
-
 	public int getPuntiProdotto() {
 		return puntiProdotto;
 	}
@@ -157,8 +119,8 @@ public class Prodotto implements GestoreProdotto{
 				"\nPunti: " + this.puntiProdotto);
 	}
 	
-	public String toString() {
-		return this.codiceABarreProdotto + " " +this.componenti ;
+	public void stampaComponenti() {
+		System.out.println(this.codiceABarreProdotto + " " + this.componenti);
 	}
 	
 	@Override
@@ -170,7 +132,10 @@ public class Prodotto implements GestoreProdotto{
 	public static void main(String[] args) {
 		Prodotto p = new Prodotto("123456");
 		p.creaConnessione();		
-		p.getDatiProdotto();		
+		p.getDatiProdotto();
+		
+		p.setComponenti(Materiale.Carta);	
+		p.stampaComponenti();
 	}	
 
 }

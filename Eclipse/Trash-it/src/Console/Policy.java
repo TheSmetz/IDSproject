@@ -80,57 +80,18 @@ public class Policy {
 			e.printStackTrace();
 		}
 	}
-			
-		
-		
-//		
-//		
-//		//finali
-//		public Componente getPlastica() {
-//			return Plastica;
-//		}
-//
-//		public void setPlastica(Componente plastica) {
-//			Plastica = plastica;
-//		}
-//
-//		public Componente getCarta() {
-//			return Carta;
-//		}
-//
-//		public void setCarta(Componente carta) {
-//			Carta = carta;
-//		}
-//
-//		public Componente getIndifferenziato() {
-//			return Indifferenziato;
-//		}
-//
-//		public void setIndifferenziato(Componente indifferenziato) {
-//			Indifferenziato = indifferenziato;
-//		}
-//
-//		public Componente getVetro() {
-//			return Vetro;
-//		}
-//
-//		public void setVetro(Componente vetro) {
-//			Vetro = vetro;
-//		}
-//	}
-	
 	
 	public Materiale setEnum(String comp) {
-		if (comp == "Carta") {
+		if (comp.equals("Carta")) {
 			return Materiale.Carta;
 		}
-		if (comp == "Plastica") {
+		if (comp.equals("Plastica")) {
 			return Materiale.Plastica;
 		}
-		if (comp == "Vetro") {
+		if (comp.equals("Vetro")) {
 			return Materiale.Vetro;
 		}
-		if (comp == "Indifferenziato") {
+		if (comp.equals("Indifferenziato")) {
 			return Materiale.Indifferenziato;
 		}
 		return null;
@@ -149,10 +110,9 @@ public class Policy {
 		System.out.println("\n" + pol.zona);
 		System.out.println(pol.descrizioneUno);
 		
-		Componente c = new Componente(pol.setEnum(pol.descrizioneUno), "aaa");
-		
-		p.setComponenti(c);
-		System.out.println(p.toString());
+		System.out.println("D: "+pol.setEnum(pol.descrizioneUno));
+		p.setComponenti(pol.setEnum(pol.descrizioneUno));
+		p.stampaComponenti();
 	}
 
 }
