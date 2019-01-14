@@ -110,7 +110,6 @@ public class Policy {
 		System.out.println("\n" + pol.zona);
 		System.out.println(pol.descrizioneUno);
 		
-		System.out.println("D: "+pol.setEnum(pol.descrizioneUno));
 		p.setComponenti(pol.setEnum(pol.descrizioneUno));
 		p.stampaComponenti();
 	}
