@@ -5,38 +5,108 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Prodotto implements GestoreProdotto{
 	
 	//attributi
+	private String codiceABarreProdotto; //id
 	private String nomeProdotto;
-	private String codiceABarreProdotto;
-	private String  descrizioneProdotto;
-	private boolean carta;
-	private boolean plastica;
-	private boolean vetro;
-	private boolean indifferenziato;
+//	private String  descrizioneProdotto;
+	
+	//componenti da convertire
+	private String primoComponente;
+	private String secondoComponente;
+	private String terzoComponente;
+	private String quartoComponente;
+	
+	//componenti finali
+	ArrayList<Componente> componenti=new ArrayList<Componente>(); //Gestisce uno o piu componenti di un prodotto
+	Componente Plastica=new Componente(Materiale.Plastica,"Plastica");
+	Componente Carta=new Componente(Materiale.Carta,"Carta");
+	Componente Indifferenziato=new Componente(Materiale.Indifferenziato,"Indifferenziato");
+	Componente Vetro=new Componente(Materiale.Vetro,"Vetro");
+	
 	private byte[] imgProdotto;
 	private int puntiProdotto;
+	
 	private boolean presenza;
 	
+	public void setComponenti(Componente m) {
+		if(!componenti.contains(m))
+		componenti.add(m);
+	}
 	
-	public String getNome() {
+	public String getCodiceABarreProdotto() {
+		return codiceABarreProdotto;
+	}
+	
+	public String getNomeProdotto() {
 		return nomeProdotto;
 	}
-	public boolean isCarta() {
-		return carta;
+	
+	//provvisori
+	public String getPrimoComponente() {
+		return primoComponente;
 	}
-	public boolean isPlastica() {
-		return plastica;
+
+	public String getSecondoComponente() {
+		return secondoComponente;
 	}
-	public boolean isVetro() {
-		return vetro;
+
+	public String getTerzoComponente() {
+		return terzoComponente;
 	}
-	public boolean isIndifferenziato() {
-		return indifferenziato;
+
+	public String getQuartoComponente() {
+		return quartoComponente;
 	}
 	
+	//finali
+	public Componente getPlastica() {
+		return Plastica;
+	}
+
+	public void setPlastica(Componente plastica) {
+		Plastica = plastica;
+	}
+
+	public Componente getCarta() {
+		return Carta;
+	}
+
+	public void setCarta(Componente carta) {
+		Carta = carta;
+	}
+
+	public Componente getIndifferenziato() {
+		return Indifferenziato;
+	}
+
+	public void setIndifferenziato(Componente indifferenziato) {
+		Indifferenziato = indifferenziato;
+	}
+
+	public Componente getVetro() {
+		return Vetro;
+	}
+
+	public void setVetro(Componente vetro) {
+		Vetro = vetro;
+	}
+
+	public int getPuntiProdotto() {
+		return puntiProdotto;
+	}
+
+	public void setPuntiProdotto(int puntiProdotto) {
+		this.puntiProdotto = puntiProdotto;
+	}
+
+	public byte[] getImgProdotto() {
+		return imgProdotto;
+	}
+
 	public Prodotto (String codice) {
 		this.codiceABarreProdotto = codice;
 	}
@@ -45,24 +115,23 @@ public class Prodotto implements GestoreProdotto{
 	@Override
 	public void creaConnessione() {
 		
-		String host = "jdbc:mysql://localhost:3306/trash-it";
+		String host = "jdbc:mysql://localhost:3306/dbtrash-it";
 		String username = "root";
 		String password = "";
 		
 		try {
 			Connection dbCon = DriverManager.getConnection(host, username, password);	//connessione
 			Statement stmtProdotto = dbCon.createStatement();
-			String query = "SELECT * FROM prodotto WHERE barcode = " + codiceABarreProdotto;
+			String query = "SELECT * FROM prodotto WHERE IDProdotto = " + codiceABarreProdotto;
 			ResultSet rsProdotto = stmtProdotto.executeQuery(query);
 			
 			if (rsProdotto.next()) {	
 				//this.codiceABarre = rsProdotto.getString("barcode");
-				this.nomeProdotto = rsProdotto.getString("nome");
-				this.descrizioneProdotto = rsProdotto.getString("descrizione");
-				this.carta = rsProdotto.getBoolean("carta");
-				this.plastica = rsProdotto.getBoolean("plastica");
-				this.vetro = rsProdotto.getBoolean("vetro");
-				this.indifferenziato = rsProdotto.getBoolean("indifferenziato");
+				this.nomeProdotto = rsProdotto.getString("Nome");
+				this.primoComponente = rsProdotto.getString("PrimoComponente");
+				this.secondoComponente = rsProdotto.getString("SecondoComponente");
+				this.terzoComponente = rsProdotto.getString("TerzoComponente");
+				this.quartoComponente = rsProdotto.getString("QuartoComponente");
 				this.imgProdotto = rsProdotto.getBytes("immagine");
 				this.puntiProdotto = rsProdotto.getInt("punti");				
 				this.presenza = true;
@@ -80,14 +149,18 @@ public class Prodotto implements GestoreProdotto{
 	public void getDatiProdotto() {
 		System.out.println("--- " + this.nomeProdotto + " ---"+
 				 "\nCodice a barre: " + this.codiceABarreProdotto +
-				"\nDescrizione: " + this.descrizioneProdotto +
-				"\nCarta: " + this.carta +
-				"\nPlastica: " + this.plastica +
-				"\nVetro: " + this.vetro +
-				"\nIndifferenziato: " + this.indifferenziato +
+				"\nPrimo: " + this.primoComponente +
+				"\nSecondo: " + this.secondoComponente +
+				"\nTerzo: " + this.terzoComponente +
+				"\nQuarto: " + this.quartoComponente +
 				"\nImmagine: " + this.imgProdotto +
 				"\nPunti: " + this.puntiProdotto);
 	}
+	
+	public String toString() {
+		return this.codiceABarreProdotto + " " +this.componenti ;
+	}
+	
 	@Override
 	public String scansioneCodiceABarreProdotto() {
 		return null;
@@ -95,7 +168,7 @@ public class Prodotto implements GestoreProdotto{
 	
 	
 	public static void main(String[] args) {
-		Prodotto p = new Prodotto("4006381115575");
+		Prodotto p = new Prodotto("123456");
 		p.creaConnessione();		
 		p.getDatiProdotto();		
 	}	
