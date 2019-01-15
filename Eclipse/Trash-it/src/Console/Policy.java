@@ -73,17 +73,17 @@ public class Policy {
 	}
 
 	public static void main(String[] args) {
-		Prodotto p = new Prodotto();
-		Policy pol = new Policy("AP", p);
-		p.scansioneCodiceABarre();
-		p.creaConnessione();
-		p.getDati();
-		pol.importaDB();
-		
-
-		p.setComponenti(pol.setEnum(pol.descrizione));
-		p.stampaComponenti();
-		System.exit(0);
+//		Prodotto p = new Prodotto();
+//		Policy pol = new Policy("AP", p);
+//		p.scansioneCodiceABarre();
+//		p.creaConnessione();
+//		p.getDati();
+//		pol.importaDB();
+//		
+//
+//		p.setComponenti(pol.setEnum(pol.descrizione));
+//		p.stampaComponenti();
+//		System.exit(0);
 	}
 
 }

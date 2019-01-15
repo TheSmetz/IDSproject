@@ -67,11 +67,8 @@ public class Prodotto implements GestoreProdotto{
 		componenti.forEach((componenti) -> System.out.println(componenti)); //Lambda expression
 	}
 	
-	@Override
-	public String scansioneCodiceABarre() {// DA MODIFICARE CON GRAFICA
-		JFrame frame = new JFrame();
-	    this.codiceABarre = JOptionPane.showInputDialog(frame, "Inserisci Codice A Barre: ");
-	    return this.codiceABarre;
+	public Prodotto(String codice) {
+		this.codiceABarre = codice;
 	}
 	
 	@Override
@@ -102,8 +99,7 @@ public class Prodotto implements GestoreProdotto{
 	
 	
 	public static void main(String[] args) {
-		Prodotto p = new Prodotto();
-		p.scansioneCodiceABarre(); //in input setto il codice a barre
+		Prodotto p = new Prodotto("8410668111116");
 		p.creaConnessione();		
 		p.getDati();
 		p.setComponenti(Materiale.Indifferenziato);
@@ -113,7 +109,6 @@ public class Prodotto implements GestoreProdotto{
 		//System.out.println(p.componenti.contains(Materiale.Carta)); //CONTROLLO CHE P SIA DI CARTA
 		//System.out.println(p.componenti.contains(Materiale.Plastica));
 		//System.out.println(p.contaComponenti());
-		p.scansioneCodiceABarre();
 		System.out.println(p.getcodiceABarre());
 		System.exit(0);
 	}	

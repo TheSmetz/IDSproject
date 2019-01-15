@@ -7,7 +7,5 @@ public interface GestoreProdotto {
 	public boolean verificaPresenza();
 	
 	public void getDati();
-	
-	public String scansioneCodiceABarre();
 
 }

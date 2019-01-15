@@ -1,5 +1,7 @@
 package Console;
 
+import java.util.ArrayList;
+
 //import Console.Cestino;
 
 public class CestinoSmart {
@@ -8,6 +10,8 @@ public class CestinoSmart {
 	Cestino plastica = new Cestino("plastica");
 	Cestino vetro = new Cestino("vetro");
 	Cestino indifferenziato = new Cestino("indifferenziato");
+	
+	
 	
 	
 	public boolean controlloIntegrita() {
@@ -34,11 +38,31 @@ public class CestinoSmart {
 		}else return false;
 	}
 	
-	public void conferimentoProdotto() {
-		//cestino scelto
-		//se è pieno
-		//apri bocchetta
+	public void conferimentoProdotto(Prodotto p) {
+		int size = p.componenti.size();
+		
+		for (int i=0; i<size; i++) {
+//			p.componenti.get(i);
+			System.out.println("CCCCC: " + p.componenti.get(i));
+		}
 	}
+	
+	
+	public static void main(String[] args) {
+		Prodotto p = new Prodotto("8410668111116");
+		p.creaConnessione();		
+		p.getDati();
+		p.setComponenti(Materiale.Indifferenziato);
+		p.setComponenti(Materiale.Carta);	
+		p.setComponenti(Materiale.Plastica);
+		p.stampaComponenti();
+		//System.out.println(p.componenti.contains(Materiale.Carta)); //CONTROLLO CHE P SIA DI CARTA
+		//System.out.println(p.componenti.contains(Materiale.Plastica));
+		//System.out.println(p.contaComponenti());
+		
+		CestinoSmart c = new CestinoSmart();
+		c.conferimentoProdotto(p);
+	}	
 
 
 }
