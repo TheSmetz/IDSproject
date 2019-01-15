@@ -42,11 +42,11 @@ public class Policy {
 		try {
 			Connection dbCon = DriverManager.getConnection(host, username, password); // connessione
 			Statement stmtProdotto = dbCon.createStatement();
-			String query = "SELECT policy.descrizione FROM (( prodotto"
-					+ "        INNER JOIN componente ON prodotto.IDprodotto = componente.prodottoID)"
-					+ "    INNER JOIN policy ON componente.IDcomponente = policy.componenteID )"
-					+ "INNER JOIN AREA ON AREA.IDarea = policy.areaID" + "WHERE policy.areaID = " + this.zona
-					+ "AND prodotto.IDprodotto = " + this.prodotto.getcodiceABarre() + "";
+			String query = "SELECT componente.IDcomponente, policy.descrizione "
+					+ "FROM (( prodotto INNER JOIN componente ON prodotto.IDprodotto = componente.prodottoID )"
+					+ "INNER JOIN policy ON componente.IDcomponente = policy.componenteID ) "
+					+ "INNER JOIN AREA ON AREA.IDarea = policy.areaID WHERE policy.areaID = '"+this.zona+ "'"
+					+ "AND prodotto.IDprodotto = "+this.prodotto.getcodiceABarre()+" GROUP BY componente.IDcomponente";
 
 			ResultSet rsProdotto = stmtProdotto.executeQuery(query);
 			if (rsProdotto.next()) {
