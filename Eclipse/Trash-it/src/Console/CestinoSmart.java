@@ -42,9 +42,25 @@ public class CestinoSmart {
 		int size = p.componenti.size();
 		
 		for (int i=0; i<size; i++) {
-//			p.componenti.get(i);
-			System.out.println("CCCCC: " + p.componenti.get(i));
+//			
+			switch (p.componenti.get(i)) {
+			
+			case carta: System.out.println("Gettare nomeComponente in " + Materiale.carta);
+			break;
+			
+			case plastica: System.out.println("Gettare nomeComponente in " + Materiale.plastica);
+			break;
+
+			case vetro: System.out.println("Gettare nomeComponente in " + Materiale.vetro);
+			break;
+			
+			case indifferenziato: System.out.println("Gettare nomeComponente in " + Materiale.indifferenziato);
+			break;
+			
+			}
 		}
+		
+		
 	}
 	
 	
@@ -52,9 +68,9 @@ public class CestinoSmart {
 		Prodotto p = new Prodotto("8410668111116");
 		p.creaConnessione();		
 		p.getDati();
-		p.setComponenti(Materiale.Indifferenziato);
-		p.setComponenti(Materiale.Carta);	
-		p.setComponenti(Materiale.Plastica);
+		p.setComponenti(Materiale.indifferenziato);
+		p.setComponenti(Materiale.carta);	
+		p.setComponenti(Materiale.plastica);
 		p.stampaComponenti();
 		//System.out.println(p.componenti.contains(Materiale.Carta)); //CONTROLLO CHE P SIA DI CARTA
 		//System.out.println(p.componenti.contains(Materiale.Plastica));
