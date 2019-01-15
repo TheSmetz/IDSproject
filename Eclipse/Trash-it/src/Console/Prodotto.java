@@ -15,20 +15,29 @@ public class Prodotto implements GestoreProdotto{
 	//attributi
 	private String codiceABarre; //id
 	private String nome;
-	//componenti finali
-	ArrayList<Materiale> componenti=new ArrayList<Materiale>(); //Gestisce uno o piu componenti di un prodotto
+	//collocazione finali
+	ArrayList<Materiale> collocazioneCestini=new ArrayList<Materiale>(); //Gestisce uno o piu componenti di un prodotto
+	ArrayList<String> arrayParti=new ArrayList<String>(); //Gestisce uno o piu parti del prodotto
 	private byte[] img;
 	private int punti;
 	private boolean presenza;
 	
 	
 	public void setComponenti(Materiale m) {
-		if(!componenti.contains(m))
-		componenti.add(m);
+		if(!collocazioneCestini.contains(m))
+		collocazioneCestini.add(m);
+	}
+	
+	public ArrayList<String> getArrayParti() {
+		return arrayParti;
+	}
+
+	public void setArrayParti(ArrayList<String> arrayParti) {
+		this.arrayParti = arrayParti;
 	}
 	
 	public int contaComponenti() {
-		return componenti.size();	
+		return collocazioneCestini.size();	
 	}
 	
 	public String getcodiceABarre() {
@@ -63,9 +72,13 @@ public class Prodotto implements GestoreProdotto{
 				"\nPunti: " + this.punti);
 	}
 	
-	public void stampaComponenti() {
-		componenti.forEach((componenti) -> System.out.println(componenti)); //Lambda expression
+	public void getComponenti() {
+		collocazioneCestini.forEach((c) -> System.out.println(c)); //Lambda expression
 	}
+	
+	public void getDescrizioni() {
+		arrayParti.forEach((p) -> System.out.println(p)); //Lambda expression
+	}	
 	
 	public Prodotto(String codice) {
 		this.codiceABarre = codice;
@@ -98,19 +111,22 @@ public class Prodotto implements GestoreProdotto{
 	}
 	
 	
-	public static void main(String[] args) {
-		Prodotto p = new Prodotto("8410668111116");
-		p.creaConnessione();		
-		p.getDati();
-		p.setComponenti(Materiale.Indifferenziato);
-		p.setComponenti(Materiale.Carta);	
-		p.setComponenti(Materiale.Plastica);
-		p.stampaComponenti();
-		//System.out.println(p.componenti.contains(Materiale.Carta)); //CONTROLLO CHE P SIA DI CARTA
-		//System.out.println(p.componenti.contains(Materiale.Plastica));
-		//System.out.println(p.contaComponenti());
-		System.out.println(p.getcodiceABarre());
-		System.exit(0);
-	}	
+	
+//	public static void main(String[] args) {
+//		Prodotto p = new Prodotto("8410668111116");
+//		p.creaConnessione();		
+//		p.getDati();
+//		p.setComponenti(Materiale.Indifferenziato);
+//		p.setComponenti(Materiale.Carta);	
+//		p.setComponenti(Materiale.Plastica);
+//		p.stampaComponenti();
+//		//System.out.println(p.collocazioneCestini.contains(Materiale.Carta)); //CONTROLLO CHE P SIA DI CARTA
+//		//System.out.println(p.collocazioneCestini.contains(Materiale.Plastica));
+//		//System.out.println(p.contaComponenti());
+//		System.out.println(p.getcodiceABarre());
+//		System.exit(0);
+//	}
+
+	
 
 }
