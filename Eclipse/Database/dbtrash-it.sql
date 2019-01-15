@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 15, 2019 alle 10:15
+-- Creato il: Gen 15, 2019 alle 10:38
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -29,17 +29,18 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `area` (
-  `IDArea` varchar(2) NOT NULL,
-  `Nome` varchar(20) NOT NULL
+  `IDarea` varchar(2) NOT NULL,
+  `nome` varchar(20) NOT NULL,
+  `raccoltaPunti` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `area`
 --
 
-INSERT INTO `area` (`IDArea`, `Nome`) VALUES
-('AP', 'Ascoli Piceno'),
-('MC', 'Macerata');
+INSERT INTO `area` (`IDarea`, `nome`, `raccoltaPunti`) VALUES
+('AP', 'Ascoli Piceno', 1),
+('MC', 'Macerata', 0);
 
 -- --------------------------------------------------------
 
@@ -99,20 +100,22 @@ INSERT INTO `policy` (`componenteID`, `areaID`, `descrizione`) VALUES
 --
 
 CREATE TABLE `prodotto` (
-  `IDProdotto` varchar(13) NOT NULL,
-  `Nome` varchar(50) NOT NULL
+  `IDprodotto` varchar(13) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `punti` int(3) NOT NULL,
+  `immagine` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `prodotto`
 --
 
-INSERT INTO `prodotto` (`IDProdotto`, `Nome`) VALUES
-('4006381492355', 'Stabilo rosa'),
-('80007920', 'San Benedetto 2L'),
-('8022880201027', 'Acqua naturale nocer'),
-('821935111124', 'Bottiglia Heineken'),
-('8410668111116', 'Bottiglia Latte Feiraco');
+INSERT INTO `prodotto` (`IDprodotto`, `nome`, `punti`, `immagine`) VALUES
+('4006381492355', 'Stabilo rosa', 3, ''),
+('80007920', 'San Benedetto 2L', 3, ''),
+('8022880201027', 'Acqua naturale nocer', 3, ''),
+('821935111124', 'Bottiglia Heineken', 5, ''),
+('8410668111116', 'Bottiglia Latte Feiraco', 5, '');
 
 --
 -- Indici per le tabelle scaricate
@@ -122,7 +125,7 @@ INSERT INTO `prodotto` (`IDProdotto`, `Nome`) VALUES
 -- Indici per le tabelle `area`
 --
 ALTER TABLE `area`
-  ADD PRIMARY KEY (`IDArea`);
+  ADD PRIMARY KEY (`IDarea`);
 
 --
 -- Indici per le tabelle `componente`
@@ -136,13 +139,13 @@ ALTER TABLE `componente`
 --
 ALTER TABLE `policy`
   ADD PRIMARY KEY (`componenteID`,`areaID`),
-  ADD KEY `areaID` (`areaID`);
+  ADD KEY `policy_ibfk_2` (`areaID`);
 
 --
 -- Indici per le tabelle `prodotto`
 --
 ALTER TABLE `prodotto`
-  ADD PRIMARY KEY (`IDProdotto`);
+  ADD PRIMARY KEY (`IDprodotto`);
 
 --
 -- Limiti per le tabelle scaricate
