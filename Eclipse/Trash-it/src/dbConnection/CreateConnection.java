@@ -20,6 +20,15 @@ public class CreateConnection {
 	private Connection dbCon;
 	private Statement stmtProdotto;
 	
+	
+	public ResultSet getRsQuery() {
+		return rsQuery;
+	}
+
+	public void setRsQuery(ResultSet rsQuery) {
+		this.rsQuery = rsQuery;
+	}
+
 	public CreateConnection(String nomeDB, String queryDB) {
 		
 		this.nomeDatabase = nomeDB;

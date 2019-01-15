@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import dbConnection.CreateConnection;
+
 public class Policy {
 
 	private Prodotto prodotto;
@@ -31,25 +33,19 @@ public class Policy {
 	}
 	
 	public void importaDB() {
-		String host = "jdbc:mysql://localhost:3306/dbtrash-it";
-		String username = "root";
-		String password = "";
+		String query = "SELECT policy.descrizione, componente.descrizione "
+				+ "FROM (( prodotto INNER JOIN componente ON prodotto.IDprodotto = componente.prodottoID )"
+				+ "INNER JOIN policy ON componente.IDcomponente = policy.componenteID ) "
+				+ "INNER JOIN area ON area.IDarea = policy.areaID WHERE policy.areaID = '"+this.zona+ "'"
+				+ "AND prodotto.IDprodotto = "+this.prodotto.getcodiceABarre()+" GROUP BY componente.IDcomponente";
+		CreateConnection policyConnection = new CreateConnection("dbtrash-it", query);
 
 		try {
-			Connection dbCon = DriverManager.getConnection(host, username, password); // connessione
-			Statement stmtProdotto = dbCon.createStatement();
-			String query = "SELECT policy.descrizione, componente.descrizione "
-					+ "FROM (( prodotto INNER JOIN componente ON prodotto.IDprodotto = componente.prodottoID )"
-					+ "INNER JOIN policy ON componente.IDcomponente = policy.componenteID ) "
-					+ "INNER JOIN area ON area.IDarea = policy.areaID WHERE policy.areaID = '"+this.zona+ "'"
-					+ "AND prodotto.IDprodotto = "+this.prodotto.getcodiceABarre()+" GROUP BY componente.IDcomponente";
-
-			ResultSet rsProdotto = stmtProdotto.executeQuery(query);
-			while(rsProdotto.next()) {
-				this.descrizione = rsProdotto.getString("policy.descrizione");
+			while(policyConnection.getRsQuery().next()) {
+				this.descrizione = policyConnection.getRsQuery().getString("policy.descrizione");
 				prodotto.collocazioneCestini.add(Materiale.valueOf(this.descrizione));
 				//System.out.println("prima"+this.descrizione);
-				this.descrizione = rsProdotto.getString("componente.descrizione");
+				this.descrizione = policyConnection.getRsQuery().getString("componente.descrizione");
 				prodotto.arrayParti.add(this.descrizione);
 				//System.out.println("dopo"+this.descrizione);
 			}

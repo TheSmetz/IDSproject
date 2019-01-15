@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import dbConnection.CreateConnection;
+
 public class Prodotto implements GestoreProdotto{
 	
 	//attributi
@@ -83,46 +85,31 @@ public class Prodotto implements GestoreProdotto{
 	
 	@Override
 	public void creaConnessione() {
-		
-		String host = "jdbc:mysql://localhost:3306/dbtrash-it";
-		String username = "root";
-		String password = "";
-		
+
+		String query = "SELECT * FROM prodotto WHERE IDProdotto = " + codiceABarre;		
+		CreateConnection prodottoConnection = new CreateConnection("dbtrash-it", query);		
 		try {
-			Connection dbCon = DriverManager.getConnection(host, username, password);	//connessione
-			Statement stmtProdotto = dbCon.createStatement();
-			String query = "SELECT * FROM prodotto WHERE IDProdotto = " + codiceABarre;
-			ResultSet rsProdotto = stmtProdotto.executeQuery(query);
-			
-			if (rsProdotto.next()) {	
-				this.codiceABarre = rsProdotto.getString("IDprodotto");
-				this.nome = rsProdotto.getString("nome");
-				this.img = rsProdotto.getBytes("immagine");
-				this.punti = rsProdotto.getInt("punti");				
+			if (prodottoConnection.getRsQuery().next()) {	
+				this.codiceABarre = prodottoConnection.getRsQuery().getString("IDprodotto");
+				this.nome = prodottoConnection.getRsQuery().getString("nome");
+				this.img = prodottoConnection.getRsQuery().getBytes("immagine");
+				this.punti = prodottoConnection.getRsQuery().getInt("punti");				
 				this.presenza = true;
-			}			
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
+		}					
 	}
 	
-	
-	
-//	public static void main(String[] args) {
-//		Prodotto p = new Prodotto("8410668111116");
-//		p.creaConnessione();		
-//		p.getDati();
-//		p.setComponenti(Materiale.Indifferenziato);
-//		p.setComponenti(Materiale.Carta);	
-//		p.setComponenti(Materiale.Plastica);
-//		p.stampaComponenti();
-//		//System.out.println(p.collocazioneCestini.contains(Materiale.Carta)); //CONTROLLO CHE P SIA DI CARTA
-//		//System.out.println(p.collocazioneCestini.contains(Materiale.Plastica));
-//		//System.out.println(p.contaComponenti());
-//		System.out.println(p.getcodiceABarre());
-//		System.exit(0);
-//	}
+	public static void main(String[] args) {
+		Prodotto p = new Prodotto("8410668111116");
+		p.creaConnessione();		
+		p.getDati();
+		//System.out.println(p.collocazioneCestini.contains(Materiale.Carta)); //CONTROLLO CHE P SIA DI CARTA
+		//System.out.println(p.collocazioneCestini.contains(Materiale.Plastica));
+		//System.out.println(p.contaComponenti());
+		System.out.println(p.getcodiceABarre());
+	}
 
 	
 
