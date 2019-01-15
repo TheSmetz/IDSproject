@@ -78,11 +78,13 @@ public class Tessera implements GestoreTessera {
 		tesseraConnection.executeUpdate(query);
 	}
 	
-	
 	@Override
 	public void addebitoPunti(int adPunti) {
-		int puntiAttuali = getPunti();
-		setPunti(puntiAttuali - adPunti);		
+		this.punti -= adPunti;	
+		
+		String query = "UPDATE tessera SET punti = " + this.punti + 
+				" WHERE IDtessera = '" + this.idtessera + "'";		
+		tesseraConnection.executeUpdate(query);	
 	}
 	
 
@@ -91,7 +93,7 @@ public class Tessera implements GestoreTessera {
 		Tessera t = new Tessera("FLSNDR97D17B474W");
 		t.connessioneDB();
 		t.getDati();
-		t.accreditoPunti(12);
+		t.addebitoPunti(36);
 		t.getDati();
 	}
 
