@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 14, 2019 alle 19:18
+-- Creato il: Gen 15, 2019 alle 10:15
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -58,9 +58,11 @@ CREATE TABLE `componente` (
 --
 
 INSERT INTO `componente` (`IDcomponente`, `prodottoID`, `descrizione`) VALUES
-('CA', '123456', 'corpo'),
-('PL', '123456', 'tappo'),
-('TP', '80007920', 'corpo');
+('CA', '8410668111116', 'corpo'),
+('IN', '4006381492355', 'evidenziatore'),
+('PL', '8410668111116', 'tappo'),
+('TP', '80007920', 'corpo'),
+('VE', '821935111124', 'intera bottiglia');
 
 -- --------------------------------------------------------
 
@@ -81,10 +83,14 @@ CREATE TABLE `policy` (
 INSERT INTO `policy` (`componenteID`, `areaID`, `descrizione`) VALUES
 ('CA', 'AP', 'carta'),
 ('CA', 'MC', 'carta'),
+('IN', 'AP', 'Indifferenziato'),
+('IN', 'MC', 'Indifferenziato'),
 ('PL', 'AP', 'plastica'),
 ('PL', 'MC', 'plastica'),
 ('TP', 'AP', 'carta'),
-('TP', 'MC', 'indifferenziato');
+('TP', 'MC', 'indifferenziato'),
+('VE', 'AP', 'Vetro'),
+('VE', 'MC', 'Vetro');
 
 -- --------------------------------------------------------
 
@@ -94,7 +100,7 @@ INSERT INTO `policy` (`componenteID`, `areaID`, `descrizione`) VALUES
 
 CREATE TABLE `prodotto` (
   `IDProdotto` varchar(13) NOT NULL,
-  `Nome` varchar(20) NOT NULL
+  `Nome` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -102,8 +108,11 @@ CREATE TABLE `prodotto` (
 --
 
 INSERT INTO `prodotto` (`IDProdotto`, `Nome`) VALUES
-('123456', 'Bottiglia Latte'),
-('80007920', 'San Benedetto 2L');
+('4006381492355', 'Stabilo rosa'),
+('80007920', 'San Benedetto 2L'),
+('8022880201027', 'Acqua naturale nocer'),
+('821935111124', 'Bottiglia Heineken'),
+('8410668111116', 'Bottiglia Latte Feiraco');
 
 --
 -- Indici per le tabelle scaricate
@@ -120,7 +129,7 @@ ALTER TABLE `area`
 --
 ALTER TABLE `componente`
   ADD PRIMARY KEY (`IDcomponente`,`prodottoID`),
-  ADD KEY `prodottoID` (`prodottoID`);
+  ADD KEY `componente_ibfk_1` (`prodottoID`);
 
 --
 -- Indici per le tabelle `policy`
@@ -143,7 +152,7 @@ ALTER TABLE `prodotto`
 -- Limiti per la tabella `componente`
 --
 ALTER TABLE `componente`
-  ADD CONSTRAINT `componente_ibfk_1` FOREIGN KEY (`prodottoID`) REFERENCES `prodotto` (`IDProdotto`);
+  ADD CONSTRAINT `componente_ibfk_1` FOREIGN KEY (`prodottoID`) REFERENCES `prodotto` (`IDProdotto`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `policy`
