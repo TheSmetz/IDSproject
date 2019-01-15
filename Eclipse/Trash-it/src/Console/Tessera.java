@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Tessera implements GestoreTessera {
 	protected int idTessera;
-	protected String codiceFiscale;
 	protected String nome;
 	protected String cognome;
 	protected String citta;
@@ -24,9 +23,7 @@ public class Tessera implements GestoreTessera {
 	public int getIdTessera() {
 		return idTessera;
 	}
-	public String getCodiceFiscale() {
-		return codiceFiscale;
-	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -38,6 +35,10 @@ public class Tessera implements GestoreTessera {
 	}
 	public Date getScadenza() {
 		return scadenza;
+	}
+	
+	public void connessioneDB() {
+		
 	}
 	
 	@Override
