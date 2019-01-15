@@ -90,8 +90,8 @@ public class Prodotto implements GestoreProdotto{
 			if (rsProdotto.next()) {	
 				this.codiceABarre = rsProdotto.getString("IDprodotto");
 				this.nome = rsProdotto.getString("nome");
-				//this.img = rsProdotto.getBytes("immagine");
-				//this.punti = rsProdotto.getInt("punti");				
+				this.img = rsProdotto.getBytes("immagine");
+				this.punti = rsProdotto.getInt("punti");				
 				this.presenza = true;
 			}			
 		} catch (SQLException e) {

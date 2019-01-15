@@ -33,30 +33,6 @@ public class Policy {
 		System.out.println(prodotto.getNome());
 	}
 
-	public void importaDB() {
-		// provvisori
-		String host = "jdbc:mysql://localhost:3306/dbtrash-it";
-		String username = "root";
-		String password = "";
-
-		try {
-			Connection dbCon = DriverManager.getConnection(host, username, password); // connessione
-			Statement stmtProdotto = dbCon.createStatement();
-			String query = "SELECT componente.IDcomponente, policy.descrizione "
-					+ "FROM (( prodotto INNER JOIN componente ON prodotto.IDprodotto = componente.prodottoID )"
-					+ "INNER JOIN policy ON componente.IDcomponente = policy.componenteID ) "
-					+ "INNER JOIN AREA ON AREA.IDarea = policy.areaID WHERE policy.areaID = '"+this.zona+ "'"
-					+ "AND prodotto.IDprodotto = "+this.prodotto.getcodiceABarre()+" GROUP BY componente.IDcomponente";
-
-			ResultSet rsProdotto = stmtProdotto.executeQuery(query);
-			if (rsProdotto.next()) {
-				this.descrizione = rsProdotto.getString("policy.descrizione");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public Materiale setEnum(String comp) { // controllo errore
 		if (comp.equals("carta")) {
 			return Materiale.Carta;
@@ -69,6 +45,32 @@ public class Policy {
 		} else
 			return null;
 	}
+	
+	public void importaDB() {
+		// provvisori
+		String host = "jdbc:mysql://localhost:3306/dbtrash-it";
+		String username = "root";
+		String password = "";
+
+		try {
+			Connection dbCon = DriverManager.getConnection(host, username, password); // connessione
+			Statement stmtProdotto = dbCon.createStatement();
+			String query = "SELECT policy.descrizione "
+					+ "FROM (( prodotto INNER JOIN componente ON prodotto.IDprodotto = componente.prodottoID )"
+					+ "INNER JOIN policy ON componente.IDcomponente = policy.componenteID ) "
+					+ "INNER JOIN area ON area.IDarea = policy.areaID WHERE policy.areaID = '"+this.zona+ "'"
+					+ "AND prodotto.IDprodotto = "+this.prodotto.getcodiceABarre()+" GROUP BY componente.IDcomponente";
+
+			ResultSet rsProdotto = stmtProdotto.executeQuery(query);
+			while(rsProdotto.next()) {
+				this.descrizione = rsProdotto.getString("policy.descrizione");
+				prodotto.componenti.add(setEnum(this.descrizione));
+				//System.out.println(this.descrizione);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) {
 		Prodotto p = new Prodotto();
@@ -77,10 +79,11 @@ public class Policy {
 		p.creaConnessione();
 		p.getDati();
 		pol.importaDB();
-		System.out.println(pol.descrizione);
+		
 
 		p.setComponenti(pol.setEnum(pol.descrizione));
 		p.stampaComponenti();
+		System.exit(0);
 	}
 
 }
