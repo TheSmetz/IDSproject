@@ -29,22 +29,8 @@ public class Policy {
 	public void stampaNome() {
 		System.out.println(prodotto.getNome());
 	}
-
-	public Materiale setEnum(String comp) { // controllo errore
-		if (comp.equals("carta")) {
-			return Materiale.carta;
-		} else if (comp.equals("plastica")) {
-			return Materiale.plastica;
-		} else if (comp.equals("vetro")) {
-			return Materiale.vetro;
-		} else if (comp.equals("indifferenziato")) {
-			return Materiale.indifferenziato;
-		} else
-			return null;
-	}
 	
 	public void importaDB() {
-		// provvisori
 		String host = "jdbc:mysql://localhost:3306/dbtrash-it";
 		String username = "root";
 		String password = "";
@@ -61,7 +47,7 @@ public class Policy {
 			ResultSet rsProdotto = stmtProdotto.executeQuery(query);
 			while(rsProdotto.next()) {
 				this.descrizione = rsProdotto.getString("policy.descrizione");
-				prodotto.collocazioneCestini.add(setEnum(this.descrizione));
+				prodotto.collocazioneCestini.add(Materiale.valueOf(this.descrizione));
 				//System.out.println("prima"+this.descrizione);
 				this.descrizione = rsProdotto.getString("componente.descrizione");
 				prodotto.arrayParti.add(this.descrizione);
