@@ -4,16 +4,14 @@ import java.util.Date;
 
 import dbConnection.CreateConnection;
 
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Tessera implements GestoreTessera {
 	private String idtessera;
 	private String nome;
 	private String cognome;
 	private Date nascita;
 	private int punti;	
+	
+	private CreateConnection tesseraConnection = new CreateConnection();
 	
 	public int getPunti() {
 		return punti;
@@ -41,7 +39,7 @@ public class Tessera implements GestoreTessera {
 	
 	public void connessioneDB() {
 		String query = "SELECT * FROM tessera WHERE IDtessera = '" + this.idtessera + "'";
-		CreateConnection tesseraConnection = new CreateConnection("dbtrash-it", query);
+		tesseraConnection.executeQuery(query);
 		
 		try {
 			if (tesseraConnection.getRsQuery().next()) {
@@ -73,9 +71,14 @@ public class Tessera implements GestoreTessera {
 	}
 	@Override
 	public void accreditoPunti(int acPunti) {
-		int puntiAttuali = getPunti();
-		setPunti(puntiAttuali + acPunti);		
+		this.punti += acPunti;	
+		
+		String query = "UPDATE tessera SET punti = " + this.punti + 
+				" WHERE IDtessera = '" + this.idtessera + "'";		
+		tesseraConnection.executeUpdate(query);
 	}
+	
+	
 	@Override
 	public void addebitoPunti(int adPunti) {
 		int puntiAttuali = getPunti();
@@ -87,6 +90,8 @@ public class Tessera implements GestoreTessera {
 	public static void main(String[] args) {
 		Tessera t = new Tessera("FLSNDR97D17B474W");
 		t.connessioneDB();
+		t.getDati();
+		t.accreditoPunti(12);
 		t.getDati();
 	}
 

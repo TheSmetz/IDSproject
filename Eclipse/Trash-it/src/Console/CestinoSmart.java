@@ -1,7 +1,5 @@
 package Console;
 
-import java.util.ArrayList;
-
 //import Console.Cestino;
 
 public class CestinoSmart {

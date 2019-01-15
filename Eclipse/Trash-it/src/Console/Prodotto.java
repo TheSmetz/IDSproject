@@ -1,10 +1,6 @@
 package Console;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import dbConnection.CreateConnection;
@@ -20,6 +16,8 @@ public class Prodotto implements GestoreProdotto{
 	private byte[] img;
 	private int punti;
 	private boolean presenza;
+	
+	private CreateConnection prodottoConnection = new CreateConnection();
 	
 	
 	public void setComponenti(Materiale m) {
@@ -87,7 +85,7 @@ public class Prodotto implements GestoreProdotto{
 	public void creaConnessione() {
 
 		String query = "SELECT * FROM prodotto WHERE IDProdotto = " + this.codiceABarre;		
-		CreateConnection prodottoConnection = new CreateConnection("dbtrash-it", query);		
+		prodottoConnection.executeQuery(query);		
 		try {
 			if (prodottoConnection.getRsQuery().next()) {	
 				this.codiceABarre = prodottoConnection.getRsQuery().getString("IDprodotto");

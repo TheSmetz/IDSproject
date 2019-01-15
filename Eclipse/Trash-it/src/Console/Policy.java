@@ -1,10 +1,6 @@
 package Console;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import dbConnection.CreateConnection;
 
@@ -13,6 +9,8 @@ public class Policy {
 	private Prodotto prodotto;
 	private String descrizione;
 	private String zona;
+	
+	private CreateConnection policyConnection = new CreateConnection();
 
 	// costruttore
 	public Policy(String z, Prodotto p) {
@@ -38,7 +36,7 @@ public class Policy {
 				+ "INNER JOIN policy ON componente.IDcomponente = policy.componenteID ) "
 				+ "INNER JOIN area ON area.IDarea = policy.areaID WHERE policy.areaID = '"+this.zona+ "'"
 				+ "AND prodotto.IDprodotto = "+this.prodotto.getcodiceABarre()+" GROUP BY componente.IDcomponente";
-		CreateConnection policyConnection = new CreateConnection("dbtrash-it", query);
+		policyConnection.executeQuery(query);
 
 		try {
 			while(policyConnection.getRsQuery().next()) {

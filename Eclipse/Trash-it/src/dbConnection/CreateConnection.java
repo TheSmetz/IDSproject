@@ -13,13 +13,11 @@ public class CreateConnection {
 	private String username;
 	private String password;
 	
-	private String nomeDatabase;
-	private String queryDatabase;
 	private ResultSet rsQuery;
+	private int rsUpdate;
 	
 	private Connection dbCon;
-	private Statement stmtProdotto;
-	
+	private Statement stmtProdotto;	
 	
 	public ResultSet getRsQuery() {
 		return rsQuery;
@@ -29,19 +27,22 @@ public class CreateConnection {
 		this.rsQuery = rsQuery;
 	}
 
-	public CreateConnection(String nomeDB, String queryDB) {
-		
-		this.nomeDatabase = nomeDB;
-		this.queryDatabase = queryDB;
-		
-		this.host = "jdbc:mysql://localhost:3306/"+this.nomeDatabase;
-		this.username = "root";
-		this.password = "";		
-		
-		executeQuery(this.nomeDatabase, this.queryDatabase);
+	public int getRsUpdate() {
+		return rsUpdate;
 	}
+
+	public void setRsUpdate(int rsUpdate) {
+		this.rsUpdate = rsUpdate;
+	}
+
+	public CreateConnection() {
+		
+		this.host = "jdbc:mysql://localhost:3306/dbtrash-it";
+		this.username = "root";
+		this.password = "";			
+	}	
 	
-	public void executeQuery(String nome, String query) {
+	public void executeQuery(String query) {
 		
 		try {
 			dbCon = DriverManager.getConnection(host, username, password);	//connessione
@@ -54,16 +55,29 @@ public class CreateConnection {
 		}
 	}	
 	
+	public void executeUpdate(String query) {
+		
+		try {
+			dbCon = DriverManager.getConnection(host, username, password);	//connessione
+			
+			stmtProdotto = dbCon.createStatement();
+			rsUpdate = stmtProdotto.executeUpdate(query);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}	
+	
 	public static void main(String[] args) throws SQLException {
 		
-		CreateConnection trash = new CreateConnection("dbtrash-it", "SELECT * FROM tessera");
-		
-		String cf;
-		
-		while (trash.rsQuery.next()) {	
-			cf = trash.rsQuery.getString("IDtessera");
-			System.out.println(cf);
-		}		
+//		CreateConnection trash = new CreateConnection("dbtrash-it", "SELECT * FROM tessera");
+//		
+//		String cf;
+//		
+//		while (trash.rsQuery.next()) {	
+//			cf = trash.rsQuery.getString("IDtessera");
+//			System.out.println(cf);
+//		}		
 	}
 
 }
