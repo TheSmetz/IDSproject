@@ -33,10 +33,8 @@ public class Policy {
 		System.out.println(prodotto.getNome());
 	}
 
-	public void convertiComponenti() {
-
+	public void importaDB() {
 		// provvisori
-
 		String host = "jdbc:mysql://localhost:3306/dbtrash-it";
 		String username = "root";
 		String password = "";
@@ -44,10 +42,11 @@ public class Policy {
 		try {
 			Connection dbCon = DriverManager.getConnection(host, username, password); // connessione
 			Statement stmtProdotto = dbCon.createStatement();
-			String query = "SELECT componente.IDcomponente, policy.descrizione FROM ((`prodotto` INNER JOIN `componente` ON prodotto.IDprodotto = componente.prodottoID) "
-					+ "INNER JOIN `policy` ON componente.IDcomponente = policy.componenteID) "
-					+ "INNER JOIN `area` ON area.IDarea = policy.areaID) " + "WHERE policy.areaID = '" + this.zona
-					+ "'AND prodotto.IDprodotto='" + prodotto.getcodiceABarre() + "GROUP BY componente.IDcomponente";
+			String query = "SELECT policy.descrizione FROM (( prodotto"
+					+ "        INNER JOIN componente ON prodotto.IDprodotto = componente.prodottoID)"
+					+ "    INNER JOIN policy ON componente.IDcomponente = policy.componenteID )"
+					+ "INNER JOIN AREA ON AREA.IDarea = policy.areaID" + "WHERE policy.areaID = " + this.zona
+					+ "AND prodotto.IDprodotto = " + this.prodotto.getcodiceABarre() + "";
 
 			ResultSet rsProdotto = stmtProdotto.executeQuery(query);
 			if (rsProdotto.next()) {
@@ -59,31 +58,25 @@ public class Policy {
 	}
 
 	public Materiale setEnum(String comp) { // controllo errore
-		if (comp.equals("CA")) {
+		if (comp.equals("carta")) {
 			return Materiale.Carta;
-		}
-		if (comp.equals("PL")) {
+		} else if (comp.equals("plastica")) {
 			return Materiale.Plastica;
-		}
-		if (comp.equals("VE")) {
+		} else if (comp.equals("vetro")) {
 			return Materiale.Vetro;
-		}
-		if (comp.equals("IN")) {
+		} else if (comp.equals("indifferenziato")) {
 			return Materiale.Indifferenziato;
-		}
-		return null;
+		} else
+			return null;
 	}
 
 	public static void main(String[] args) {
 		Prodotto p = new Prodotto();
+		Policy pol = new Policy("AP", p);
 		p.scansioneCodiceABarre();
 		p.creaConnessione();
 		p.getDati();
-
-		Policy pol = new Policy("AP", p);
-		pol.stampaNome();
-		pol.convertiComponenti();
-		System.out.println("\n" + pol.zona);
+		pol.importaDB();
 		System.out.println(pol.descrizione);
 
 		p.setComponenti(pol.setEnum(pol.descrizione));
