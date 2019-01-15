@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 15, 2019 alle 10:38
+-- Creato il: Gen 15, 2019 alle 18:50
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -117,6 +117,41 @@ INSERT INTO `prodotto` (`IDprodotto`, `nome`, `punti`, `immagine`) VALUES
 ('821935111124', 'Bottiglia Heineken', 5, ''),
 ('8410668111116', 'Bottiglia Latte Feiraco', 5, '');
 
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `statistica`
+--
+
+CREATE TABLE `statistica` (
+  `ProdottoID` varchar(13) NOT NULL,
+  `TesseraID` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `tessera`
+--
+
+CREATE TABLE `tessera` (
+  `IDtessera` varchar(16) NOT NULL,
+  `nome` varchar(20) NOT NULL,
+  `cognome` varchar(20) NOT NULL,
+  `nascita` date NOT NULL,
+  `punti` int(7) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `tessera`
+--
+
+INSERT INTO `tessera` (`IDtessera`, `nome`, `cognome`, `nascita`, `punti`) VALUES
+('FLSNDR97D17B474W', 'Andrea', 'Falaschini', '1997-04-17', 36),
+('GRRMTT97L08I156I', 'Matteo', 'Guerrini', '1997-07-08', 0),
+('MCCDGI97M04A27IO', 'Diego', 'Miccio', '1997-08-04', 0),
+('MMIMTT97L04E783P', 'Matteo', 'Iommi', '1997-07-04', 0);
+
 --
 -- Indici per le tabelle scaricate
 --
@@ -148,6 +183,19 @@ ALTER TABLE `prodotto`
   ADD PRIMARY KEY (`IDprodotto`);
 
 --
+-- Indici per le tabelle `statistica`
+--
+ALTER TABLE `statistica`
+  ADD KEY `ProdottoID` (`ProdottoID`),
+  ADD KEY `TesseraID` (`TesseraID`);
+
+--
+-- Indici per le tabelle `tessera`
+--
+ALTER TABLE `tessera`
+  ADD PRIMARY KEY (`IDtessera`);
+
+--
 -- Limiti per le tabelle scaricate
 --
 
@@ -155,14 +203,21 @@ ALTER TABLE `prodotto`
 -- Limiti per la tabella `componente`
 --
 ALTER TABLE `componente`
-  ADD CONSTRAINT `componente_ibfk_1` FOREIGN KEY (`prodottoID`) REFERENCES `prodotto` (`IDProdotto`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `componente_ibfk_1` FOREIGN KEY (`prodottoID`) REFERENCES `prodotto` (`IDprodotto`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `policy`
 --
 ALTER TABLE `policy`
   ADD CONSTRAINT `policy_ibfk_1` FOREIGN KEY (`componenteID`) REFERENCES `componente` (`IDcomponente`),
-  ADD CONSTRAINT `policy_ibfk_2` FOREIGN KEY (`areaID`) REFERENCES `area` (`IDArea`);
+  ADD CONSTRAINT `policy_ibfk_2` FOREIGN KEY (`areaID`) REFERENCES `area` (`IDarea`);
+
+--
+-- Limiti per la tabella `statistica`
+--
+ALTER TABLE `statistica`
+  ADD CONSTRAINT `ProdottoID` FOREIGN KEY (`ProdottoID`) REFERENCES `prodotto` (`IDprodotto`),
+  ADD CONSTRAINT `TesseraID` FOREIGN KEY (`TesseraID`) REFERENCES `tessera` (`IDTessera`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
