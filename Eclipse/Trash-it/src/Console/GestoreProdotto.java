@@ -6,8 +6,8 @@ public interface GestoreProdotto {
 	
 	public boolean verificaPresenza();
 	
-	public void getDatiProdotto();
+	public void getDati();
 	
-	public String scansioneCodiceABarreProdotto();
+	public String scansioneCodiceABarre();
 
 }

@@ -7,73 +7,73 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class Prodotto implements GestoreProdotto{
 	
 	//attributi
-	private String codiceABarreProdotto; //id
-	private String nomeProdotto;
-	
-	//componenti da convertire
-	private String primoComponente;
-	private String secondoComponente;
-	private String terzoComponente;
-	private String quartoComponente;
-	
+	private String codiceABarre; //id
+	private String nome;
 	//componenti finali
 	ArrayList<Materiale> componenti=new ArrayList<Materiale>(); //Gestisce uno o piu componenti di un prodotto
-		
-	private byte[] imgProdotto;
-	private int puntiProdotto;
-	
+	private byte[] img;
+	private int punti;
 	private boolean presenza;
+	
 	
 	public void setComponenti(Materiale m) {
 		if(!componenti.contains(m))
 		componenti.add(m);
 	}
 	
-	public String getCodiceABarreProdotto() {
-		return codiceABarreProdotto;
+	public int contaComponenti() {
+		return componenti.size();	
 	}
 	
-	public String getNomeProdotto() {
-		return nomeProdotto;
+	public String getcodiceABarre() {
+		return this.codiceABarre;
 	}
 	
-	//provvisori
-	public String getPrimoComponente() {
-		return primoComponente;
-	}
-
-	public String getSecondoComponente() {
-		return secondoComponente;
-	}
-
-	public String getTerzoComponente() {
-		return terzoComponente;
-	}
-
-	public String getQuartoComponente() {
-		return quartoComponente;
+	public String getNome() {
+		return this.nome;
 	}
 	
-	public int getPuntiProdotto() {
-		return puntiProdotto;
+	public int getPunti() {
+		return this.punti;
 	}
 
-	public void setPuntiProdotto(int puntiProdotto) {
-		this.puntiProdotto = puntiProdotto;
+	public void setPunti(int punti) {
+		this.punti = punti;
 	}
 
-	public byte[] getImgProdotto() {
-		return imgProdotto;
-	}
-
-	public Prodotto (String codice) {
-		this.codiceABarreProdotto = codice;
+	public byte[] getImg() {
+		return this.img;
 	}
 	
-
+	@Override
+	public boolean verificaPresenza() {
+		return this.presenza;
+	}
+	
+	@Override
+	public void getDati() {
+		System.out.println("--- " + this.nome + " ---"+
+				 "\nCodice a barre: " + this.codiceABarre +
+				"\nPunti: " + this.punti);
+	}
+	
+	public void stampaComponenti() {
+		componenti.forEach((componenti) -> System.out.println(componenti)); //Lambda expression
+	}
+	
+	@Override
+	public String scansioneCodiceABarre() {// DA MODIFICARE CON GRAFICA
+		JFrame frame = new JFrame();
+	    this.codiceABarre = JOptionPane.showInputDialog(frame, "Inserisci Codice A Barre: ");
+	    return this.codiceABarre;
+	}
+	
 	@Override
 	public void creaConnessione() {
 		
@@ -84,18 +84,14 @@ public class Prodotto implements GestoreProdotto{
 		try {
 			Connection dbCon = DriverManager.getConnection(host, username, password);	//connessione
 			Statement stmtProdotto = dbCon.createStatement();
-			String query = "SELECT * FROM prodotto WHERE IDProdotto = " + codiceABarreProdotto;
+			String query = "SELECT * FROM prodotto WHERE IDProdotto = " + codiceABarre;
 			ResultSet rsProdotto = stmtProdotto.executeQuery(query);
 			
 			if (rsProdotto.next()) {	
-				//this.codiceABarre = rsProdotto.getString("barcode");
-				this.nomeProdotto = rsProdotto.getString("Nome");
-				this.primoComponente = rsProdotto.getString("PrimoComponente");
-				this.secondoComponente = rsProdotto.getString("SecondoComponente");
-				this.terzoComponente = rsProdotto.getString("TerzoComponente");
-				this.quartoComponente = rsProdotto.getString("QuartoComponente");
-				this.imgProdotto = rsProdotto.getBytes("immagine");
-				this.puntiProdotto = rsProdotto.getInt("punti");				
+				this.codiceABarre = rsProdotto.getString("IDprodotto");
+				this.nome = rsProdotto.getString("nome");
+				//this.img = rsProdotto.getBytes("immagine");
+				//this.punti = rsProdotto.getInt("punti");				
 				this.presenza = true;
 			}			
 		} catch (SQLException e) {
@@ -103,39 +99,23 @@ public class Prodotto implements GestoreProdotto{
 		}
 		
 	}
-	@Override
-	public boolean verificaPresenza() {
-		return this.presenza;
-	}
-	@Override
-	public void getDatiProdotto() {
-		System.out.println("--- " + this.nomeProdotto + " ---"+
-				 "\nCodice a barre: " + this.codiceABarreProdotto +
-				"\nPrimo: " + this.primoComponente +
-				"\nSecondo: " + this.secondoComponente +
-				"\nTerzo: " + this.terzoComponente +
-				"\nQuarto: " + this.quartoComponente +
-				"\nImmagine: " + this.imgProdotto +
-				"\nPunti: " + this.puntiProdotto);
-	}
-	
-	public void stampaComponenti() {
-		System.out.println(this.codiceABarreProdotto + " " + this.componenti);
-	}
-	
-	@Override
-	public String scansioneCodiceABarreProdotto() {
-		return null;
-	}
 	
 	
 	public static void main(String[] args) {
-		Prodotto p = new Prodotto("123456");
+		Prodotto p = new Prodotto();
+		p.scansioneCodiceABarre(); //in input setto il codice a barre
 		p.creaConnessione();		
-		p.getDatiProdotto();
-		
+		p.getDati();
+		p.setComponenti(Materiale.Indifferenziato);
 		p.setComponenti(Materiale.Carta);	
+		p.setComponenti(Materiale.Plastica);
 		p.stampaComponenti();
+		//System.out.println(p.componenti.contains(Materiale.Carta)); //CONTROLLO CHE P SIA DI CARTA
+		//System.out.println(p.componenti.contains(Materiale.Plastica));
+		//System.out.println(p.contaComponenti());
+		p.scansioneCodiceABarre();
+		System.out.println(p.getcodiceABarre());
+		System.exit(0);
 	}	
 
 }
