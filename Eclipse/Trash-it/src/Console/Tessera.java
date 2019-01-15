@@ -1,18 +1,19 @@
 package Console;
 
 import java.util.Date;
+
+import dbConnection.CreateConnection;
+
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Tessera implements GestoreTessera {
-	protected int idTessera;
-	protected String nome;
-	protected String cognome;
-	protected String citta;
-	protected Date scadenza ;	//Date firstDate1 = new Date(int year, int month, int date);
-	protected int punti;
-	
+	private String idtessera;
+	private String nome;
+	private String cognome;
+	private Date nascita;
+	private int punti;	
 	
 	public int getPunti() {
 		return punti;
@@ -20,8 +21,8 @@ public class Tessera implements GestoreTessera {
 	public void setPunti(int punti) {
 		this.punti = punti;
 	}
-	public int getIdTessera() {
-		return idTessera;
+	public String getIdTessera() {
+		return idtessera;
 	}
 	
 	public String getNome() {
@@ -30,25 +31,32 @@ public class Tessera implements GestoreTessera {
 	public String getCognome() {
 		return cognome;
 	}
-	public String getCitta() {
-		return citta;
+	public Date getNascita() {
+		return nascita;
 	}
-	public Date getScadenza() {
-		return scadenza;
+	
+	public Tessera (String tessera) {
+		this.idtessera = tessera;
 	}
 	
 	public void connessioneDB() {
+		String query = "SELECT * FROM tessera WHERE IDtessera = '" + this.idtessera + "'";
+		CreateConnection tesseraConnection = new CreateConnection("dbtrash-it", query);
 		
+		try {
+			if (tesseraConnection.getRsQuery().next()) {
+				this.nome = tesseraConnection.getRsQuery().getString("nome");
+				this.cognome = tesseraConnection.getRsQuery().getString("cognome");
+				this.nascita = tesseraConnection.getRsQuery().getDate("nascita");
+				this.punti = tesseraConnection.getRsQuery().getInt("punti");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	@Override
-	public boolean verificaValidita() {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-		LocalDateTime localDate = LocalDateTime.now();
-		System.out.println(dtf.format(localDate));
-		System.out.println();
-		return false;
-	}
+	
 	@Override
 	public boolean verificaPresenza() {
 		// TODO Auto-generated method stub
@@ -56,7 +64,11 @@ public class Tessera implements GestoreTessera {
 	}
 	@Override
 	public void getDati() {
-		//connessione database e estrazione dati
+		System.out.println("--- " + this.idtessera + " ---"+
+				 "\nNome: " + this.nome +
+				"\nCognome: " + this.cognome +
+				"\nNascita: " + this.nascita +
+				"\nPunti: " + this.punti);
 		
 	}
 	@Override
@@ -73,8 +85,9 @@ public class Tessera implements GestoreTessera {
 
 
 	public static void main(String[] args) {
-		Tessera t = new Tessera();
-		t.verificaValidita();
+		Tessera t = new Tessera("FLSNDR97D17B474W");
+		t.connessioneDB();
+		t.getDati();
 	}
 
 }

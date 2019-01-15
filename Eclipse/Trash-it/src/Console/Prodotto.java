@@ -86,7 +86,7 @@ public class Prodotto implements GestoreProdotto{
 	@Override
 	public void creaConnessione() {
 
-		String query = "SELECT * FROM prodotto WHERE IDProdotto = " + codiceABarre;		
+		String query = "SELECT * FROM prodotto WHERE IDProdotto = " + this.codiceABarre;		
 		CreateConnection prodottoConnection = new CreateConnection("dbtrash-it", query);		
 		try {
 			if (prodottoConnection.getRsQuery().next()) {	
