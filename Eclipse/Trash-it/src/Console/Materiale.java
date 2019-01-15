@@ -1,6 +1,7 @@
 package Console;
 
 public enum Materiale {
-	Carta, Plastica, Vetro, Indifferenziato
-
+	carta, plastica, vetro, indifferenziato;
 }
+
+
