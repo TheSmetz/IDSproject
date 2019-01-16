@@ -2,8 +2,6 @@ package Console;
 
 import java.io.IOException;
 
-//import Console.Cestino;
-
 public class CestinoSmart {
 
 	Cestino carta = new Cestino("carta");
@@ -28,31 +26,31 @@ public class CestinoSmart {
 	}
 
 	public boolean controlloCestini() { // controllo generale sia vuoto sia integrità
-		if (controlloIntegrita() == true && controlloVuoto() == true) {
+		if (controlloIntegrita() == true && controlloVuoto() == false) {
 			return true;
 		} else
 			return false;
 	}
 
 	public void conferimentoProdotto(Prodotto p) throws IOException {
-		for (int i = 0; i < p.collocazioneCestini.size(); i++) {
+		for (int i = 0; i < p.getCollocazioneCestini().size(); i++) {
 			if (controlloVuoto()) {
-				switch (p.collocazioneCestini.get(i)) {
+				switch (p.getCollocazioneCestini().get(i)) {
 				case carta:
 					carta.aumentaCapienza();
-					System.out.println("Gettare " + p.arrayParti.get(i) + " in " + Materiale.carta);
+					System.out.println("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.carta);
 					continue;
 				case plastica:
 					plastica.aumentaCapienza();
-					System.out.println("Gettare " + p.arrayParti.get(i) + " in " + Materiale.plastica);
+					System.out.println("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.plastica);
 					continue;
 				case vetro:
 					vetro.aumentaCapienza();
-					System.out.println("Gettare " + p.arrayParti.get(i) + " in " + Materiale.vetro);
+					System.out.println("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.vetro);
 					continue;
 				case indifferenziato:
 					indifferenziato.aumentaCapienza();
-					System.out.println("Gettare " + p.arrayParti.get(i) + " in " + Materiale.indifferenziato);
+					System.out.println("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.indifferenziato);
 					continue;
 				}
 			} else throw new IOException("Cestini Pieni");

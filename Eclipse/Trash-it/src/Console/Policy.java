@@ -50,10 +50,10 @@ public class Policy {
 		try {
 			while(policyConnection.getRsQuery().next()) {
 				this.descrizione = policyConnection.getRsQuery().getString("policy.descrizione");
-				prodotto.collocazioneCestini.add(Materiale.valueOf(this.descrizione));
+				prodotto.getCollocazioneCestini().add(Materiale.valueOf(this.descrizione));
 				//System.out.println("prima"+this.descrizione);
 				this.descrizione = policyConnection.getRsQuery().getString("componente.descrizione");
-				prodotto.arrayParti.add(this.descrizione);
+				prodotto.getArrayParti().add(this.descrizione);
 				//System.out.println("dopo"+this.descrizione);
 			}
 			
