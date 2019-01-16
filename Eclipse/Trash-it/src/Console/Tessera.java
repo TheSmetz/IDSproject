@@ -80,18 +80,16 @@ public class Tessera implements GestoreTessera {
 	}
 	
 	@Override
-	public void accreditoPunti(int acPunti, boolean utilizzoPunti) {
-		System.out.println("UUU: "+utilizzoPunti);
-		if(utilizzoPunti == true && (acPunti+this.punti) <= 9999999) {
-			System.out.println("PPPPPPPP: "+acPunti+this.punti);
+	public void accreditoPunti(int acPunti, boolean utilizzoPunti) throws IOException {
+		if(utilizzoPunti && ((acPunti+this.punti) <= 9999999))  {
 			this.punti += acPunti;	
 			aggiornaPunti();
-		}		
+		}else throw new IOException("Punti sopra la soglia massima");
 	}
 	
 	@Override
 	public void addebitoPunti(int adPunti, boolean utilizzoPunti) throws IOException {
-		if((this.punti - adPunti)<0) throw new IOException("Punti negativi");
+		if((this.punti-adPunti)<0) throw new IOException("Punti negativi");
 		else {
 		this.punti -= adPunti;	
 		aggiornaPunti();

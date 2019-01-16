@@ -1,5 +1,7 @@
 package Console;
 
+import java.io.IOException;
+
 //import Console.Cestino;
 
 public class CestinoSmart {
@@ -25,49 +27,51 @@ public class CestinoSmart {
 			return false;
 	}
 
-	public boolean controlloCestino() {
+	public boolean controlloCestini() { //controllo generale sia vuoto sia integrità
 		if (controlloIntegrita() == true && controlloVuoto() == true) {
 			return true;
 		} else
 			return false;
 	}
 
-	public void conferimentoProdotto(Prodotto p) {
-		for (int i = 0 ; i < p.collocazioneCestini.size(); i++) {	
-			switch (p.collocazioneCestini.get(i)) {
-			case carta:
-				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.carta);
-				continue;
-			case plastica:
-				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.plastica);
-				continue;
-			case vetro:
-				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.vetro);
-				continue;
-			case indifferenziato:
-				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.indifferenziato);
-				continue;
-			}
+	public void conferimentoProdotto(Prodotto p) throws IOException {
+		for (int i = 0 ; i < p.collocazioneCestini.size(); i++) {
+			if(controlloCestini()) {
+				
+				
+				if (p.collocazioneCestini.get(i) == Materiale.carta) {
+					carta.aumentaCapienza();
+					System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.carta);
+				}
+				
+				if (p.collocazioneCestini.get(i) == Materiale.plastica) {
+					plastica.aumentaCapienza();
+					System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.plastica);
+				}
+				
+				
+//			switch (p.collocazioneCestini.get(i)) {
+//			case carta:
+//				carta.aumentaCapienza();
+//				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.carta);
+//				continue;
+//			case plastica:
+//				plastica.aumentaCapienza();
+//				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.plastica);
+//				continue;
+//			case vetro:
+//				vetro.aumentaCapienza();
+//				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.vetro);
+//				continue;
+//			case indifferenziato:
+//				indifferenziato.aumentaCapienza();
+//				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.indifferenziato);
+//				continue;
+//			}
+		} else throw new IOException("Cestini Pieni");{
+			
 		}
-
-	}
-
-	public static void main(String[] args) {
-		Prodotto p = new Prodotto("8410668111116");
-		Policy pol = new Policy("AP", p);
-		p.creaConnessione();
-		p.getDati();
-		pol.importaDB();
-		p.getComponenti();
-		//p.getDescrizioni();
-		
-		// System.out.println(p.componenti.contains(Materiale.Carta)); //CONTROLLO CHE P
-		// SIA DI CARTA
-		// System.out.println(p.componenti.contains(Materiale.Plastica));
-		// System.out.println(p.contaComponenti());
-
-		CestinoSmart c = new CestinoSmart();
-		c.conferimentoProdotto(p);
+		}
 	}
 
 }
