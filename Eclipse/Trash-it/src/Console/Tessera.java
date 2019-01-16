@@ -56,10 +56,11 @@ public class Tessera implements GestoreTessera {
 	}
 	
 	
-//	@Override
-//	public boolean verificaPresenza() {
-//		//DA FARE
-//	}
+	@Override
+	public boolean verificaPresenza() {
+		//DA FARE
+		return true;
+	}
 	@Override
 	public void getDati() {
 		System.out.println("--- " + this.idtessera + " ---"+
@@ -69,11 +70,6 @@ public class Tessera implements GestoreTessera {
 				"\nPunti: " + this.punti);
 		
 	}
-	@Override
-	public void accreditoPunti(int acPunti) {
-		this.punti += acPunti;	
-		aggiornaPunti();
-	}
 	
 	@Override
 	public void aggiornaPunti() {
@@ -82,9 +78,20 @@ public class Tessera implements GestoreTessera {
 		tesseraConnection.executeUpdate(query);
 		
 	}
+	
 	@Override
-	public void addebitoPunti(int adPunti) throws IOException {
-		if((this.punti -= adPunti)<0) throw new IOException("Punti negativi");
+	public void accreditoPunti(int acPunti, boolean utilizzoPunti) {
+		System.out.println("UUU: "+utilizzoPunti);
+		if(utilizzoPunti == true && (acPunti+this.punti) <= 9999999) {
+			System.out.println("PPPPPPPP: "+acPunti+this.punti);
+			this.punti += acPunti;	
+			aggiornaPunti();
+		}		
+	}
+	
+	@Override
+	public void addebitoPunti(int adPunti, boolean utilizzoPunti) throws IOException {
+		if((this.punti - adPunti)<0) throw new IOException("Punti negativi");
 		else {
 		this.punti -= adPunti;	
 		aggiornaPunti();
@@ -94,15 +101,18 @@ public class Tessera implements GestoreTessera {
 
 
 	public static void main(String[] args) throws IOException {
-//		Tessera t = new Tessera("FLSNDR97D17B474W");
-		Tessera z = new Tessera("GRRMTT97L08I156I");
+
+		Tessera t = new Tessera("GRRMTT97L08I156I");
 		Prodotto p = new Prodotto("8410668111116");
 		p.creaConnessione();
-		z.connessioneDB();
-		p.getDati();
-		z.accreditoPunti(p.getPunti());
+		t.connessioneDB();
+		//p.getDati();
+		Policy pol = new Policy("AP", p);
+		pol.importaDB();
+		//t.accreditoPunti(9999999, pol.isUtilizzoPunti());
+		t.addebitoPunti(0, pol.isUtilizzoPunti());
 		//z.addebitoPunti(11);
-		z.getDati();
+		t.getDati();
 //		t.connessioneDB();
 //		t.addebitoPunti(3);
 //		t.accreditoPunti(10);
