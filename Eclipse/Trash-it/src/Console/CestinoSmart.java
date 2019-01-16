@@ -27,7 +27,7 @@ public class CestinoSmart {
 			return false;
 	}
 
-	public boolean controlloCestini() { //controllo generale sia vuoto sia integrità
+	public boolean controlloCestini() { // controllo generale sia vuoto sia integrità
 		if (controlloIntegrita() == true && controlloVuoto() == true) {
 			return true;
 		} else
@@ -35,34 +35,27 @@ public class CestinoSmart {
 	}
 
 	public void conferimentoProdotto(Prodotto p) throws IOException {
-		for (int i = 0 ; i < p.collocazioneCestini.size(); i++) {
-			//if(controlloVuoto()) {
-			switch (p.collocazioneCestini.get(i)) {
-			case carta:
-				if (carta.isVuoto()) {
-				carta.aumentaCapienza();
-				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.carta);
-				}else break;
-			case plastica:
-				if (plastica.isVuoto()) {
-				plastica.aumentaCapienza();
-				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.plastica);
-				}else break;
-			case vetro:
-				if (vetro.isVuoto()) {
-				vetro.aumentaCapienza();
-				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.vetro);
-				} else break;
-			case indifferenziato:
-				if (indifferenziato.isVuoto()) {
-				indifferenziato.aumentaCapienza();
-				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.indifferenziato);
-				}else break;
-			}
-		//} else throw new IOException("Cestini Pieni");{
-			
-		}
+		for (int i = 0; i < p.collocazioneCestini.size(); i++) {
+			if (controlloVuoto()) {
+				switch (p.collocazioneCestini.get(i)) {
+				case carta:
+					carta.aumentaCapienza();
+					System.out.println("Gettare " + p.arrayParti.get(i) + " in " + Materiale.carta);
+					continue;
+				case plastica:
+					plastica.aumentaCapienza();
+					System.out.println("Gettare " + p.arrayParti.get(i) + " in " + Materiale.plastica);
+					continue;
+				case vetro:
+					vetro.aumentaCapienza();
+					System.out.println("Gettare " + p.arrayParti.get(i) + " in " + Materiale.vetro);
+					continue;
+				case indifferenziato:
+					indifferenziato.aumentaCapienza();
+					System.out.println("Gettare " + p.arrayParti.get(i) + " in " + Materiale.indifferenziato);
+					continue;
+				}
+			} else throw new IOException("Cestini Pieni");
 		}
 	}
-
-//}
+}

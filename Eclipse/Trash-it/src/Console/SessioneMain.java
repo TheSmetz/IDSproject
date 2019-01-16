@@ -18,7 +18,8 @@ public class SessioneMain {
 	 * 		2.1 Autenticazione
 	 * 
 	 * 		3. scansione prodotto: -GestoreProdotto
-	 * 
+	 * TODO:statistiche
+	 * TODO:ritiropremio
 	 * 
 	 * ?.Chiusura sessione
 	 * 
