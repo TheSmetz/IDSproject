@@ -3,7 +3,7 @@ package Console;
 public class Cestino {
 
     private String tipo;
-    private boolean pieno = false; //capienza = 100;
+    private boolean vuoto = true; //capienza = 100;
     private int capienza;
     private boolean integrita = true;
     private boolean bocchetta;
@@ -13,7 +13,7 @@ public class Cestino {
             this.capienza+=1;
             System.out.println(this.capienza);
         }else {
-            this.pieno=true;
+            this.vuoto = false;
         }
         //ciao
     }
@@ -21,8 +21,8 @@ public class Cestino {
         return this.capienza;
     }
 
-    public boolean isPieno() {
-        return this.pieno;
+    public boolean isVuoto() {
+        return this.vuoto;
     }
     public boolean isIntegrita() {
         return this.integrita;
