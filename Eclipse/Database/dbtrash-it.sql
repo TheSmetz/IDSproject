@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 15, 2019 alle 18:50
+-- Creato il: Gen 16, 2019 alle 10:40
 -- Versione del server: 10.1.37-MariaDB
--- Versione PHP: 7.2.12
+-- Versione PHP: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -125,7 +125,7 @@ INSERT INTO `prodotto` (`IDprodotto`, `nome`, `punti`, `immagine`) VALUES
 
 CREATE TABLE `statistica` (
   `ProdottoID` varchar(13) NOT NULL,
-  `TesseraID` varchar(16) NOT NULL
+  `TesseraID` varchar(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -148,7 +148,7 @@ CREATE TABLE `tessera` (
 
 INSERT INTO `tessera` (`IDtessera`, `nome`, `cognome`, `nascita`, `punti`) VALUES
 ('FLSNDR97D17B474W', 'Andrea', 'Falaschini', '1997-04-17', 36),
-('GRRMTT97L08I156I', 'Matteo', 'Guerrini', '1997-07-08', 0),
+('GRRMTT97L08I156I', 'Matteo', 'Guerrini', '1997-07-08', 10),
 ('MCCDGI97M04A27IO', 'Diego', 'Miccio', '1997-08-04', 0),
 ('MMIMTT97L04E783P', 'Matteo', 'Iommi', '1997-07-04', 0);
 
@@ -217,7 +217,7 @@ ALTER TABLE `policy`
 --
 ALTER TABLE `statistica`
   ADD CONSTRAINT `ProdottoID` FOREIGN KEY (`ProdottoID`) REFERENCES `prodotto` (`IDprodotto`),
-  ADD CONSTRAINT `TesseraID` FOREIGN KEY (`TesseraID`) REFERENCES `tessera` (`IDTessera`);
+  ADD CONSTRAINT `TesseraID` FOREIGN KEY (`TesseraID`) REFERENCES `tessera` (`IDtessera`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

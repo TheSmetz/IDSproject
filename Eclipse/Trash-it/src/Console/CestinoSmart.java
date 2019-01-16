@@ -47,7 +47,6 @@ public class CestinoSmart {
 			case indifferenziato:
 				System.out.println("Gettare "+p.arrayParti.get(i)+" in " + Materiale.indifferenziato);
 				continue;
-
 			}
 		}
 

@@ -1,5 +1,6 @@
 package Console;
 
+import java.io.IOException;
 import java.util.Date;
 
 import dbConnection.CreateConnection;
@@ -83,24 +84,27 @@ public class Tessera implements GestoreTessera {
 		
 	}
 	@Override
-	public void addebitoPunti(int adPunti) {
+	public void addebitoPunti(int adPunti) throws IOException {
+		if((this.punti -= adPunti)<0) throw new IOException("Punti negativi");
+		else {
 		this.punti -= adPunti;	
 		aggiornaPunti();
+		}
 	}
 	
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Tessera t = new Tessera("FLSNDR97D17B474W");
 		Tessera z = new Tessera("GRRMTT97L08I156I");
 		z.connessioneDB();
-		z.accreditoPunti(10);
-		z.addebitoPunti(2);
+		z.accreditoPunti(0);
+		z.addebitoPunti(11);
 		z.getDati();
-		t.connessioneDB();
-		t.addebitoPunti(3);
-		t.accreditoPunti(10);
-		t.getDati();
+//		t.connessioneDB();
+//		t.addebitoPunti(3);
+//		t.accreditoPunti(10);
+//		t.getDati();
 	}
 
 }
