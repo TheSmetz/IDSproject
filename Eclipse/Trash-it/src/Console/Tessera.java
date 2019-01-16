@@ -56,11 +56,10 @@ public class Tessera implements GestoreTessera {
 	}
 	
 	
-	@Override
-	public boolean verificaPresenza() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+//	@Override
+//	public boolean verificaPresenza() {
+//		//DA FARE
+//	}
 	@Override
 	public void getDati() {
 		System.out.println("--- " + this.idtessera + " ---"+
@@ -95,11 +94,14 @@ public class Tessera implements GestoreTessera {
 
 
 	public static void main(String[] args) throws IOException {
-		Tessera t = new Tessera("FLSNDR97D17B474W");
+//		Tessera t = new Tessera("FLSNDR97D17B474W");
 		Tessera z = new Tessera("GRRMTT97L08I156I");
+		Prodotto p = new Prodotto("8410668111116");
+		p.creaConnessione();
 		z.connessioneDB();
-		z.accreditoPunti(0);
-		z.addebitoPunti(11);
+		p.getDati();
+		z.accreditoPunti(p.getPunti());
+		//z.addebitoPunti(11);
 		z.getDati();
 //		t.connessioneDB();
 //		t.addebitoPunti(3);
