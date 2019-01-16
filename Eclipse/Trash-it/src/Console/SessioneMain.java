@@ -21,10 +21,19 @@ public class SessioneMain {
 	 * ?.Chiusura sessione
 	 * 
 	 * */
+	
+	
+	
+	
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		Prodotto p = new Prodotto("8410668111116");
+		Policy pol = new Policy("AP", p);
+		p.creaConnessione();
+		p.getDati();
+		pol.importaDB();
+		p.getComponenti();
+		p.getDescrizioni();
 	}
 
 }
