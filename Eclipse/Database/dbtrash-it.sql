@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 16, 2019 alle 10:40
+-- Creato il: Gen 16, 2019 alle 16:28
 -- Versione del server: 10.1.37-MariaDB
--- Versione PHP: 7.3.0
+-- Versione PHP: 7.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -124,9 +124,19 @@ INSERT INTO `prodotto` (`IDprodotto`, `nome`, `punti`, `immagine`) VALUES
 --
 
 CREATE TABLE `statistica` (
-  `ProdottoID` varchar(13) NOT NULL,
-  `TesseraID` varchar(16) DEFAULT NULL
+  `prodottoID` varchar(13) NOT NULL,
+  `tesseraID` varchar(16) DEFAULT NULL,
+  `orario` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `statistica`
+--
+
+INSERT INTO `statistica` (`prodottoID`, `tesseraID`, `orario`) VALUES
+('8410668111116', 'GRRMTT97L08I156I', '2019-01-16 04:12:51'),
+('8410668111116', 'GRRMTT97L08I156I', '2019-01-16 04:13:45'),
+('8410668111116', 'GRRMTT97L08I156I', '2019-01-16 04:16:46');
 
 -- --------------------------------------------------------
 
@@ -148,7 +158,7 @@ CREATE TABLE `tessera` (
 
 INSERT INTO `tessera` (`IDtessera`, `nome`, `cognome`, `nascita`, `punti`) VALUES
 ('FLSNDR97D17B474W', 'Andrea', 'Falaschini', '1997-04-17', 36),
-('GRRMTT97L08I156I', 'Matteo', 'Guerrini', '1997-07-08', 10),
+('GRRMTT97L08I156I', 'Matteo', 'Guerrini', '1997-07-08', 120),
 ('MCCDGI97M04A27IO', 'Diego', 'Miccio', '1997-08-04', 0),
 ('MMIMTT97L04E783P', 'Matteo', 'Iommi', '1997-07-04', 0);
 
@@ -186,8 +196,8 @@ ALTER TABLE `prodotto`
 -- Indici per le tabelle `statistica`
 --
 ALTER TABLE `statistica`
-  ADD KEY `ProdottoID` (`ProdottoID`),
-  ADD KEY `TesseraID` (`TesseraID`);
+  ADD KEY `ProdottoID` (`prodottoID`),
+  ADD KEY `TesseraID` (`tesseraID`);
 
 --
 -- Indici per le tabelle `tessera`
