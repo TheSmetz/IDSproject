@@ -15,10 +15,15 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import Console.CestinoSmart;
+import Console.Policy;
+import Console.Prodotto;
+
 import java.awt.CardLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -38,17 +43,20 @@ public class GuiMain extends JFrame {
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;
 
-	private boolean connectionFail = false; // se c'è un errore con la connessione, gestisco errore visualizzazione
-											// prodotto
-
 	// descrizione prodotto
 	private String barcodeProdotto; // barcode
-	private String nomeProdotto; // nome
+	//private String nomeProdotto; // nome
 	private String descrizioneProdotto; // decrizione
-	private byte[] imgProdotto; // immagine
-	private int puntiProdotto; //punti
+	//private byte[] imgProdotto; // immagine
+	//private int puntiProdotto; //punti
 	protected String[] args;
 	private JTextField hometxtInputBarcode;	//input barcode
+	
+	private String citta = "AP";
+	
+	public Prodotto prodottoScansionato;
+	public Policy policyProdotto;
+	public CestinoSmart cestinoS;
 	
 
 	public void switchPanel(JPanel panelName) {
@@ -59,6 +67,12 @@ public class GuiMain extends JFrame {
 		layeredPane.revalidate();
 
 	}
+	
+//	public void prodotto(String codice) {
+//		this.barcodeProdotto = codice;
+//		Prodotto p = new Prodotto(this.barcodeProdotto);
+//		p.getDati();
+//	}
 	
 	public static boolean verifyBarcode(String s) {
 
@@ -87,33 +101,33 @@ public class GuiMain extends JFrame {
 		return corretto;
 		}
 	
-
-	public void searchDBProduct(String barcodeQuery) {
-		try {
-			String host = "jdbc:mysql://localhost:3306/dbtrash-it"; // database name
-			String password = "";
-			String username = "root";
-			Connection con = DriverManager.getConnection(host, username, password); // connessione
-
-			Statement stmtProdotto = con.createStatement();
-			String SQLProdotto = "SELECT * FROM prodotto WHERE IDprodotto = "+barcodeQuery; // "SELECT * FROM prodotto WHERE nome = 'igieneplus'"
-			ResultSet rsProdotto = stmtProdotto.executeQuery(SQLProdotto);
-
-			// output
-			while (rsProdotto.next()) {
-				barcodeProdotto = rsProdotto.getString("IDprodotto");
-				nomeProdotto = rsProdotto.getString("nome");
-				descrizioneProdotto = rsProdotto.getString("punti");
-				imgProdotto = rsProdotto.getBytes("immagine");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			connectionFail = true; // se la connessione non funziona
-			System.out.println(e.getMessage());
-			System.out.println("\nFailed to Connect to Trash-it DataBase");
-
-		}
-	}
+	//superflua
+//	public void searchDBProduct(String barcodeQuery) {
+//		try {
+//			String host = "jdbc:mysql://localhost:3306/dbtrash-it"; // database name
+//			String password = "";
+//			String username = "root";
+//			Connection con = DriverManager.getConnection(host, username, password); // connessione
+//
+//			Statement stmtProdotto = con.createStatement();
+//			String SQLProdotto = "SELECT * FROM prodotto WHERE IDprodotto = "+barcodeQuery; // "SELECT * FROM prodotto WHERE nome = 'igieneplus'"
+//			ResultSet rsProdotto = stmtProdotto.executeQuery(SQLProdotto);
+//
+//			// output
+//			while (rsProdotto.next()) {
+//				barcodeProdotto = rsProdotto.getString("IDprodotto");
+//				nomeProdotto = rsProdotto.getString("nome");
+//				descrizioneProdotto = rsProdotto.getString("punti");
+//				imgProdotto = rsProdotto.getBytes("immagine");
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			connectionFail = true; // se la connessione non funziona
+//			System.out.println(e.getMessage());
+//			System.out.println("\nFailed to Connect to Trash-it DataBase");
+//
+//		}
+//	}
 
 	/**
 	 * Create the frame.
@@ -488,8 +502,11 @@ public class GuiMain extends JFrame {
 				// prendo il valore dalla variabile globale
 				
 				
-				gttlblPunti.setText("Punti prodotto: " + String.valueOf(puntiProdotto));
+				gttlblPunti.setText("Punti prodotto: " + String.valueOf(prodottoScansionato.getPunti()));
+				
+				//DA AGGIUNGERE DESCRIZIONE
 				gttlblDescrizione.setText(descrizioneProdotto);
+				System.out.println("DESC: " + descrizioneProdotto);
 				gttPanel.remove(gttTxtIstruzioni);
 			}
 
@@ -541,6 +558,9 @@ public class GuiMain extends JFrame {
 		scanbtnInfo.setBorderPainted(false);
 		scanbtnInfo.setBounds(0, 571, 418, 57);
 		scanPanel.add(scanbtnInfo);
+		
+		JLabel lblPuntiprodotto = new JLabel("PuntiProdotto");
+		lblPuntiprodotto.setBounds(679, 398, 124, 23);
 
 		// contenuti HOME
 
@@ -562,25 +582,40 @@ public class GuiMain extends JFrame {
 				barcodeProdotto = hometxtInputBarcode.getText();
 				
 				//verifico che sia un barcode della forma corretta
-				verifyBarcode(barcodeProdotto);
+				//verifyBarcode(barcodeProdotto);
 				
 				//8029241107035	igiene plus
 				//4006381115575 stabilo
 				//8001050026066 levissima
 				
 				// eseguo ricerca prodotto
-				searchDBProduct(barcodeProdotto);
+				//searchDBProduct(barcodeProdotto);
 				
 				switchPanel(scanPanel);
+				
+				prodottoScansionato = new Prodotto(barcodeProdotto);
+				
+				try {
+					cestinoS.conferimentoProdotto(prodottoScansionato);
+				} catch (IOException e) {
+					System.out.println("CIAOOO\n");
+					e.printStackTrace();
+				}
 
 				// output
-				if (connectionFail == false && verifyBarcode(barcodeProdotto)) {
-					System.out.println("\n----- PRODOTTO -----\n");
-					System.out.println("Barcode:" + barcodeProdotto);
-					System.out.println("Nome:" + nomeProdotto);
-					System.out.println("Descrizione:" + descrizioneProdotto);
-					System.out.println("Punti: " + puntiProdotto);
-					ImageIcon image = new ImageIcon(imgProdotto);
+				if (prodottoScansionato.isPresenza()) {
+					
+					//policy
+					policyProdotto = new Policy(citta, prodottoScansionato);
+					
+					
+					prodottoScansionato.getDati();
+//					System.out.println("\n----- PRODOTTO -----\n");
+//					System.out.println("Barcode:" + barcodeProdotto);
+//					System.out.println("Nome:" + nomeProdotto);
+//					System.out.println("Descrizione:" + descrizioneProdotto);
+//					System.out.println("Punti: " + puntiProdotto);
+					ImageIcon image = new ImageIcon(prodottoScansionato.getImmagine());
 					Image im = image.getImage();
 					Image myImg = im.getScaledInstance(scanlblImmagineProdotto.getWidth(),
 					scanlblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
@@ -589,12 +624,9 @@ public class GuiMain extends JFrame {
 					gttlblImmagineProdotto.setIcon(newImage);
 					
 				} else {
-					System.out.println("\nNon e' stato possibile ottenere il prodotto"); //connectionFail == true
-					
-					//pannello di errore
-					switchPanel(errorPanel);
+					System.out.println("\nProdotto non presente nel DB, invia notifica per aggiungerlo");					
+					switchPanel(errorPanel);	//pannello di errore
 				}
-
 			}
 		});
 		homebtnScansionaProdotto.setBounds(416, 212, 629, 96);

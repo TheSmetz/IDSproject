@@ -18,6 +18,7 @@ public class Policy {
 	public Policy(String z, Prodotto p) {
 		this.zona = z;
 		this.prodotto = p;
+		importaDB();
 	}
 	
 	public String getZona() {

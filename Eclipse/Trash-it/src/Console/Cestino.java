@@ -11,7 +11,6 @@ public class Cestino {
 	public void aumentaCapienza() {
 		if (this.capienza < 100 && this.capienza >= 0) {
 			this.capienza += 1;
-			System.out.println(this.capienza);
 		} else {
 			this.vuoto = false;
 		}

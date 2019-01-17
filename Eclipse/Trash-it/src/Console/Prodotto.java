@@ -13,13 +13,20 @@ public class Prodotto implements GestoreProdotto{
 	//collocazione finali
 	private ArrayList<Materiale> collocazioneCestini=new ArrayList<Materiale>(); //Gestisce uno o piu componenti di un prodotto
 	private ArrayList<String> arrayParti=new ArrayList<String>(); //Gestisce uno o piu parti del prodotto
-	private byte[] img;
+	private byte[] immagine;
 	private int punti;
 	private boolean presenza;
+	private String descrizione;
 	
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
 	private CreateConnection prodottoConnection = new CreateConnection();
-	
-	
 	
 	
 	public ArrayList<Materiale> getCollocazioneCestini() {
@@ -63,20 +70,20 @@ public class Prodotto implements GestoreProdotto{
 		this.punti = punti;
 	}
 
-	public byte[] getImg() {
-		return this.img;
+	public byte[] getImmagine() {
+		return this.immagine;
 	}
 	
-	@Override
+	public boolean isPresenza() {
+		return presenza;
+	}
+
+	public void setPresenza(boolean presenza) {
+		this.presenza = presenza;
+	}
+
 	public boolean verificaPresenza() {
 		return this.presenza;
-	}
-	
-	@Override
-	public void getDati() {
-		System.out.println("--- " + this.nome + " ---"+
-				 "\nCodice a barre: " + this.codiceABarre +
-				"\nPunti: " + this.punti);
 	}
 	
 	public void getComponenti() {
@@ -85,11 +92,13 @@ public class Prodotto implements GestoreProdotto{
 	
 	public void getDescrizioni() {
 		arrayParti.forEach((p) -> System.out.println(p)); //Lambda expression
-	}	
+	}
 	
+	//costruttore
 	public Prodotto(String codice) {
 		this.codiceABarre = codice;
-	}
+		creaConnessione();
+	}	
 	
 	@Override
 	public void creaConnessione() {
@@ -100,12 +109,24 @@ public class Prodotto implements GestoreProdotto{
 			if (prodottoConnection.getRsQuery().next()) {	
 				this.codiceABarre = prodottoConnection.getRsQuery().getString("IDprodotto");
 				this.nome = prodottoConnection.getRsQuery().getString("nome");
-				this.img = prodottoConnection.getRsQuery().getBytes("immagine");
-				this.punti = prodottoConnection.getRsQuery().getInt("punti");				
+				this.immagine = prodottoConnection.getRsQuery().getBytes("immagine");
+				this.punti = prodottoConnection.getRsQuery().getInt("punti");	
 				this.presenza = true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}					
 	}
+	
+	@Override
+	public void getDati() {
+		System.out.println("--- " + this.nome + " ---"+
+				 "\nCodice a barre: " + this.codiceABarre +
+				"\nPunti: " + this.punti +
+				"\nDescrizione: " + descrizione);
+	}
+	
+	
+	
+	
 }

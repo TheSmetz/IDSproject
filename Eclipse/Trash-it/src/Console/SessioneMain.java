@@ -35,21 +35,20 @@ public class SessioneMain {
 
 	public static void main(String[] args) throws IOException {
 		
-		AggiuntaDB a=new AggiuntaDB();
+//		AggiuntaDB a=new AggiuntaDB();
 		//a.registrazioneTessera("RSSMRA70A01H501S", "mario", "rossi","1970-01-01");		
 
-		a.aggiungiProdotto("0715679886120", "Bean Boozled", 5);
+//		a.aggiungiProdotto("0715679886120", "Bean Boozled", 5);
 //		registrazione("RSSMRA70A01H501S", "mario", "rossi","1970-01-01");
-//		//prodotto		
-//		Prodotto p = new Prodotto("8410668111116");
-//		p.creaConnessione();
-//		p.getDati();
-//		p.getComponenti();
-//		p.getDescrizioni();
 //		
-//		//policy
-//		Policy pol = new Policy("AP", p);
-//		pol.importaDB();
+		
+		//prodotto		
+		Prodotto p = new Prodotto("8410668111116");
+		p.creaConnessione();
+		//p.getDati();
+		
+		//policy
+		Policy pol = new Policy("AP", p);
 //		
 //		//tessera
 //		Tessera t = new Tessera("GRRMTT97L08I156I");
@@ -58,9 +57,11 @@ public class SessioneMain {
 //		t.getDati();
 //		t.ritiroPremio(12);
 //		
-//		//cestino smart
-//		CestinoSmart c = new CestinoSmart();
-//		c.conferimentoProdotto(p);
+		//cestino smart
+		CestinoSmart c = new CestinoSmart();
+		c.conferimentoProdotto(p);
+		//System.out.println(c.getArrayConferimento());
+		p.getDati();
 	}
 	
 	
