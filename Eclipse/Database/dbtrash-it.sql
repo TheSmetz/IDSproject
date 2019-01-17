@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 17, 2019 alle 19:19
+-- Creato il: Gen 17, 2019 alle 19:31
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.2.12
 
@@ -59,8 +59,12 @@ CREATE TABLE `componente` (
 --
 
 INSERT INTO `componente` (`IDcomponente`, `prodottoID`, `descrizione`) VALUES
+('CA', '0715679886120', 'corpo'),
 ('CA', '8410668111116', 'corpo'),
-('IN', '4006381492355', 'evidenziatore'),
+('IN', '4006381492355', 'corpo'),
+('IN', '8022880201027', 'tappo'),
+('PL', '0715679886120', 'imballaggio'),
+('PL', '8022880201027', 'corpo'),
 ('PL', '8410668111116', 'tappo'),
 ('TP', '80007920', 'corpo'),
 ('VE', '821935111124', 'intera bottiglia');
@@ -231,8 +235,8 @@ ALTER TABLE `policy`
 -- Limiti per la tabella `statistica`
 --
 ALTER TABLE `statistica`
-  ADD CONSTRAINT `ProdottoID` FOREIGN KEY (`ProdottoID`) REFERENCES `prodotto` (`IDprodotto`),
-  ADD CONSTRAINT `TesseraID` FOREIGN KEY (`TesseraID`) REFERENCES `tessera` (`IDtessera`);
+  ADD CONSTRAINT `ProdottoID` FOREIGN KEY (`prodottoID`) REFERENCES `prodotto` (`IDprodotto`),
+  ADD CONSTRAINT `TesseraID` FOREIGN KEY (`tesseraID`) REFERENCES `tessera` (`IDtessera`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
