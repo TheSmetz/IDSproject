@@ -41,7 +41,7 @@ public class AggiuntaDB {
         FileInputStream fis = null;
  
         try {
-            File file = new File("C:\\Users\\diego\\Desktop\\bean.jpg");
+            File file = new File("src\\Gui\\images\\beanboozled.jpeg");
             fis = new FileInputStream(file);
  
             queryAggiuntaProdotto = "INSERT INTO prodotto (IDprodotto, nome, punti, immagine) VALUES (?,?,?,?)";
@@ -54,6 +54,7 @@ public class AggiuntaDB {
             statement.setBinaryStream(4, (InputStream) fis, (int)(file.length())); 
             //tConnection.executeUpdate(queryAggiuntaProdotto);
             statement.executeUpdate();
+            System.out.println("prodotto aggiunto correttamente");
  
         } catch (FileNotFoundException e) {
             System.out.println("FileNotFoundException: - " + e);
@@ -66,10 +67,9 @@ public class AggiuntaDB {
                 statement.close();
             } catch (SQLException e) {
                 System.out.println("SQLException Finally: - " + e);
+                
             }
- 
         }
-		System.out.println("prodotto aggiunto correttamente");
 	}
         
 	
