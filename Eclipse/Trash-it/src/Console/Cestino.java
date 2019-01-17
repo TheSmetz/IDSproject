@@ -17,6 +17,14 @@ public class Cestino {
 		}
 		// ciao
 	}
+	
+	public void svuotaCestino() { //TECNICO
+		this.capienza=0;
+	}
+	
+	public void riparaCestino() { //TECNICO
+		this.integrita=true;
+	}
 
 	public int getCapienza() {
 		return this.capienza;
