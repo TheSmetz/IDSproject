@@ -93,7 +93,8 @@ public class Tessera implements GestoreTessera {
 	
 	public void ritiroPremio(int puntiPremio) throws IOException {
 	addebitoPunti(puntiPremio,true);
+	System.out.println("premio stampato yuppiii");
 	//STAMPA BUONO DA FARE
 	}
-
+	
 }

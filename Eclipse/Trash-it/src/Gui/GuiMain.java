@@ -90,22 +90,21 @@ public class GuiMain extends JFrame {
 
 	public void searchDBProduct(String barcodeQuery) {
 		try {
-			String host = "jdbc:mysql://localhost:3306/trash-it"; // database name
+			String host = "jdbc:mysql://localhost:3306/dbtrash-it"; // database name
 			String password = "";
 			String username = "root";
 			Connection con = DriverManager.getConnection(host, username, password); // connessione
 
 			Statement stmtProdotto = con.createStatement();
-			String SQLProdotto = "SELECT * FROM prodotto WHERE barcode = "+barcodeQuery; // "SELECT * FROM prodotto WHERE nome = 'igieneplus'"
+			String SQLProdotto = "SELECT * FROM prodotto WHERE IDprodotto = "+barcodeQuery; // "SELECT * FROM prodotto WHERE nome = 'igieneplus'"
 			ResultSet rsProdotto = stmtProdotto.executeQuery(SQLProdotto);
 
 			// output
 			while (rsProdotto.next()) {
-				barcodeProdotto = rsProdotto.getString("barcode");
+				barcodeProdotto = rsProdotto.getString("IDprodotto");
 				nomeProdotto = rsProdotto.getString("nome");
-				descrizioneProdotto = rsProdotto.getString("descrizione");
+				descrizioneProdotto = rsProdotto.getString("punti");
 				imgProdotto = rsProdotto.getBytes("immagine");
-				puntiProdotto = rsProdotto.getInt("punti");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
