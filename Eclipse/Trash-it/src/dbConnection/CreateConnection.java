@@ -1,5 +1,6 @@
 package dbConnection;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -35,6 +36,14 @@ public class CreateConnection {
 		this.rsUpdate = rsUpdate;
 	}
 
+	public Statement getStmtProdotto() {
+		return stmtProdotto;
+	}
+
+	public void setStmtProdotto(Statement stmtProdotto) {
+		this.stmtProdotto = stmtProdotto;
+	}
+
 	public CreateConnection() {
 		
 		this.host = "jdbc:mysql://localhost:3306/dbtrash-it";
@@ -67,7 +76,6 @@ public class CreateConnection {
 			e.printStackTrace();
 		}
 	}	
-	
 	public static void main(String[] args) throws SQLException {
 		
 //		CreateConnection trash = new CreateConnection("dbtrash-it", "SELECT * FROM tessera");
