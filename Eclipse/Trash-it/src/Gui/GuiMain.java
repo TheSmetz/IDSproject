@@ -224,7 +224,7 @@ public class GuiMain extends JFrame {
 		homelblSelezionaOperazione.setBounds(416, 97, 629, 57);
 		home.add(homelblSelezionaOperazione);
 		
-		JButton homebtnScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton homebtnScansione = new JButton("Scansiona prodotto", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		homebtnScansione.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnScansione.setMargin(new Insets(0, 0, 0, 0));
 		homebtnScansione.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -341,6 +341,8 @@ public class GuiMain extends JFrame {
 				}			
 				
 				prodottoScansionato.getDati();
+				
+				//VERIFICARE CORRETTEZZA CODICE A BARRE
 				
 				// output
 				if (prodottoScansionato.isPresenza()) {
@@ -585,10 +587,7 @@ public class GuiMain extends JFrame {
 		confbtnInfo.setContentAreaFilled(false);
 		confbtnInfo.setBorderPainted(false);
 		confbtnInfo.setBounds(0, 571, 418, 57);
-		conferimento.add(confbtnInfo);
-		
-		
-		
+		conferimento.add(confbtnInfo);		
 		
 		//ERRORE CONFERIMENTO
 		JLabel errlblErroreProdotto = new JLabel("ERRORE PRODOTTO");
@@ -666,8 +665,8 @@ public class GuiMain extends JFrame {
 		errtxtpnErroreRecuperoImmagine.setFont(new Font("Tahoma", Font.PLAIN, 25));		
 		StyledDocument doc = errtxtpnErroreRecuperoImmagine.getStyledDocument();
 		errtxtpnErroreRecuperoImmagine.setOpaque(false);
-		errtxtpnErroreRecuperoImmagine.setText("Non \u00E8 stato possibile recuperare l'immagine del prodotto");
-		errtxtpnErroreRecuperoImmagine.setBounds(416, 86, 629, 73);
+		errtxtpnErroreRecuperoImmagine.setText("possibili cause: prodotto non presente nel nostro database oppure errore temporaneo (ritenta scansione)");
+		errtxtpnErroreRecuperoImmagine.setBounds(426, 70, 629, 73);
 		erroreConf.add(errtxtpnErroreRecuperoImmagine);
 		
 		//ASSISTENZA
