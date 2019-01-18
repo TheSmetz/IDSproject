@@ -36,6 +36,7 @@ import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
 public class GuiMain extends JFrame {
@@ -46,17 +47,19 @@ public class GuiMain extends JFrame {
 	// descrizione prodotto
 	private String barcodeProdotto; // barcode
 	//private String nomeProdotto; // nome
-	private String descrizioneProdotto; // decrizione
+	//private String descrizioneProdotto; // decrizione
 	//private byte[] imgProdotto; // immagine
 	//private int puntiProdotto; //punti
 	protected String[] args;
-	private JTextField hometxtInputBarcode;	//input barcode
+	private JTextField scantxtInputBarcode;	//input barcode
 	
 	private String citta = "AP";
 	
 	public Prodotto prodottoScansionato;
 	public Policy policyProdotto;
-	public CestinoSmart cestinoS;
+	private JLabel scanlblBenvenuto;
+	private JButton scannbtnInfo;
+	//public CestinoSmart cestinoS;
 	
 
 	public void switchPanel(JPanel panelName) {
@@ -100,34 +103,6 @@ public class GuiMain extends JFrame {
 		System.out.println("Corretto: " + corretto);
 		return corretto;
 		}
-	
-	//superflua
-//	public void searchDBProduct(String barcodeQuery) {
-//		try {
-//			String host = "jdbc:mysql://localhost:3306/dbtrash-it"; // database name
-//			String password = "";
-//			String username = "root";
-//			Connection con = DriverManager.getConnection(host, username, password); // connessione
-//
-//			Statement stmtProdotto = con.createStatement();
-//			String SQLProdotto = "SELECT * FROM prodotto WHERE IDprodotto = "+barcodeQuery; // "SELECT * FROM prodotto WHERE nome = 'igieneplus'"
-//			ResultSet rsProdotto = stmtProdotto.executeQuery(SQLProdotto);
-//
-//			// output
-//			while (rsProdotto.next()) {
-//				barcodeProdotto = rsProdotto.getString("IDprodotto");
-//				nomeProdotto = rsProdotto.getString("nome");
-//				descrizioneProdotto = rsProdotto.getString("punti");
-//				imgProdotto = rsProdotto.getBytes("immagine");
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			connectionFail = true; // se la connessione non funziona
-//			System.out.println(e.getMessage());
-//			System.out.println("\nFailed to Connect to Trash-it DataBase");
-//
-//		}
-//	}
 
 	/**
 	 * Create the frame.
@@ -146,24 +121,151 @@ public class GuiMain extends JFrame {
 		layeredPane.setBounds(0, 51, 1045, 683);
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
+		
 
-		// INIZIALIZZAZIONE PANEL
+		//--------------DICHIARAZIONE PANEL--------------
+		
+		//HOME
+		JPanel home = new JPanel();
+		layeredPane.add(home, "name_781337426904700");
+		home.setOpaque(false);
+		home.setLayout(null);
+		
+		//SCANSIONE
+		JPanel scansione = new JPanel();
+		layeredPane.add(scansione, "name_47697602642643");
+		scansione.setOpaque(false);
+		scansione.setLayout(null);
+		
+		//CONFERIMENTO
+		JPanel conferimento = new JPanel();
+		layeredPane.add(conferimento, "name_47730555398847");
+		conferimento.setOpaque(false);
+		conferimento.setLayout(null);
+		
+		//ISTRUZIONI CONFERIMENTO
+		JPanel istruzioneConf = new JPanel();
+		layeredPane.add(istruzioneConf, "name_47764772881651");
+		istruzioneConf.setOpaque(false);
+		istruzioneConf.setLayout(null);
+		
+		//ERRORE CONFERIMENTO
+		JPanel erroreConf = new JPanel();
+		erroreConf.setLayout(null);
+		erroreConf.setOpaque(false);
+		layeredPane.add(erroreConf, "name_2585705284100");
+		
+		//ASSISTENZA
+		JPanel assistenza = new JPanel();
+		layeredPane.add(assistenza, "name_783099324881200");
+		assistenza.setLayout(null);
+		assistenza.setOpaque(false);
 
-		// HOME PANEL
-		JPanel homePanel = new JPanel();
-		layeredPane.add(homePanel, "name_47697602642643");
-		homePanel.setOpaque(false);
-		homePanel.setLayout(null);
+		// BOTTONI NAVIGAZIONE SCHEDE (provvisori)
+		JButton btnPanel1 = new JButton("HOME");
+		btnPanel1.setBackground(Color.WHITE);
+		btnPanel1.setForeground(Color.BLACK);
+		btnPanel1.setBounds(60, 13, 97, 25);
+		btnPanel1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(home);
+			}
+		});
+		contentPane.add(btnPanel1);
+
+		JButton btnPanel2 = new JButton("ScProdotto");
+		btnPanel2.setBackground(Color.WHITE);
+		btnPanel2.setForeground(Color.BLACK);
+		btnPanel2.setBounds(189, 13, 97, 25);
+		btnPanel2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(conferimento);
+			}
+		});
+		contentPane.add(btnPanel2);
+
+		JButton btnPanel3 = new JButton("GttProdotto");
+		btnPanel3.setBackground(Color.WHITE);
+		btnPanel3.setForeground(Color.BLACK);
+		btnPanel3.setBounds(309, 13, 97, 25);
+		btnPanel3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(istruzioneConf);
+			}
+		});
+		contentPane.add(btnPanel3);
+		
+		JButton btnAsspanel = new JButton("AssPanel");
+		btnAsspanel.setBackground(Color.WHITE);
+		btnAsspanel.setForeground(Color.BLACK);
+		btnAsspanel.setBounds(440, 13, 97, 25);
+		btnAsspanel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(assistenza);				
+			}
+		});
+		contentPane.add(btnAsspanel);
 		
 		
+		//--------------CONTENUTI PANEL--------------
+		
+		//HOME		
 		JLabel homelblBenvenuto = new JLabel("BENVENUTO");
 		homelblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblBenvenuto.setForeground(Color.BLACK);
 		homelblBenvenuto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
 		homelblBenvenuto.setBounds(416, 0, 629, 57);
-		homePanel.add(homelblBenvenuto);
+		home.add(homelblBenvenuto);
+		
+		JLabel homelblSelezionaOperazione = new JLabel("Seleziona operazione");
+		homelblSelezionaOperazione.setHorizontalAlignment(SwingConstants.CENTER);
+		homelblSelezionaOperazione.setForeground(Color.BLACK);
+		homelblSelezionaOperazione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
+		homelblSelezionaOperazione.setBounds(416, 97, 629, 57);
+		home.add(homelblSelezionaOperazione);
+		
+		JButton homebtnScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		homebtnScansione.setVerticalTextPosition(SwingConstants.CENTER);
+		homebtnScansione.setMargin(new Insets(0, 0, 0, 0));
+		homebtnScansione.setHorizontalTextPosition(SwingConstants.CENTER);
+		homebtnScansione.setForeground(Color.BLACK);
+		homebtnScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		homebtnScansione.setContentAreaFilled(false);
+		homebtnScansione.setBorderPainted(false);
+		homebtnScansione.setBounds(416, 212, 629, 96);
+		homebtnScansione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(scansione);
+			}
+		});
+		home.add(homebtnScansione);
+		
+		JButton homebtnRitiroPremio = new JButton("Ritiro premio", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		homebtnRitiroPremio.setVerticalTextPosition(SwingConstants.CENTER);
+		homebtnRitiroPremio.setMargin(new Insets(0, 0, 0, 0));
+		homebtnRitiroPremio.setHorizontalTextPosition(SwingConstants.CENTER);
+		homebtnRitiroPremio.setForeground(Color.BLACK);
+		homebtnRitiroPremio.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		homebtnRitiroPremio.setContentAreaFilled(false);
+		homebtnRitiroPremio.setBorderPainted(false);
+		homebtnRitiroPremio.setBounds(416, 321, 629, 96);
+		home.add(homebtnRitiroPremio);
+		SimpleAttributeSet centerT = new SimpleAttributeSet();
+		StyleConstants.setAlignment(centerT, StyleConstants.ALIGN_CENTER);
 
-		JButton homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		
+		JButton homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", null);
+		homebtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
+		homebtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
+		homebtnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
+		homebtnProblemiAssistenza.setForeground(Color.BLACK);
+		homebtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		homebtnProblemiAssistenza.setContentAreaFilled(false);
+		homebtnProblemiAssistenza.setBorderPainted(false);
+		homebtnProblemiAssistenza.setBounds(416, 613, 628, 57);
+		home.add(homebtnProblemiAssistenza);
+		
+		JButton homebtnInfo = new JButton("About us", null);
 		homebtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnInfo.setOpaque(false);
 		homebtnInfo.setMargin(new Insets(0, 0, 0, 0));
@@ -173,61 +275,363 @@ public class GuiMain extends JFrame {
 		homebtnInfo.setContentAreaFilled(false);
 		homebtnInfo.setBorderPainted(false);
 		homebtnInfo.setBounds(0, 571, 418, 57);
-		homePanel.add(homebtnInfo);
+		home.add(homebtnInfo);
 		
-		//ASSISTENZA PANEL
-		JPanel assPanel = new JPanel();
-		assPanel.setLayout(null);
-		assPanel.setOpaque(false);
-		layeredPane.add(assPanel, "name_8556421918800");
+		JLabel homelblLogo = new JLabel("");
+		homelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		homelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		homelblLogo.setBounds(0, 0, 418, 488);
+		home.add(homelblLogo);
 		
-		//ERROR PANEL
-		JPanel errorPanel = new JPanel();
-		errorPanel.setLayout(null);
-		errorPanel.setOpaque(false);
-		layeredPane.add(errorPanel, "name_2585705284100");
+		//SCANSIONE	
+		JLabel scanlblBenvenuto;
+		scanlblBenvenuto = new JLabel("BENVENUTO");
+		scanlblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
+		scanlblBenvenuto.setForeground(Color.BLACK);
+		scanlblBenvenuto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
+		scanlblBenvenuto.setBounds(416, 0, 629, 57);
+		scansione.add(scanlblBenvenuto);
+
+		JButton scanbtnInfo;
+		scannbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		scannbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
+		scannbtnInfo.setOpaque(false);
+		scannbtnInfo.setMargin(new Insets(0, 0, 0, 0));
+		scannbtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
+		scannbtnInfo.setForeground(Color.BLACK);
+		scannbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		scannbtnInfo.setContentAreaFilled(false);
+		scannbtnInfo.setBorderPainted(false);
+		scannbtnInfo.setBounds(0, 571, 418, 57);
+		scansione.add(scannbtnInfo);
+
+		// Avvia scansione		
+		JButton scanbtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		scanbtnAvviaScansione.setVerticalTextPosition(JButton.CENTER);
+		scanbtnAvviaScansione.setHorizontalTextPosition(JButton.CENTER);
+		scanbtnAvviaScansione.setBorderPainted(false);
+		scanbtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
+		// btnScansionaProdotto.setIcon(new
+		// ImageIcon(Main.class.getResource("/Gui/images/greenbutton.png")));
+		scanbtnAvviaScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		scanbtnAvviaScansione.setForeground(Color.BLACK);
+		scanbtnAvviaScansione.setContentAreaFilled(false);
+		scanbtnAvviaScansione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//leggo il barcode in input
+				barcodeProdotto = scantxtInputBarcode.getText();
+								
+				switchPanel(conferimento);
+				
+				//prodotto
+				prodottoScansionato = new Prodotto(barcodeProdotto);
+				System.out.println("Citta: "+citta);
+				
+				//policy
+				policyProdotto = new Policy("AP", prodottoScansionato);					
+				prodottoScansionato.getDati();
+				
+				//cestinosmart				
+				CestinoSmart cestinoS = new CestinoSmart();
+				try {
+					cestinoS.conferimentoProdotto(prodottoScansionato);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}			
+				
+				prodottoScansionato.getDati();
+				
+				// output
+				if (prodottoScansionato.isPresenza()) {
+					
+					//policy
+//									policyProdotto = new Policy(citta, prodottoScansionato);					
+//									prodottoScansionato.getDati();
+					
+					
+//							ImageIcon image = new ImageIcon(prodottoScansionato.getImmagine());
+//							Image im = image.getImage();
+//							Image myImg = im.getScaledInstance(conflblImmagineProdotto.getWidth(),
+//							conflblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
+//							ImageIcon newImage = new ImageIcon(myImg);
+//							conflblImmagineProdotto.setIcon(newImage);
+//							gttlblImmagineProdotto.setIcon(newImage);
+					
+				} else {
+					System.out.println("\nProdotto non presente nel DB, invia notifica per aggiungerlo");					
+					switchPanel(erroreConf);	//pannello di errore
+				}
+			}
+		});
+		scanbtnAvviaScansione.setBounds(416, 212, 629, 96);
+		scansione.add(scanbtnAvviaScansione);
+
+		JLabel scanlblLogo = new JLabel("");
+		scanlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		scanlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		scanlblLogo.setBounds(0, 0, 418, 488);
+		scansione.add(scanlblLogo);
+
+		JLabel scanlblScansionaProdotto = new JLabel("Scansione Prodotto");
+		scanlblScansionaProdotto.setHorizontalAlignment(SwingConstants.CENTER);
+		scanlblScansionaProdotto.setForeground(Color.BLACK);
+		scanlblScansionaProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
+		scanlblScansionaProdotto.setBounds(416, 97, 629, 57);
+		scansione.add(scanlblScansionaProdotto);
 		
+		scantxtInputBarcode = new JTextField();
+		scantxtInputBarcode.setHorizontalAlignment(SwingConstants.CENTER);
+		scantxtInputBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		scantxtInputBarcode.setBounds(632, 384, 212, 44);
+		scantxtInputBarcode.setOpaque(false);
+		scansione.add(scantxtInputBarcode);
+		scantxtInputBarcode.setColumns(10);
+		
+		JLabel scanlblInputBackground = new JLabel("");
+		scanlblInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
+		scanlblInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonsmall.png")));
+		scanlblInputBackground.setBounds(430, 357, 615, 96);
+		scansione.add(scanlblInputBackground);
+		
+		JButton scanbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		scanbtnProblemiAssistenza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(assistenza);
+			}
+		});
+		scanbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
+		scanbtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
+		scanbtnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
+		scanbtnProblemiAssistenza.setForeground(Color.BLACK);
+		scanbtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		scanbtnProblemiAssistenza.setContentAreaFilled(false);
+		scanbtnProblemiAssistenza.setBorderPainted(false);
+		scanbtnProblemiAssistenza.setBounds(416, 613, 628, 57);
+		scansione.add(scanbtnProblemiAssistenza);
+		
+		JLabel scantxtBarcode = new JLabel();
+		scantxtBarcode.setHorizontalAlignment(SwingConstants.CENTER);
+		scantxtBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		scantxtBarcode.setText("Barcode:");
+		scantxtBarcode.setBounds(426, 321, 619, 49);
+		scantxtBarcode.setOpaque(false);
+		scansione.add(scantxtBarcode);		
+		
+		//ISTRUZIONI CONFERIMENTO
+		JLabel istrlblConferimentoProdotto = new JLabel("CONFERIMENTO PRODOTTO");
+		istrlblConferimentoProdotto.setForeground(Color.BLACK);
+		istrlblConferimentoProdotto.setHorizontalAlignment(SwingConstants.CENTER);
+		istrlblConferimentoProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
+		istrlblConferimentoProdotto.setBounds(416, 0, 629, 57);
+		istruzioneConf.add(istrlblConferimentoProdotto);
+
+		JButton istrbtnProblemiAssistenza = new JButton("Problemi? Assistenza");
+		istrbtnProblemiAssistenza.setVerticalTextPosition(JButton.CENTER);
+		istrbtnProblemiAssistenza.setHorizontalTextPosition(JButton.CENTER);
+		istrbtnProblemiAssistenza.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		istrbtnProblemiAssistenza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(assistenza);
+			}
+		});
+		istrbtnProblemiAssistenza.setOpaque(false);
+		istrbtnProblemiAssistenza.setForeground(Color.BLACK);
+		istrbtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		istrbtnProblemiAssistenza.setContentAreaFilled(false);
+		istrbtnProblemiAssistenza.setBorderPainted(false);
+		istrbtnProblemiAssistenza.setBounds(416, 613, 629, 57);
+		istruzioneConf.add(istrbtnProblemiAssistenza);
+
+		JButton istrbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		istrbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
+		istrbtnInfo.setOpaque(false);
+		istrbtnInfo.setMargin(new Insets(0, 0, 0, 0));
+		istrbtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
+		istrbtnInfo.setForeground(Color.BLACK);
+		istrbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		istrbtnInfo.setContentAreaFilled(false);
+		istrbtnInfo.setBorderPainted(false);
+		istrbtnInfo.setBounds(0, 571, 418, 57);
+		istruzioneConf.add(istrbtnInfo);
+
+		JLabel istrlblLogo = new JLabel("");
+		istrlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		istrlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		istrlblLogo.setBounds(0, 0, 418, 488);
+		istruzioneConf.add(istrlblLogo);
+
+		JLabel istrlblDescrizione = new JLabel("descrizione prodotto");
+		istrlblDescrizione.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		istrlblDescrizione.setHorizontalAlignment(SwingConstants.CENTER);
+		istrlblDescrizione.setBounds(416, 336, 629, 136);
+		istruzioneConf.add(istrlblDescrizione);
+		
+		JLabel istrlblImmagineProdotto = new JLabel("immagine prodotto");
+		istrlblImmagineProdotto.setHorizontalAlignment(SwingConstants.CENTER);
+		istrlblImmagineProdotto.setBounds(600, 84, 269, 257);
+		istruzioneConf.add(istrlblImmagineProdotto);
+		
+		JLabel istrlblGif = new JLabel("");
+		istrlblGif.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/trash.gif")));
+		istrlblGif.setBounds(557, 455, 109, 145);
+		istruzioneConf.add(istrlblGif);	
+		
+		//punti
+		JLabel istrlblPunti = new JLabel("Punti");
+		istrlblPunti.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		istrlblPunti.setHorizontalAlignment(SwingConstants.CENTER);
+		istrlblPunti.setBounds(716, 485, 209, 88);
+		istruzioneConf.add(istrlblPunti);
+		String newLine = System.getProperty("line.separator");
+		
+		JLabel lblPuntiprodotto = new JLabel("PuntiProdotto");
+		lblPuntiprodotto.setBounds(679, 398, 124, 23);
+		
+		//CONFERIMENTO
+		JLabel conflblScansioneProdotto = new JLabel("PRODOTTO SCANSIONATO");
+		conflblScansioneProdotto.setHorizontalAlignment(SwingConstants.CENTER);
+		conflblScansioneProdotto.setForeground(Color.BLACK);
+		conflblScansioneProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
+		conflblScansioneProdotto.setBounds(416, 0, 629, 57);
+		conferimento.add(conflblScansioneProdotto);		
+		
+		// prodotto errato		
+		JButton confbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		confbtnProdottoVisualizzatoErrato.setVerticalTextPosition(JButton.CENTER);
+		confbtnProdottoVisualizzatoErrato.setHorizontalTextPosition(JButton.CENTER);
+		confbtnProdottoVisualizzatoErrato.setBorderPainted(false);
+		confbtnProdottoVisualizzatoErrato.setMargin(new Insets(0, 0, 0, 0));
+		confbtnProdottoVisualizzatoErrato.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		confbtnProdottoVisualizzatoErrato.setForeground(Color.BLACK);
+		confbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
+		confbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(scansione);
+			}
+		});
+		confbtnProdottoVisualizzatoErrato.setOpaque(false);
+		confbtnProdottoVisualizzatoErrato.setForeground(Color.BLACK);
+		confbtnProdottoVisualizzatoErrato.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		confbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
+		confbtnProdottoVisualizzatoErrato.setBorderPainted(false);
+		confbtnProdottoVisualizzatoErrato.setBounds(749, 449, 255, 57);
+		conferimento.add(confbtnProdottoVisualizzatoErrato);
+
+		// prodotto corretto		
+		JButton confbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		confbtnProdottoVisualizzatoCorretto.setVerticalTextPosition(JButton.CENTER);
+		confbtnProdottoVisualizzatoCorretto.setHorizontalTextPosition(JButton.CENTER);
+		confbtnProdottoVisualizzatoCorretto.setBorderPainted(false);
+		confbtnProdottoVisualizzatoCorretto.setMargin(new Insets(0, 0, 0, 0));
+		confbtnProdottoVisualizzatoCorretto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		confbtnProdottoVisualizzatoCorretto.setForeground(Color.BLACK);
+		confbtnProdottoVisualizzatoCorretto.setContentAreaFilled(false);
+		confbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(istruzioneConf);
+				
+				// prendo il valore dalla variabile globale				
+				istrlblPunti.setText("Punti prodotto: " + String.valueOf(prodottoScansionato.getPunti()));
+				
+				//DA AGGIUNGERE DESCRIZIONE
+				istrlblDescrizione.setText(prodottoScansionato.getDescrizione());
+			}
+
+		});
+		confbtnProdottoVisualizzatoCorretto.setOpaque(false);
+		confbtnProdottoVisualizzatoCorretto.setForeground(Color.BLACK);
+		confbtnProdottoVisualizzatoCorretto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		confbtnProdottoVisualizzatoCorretto.setContentAreaFilled(false);
+		confbtnProdottoVisualizzatoCorretto.setBorderPainted(false);
+		confbtnProdottoVisualizzatoCorretto.setBounds(470, 449, 255, 57);
+		conferimento.add(confbtnProdottoVisualizzatoCorretto);
+
+		JLabel conflblImmagineProdotto = new JLabel("immagine prodotto");
+		conflblImmagineProdotto.setHorizontalAlignment(SwingConstants.CENTER);
+		conflblImmagineProdotto.setBounds(600, 84, 269, 257);
+		conferimento.add(conflblImmagineProdotto);
+
+		JLabel conflblLogo = new JLabel("");
+		conflblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		conflblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		conflblLogo.setBounds(0, 0, 418, 488);
+		conferimento.add(conflblLogo);
+		
+		JButton confbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		confbtnProblemiAssistenza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(assistenza);
+			}
+		});
+		confbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
+		confbtnProblemiAssistenza.setOpaque(false);
+		confbtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
+		confbtnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
+		confbtnProblemiAssistenza.setForeground(Color.BLACK);
+		confbtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		confbtnProblemiAssistenza.setContentAreaFilled(false);
+		confbtnProblemiAssistenza.setBorderPainted(false);
+		confbtnProblemiAssistenza.setBounds(416, 613, 628, 57);
+		conferimento.add(confbtnProblemiAssistenza);
+		
+		JButton confbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		confbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
+		confbtnInfo.setOpaque(false);
+		confbtnInfo.setMargin(new Insets(0, 0, 0, 0));
+		confbtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
+		confbtnInfo.setForeground(Color.BLACK);
+		confbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		confbtnInfo.setContentAreaFilled(false);
+		confbtnInfo.setBorderPainted(false);
+		confbtnInfo.setBounds(0, 571, 418, 57);
+		conferimento.add(confbtnInfo);
+		
+		
+		
+		
+		//ERRORE CONFERIMENTO
 		JLabel errlblErroreProdotto = new JLabel("ERRORE PRODOTTO");
 		errlblErroreProdotto.setHorizontalAlignment(SwingConstants.CENTER);
 		errlblErroreProdotto.setForeground(Color.BLACK);
 		errlblErroreProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
 		errlblErroreProdotto.setBounds(416, 0, 629, 57);
-		errorPanel.add(errlblErroreProdotto);
+		erroreConf.add(errlblErroreProdotto);
 		
-		JButton errbtnTornaIndietro = new JButton("Ritenta scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
-		errbtnTornaIndietro.addActionListener(new ActionListener() {
+		JButton errbtnRitentaScansione = new JButton("Ritenta scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		errbtnRitentaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 				GuiMain.main(args);
-				switchPanel(homePanel);				
+				switchPanel(scansione);				
 			}
 		});
-		errbtnTornaIndietro.setVerticalTextPosition(SwingConstants.CENTER);
-		errbtnTornaIndietro.setOpaque(false);
-		errbtnTornaIndietro.setMargin(new Insets(0, 0, 0, 0));
-		errbtnTornaIndietro.setHorizontalTextPosition(SwingConstants.CENTER);
-		errbtnTornaIndietro.setForeground(Color.BLACK);
-		errbtnTornaIndietro.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		errbtnTornaIndietro.setContentAreaFilled(false);
-		errbtnTornaIndietro.setBorderPainted(false);
-		errbtnTornaIndietro.setBounds(416, 464, 628, 57);
-		errorPanel.add(errbtnTornaIndietro);
+		errbtnRitentaScansione.setVerticalTextPosition(SwingConstants.CENTER);
+		errbtnRitentaScansione.setOpaque(false);
+		errbtnRitentaScansione.setMargin(new Insets(0, 0, 0, 0));
+		errbtnRitentaScansione.setHorizontalTextPosition(SwingConstants.CENTER);
+		errbtnRitentaScansione.setForeground(Color.BLACK);
+		errbtnRitentaScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		errbtnRitentaScansione.setContentAreaFilled(false);
+		errbtnRitentaScansione.setBorderPainted(false);
+		errbtnRitentaScansione.setBounds(416, 464, 628, 57);
+		erroreConf.add(errbtnRitentaScansione);
 		
-		JButton errbtnAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
-		errbtnAssistenza.addActionListener(new ActionListener() {
+		JButton errbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		errbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switchPanel(assPanel);
+				switchPanel(assistenza);
 			}
 		});
-		errbtnAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
-		errbtnAssistenza.setMargin(new Insets(0, 0, 0, 0));
-		errbtnAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
-		errbtnAssistenza.setForeground(Color.BLACK);
-		errbtnAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		errbtnAssistenza.setContentAreaFilled(false);
-		errbtnAssistenza.setBorderPainted(false);
-		errbtnAssistenza.setBounds(416, 613, 628, 57);
-		errorPanel.add(errbtnAssistenza);
+		errbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
+		errbtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
+		errbtnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
+		errbtnProblemiAssistenza.setForeground(Color.BLACK);
+		errbtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		errbtnProblemiAssistenza.setContentAreaFilled(false);
+		errbtnProblemiAssistenza.setBorderPainted(false);
+		errbtnProblemiAssistenza.setBounds(416, 613, 628, 57);
+		erroreConf.add(errbtnProblemiAssistenza);
 		
 		
 		JButton errbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
@@ -240,7 +644,7 @@ public class GuiMain extends JFrame {
 		errbtnInfo.setContentAreaFilled(false);
 		errbtnInfo.setBorderPainted(false);
 		errbtnInfo.setBounds(0, 571, 418, 57);
-		errorPanel.add(errbtnInfo);
+		erroreConf.add(errbtnInfo);
 		
 		JLabel errlblErrorImage = new JLabel("Image Not Found");
 		errlblErrorImage.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -249,176 +653,31 @@ public class GuiMain extends JFrame {
 		errlblErrorImage.setHorizontalTextPosition(JLabel.CENTER);
 		errlblErrorImage.setVerticalTextPosition(JLabel.BOTTOM);
 		errlblErrorImage.setBounds(416, 128, 629, 309);
-		errorPanel.add(errlblErrorImage);
+		erroreConf.add(errlblErrorImage);
 		
 		JLabel errlblLogo = new JLabel("");
 		errlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
 		errlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		errlblLogo.setBounds(0, 0, 418, 488);
-		errorPanel.add(errlblLogo);
+		erroreConf.add(errlblLogo);
 		
-		JTextPane errtxtpnNonStato = new JTextPane();
-		errtxtpnNonStato.setEditable(false);
-		errtxtpnNonStato.setFont(new Font("Tahoma", Font.PLAIN, 25));		
-		//allign center
-		SimpleAttributeSet centerText = new SimpleAttributeSet();
-		StyleConstants.setAlignment(centerText, StyleConstants.ALIGN_CENTER);
-		StyledDocument doc = errtxtpnNonStato.getStyledDocument();
-		doc.setParagraphAttributes(0, 104, centerText, false);
-		errtxtpnNonStato.setOpaque(false);
-		errtxtpnNonStato.setText("Non \u00E8 stato possibile recuperare l'immagine del prodotto");
-		errtxtpnNonStato.setBounds(416, 86, 629, 73);
-		errorPanel.add(errtxtpnNonStato);
-
-		// SCAN PANEL
-		JPanel scanPanel = new JPanel();
-		layeredPane.add(scanPanel, "name_47730555398847");
-		scanPanel.setOpaque(false);
-		scanPanel.setLayout(null);
+		JTextPane errtxtpnErroreRecuperoImmagine = new JTextPane();
+		errtxtpnErroreRecuperoImmagine.setEditable(false);
+		errtxtpnErroreRecuperoImmagine.setFont(new Font("Tahoma", Font.PLAIN, 25));		
+		StyledDocument doc = errtxtpnErroreRecuperoImmagine.getStyledDocument();
+		errtxtpnErroreRecuperoImmagine.setOpaque(false);
+		errtxtpnErroreRecuperoImmagine.setText("Non \u00E8 stato possibile recuperare l'immagine del prodotto");
+		errtxtpnErroreRecuperoImmagine.setBounds(416, 86, 629, 73);
+		erroreConf.add(errtxtpnErroreRecuperoImmagine);
 		
-
-		// GTT PANEL
-		JPanel gttPanel = new JPanel();
-		layeredPane.add(gttPanel, "name_47764772881651");
-		gttPanel.setOpaque(false);
-		gttPanel.setLayout(null);
-
-		// BOTTONI NAVIGAZIONE SCHEDE (provvisori)
-		JButton btnPanel1 = new JButton("HOME");
-		btnPanel1.setBackground(Color.WHITE);
-		btnPanel1.setForeground(Color.BLACK);
-		btnPanel1.setBounds(60, 13, 97, 25);
-		btnPanel1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(homePanel);
-			}
-		});
-		contentPane.add(btnPanel1);
-
-		JButton btnPanel2 = new JButton("ScProdotto");
-		btnPanel2.setBackground(Color.WHITE);
-		btnPanel2.setForeground(Color.BLACK);
-		btnPanel2.setBounds(189, 13, 97, 25);
-		btnPanel2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(scanPanel);
-			}
-		});
-		contentPane.add(btnPanel2);
-
-		JButton btnPanel3 = new JButton("GttProdotto");
-		btnPanel3.setBackground(Color.WHITE);
-		btnPanel3.setForeground(Color.BLACK);
-		btnPanel3.setBounds(309, 13, 97, 25);
-		btnPanel3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(gttPanel);
-			}
-		});
-		contentPane.add(btnPanel3);
+		//ASSISTENZA
+		JLabel asslblAssistenza = new JLabel("ASSISTENZA");
+		asslblAssistenza.setHorizontalAlignment(SwingConstants.CENTER);
+		asslblAssistenza.setForeground(Color.BLACK);
+		asslblAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
+		asslblAssistenza.setBounds(416, 0, 629, 57);
+		assistenza.add(asslblAssistenza);
 		
-		JButton btnAsspanel = new JButton("AssPanel");
-		btnAsspanel.setBackground(Color.WHITE);
-		btnAsspanel.setForeground(Color.BLACK);
-		btnAsspanel.setBounds(440, 13, 97, 25);
-		btnAsspanel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(assPanel);				
-			}
-		});
-		contentPane.add(btnAsspanel);
-		
-		
-		
-		// contenuti GTT
-		JLabel gttlblConferimentoProdotto = new JLabel("CONFERIMENTO PRODOTTO");
-		gttlblConferimentoProdotto.setForeground(Color.BLACK);
-		gttlblConferimentoProdotto.setHorizontalAlignment(SwingConstants.CENTER);
-		gttlblConferimentoProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
-		gttlblConferimentoProdotto.setBounds(416, 0, 629, 57);
-		gttPanel.add(gttlblConferimentoProdotto);
-
-		JButton gttbtnProblemiAssistenza = new JButton("Problemi? Assistenza");
-		gttbtnProblemiAssistenza.setVerticalTextPosition(JButton.CENTER);
-		gttbtnProblemiAssistenza.setHorizontalTextPosition(JButton.CENTER);
-		gttbtnProblemiAssistenza.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
-		gttbtnProblemiAssistenza.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(assPanel);
-			}
-		});
-		gttbtnProblemiAssistenza.setOpaque(false);
-		gttbtnProblemiAssistenza.setForeground(Color.BLACK);
-		gttbtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		gttbtnProblemiAssistenza.setContentAreaFilled(false);
-		gttbtnProblemiAssistenza.setBorderPainted(false);
-		gttbtnProblemiAssistenza.setBounds(416, 613, 629, 57);
-		gttPanel.add(gttbtnProblemiAssistenza);
-
-		JButton gttbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
-		gttbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
-		gttbtnInfo.setOpaque(false);
-		gttbtnInfo.setMargin(new Insets(0, 0, 0, 0));
-		gttbtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
-		gttbtnInfo.setForeground(Color.BLACK);
-		gttbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		gttbtnInfo.setContentAreaFilled(false);
-		gttbtnInfo.setBorderPainted(false);
-		gttbtnInfo.setBounds(0, 571, 418, 57);
-		gttPanel.add(gttbtnInfo);
-
-		JLabel gttlblLogo = new JLabel("");
-		gttlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		gttlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
-		gttlblLogo.setBounds(0, 0, 418, 488);
-		gttPanel.add(gttlblLogo);
-
-		JLabel gttlblDescrizione = new JLabel("descrizione prodotto");
-		gttlblDescrizione.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		gttlblDescrizione.setHorizontalAlignment(SwingConstants.CENTER);
-		gttlblDescrizione.setBounds(416, 336, 629, 136);
-		gttPanel.add(gttlblDescrizione);
-
-		JTextPane gttTxtIstruzioni = new JTextPane();
-		gttTxtIstruzioni.setEditable(false);
-		gttTxtIstruzioni.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		
-		//allign center
-		SimpleAttributeSet centerIstruzioni = new SimpleAttributeSet();
-		StyleConstants.setAlignment(centerIstruzioni, StyleConstants.ALIGN_CENTER);
-		StyledDocument docIstruzioni = gttTxtIstruzioni.getStyledDocument();
-		docIstruzioni.setParagraphAttributes(0, 104, centerIstruzioni, false);
-		gttTxtIstruzioni.setOpaque(false);
-		gttTxtIstruzioni.setText("Non \u00E8 stato possibile recuperare l'immagine del prodotto");
-		gttTxtIstruzioni.setBounds(416, 86, 629, 73);
-		gttPanel.add(gttTxtIstruzioni);
-		
-		JLabel gttlblImmagineProdotto = new JLabel("immagine prodotto");
-		gttlblImmagineProdotto.setHorizontalAlignment(SwingConstants.CENTER);
-		gttlblImmagineProdotto.setBounds(600, 128, 269, 257);
-		gttPanel.add(gttlblImmagineProdotto);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/trash.gif")));
-		lblNewLabel.setBounds(557, 455, 109, 145);
-		gttPanel.add(lblNewLabel);
-		
-		//punti
-		JLabel gttlblPunti = new JLabel("Punti");
-		gttlblPunti.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		gttlblPunti.setHorizontalAlignment(SwingConstants.CENTER);
-		gttlblPunti.setBounds(716, 485, 209, 88);
-		gttPanel.add(gttlblPunti);
-		
-		
-		//contenuti assistenza
-		JLabel lblAssistenza = new JLabel("ASSISTENZA");
-		lblAssistenza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAssistenza.setForeground(Color.BLACK);
-		lblAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
-		lblAssistenza.setBounds(416, 0, 629, 57);
-		assPanel.add(lblAssistenza);
-				
 		JButton assbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		assbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
 		assbtnInfo.setOpaque(false);
@@ -429,261 +688,23 @@ public class GuiMain extends JFrame {
 		assbtnInfo.setContentAreaFilled(false);
 		assbtnInfo.setBorderPainted(false);
 		assbtnInfo.setBounds(0, 571, 418, 57);
-		assPanel.add(assbtnInfo);
-				
-		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setBounds(0, 0, 418, 488);
-		assPanel.add(label_2);
-				
-		JTextPane txtpnTel = new JTextPane();
-		txtpnTel.setEditable(false);
-		txtpnTel.setText("Telefono:");
-		String newLine = System.getProperty("line.separator");    
-		txtpnTel.setText(txtpnTel.getText() + newLine + "Email:");
-		txtpnTel.setOpaque(false);
-		txtpnTel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		txtpnTel.setBounds(416, 86, 629, 73);
-		//allign center
-		SimpleAttributeSet centerAss = new SimpleAttributeSet();
-		StyleConstants.setAlignment(centerAss, StyleConstants.ALIGN_CENTER);
-		StyledDocument docAss = txtpnTel.getStyledDocument();
-		docAss.setParagraphAttributes(0, 104, centerAss, false);
-		assPanel.add(txtpnTel);
-
-
-		// contenuti SCAN
-		JLabel scanlblScansioneProdotto = new JLabel("SCANSIONE PRODOTTO");
-		scanlblScansioneProdotto.setHorizontalAlignment(SwingConstants.CENTER);
-		scanlblScansioneProdotto.setForeground(Color.BLACK);
-		scanlblScansioneProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
-		scanlblScansioneProdotto.setBounds(416, 0, 629, 57);
-		scanPanel.add(scanlblScansioneProdotto);
+		assistenza.add(assbtnInfo);
 		
+		JLabel asslblLogo = new JLabel("");
+		asslblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		asslblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		asslblLogo.setBounds(0, 0, 418, 488);
+		assistenza.add(asslblLogo);
 		
-		// prodotto errato
-
-		
-		JButton scanbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
-		scanbtnProdottoVisualizzatoErrato.setVerticalTextPosition(JButton.CENTER);
-		scanbtnProdottoVisualizzatoErrato.setHorizontalTextPosition(JButton.CENTER);
-		scanbtnProdottoVisualizzatoErrato.setBorderPainted(false);
-		scanbtnProdottoVisualizzatoErrato.setMargin(new Insets(0, 0, 0, 0));
-		scanbtnProdottoVisualizzatoErrato.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		scanbtnProdottoVisualizzatoErrato.setForeground(Color.BLACK);
-		scanbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
-		scanbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(homePanel);
-			}
-		});
-		scanbtnProdottoVisualizzatoErrato.setOpaque(false);
-		scanbtnProdottoVisualizzatoErrato.setForeground(Color.BLACK);
-		scanbtnProdottoVisualizzatoErrato.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		scanbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
-		scanbtnProdottoVisualizzatoErrato.setBorderPainted(false);
-		scanbtnProdottoVisualizzatoErrato.setBounds(749, 449, 255, 57);
-		scanPanel.add(scanbtnProdottoVisualizzatoErrato);
-
-		// prodotto corretto
-		
-		JButton scanbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
-		scanbtnProdottoVisualizzatoCorretto.setVerticalTextPosition(JButton.CENTER);
-		scanbtnProdottoVisualizzatoCorretto.setHorizontalTextPosition(JButton.CENTER);
-		scanbtnProdottoVisualizzatoCorretto.setBorderPainted(false);
-		scanbtnProdottoVisualizzatoCorretto.setMargin(new Insets(0, 0, 0, 0));
-		scanbtnProdottoVisualizzatoCorretto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		scanbtnProdottoVisualizzatoCorretto.setForeground(Color.BLACK);
-		scanbtnProdottoVisualizzatoCorretto.setContentAreaFilled(false);
-		scanbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(gttPanel);
-				// prendo il valore dalla variabile globale
-				
-				
-				gttlblPunti.setText("Punti prodotto: " + String.valueOf(prodottoScansionato.getPunti()));
-				
-				//DA AGGIUNGERE DESCRIZIONE
-				gttlblDescrizione.setText(descrizioneProdotto);
-				System.out.println("DESC: " + descrizioneProdotto);
-				gttPanel.remove(gttTxtIstruzioni);
-			}
-
-		});
-		scanbtnProdottoVisualizzatoCorretto.setOpaque(false);
-		scanbtnProdottoVisualizzatoCorretto.setForeground(Color.BLACK);
-		scanbtnProdottoVisualizzatoCorretto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		scanbtnProdottoVisualizzatoCorretto.setContentAreaFilled(false);
-		scanbtnProdottoVisualizzatoCorretto.setBorderPainted(false);
-		scanbtnProdottoVisualizzatoCorretto.setBounds(470, 449, 255, 57);
-		scanPanel.add(scanbtnProdottoVisualizzatoCorretto);
-
-		JLabel scanlblImmagineProdotto = new JLabel("immagine prodotto");
-		scanlblImmagineProdotto.setHorizontalAlignment(SwingConstants.CENTER);
-		scanlblImmagineProdotto.setBounds(600, 128, 269, 257);
-		scanPanel.add(scanlblImmagineProdotto);
-
-		JLabel scanlblLogo = new JLabel("");
-		scanlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		scanlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
-		scanlblLogo.setBounds(0, 0, 418, 488);
-		scanPanel.add(scanlblLogo);
-		
-		JButton btnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
-		btnProblemiAssistenza.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(assPanel);
-			}
-		});
-		btnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
-		btnProblemiAssistenza.setOpaque(false);
-		btnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
-		btnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnProblemiAssistenza.setForeground(Color.BLACK);
-		btnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		btnProblemiAssistenza.setContentAreaFilled(false);
-		btnProblemiAssistenza.setBorderPainted(false);
-		btnProblemiAssistenza.setBounds(416, 613, 628, 57);
-		scanPanel.add(btnProblemiAssistenza);
-		
-		JButton scanbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
-		scanbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
-		scanbtnInfo.setOpaque(false);
-		scanbtnInfo.setMargin(new Insets(0, 0, 0, 0));
-		scanbtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
-		scanbtnInfo.setForeground(Color.BLACK);
-		scanbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		scanbtnInfo.setContentAreaFilled(false);
-		scanbtnInfo.setBorderPainted(false);
-		scanbtnInfo.setBounds(0, 571, 418, 57);
-		scanPanel.add(scanbtnInfo);
-		
-		JLabel lblPuntiprodotto = new JLabel("PuntiProdotto");
-		lblPuntiprodotto.setBounds(679, 398, 124, 23);
-
-		// contenuti HOME
-
-		// Avvia scansione
-		
-		JButton homebtnScansionaProdotto = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
-		homebtnScansionaProdotto.setVerticalTextPosition(JButton.CENTER);
-		homebtnScansionaProdotto.setHorizontalTextPosition(JButton.CENTER);
-		homebtnScansionaProdotto.setBorderPainted(false);
-		homebtnScansionaProdotto.setMargin(new Insets(0, 0, 0, 0));
-		// btnScansionaProdotto.setIcon(new
-		// ImageIcon(Main.class.getResource("/Gui/images/greenbutton.png")));
-		homebtnScansionaProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		homebtnScansionaProdotto.setForeground(Color.BLACK);
-		homebtnScansionaProdotto.setContentAreaFilled(false);
-		homebtnScansionaProdotto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//leggo il barcode in input
-				barcodeProdotto = hometxtInputBarcode.getText();
-				
-				//verifico che sia un barcode della forma corretta
-				//verifyBarcode(barcodeProdotto);
-				
-				//8029241107035	igiene plus
-				//4006381115575 stabilo
-				//8001050026066 levissima
-				
-				// eseguo ricerca prodotto
-				//searchDBProduct(barcodeProdotto);
-				
-				switchPanel(scanPanel);
-				
-				prodottoScansionato = new Prodotto(barcodeProdotto);
-				
-				try {
-					cestinoS.conferimentoProdotto(prodottoScansionato);
-				} catch (IOException e) {
-					System.out.println("CIAOOO\n");
-					e.printStackTrace();
-				}
-
-				// output
-				if (prodottoScansionato.isPresenza()) {
-					
-					//policy
-					policyProdotto = new Policy(citta, prodottoScansionato);
-					
-					
-					prodottoScansionato.getDati();
-//					System.out.println("\n----- PRODOTTO -----\n");
-//					System.out.println("Barcode:" + barcodeProdotto);
-//					System.out.println("Nome:" + nomeProdotto);
-//					System.out.println("Descrizione:" + descrizioneProdotto);
-//					System.out.println("Punti: " + puntiProdotto);
-					ImageIcon image = new ImageIcon(prodottoScansionato.getImmagine());
-					Image im = image.getImage();
-					Image myImg = im.getScaledInstance(scanlblImmagineProdotto.getWidth(),
-					scanlblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
-					ImageIcon newImage = new ImageIcon(myImg);
-					scanlblImmagineProdotto.setIcon(newImage);
-					gttlblImmagineProdotto.setIcon(newImage);
-					
-				} else {
-					System.out.println("\nProdotto non presente nel DB, invia notifica per aggiungerlo");					
-					switchPanel(errorPanel);	//pannello di errore
-				}
-			}
-		});
-		homebtnScansionaProdotto.setBounds(416, 212, 629, 96);
-		homePanel.add(homebtnScansionaProdotto);
-
-		JLabel homelblLogo = new JLabel("");
-		homelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		homelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
-		homelblLogo.setBounds(0, 0, 418, 488);
-		homePanel.add(homelblLogo);
-
-		JLabel homelblScansionaProdotto = new JLabel("Scansione Prodotto");
-		homelblScansionaProdotto.setHorizontalAlignment(SwingConstants.CENTER);
-		homelblScansionaProdotto.setForeground(Color.BLACK);
-		homelblScansionaProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
-		homelblScansionaProdotto.setBounds(416, 97, 629, 57);
-		homePanel.add(homelblScansionaProdotto);
-		
-		hometxtInputBarcode = new JTextField();
-		hometxtInputBarcode.setHorizontalAlignment(SwingConstants.CENTER);
-		hometxtInputBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		hometxtInputBarcode.setBounds(632, 384, 212, 44);
-		hometxtInputBarcode.setOpaque(false);
-		homePanel.add(hometxtInputBarcode);
-		hometxtInputBarcode.setColumns(10);
-		
-		JLabel homeInputBackground = new JLabel("");
-		homeInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
-		homeInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonsmall.png")));
-		homeInputBackground.setBounds(430, 357, 615, 96);
-		homePanel.add(homeInputBackground);
-		
-		JButton homebtnAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
-		homebtnAssistenza.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(assPanel);
-			}
-		});
-		homebtnAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
-		homebtnAssistenza.setMargin(new Insets(0, 0, 0, 0));
-		homebtnAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
-		homebtnAssistenza.setForeground(Color.BLACK);
-		homebtnAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		homebtnAssistenza.setContentAreaFilled(false);
-		homebtnAssistenza.setBorderPainted(false);
-		homebtnAssistenza.setBounds(416, 613, 628, 57);
-		homePanel.add(homebtnAssistenza);
-		
-		JLabel hometxtBarcode = new JLabel();
-		hometxtBarcode.setHorizontalAlignment(SwingConstants.CENTER);
-		hometxtBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		hometxtBarcode.setText("Barcode:");
-		hometxtBarcode.setBounds(426, 321, 619, 49);
-		hometxtBarcode.setOpaque(false);
-		homePanel.add(hometxtBarcode);
-		
-		
+		JTextPane asstxtpnTelefonoEmail = new JTextPane();
+		asstxtpnTelefonoEmail.setEditable(false);
+		asstxtpnTelefonoEmail.setText("Telefono:");
+		asstxtpnTelefonoEmail.setText(asstxtpnTelefonoEmail.getText() + newLine + "Email:");
+		asstxtpnTelefonoEmail.setOpaque(false);
+		asstxtpnTelefonoEmail.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		asstxtpnTelefonoEmail.setBounds(416, 86, 629, 73);
+		StyledDocument docAss = asstxtpnTelefonoEmail.getStyledDocument();
+		assistenza.add(asstxtpnTelefonoEmail);
 		
 		JLabel background = new JLabel("");
 		background.setBounds(0, -14, 1045, 761);

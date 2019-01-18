@@ -43,12 +43,13 @@ public class SessioneMain {
 //		
 		
 		//prodotto		
-		Prodotto p = new Prodotto("8410668111116");
-		p.creaConnessione();
+		Prodotto p = new Prodotto("0715679886120");
+		//p.creaConnessione();
 		//p.getDati();
 		
 		//policy
 		Policy pol = new Policy("AP", p);
+		p.getDati();
 //		
 //		//tessera
 //		Tessera t = new Tessera("GRRMTT97L08I156I");

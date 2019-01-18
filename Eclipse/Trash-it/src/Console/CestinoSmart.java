@@ -71,8 +71,7 @@ public class CestinoSmart {
 					continue;
 				}
 			} else throw new IOException("Cestini Pieni");
-		}
-		
+		}		
 		p.setDescrizione(getArrayConferimento());
 	}
 }
