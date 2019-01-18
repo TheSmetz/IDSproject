@@ -1,24 +1,16 @@
 package Gui;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
+import Console.CestinoSmart;
+import Console.Policy;
+import Console.Prodotto;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-
-import Console.CestinoSmart;
-import Console.Policy;
-import Console.Prodotto;
-
 import java.awt.CardLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JButton;
@@ -29,7 +21,6 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Insets;
-
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -59,29 +50,18 @@ public class GuiMain extends JFrame {
 	public Policy policyProdotto;
 	private JLabel scanlblBenvenuto;
 	private JButton scannbtnInfo;
-	//public CestinoSmart cestinoS;
-	
+	//public CestinoSmart cestinoS;	
 
 	public void switchPanel(JPanel panelName) {
-
 		layeredPane.removeAll();
 		layeredPane.add(panelName);
 		layeredPane.repaint();
 		layeredPane.revalidate();
-
 	}
 	
-//	public void prodotto(String codice) {
-//		this.barcodeProdotto = codice;
-//		Prodotto p = new Prodotto(this.barcodeProdotto);
-//		p.getDati();
-//	}
-	
 	public static boolean verifyBarcode(String s) {
-
 		boolean corretto = false;
-		int lenght = s.length();
-		
+		int lenght = s.length();		
 		System.out.println("---INPUT BARCODE--- ");
 		System.out.println("Text: " + s);
 		System.out.println("Lunghezza: " + lenght);
@@ -118,12 +98,19 @@ public class GuiMain extends JFrame {
 		contentPane.setLayout(null);
 
 		layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 51, 1045, 683);
+		layeredPane.setBounds(0, 0, 1045, 734);
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
-		
+
 
 		//--------------DICHIARAZIONE PANEL--------------
+		
+		//SESSIONE
+		JPanel sessione = new JPanel();
+		layeredPane.add(sessione, "name_793346484234400");
+		sessione.setOpaque(true);
+		sessione.setLayout(null);
+		sessione.setBackground(Color.WHITE);
 		
 		//HOME
 		JPanel home = new JPanel();
@@ -142,6 +129,7 @@ public class GuiMain extends JFrame {
 		layeredPane.add(conferimento, "name_47730555398847");
 		conferimento.setOpaque(false);
 		conferimento.setLayout(null);
+		JLabel conflblImmagineProdotto = new JLabel("immagine prodotto");
 		
 		//ISTRUZIONI CONFERIMENTO
 		JPanel istruzioneConf = new JPanel();
@@ -162,52 +150,90 @@ public class GuiMain extends JFrame {
 		assistenza.setOpaque(false);
 
 		// BOTTONI NAVIGAZIONE SCHEDE (provvisori)
-		JButton btnPanel1 = new JButton("HOME");
-		btnPanel1.setBackground(Color.WHITE);
-		btnPanel1.setForeground(Color.BLACK);
-		btnPanel1.setBounds(60, 13, 97, 25);
-		btnPanel1.addActionListener(new ActionListener() {
+//		JButton btnPanel1 = new JButton("HOME");
+//		btnPanel1.setBackground(Color.WHITE);
+//		btnPanel1.setForeground(Color.BLACK);
+//		btnPanel1.setBounds(12, 13, 97, 25);
+//		btnPanel1.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				switchPanel(home);
+//			}
+//		});
+//		contentPane.add(btnPanel1);
+//
+//		JButton btnPanel2 = new JButton("ScProdotto");
+//		btnPanel2.setBackground(Color.WHITE);
+//		btnPanel2.setForeground(Color.BLACK);
+//		btnPanel2.setBounds(131, 13, 97, 25);
+//		btnPanel2.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				switchPanel(conferimento);
+//			}
+//		});
+//		contentPane.add(btnPanel2);
+//
+//		JButton btnPanel3 = new JButton("GttProdotto");
+//		btnPanel3.setBackground(Color.WHITE);
+//		btnPanel3.setForeground(Color.BLACK);
+//		btnPanel3.setBounds(250, 13, 97, 25);
+//		btnPanel3.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				switchPanel(istruzioneConf);
+//			}
+//		});
+//		contentPane.add(btnPanel3);
+//		
+//		JButton btnAsspanel = new JButton("AssPanel");
+//		btnAsspanel.setBackground(Color.WHITE);
+//		btnAsspanel.setForeground(Color.BLACK);
+//		btnAsspanel.setBounds(355, 13, 97, 25);
+//		btnAsspanel.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				switchPanel(assistenza);				
+//			}
+//		});
+//		contentPane.add(btnAsspanel);
+		
+		
+		//--------------CONTENUTI PIU' UTILIZZATI--------------
+		
+		
+		//--------------CONTENUTI PANEL--------------		
+		
+		//SESSIONE
+		JLabel sessionelblLogo = new JLabel("");
+		sessionelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logog.png")));
+		sessionelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		sessionelblLogo.setBounds(0, 84, 1045, 505);
+		sessione.add(sessionelblLogo);
+		
+		JLabel sessionelblSessione = new JLabel("Guadagna PREMI salvando l'ambiente!");
+		sessionelblSessione.setHorizontalAlignment(SwingConstants.CENTER);
+		sessionelblSessione.setForeground(Color.BLACK);
+		sessionelblSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 35));
+		sessionelblSessione.setBounds(0, 13, 1045, 57);
+		sessione.add(sessionelblSessione);
+		
+		JButton sessionebtnAvviaScansione = new JButton("AVVIA SESSIONE", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbutton.png")));
+		sessionebtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(home);
 			}
 		});
-		contentPane.add(btnPanel1);
-
-		JButton btnPanel2 = new JButton("ScProdotto");
-		btnPanel2.setBackground(Color.WHITE);
-		btnPanel2.setForeground(Color.BLACK);
-		btnPanel2.setBounds(189, 13, 97, 25);
-		btnPanel2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(conferimento);
-			}
-		});
-		contentPane.add(btnPanel2);
-
-		JButton btnPanel3 = new JButton("GttProdotto");
-		btnPanel3.setBackground(Color.WHITE);
-		btnPanel3.setForeground(Color.BLACK);
-		btnPanel3.setBounds(309, 13, 97, 25);
-		btnPanel3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(istruzioneConf);
-			}
-		});
-		contentPane.add(btnPanel3);
+		sessionebtnAvviaScansione.setVerticalTextPosition(SwingConstants.CENTER);
+		sessionebtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
+		sessionebtnAvviaScansione.setHorizontalTextPosition(SwingConstants.CENTER);
+		sessionebtnAvviaScansione.setForeground(Color.BLACK);
+		sessionebtnAvviaScansione.setFont(new Font("Calibri", Font.BOLD, 30));
+		sessionebtnAvviaScansione.setContentAreaFilled(false);
+		sessionebtnAvviaScansione.setBorderPainted(false);
+		sessionebtnAvviaScansione.setBounds(0, 625, 1045, 96);
+		sessione.add(sessionebtnAvviaScansione);
 		
-		JButton btnAsspanel = new JButton("AssPanel");
-		btnAsspanel.setBackground(Color.WHITE);
-		btnAsspanel.setForeground(Color.BLACK);
-		btnAsspanel.setBounds(440, 13, 97, 25);
-		btnAsspanel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(assistenza);				
-			}
-		});
-		contentPane.add(btnAsspanel);
-		
-		
-		//--------------CONTENUTI PANEL--------------
+		JLabel sesslblFreccia = new JLabel("");
+		sesslblFreccia.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/freccia.png")));
+		sesslblFreccia.setBounds(728, 54, 264, 598);
+		sessione.add(sesslblFreccia);
 		
 		//HOME		
 		JLabel homelblBenvenuto = new JLabel("BENVENUTO");
@@ -254,7 +280,12 @@ public class GuiMain extends JFrame {
 		StyleConstants.setAlignment(centerT, StyleConstants.ALIGN_CENTER);
 
 		
-		JButton homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", null);
+		JButton homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(assistenza);
+			}
+		});
 		homebtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
 		homebtnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -262,10 +293,14 @@ public class GuiMain extends JFrame {
 		homebtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		homebtnProblemiAssistenza.setContentAreaFilled(false);
 		homebtnProblemiAssistenza.setBorderPainted(false);
-		homebtnProblemiAssistenza.setBounds(416, 613, 628, 57);
+		homebtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		home.add(homebtnProblemiAssistenza);
 		
-		JButton homebtnInfo = new JButton("About us", null);
+		JButton homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		homebtnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		homebtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnInfo.setOpaque(false);
 		homebtnInfo.setMargin(new Insets(0, 0, 0, 0));
@@ -274,7 +309,7 @@ public class GuiMain extends JFrame {
 		homebtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		homebtnInfo.setContentAreaFilled(false);
 		homebtnInfo.setBorderPainted(false);
-		homebtnInfo.setBounds(0, 571, 418, 57);
+		homebtnInfo.setBounds(0, 456, 418, 57);
 		home.add(homebtnInfo);
 		
 		JLabel homelblLogo = new JLabel("");
@@ -282,6 +317,23 @@ public class GuiMain extends JFrame {
 		homelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblLogo.setBounds(0, 0, 418, 488);
 		home.add(homelblLogo);
+		
+		JButton homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		homebtnChiudiSessione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(sessione);
+			}
+		});
+		homebtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
+		homebtnChiudiSessione.setOpaque(false);
+		homebtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
+		homebtnChiudiSessione.setHorizontalTextPosition(SwingConstants.CENTER);
+		homebtnChiudiSessione.setForeground(Color.WHITE);
+		homebtnChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		homebtnChiudiSessione.setContentAreaFilled(false);
+		homebtnChiudiSessione.setBorderPainted(false);
+		homebtnChiudiSessione.setBounds(416, 613, 629, 57);
+		home.add(homebtnChiudiSessione);
 		
 		//SCANSIONE	
 		JLabel scanlblBenvenuto;
@@ -294,6 +346,10 @@ public class GuiMain extends JFrame {
 
 		JButton scanbtnInfo;
 		scannbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		scannbtnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		scannbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
 		scannbtnInfo.setOpaque(false);
 		scannbtnInfo.setMargin(new Insets(0, 0, 0, 0));
@@ -302,7 +358,7 @@ public class GuiMain extends JFrame {
 		scannbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		scannbtnInfo.setContentAreaFilled(false);
 		scannbtnInfo.setBorderPainted(false);
-		scannbtnInfo.setBounds(0, 571, 418, 57);
+		scannbtnInfo.setBounds(0, 456, 418, 57);
 		scansione.add(scannbtnInfo);
 
 		// Avvia scansione		
@@ -352,13 +408,13 @@ public class GuiMain extends JFrame {
 //									prodottoScansionato.getDati();
 					
 					
-//							ImageIcon image = new ImageIcon(prodottoScansionato.getImmagine());
-//							Image im = image.getImage();
-//							Image myImg = im.getScaledInstance(conflblImmagineProdotto.getWidth(),
-//							conflblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
-//							ImageIcon newImage = new ImageIcon(myImg);
-//							conflblImmagineProdotto.setIcon(newImage);
-//							gttlblImmagineProdotto.setIcon(newImage);
+							ImageIcon image = new ImageIcon(prodottoScansionato.getImmagine());
+							Image im = image.getImage();
+							Image myImg = im.getScaledInstance(conflblImmagineProdotto.getWidth(),
+							conflblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
+							ImageIcon newImage = new ImageIcon(myImg);
+							conflblImmagineProdotto.setIcon(newImage);
+							conflblImmagineProdotto.setIcon(newImage);
 					
 				} else {
 					System.out.println("\nProdotto non presente nel DB, invia notifica per aggiungerlo");					
@@ -396,7 +452,7 @@ public class GuiMain extends JFrame {
 		scanlblInputBackground.setBounds(430, 357, 615, 96);
 		scansione.add(scanlblInputBackground);
 		
-		JButton scanbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		JButton scanbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		scanbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
@@ -409,7 +465,7 @@ public class GuiMain extends JFrame {
 		scanbtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		scanbtnProblemiAssistenza.setContentAreaFilled(false);
 		scanbtnProblemiAssistenza.setBorderPainted(false);
-		scanbtnProblemiAssistenza.setBounds(416, 613, 628, 57);
+		scanbtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		scansione.add(scanbtnProblemiAssistenza);
 		
 		JLabel scantxtBarcode = new JLabel();
@@ -420,18 +476,36 @@ public class GuiMain extends JFrame {
 		scantxtBarcode.setOpaque(false);
 		scansione.add(scantxtBarcode);		
 		
+		JButton scanbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		scanbtnChiudiSessione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(sessione);
+			}
+		});
+		
+		scanbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
+		scanbtnChiudiSessione.setOpaque(false);
+		scanbtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
+		scanbtnChiudiSessione.setHorizontalTextPosition(SwingConstants.CENTER);
+		scanbtnChiudiSessione.setForeground(Color.WHITE);
+		scanbtnChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		scanbtnChiudiSessione.setContentAreaFilled(false);
+		scanbtnChiudiSessione.setBorderPainted(false);
+		scanbtnChiudiSessione.setBounds(416, 613, 629, 57);
+		scansione.add(scanbtnChiudiSessione);
+		
 		//ISTRUZIONI CONFERIMENTO
-		JLabel istrlblConferimentoProdotto = new JLabel("CONFERIMENTO PRODOTTO");
+		JLabel istrlblConferimentoProdotto = new JLabel("ISTRUZIONI CONFERIMENTO");
 		istrlblConferimentoProdotto.setForeground(Color.BLACK);
 		istrlblConferimentoProdotto.setHorizontalAlignment(SwingConstants.CENTER);
 		istrlblConferimentoProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
 		istrlblConferimentoProdotto.setBounds(416, 0, 629, 57);
 		istruzioneConf.add(istrlblConferimentoProdotto);
 
-		JButton istrbtnProblemiAssistenza = new JButton("Problemi? Assistenza");
+		JButton istrbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		istrbtnProblemiAssistenza.setVerticalTextPosition(JButton.CENTER);
 		istrbtnProblemiAssistenza.setHorizontalTextPosition(JButton.CENTER);
-		istrbtnProblemiAssistenza.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		istrbtnProblemiAssistenza.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		istrbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
@@ -442,7 +516,7 @@ public class GuiMain extends JFrame {
 		istrbtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		istrbtnProblemiAssistenza.setContentAreaFilled(false);
 		istrbtnProblemiAssistenza.setBorderPainted(false);
-		istrbtnProblemiAssistenza.setBounds(416, 613, 629, 57);
+		istrbtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		istruzioneConf.add(istrbtnProblemiAssistenza);
 
 		JButton istrbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
@@ -454,7 +528,7 @@ public class GuiMain extends JFrame {
 		istrbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		istrbtnInfo.setContentAreaFilled(false);
 		istrbtnInfo.setBorderPainted(false);
-		istrbtnInfo.setBounds(0, 571, 418, 57);
+		istrbtnInfo.setBounds(0, 456, 418, 57);
 		istruzioneConf.add(istrbtnInfo);
 
 		JLabel istrlblLogo = new JLabel("");
@@ -466,32 +540,57 @@ public class GuiMain extends JFrame {
 		JLabel istrlblDescrizione = new JLabel("descrizione prodotto");
 		istrlblDescrizione.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		istrlblDescrizione.setHorizontalAlignment(SwingConstants.CENTER);
-		istrlblDescrizione.setBounds(416, 336, 629, 136);
+		istrlblDescrizione.setBounds(416, 137, 629, 136);
 		istruzioneConf.add(istrlblDescrizione);
 		
-		JLabel istrlblImmagineProdotto = new JLabel("immagine prodotto");
-		istrlblImmagineProdotto.setHorizontalAlignment(SwingConstants.CENTER);
-		istrlblImmagineProdotto.setBounds(600, 84, 269, 257);
-		istruzioneConf.add(istrlblImmagineProdotto);
-		
-		JLabel istrlblGif = new JLabel("");
-		istrlblGif.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/trash.gif")));
-		istrlblGif.setBounds(557, 455, 109, 145);
-		istruzioneConf.add(istrlblGif);	
-		
 		//punti
-		JLabel istrlblPunti = new JLabel("Punti");
+		JLabel istrlblPunti = new JLabel("Punti guadagnati");
 		istrlblPunti.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		istrlblPunti.setHorizontalAlignment(SwingConstants.CENTER);
-		istrlblPunti.setBounds(716, 485, 209, 88);
+		istrlblPunti.setBounds(417, 258, 628, 69);
 		istruzioneConf.add(istrlblPunti);
+		
+		//nuova scansione
+		JButton istrbtnNuovaScansione = new JButton("Nuova scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		istrbtnNuovaScansione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(scansione);
+			}
+		});
+		istrbtnNuovaScansione.setVerticalTextPosition(SwingConstants.CENTER);
+		istrbtnNuovaScansione.setOpaque(false);
+		istrbtnNuovaScansione.setMargin(new Insets(0, 0, 0, 0));
+		istrbtnNuovaScansione.setHorizontalTextPosition(SwingConstants.CENTER);
+		istrbtnNuovaScansione.setForeground(Color.BLACK);
+		istrbtnNuovaScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		istrbtnNuovaScansione.setContentAreaFilled(false);
+		istrbtnNuovaScansione.setBorderPainted(false);
+		istrbtnNuovaScansione.setBounds(416, 456, 629, 57);
+		istruzioneConf.add(istrbtnNuovaScansione);
+		
+		JButton istrbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		istrbtnChiudiSessione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(sessione);
+			}
+		});
+		istrbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
+		istrbtnChiudiSessione.setOpaque(false);
+		istrbtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
+		istrbtnChiudiSessione.setHorizontalTextPosition(SwingConstants.CENTER);
+		istrbtnChiudiSessione.setForeground(Color.WHITE);
+		istrbtnChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		istrbtnChiudiSessione.setContentAreaFilled(false);
+		istrbtnChiudiSessione.setBorderPainted(false);
+		istrbtnChiudiSessione.setBounds(416, 613, 629, 57);
+		istruzioneConf.add(istrbtnChiudiSessione);
 		String newLine = System.getProperty("line.separator");
 		
 		JLabel lblPuntiprodotto = new JLabel("PuntiProdotto");
 		lblPuntiprodotto.setBounds(679, 398, 124, 23);
 		
 		//CONFERIMENTO
-		JLabel conflblScansioneProdotto = new JLabel("PRODOTTO SCANSIONATO");
+		JLabel conflblScansioneProdotto = new JLabel("CONFERIMENTO PRODOTTO");
 		conflblScansioneProdotto.setHorizontalAlignment(SwingConstants.CENTER);
 		conflblScansioneProdotto.setForeground(Color.BLACK);
 		conflblScansioneProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
@@ -534,7 +633,7 @@ public class GuiMain extends JFrame {
 				switchPanel(istruzioneConf);
 				
 				// prendo il valore dalla variabile globale				
-				istrlblPunti.setText("Punti prodotto: " + String.valueOf(prodottoScansionato.getPunti()));
+				istrlblPunti.setText("Punti guadagnati: " + String.valueOf(prodottoScansionato.getPunti()));
 				
 				//DA AGGIUNGERE DESCRIZIONE
 				istrlblDescrizione.setText(prodottoScansionato.getDescrizione());
@@ -549,7 +648,7 @@ public class GuiMain extends JFrame {
 		confbtnProdottoVisualizzatoCorretto.setBounds(470, 449, 255, 57);
 		conferimento.add(confbtnProdottoVisualizzatoCorretto);
 
-		JLabel conflblImmagineProdotto = new JLabel("immagine prodotto");
+//		JLabel conflblImmagineProdotto = new JLabel("immagine prodotto");
 		conflblImmagineProdotto.setHorizontalAlignment(SwingConstants.CENTER);
 		conflblImmagineProdotto.setBounds(600, 84, 269, 257);
 		conferimento.add(conflblImmagineProdotto);
@@ -560,7 +659,7 @@ public class GuiMain extends JFrame {
 		conflblLogo.setBounds(0, 0, 418, 488);
 		conferimento.add(conflblLogo);
 		
-		JButton confbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		JButton confbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		confbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(assistenza);
@@ -574,7 +673,7 @@ public class GuiMain extends JFrame {
 		confbtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		confbtnProblemiAssistenza.setContentAreaFilled(false);
 		confbtnProblemiAssistenza.setBorderPainted(false);
-		confbtnProblemiAssistenza.setBounds(416, 613, 628, 57);
+		confbtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		conferimento.add(confbtnProblemiAssistenza);
 		
 		JButton confbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
@@ -586,8 +685,25 @@ public class GuiMain extends JFrame {
 		confbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		confbtnInfo.setContentAreaFilled(false);
 		confbtnInfo.setBorderPainted(false);
-		confbtnInfo.setBounds(0, 571, 418, 57);
+		confbtnInfo.setBounds(0, 456, 418, 57);
 		conferimento.add(confbtnInfo);		
+		
+		JButton confbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		confbtnChiudiSessione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(sessione);
+			}
+		});
+		confbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
+		confbtnChiudiSessione.setOpaque(false);
+		confbtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
+		confbtnChiudiSessione.setHorizontalTextPosition(SwingConstants.CENTER);
+		confbtnChiudiSessione.setForeground(Color.WHITE);
+		confbtnChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		confbtnChiudiSessione.setContentAreaFilled(false);
+		confbtnChiudiSessione.setBorderPainted(false);
+		confbtnChiudiSessione.setBounds(416, 613, 629, 57);
+		conferimento.add(confbtnChiudiSessione);
 		
 		//ERRORE CONFERIMENTO
 		JLabel errlblErroreProdotto = new JLabel("ERRORE PRODOTTO");
@@ -616,7 +732,7 @@ public class GuiMain extends JFrame {
 		errbtnRitentaScansione.setBounds(416, 464, 628, 57);
 		erroreConf.add(errbtnRitentaScansione);
 		
-		JButton errbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		JButton errbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		errbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
@@ -629,7 +745,7 @@ public class GuiMain extends JFrame {
 		errbtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		errbtnProblemiAssistenza.setContentAreaFilled(false);
 		errbtnProblemiAssistenza.setBorderPainted(false);
-		errbtnProblemiAssistenza.setBounds(416, 613, 628, 57);
+		errbtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		erroreConf.add(errbtnProblemiAssistenza);
 		
 		
@@ -642,7 +758,7 @@ public class GuiMain extends JFrame {
 		errbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		errbtnInfo.setContentAreaFilled(false);
 		errbtnInfo.setBorderPainted(false);
-		errbtnInfo.setBounds(0, 571, 418, 57);
+		errbtnInfo.setBounds(0, 456, 418, 57);
 		erroreConf.add(errbtnInfo);
 		
 		JLabel errlblErrorImage = new JLabel("Image Not Found");
@@ -669,6 +785,23 @@ public class GuiMain extends JFrame {
 		errtxtpnErroreRecuperoImmagine.setBounds(426, 70, 629, 73);
 		erroreConf.add(errtxtpnErroreRecuperoImmagine);
 		
+		JButton errbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		errbtnChiudiSessione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(sessione);
+			}
+		});
+		errbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
+		errbtnChiudiSessione.setOpaque(false);
+		errbtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
+		errbtnChiudiSessione.setHorizontalTextPosition(SwingConstants.CENTER);
+		errbtnChiudiSessione.setForeground(Color.WHITE);
+		errbtnChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		errbtnChiudiSessione.setContentAreaFilled(false);
+		errbtnChiudiSessione.setBorderPainted(false);
+		errbtnChiudiSessione.setBounds(416, 613, 629, 57);
+		erroreConf.add(errbtnChiudiSessione);
+		
 		//ASSISTENZA
 		JLabel asslblAssistenza = new JLabel("ASSISTENZA");
 		asslblAssistenza.setHorizontalAlignment(SwingConstants.CENTER);
@@ -686,7 +819,7 @@ public class GuiMain extends JFrame {
 		assbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		assbtnInfo.setContentAreaFilled(false);
 		assbtnInfo.setBorderPainted(false);
-		assbtnInfo.setBounds(0, 571, 418, 57);
+		assbtnInfo.setBounds(0, 456, 418, 57);
 		assistenza.add(assbtnInfo);
 		
 		JLabel asslblLogo = new JLabel("");
@@ -704,6 +837,23 @@ public class GuiMain extends JFrame {
 		asstxtpnTelefonoEmail.setBounds(416, 86, 629, 73);
 		StyledDocument docAss = asstxtpnTelefonoEmail.getStyledDocument();
 		assistenza.add(asstxtpnTelefonoEmail);
+		
+		JButton assbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		assbtnChiudiSessione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(sessione);
+			}
+		});
+		assbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
+		assbtnChiudiSessione.setOpaque(false);
+		assbtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
+		assbtnChiudiSessione.setHorizontalTextPosition(SwingConstants.CENTER);
+		assbtnChiudiSessione.setForeground(Color.WHITE);
+		assbtnChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		assbtnChiudiSessione.setContentAreaFilled(false);
+		assbtnChiudiSessione.setBorderPainted(false);
+		assbtnChiudiSessione.setBounds(416, 613, 629, 57);
+		assistenza.add(assbtnChiudiSessione);
 		
 		JLabel background = new JLabel("");
 		background.setBounds(0, -14, 1045, 761);

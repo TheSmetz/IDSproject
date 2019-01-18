@@ -17,7 +17,7 @@ public class CestinoSmart {
 
 		for (String s : arrayConferimento)
 		{
-		    conferimento += s + "|";
+		    conferimento += s + " ";
 		}
 		return conferimento;
 	}
