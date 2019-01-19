@@ -376,45 +376,40 @@ public class GuiMain extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//leggo il barcode in input
 				barcodeProdotto = scantxtInputBarcode.getText();
-								
-				switchPanel(conferimento);
 				
 				//prodotto
 				prodottoScansionato = new Prodotto(barcodeProdotto);
-				System.out.println("Citta: "+citta);
-				
-				//policy
-				policyProdotto = new Policy("AP", prodottoScansionato);					
-				prodottoScansionato.getDati();
-				
-				//cestinosmart				
-				CestinoSmart cestinoS = new CestinoSmart();
-				try {
-					cestinoS.conferimentoProdotto(prodottoScansionato);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}			
-				
-				prodottoScansionato.getDati();
 				
 				//VERIFICARE CORRETTEZZA CODICE A BARRE
 				
 				// output
-				if (prodottoScansionato.isPresenza()) {
+				if (prodottoScansionato.isPresenza()) {					
 					
 					//policy
-//									policyProdotto = new Policy(citta, prodottoScansionato);					
-//									prodottoScansionato.getDati();
+					policyProdotto = new Policy("AP", prodottoScansionato);					
+					prodottoScansionato.getDati();
 					
+					//cestinosmart				
+					CestinoSmart cestinoS = new CestinoSmart();
+					try {
+						cestinoS.conferimentoProdotto(prodottoScansionato);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}			
 					
-							ImageIcon image = new ImageIcon(prodottoScansionato.getImmagine());
-							Image im = image.getImage();
-							Image myImg = im.getScaledInstance(conflblImmagineProdotto.getWidth(),
-							conflblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
-							ImageIcon newImage = new ImageIcon(myImg);
-							conflblImmagineProdotto.setIcon(newImage);
-							conflblImmagineProdotto.setIcon(newImage);
+					prodottoScansionato.getDati();
+			
+					ImageIcon image = new ImageIcon(prodottoScansionato.getImmagine());
+					Image im = image.getImage();
+					Image myImg = im.getScaledInstance(conflblImmagineProdotto.getWidth(),
+					conflblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
+					ImageIcon newImage = new ImageIcon(myImg);
+					conflblImmagineProdotto.setIcon(newImage);
+					conflblImmagineProdotto.setIcon(newImage);
+					
+					//prodotto nel db allora procedo con il conferimento
+					switchPanel(conferimento);
 					
 				} else {
 					System.out.println("\nProdotto non presente nel DB, invia notifica per aggiungerlo");					

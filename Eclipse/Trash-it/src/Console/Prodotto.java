@@ -114,6 +114,7 @@ public class Prodotto implements GestoreProdotto{
 				this.presenza = true;
 			}
 		} catch (SQLException e) {
+			this.presenza = false;
 			e.printStackTrace();
 		}					
 	}
