@@ -148,6 +148,12 @@ public class GuiMain extends JFrame {
 		layeredPane.add(assistenza, "name_783099324881200");
 		assistenza.setLayout(null);
 		assistenza.setOpaque(false);
+		
+		//ABOUT
+		JPanel about = new JPanel();
+		layeredPane.add(about, "name_962290729165700");
+		about.setLayout(null);
+		about.setOpaque(false);
 
 		// BOTTONI NAVIGAZIONE SCHEDE (provvisori)
 //		JButton btnPanel1 = new JButton("HOME");
@@ -204,7 +210,7 @@ public class GuiMain extends JFrame {
 		JLabel sessionelblLogo = new JLabel("");
 		sessionelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logog.png")));
 		sessionelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		sessionelblLogo.setBounds(0, 84, 1045, 505);
+		sessionelblLogo.setBounds(0, 83, 1045, 505);
 		sessione.add(sessionelblLogo);
 		
 		JLabel sessionelblSessione = new JLabel("Guadagna PREMI salvando l'ambiente!");
@@ -231,8 +237,9 @@ public class GuiMain extends JFrame {
 		sessione.add(sessionebtnAvviaScansione);
 		
 		JLabel sesslblFreccia = new JLabel("");
-		sesslblFreccia.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/freccia.png")));
-		sesslblFreccia.setBounds(728, 54, 264, 598);
+		sesslblFreccia.setToolTipText("");
+		sesslblFreccia.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/freccia.gif")));
+		sesslblFreccia.setBounds(728, 54, 240, 598);
 		sessione.add(sesslblFreccia);
 		
 		//HOME		
@@ -250,7 +257,7 @@ public class GuiMain extends JFrame {
 		homelblSelezionaOperazione.setBounds(416, 97, 629, 57);
 		home.add(homelblSelezionaOperazione);
 		
-		JButton homebtnScansione = new JButton("Scansiona prodotto", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton homebtnScansione = new JButton("SCANSIONA PRODOTTO", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		homebtnScansione.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnScansione.setMargin(new Insets(0, 0, 0, 0));
 		homebtnScansione.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -258,7 +265,7 @@ public class GuiMain extends JFrame {
 		homebtnScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		homebtnScansione.setContentAreaFilled(false);
 		homebtnScansione.setBorderPainted(false);
-		homebtnScansione.setBounds(416, 212, 629, 96);
+		homebtnScansione.setBounds(416, 262, 629, 96);
 		homebtnScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(scansione);
@@ -266,7 +273,7 @@ public class GuiMain extends JFrame {
 		});
 		home.add(homebtnScansione);
 		
-		JButton homebtnRitiroPremio = new JButton("Ritiro premio", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton homebtnRitiroPremio = new JButton("RITITO PREMI", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		homebtnRitiroPremio.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnRitiroPremio.setMargin(new Insets(0, 0, 0, 0));
 		homebtnRitiroPremio.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -274,7 +281,7 @@ public class GuiMain extends JFrame {
 		homebtnRitiroPremio.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		homebtnRitiroPremio.setContentAreaFilled(false);
 		homebtnRitiroPremio.setBorderPainted(false);
-		homebtnRitiroPremio.setBounds(416, 321, 629, 96);
+		homebtnRitiroPremio.setBounds(416, 371, 629, 96);
 		home.add(homebtnRitiroPremio);
 		SimpleAttributeSet centerT = new SimpleAttributeSet();
 		StyleConstants.setAlignment(centerT, StyleConstants.ALIGN_CENTER);
@@ -299,6 +306,7 @@ public class GuiMain extends JFrame {
 		JButton homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		homebtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				switchPanel(about);
 			}
 		});
 		homebtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -348,6 +356,7 @@ public class GuiMain extends JFrame {
 		scannbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		scannbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(about);
 			}
 		});
 		scannbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -515,6 +524,11 @@ public class GuiMain extends JFrame {
 		istruzioneConf.add(istrbtnProblemiAssistenza);
 
 		JButton istrbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		istrbtnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(about);
+			}
+		});
 		istrbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
 		istrbtnInfo.setOpaque(false);
 		istrbtnInfo.setMargin(new Insets(0, 0, 0, 0));
@@ -672,6 +686,11 @@ public class GuiMain extends JFrame {
 		conferimento.add(confbtnProblemiAssistenza);
 		
 		JButton confbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		confbtnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(about);
+			}
+		});
 		confbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
 		confbtnInfo.setOpaque(false);
 		confbtnInfo.setMargin(new Insets(0, 0, 0, 0));
@@ -745,6 +764,11 @@ public class GuiMain extends JFrame {
 		
 		
 		JButton errbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		errbtnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(about);
+			}
+		});
 		errbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
 		errbtnInfo.setOpaque(false);
 		errbtnInfo.setMargin(new Insets(0, 0, 0, 0));
@@ -806,6 +830,11 @@ public class GuiMain extends JFrame {
 		assistenza.add(asslblAssistenza);
 		
 		JButton assbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		assbtnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(about);
+			}
+		});
 		assbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
 		assbtnInfo.setOpaque(false);
 		assbtnInfo.setMargin(new Insets(0, 0, 0, 0));
@@ -850,6 +879,80 @@ public class GuiMain extends JFrame {
 		assbtnChiudiSessione.setBounds(416, 613, 629, 57);
 		assistenza.add(assbtnChiudiSessione);
 		
+		//ABOUT
+		JLabel aboutlblLogo = new JLabel("");
+		aboutlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		aboutlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		aboutlblLogo.setBounds(0, 0, 418, 488);
+		about.add(aboutlblLogo);
+		
+		JLabel aboutlblInformazioniTrashit = new JLabel("INFORMAZIONI TRASH-IT");
+		aboutlblInformazioniTrashit.setHorizontalAlignment(SwingConstants.CENTER);
+		aboutlblInformazioniTrashit.setForeground(Color.BLACK);
+		aboutlblInformazioniTrashit.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
+		aboutlblInformazioniTrashit.setBounds(416, 0, 629, 57);
+		about.add(aboutlblInformazioniTrashit);
+		
+		JButton aboutbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		aboutbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
+		aboutbtnProblemiAssistenza.setOpaque(false);
+		aboutbtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
+		aboutbtnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
+		aboutbtnProblemiAssistenza.setForeground(Color.BLACK);
+		aboutbtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		aboutbtnProblemiAssistenza.setContentAreaFilled(false);
+		aboutbtnProblemiAssistenza.setBorderPainted(false);
+		aboutbtnProblemiAssistenza.setBounds(0, 613, 418, 57);
+		about.add(aboutbtnProblemiAssistenza);
+		
+		JButton aboutbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		aboutbtnChiudiSessione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(sessione);
+			}
+		});
+		aboutbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
+		aboutbtnChiudiSessione.setOpaque(false);
+		aboutbtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
+		aboutbtnChiudiSessione.setHorizontalTextPosition(SwingConstants.CENTER);
+		aboutbtnChiudiSessione.setForeground(Color.WHITE);
+		aboutbtnChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		aboutbtnChiudiSessione.setContentAreaFilled(false);
+		aboutbtnChiudiSessione.setBorderPainted(false);
+		aboutbtnChiudiSessione.setBounds(416, 613, 629, 57);
+		about.add(aboutbtnChiudiSessione);
+		
+		JTextPane abouttextPaneInfo = new JTextPane();
+		abouttextPaneInfo.setText("Trash-it Ë un'applicazione destinata al corretto svolgimento " + 
+				" della raccolta differenziata. \nScansionando il codice a barre di un prodotto," + 
+				" si potranno ricevere informazioni sul materiale di cui il prodotto Ë composto" + 
+				" e le relative indicazioni su dove gettarlo. \nVerranno poi applicate le specifiche policy di riciclo per ogni comune" + 
+				"\nIl vantaggio dell'usp di questo sistema sta nel guadagno punti per l'utente, in modo da ritirare premi." +
+				" \n» inoltre possibile accedere alle statistiche relative ai prodotti conferiti nel comune.");
+		abouttextPaneInfo.setOpaque(false);
+		abouttextPaneInfo.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		abouttextPaneInfo.setEditable(false);
+		abouttextPaneInfo.setBounds(441, 70, 604, 342);
+		about.add(abouttextPaneInfo);
+		
+		JButton aboutbtnHome = new JButton("Home Page", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		aboutbtnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(home);
+			}
+		});
+		aboutbtnHome.setVerticalTextPosition(SwingConstants.CENTER);
+		aboutbtnHome.setOpaque(false);
+		aboutbtnHome.setMargin(new Insets(0, 0, 0, 0));
+		aboutbtnHome.setHorizontalTextPosition(SwingConstants.CENTER);
+		aboutbtnHome.setForeground(Color.WHITE);
+		aboutbtnHome.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		aboutbtnHome.setContentAreaFilled(false);
+		aboutbtnHome.setBorderPainted(false);
+		aboutbtnHome.setBounds(416, 509, 629, 57);
+		about.add(aboutbtnHome);
+		
+		//BACKGROUND
 		JLabel background = new JLabel("");
 		background.setBounds(0, -14, 1045, 761);
 		background.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/home.jpg")));
