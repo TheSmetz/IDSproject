@@ -595,13 +595,13 @@ public class GuiMain extends JFrame {
 		scanTesseralblScansionaProdotto.setBounds(416, 97, 629, 57);
 		scansioneTessera.add(scanTesseralblScansionaProdotto);
 		
-		JLabel scanTesseratxtBarcode = new JLabel();
-		scanTesseratxtBarcode.setHorizontalAlignment(SwingConstants.CENTER);
-		scanTesseratxtBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		scanTesseratxtBarcode.setText("Codice:");
-		scanTesseratxtBarcode.setBounds(426, 321, 619, 49);
-		scanTesseratxtBarcode.setOpaque(false);
-		scansioneTessera.add(scanTesseratxtBarcode);		
+		JLabel scanTesseratxtCodice = new JLabel();
+		scanTesseratxtCodice.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseratxtCodice.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		scanTesseratxtCodice.setText("Codice:");
+		scanTesseratxtCodice.setBounds(426, 321, 619, 49);
+		scanTesseratxtCodice.setOpaque(false);
+		scansioneTessera.add(scanTesseratxtCodice);		
 		
 		JTextField scanTesseratxtInputCodice = new JTextField();
 		scanTesseratxtInputCodice.setHorizontalAlignment(SwingConstants.CENTER);
