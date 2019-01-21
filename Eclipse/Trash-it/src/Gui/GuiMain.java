@@ -3,8 +3,11 @@ package Gui;
 import Console.CestinoSmart;
 import Console.Policy;
 import Console.Prodotto;
+import Console.Tessera;
 
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,7 +18,10 @@ import java.awt.CardLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.beans.DesignMode;
 import java.io.IOException;
+import java.security.acl.Group;
+import java.security.cert.PKIXRevocationChecker.Option;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimerTask;
@@ -24,6 +30,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Insets;
+
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -32,6 +40,9 @@ import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
+import javax.swing.JRadioButton;
+import javax.swing.JTable;
+import javax.swing.JInternalFrame;
 
 
 @SuppressWarnings("serial")
@@ -40,6 +51,9 @@ public class GuiMain extends JFrame {
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;
 	//private Timer timer = new Timer();
+	
+	private int puntiTessera;
+	private String idTessera;
 	
 	// descrizione prodotto
 	private String barcodeProdotto; // barcode
@@ -68,11 +82,12 @@ public class GuiMain extends JFrame {
     }
     
 	
-	public Prodotto prodottoScansionato;
-	public Policy policyProdotto;
+	private Prodotto prodottoScansionato;
+	private Policy policyProdotto;
 	private JLabel scanlblBenvenuto;
 	private JButton scannbtnInfo;
 	private JTextField textField;
+	private Tessera tesseraScansionata;
 	//public CestinoSmart cestinoS;	
 
 	public void switchPanel(JPanel panelName) {
@@ -116,17 +131,26 @@ public class GuiMain extends JFrame {
 		home.setOpaque(false);
 		home.setLayout(null);
 		
+		
 		//RITIROPREMIO
 		JPanel ritiroPremio = new JPanel();
 		layeredPane.add(ritiroPremio, "name_1042826559621000");
-		ritiroPremio.setOpaque(false);
 		ritiroPremio.setLayout(null);		
+		ritiroPremio.setOpaque(false);
 		
 		//SCANSIONE TESSEERA
 		JPanel scansioneTessera = new JPanel();
 		layeredPane.add(scansioneTessera, "name_1043256396947700");
 		scansioneTessera.setOpaque(false);
 		scansioneTessera.setLayout(null);
+		
+		JTextField scanTesseratxtInputCodice = new JTextField();
+		scanTesseratxtInputCodice.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseratxtInputCodice.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		scanTesseratxtInputCodice.setBounds(600, 383, 275, 44);
+		scanTesseratxtInputCodice.setOpaque(false);
+		scansioneTessera.add(scanTesseratxtInputCodice);
+		scanTesseratxtInputCodice.setColumns(10);
 		
 		//SCANSIONE
 		JPanel scansione = new JPanel();
@@ -166,53 +190,8 @@ public class GuiMain extends JFrame {
 		about.setLayout(null);
 		about.setOpaque(false);
 
-		// BOTTONI NAVIGAZIONE SCHEDE (provvisori)
-//		JButton btnPanel1 = new JButton("HOME");
-//		btnPanel1.setBackground(Color.WHITE);
-//		btnPanel1.setForeground(Color.BLACK);
-//		btnPanel1.setBounds(12, 13, 97, 25);
-//		btnPanel1.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				switchPanel(home);
-//			}
-//		});
-//		contentPane.add(btnPanel1);
-//
-//		JButton btnPanel2 = new JButton("ScProdotto");
-//		btnPanel2.setBackground(Color.WHITE);
-//		btnPanel2.setForeground(Color.BLACK);
-//		btnPanel2.setBounds(131, 13, 97, 25);
-//		btnPanel2.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				switchPanel(conferimento);
-//			}
-//		});
-//		contentPane.add(btnPanel2);
-//
-//		JButton btnPanel3 = new JButton("GttProdotto");
-//		btnPanel3.setBackground(Color.WHITE);
-//		btnPanel3.setForeground(Color.BLACK);
-//		btnPanel3.setBounds(250, 13, 97, 25);
-//		btnPanel3.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				switchPanel(istruzioneConf);
-//			}
-//		});
-//		contentPane.add(btnPanel3);
-//		
-//		JButton btnAsspanel = new JButton("AssPanel");
-//		btnAsspanel.setBackground(Color.WHITE);
-//		btnAsspanel.setForeground(Color.BLACK);
-//		btnAsspanel.setBounds(355, 13, 97, 25);
-//		btnAsspanel.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				switchPanel(assistenza);				
-//			}
-//		});
-//		contentPane.add(btnAsspanel);
 		
-		
-		//--------------CONTENUTI PIU' UTILIZZATI--------------
+	
 		
 		
 		//--------------CONTENUTI PANEL--------------	
@@ -378,6 +357,7 @@ public class GuiMain extends JFrame {
 		homebtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
+				timer.stop();
 			}
 		});
 		homebtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -397,6 +377,11 @@ public class GuiMain extends JFrame {
 		ritirolblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		ritirolblLogo.setBounds(0, 0, 418, 488);
 		ritiroPremio.add(ritirolblLogo);
+		
+		
+		
+		
+		
 		
 		JButton ritirobtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		ritirobtnInfo.addActionListener(new ActionListener() {
@@ -436,6 +421,7 @@ public class GuiMain extends JFrame {
 		ritirobtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
+				timer.stop();
 			}
 		});
 		ritirobtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -467,7 +453,7 @@ public class GuiMain extends JFrame {
 		ritirolblPuntiTessera.setHorizontalAlignment(SwingConstants.CENTER);
 		ritirolblPuntiTessera.setForeground(Color.BLACK);
 		ritirolblPuntiTessera.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
-		ritirolblPuntiTessera.setBounds(416, 112, 629, 57);
+		ritirolblPuntiTessera.setBounds(416, 113, 629, 57);
 		ritiroPremio.add(ritirolblPuntiTessera);
 		
 		JButton ritirobtnRitira = new JButton("Ritira", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
@@ -482,13 +468,35 @@ public class GuiMain extends JFrame {
 		ritirobtnRitira.setBounds(416, 526, 629, 57);
 		ritiroPremio.add(ritirobtnRitira);
 		
-		JLabel label = new JLabel("Punti tessera: ");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setForeground(Color.BLACK);
-		label.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
-		label.setBounds(416, 198, 629, 57);
-		ritiroPremio.add(label);
+		JRadioButton option10 = new JRadioButton(" 10%");
+		option10.setFont(new Font("Dialog", Font.PLAIN, 30));
+		option10.setBounds(538, 250, 127, 50);
+		ritiroPremio.add(option10);
+		option10.setOpaque(false);
 		
+		JRadioButton option30 = new JRadioButton(" 30%");
+		option30.setFont(new Font("Dialog", Font.PLAIN, 30));
+		option30.setBounds(538, 300, 127, 50);
+		ritiroPremio.add(option30);
+		option30.setOpaque(false);
+		
+		JRadioButton option50 = new JRadioButton(" 50%");
+		option50.setFont(new Font("Dialog", Font.PLAIN, 30));
+		option50.setBounds(538, 350, 127, 50);
+		ritiroPremio.add(option50);
+		option50.setOpaque(false);
+		
+		JRadioButton option75 = new JRadioButton(" 75%");
+		option75.setFont(new Font("Dialog", Font.PLAIN, 30));
+		option75.setBounds(538, 400, 127, 50);
+		ritiroPremio.add(option75);
+		option75.setOpaque(false);
+		
+		ButtonGroup buoniSconto = new ButtonGroup();
+		buoniSconto.add(option10);
+		buoniSconto.add(option30);
+		buoniSconto.add(option50);
+		buoniSconto.add(option75);
 		//SCANSIONE TESSERA
 		JLabel scanTesseralblBenvenuto;
 		scanTesseralblBenvenuto = new JLabel("BENVENUTO");
@@ -521,8 +529,14 @@ public class GuiMain extends JFrame {
 		JButton scanTesserabtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switchPanel(ritiroPremio);
 				seconds = 30;
+				idTessera = scanTesseratxtInputCodice.getText();
+				tesseraScansionata = new Tessera(idTessera);
+				if (tesseraScansionata.verificaPresenza()) {
+					puntiTessera = tesseraScansionata.getPunti();
+					ritirolblPuntiTessera.setText("Punti tessera: "+String.valueOf(puntiTessera));
+					switchPanel(ritiroPremio);
+				}		
 			}
 		});
 		scanTesserabtnAvviaScansione.setVerticalTextPosition(JButton.CENTER);
@@ -595,21 +609,15 @@ public class GuiMain extends JFrame {
 		scanTesseralblScansionaProdotto.setBounds(416, 97, 629, 57);
 		scansioneTessera.add(scanTesseralblScansionaProdotto);
 		
-		JLabel scanTesseratxtCodice = new JLabel();
-		scanTesseratxtCodice.setHorizontalAlignment(SwingConstants.CENTER);
-		scanTesseratxtCodice.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		scanTesseratxtCodice.setText("Codice:");
-		scanTesseratxtCodice.setBounds(426, 321, 619, 49);
-		scanTesseratxtCodice.setOpaque(false);
-		scansioneTessera.add(scanTesseratxtCodice);		
+		JLabel scanTesseratxtBarcode = new JLabel();
+		scanTesseratxtBarcode.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseratxtBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		scanTesseratxtBarcode.setText("Codice:");
+		scanTesseratxtBarcode.setBounds(426, 321, 619, 49);
+		scanTesseratxtBarcode.setOpaque(false);
+		scansioneTessera.add(scanTesseratxtBarcode);		
 		
-		JTextField scanTesseratxtInputCodice = new JTextField();
-		scanTesseratxtInputCodice.setHorizontalAlignment(SwingConstants.CENTER);
-		scanTesseratxtInputCodice.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		scanTesseratxtInputCodice.setBounds(600, 383, 275, 44);
-		scanTesseratxtInputCodice.setOpaque(false);
-		scansioneTessera.add(scanTesseratxtInputCodice);
-		scanTesseratxtInputCodice.setColumns(10);
+		
 		
 		JLabel scanTesseralblInputBackground = new JLabel("");
 		scanTesseralblInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
@@ -640,6 +648,7 @@ public class GuiMain extends JFrame {
 		scanTesserabtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
+				timer.stop();
 			}
 		});
 		
@@ -801,6 +810,7 @@ public class GuiMain extends JFrame {
 		scanbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
+				timer.stop();
 			}
 		});
 		
@@ -902,7 +912,7 @@ public class GuiMain extends JFrame {
 		istrbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
-				seconds = 30;
+				timer.stop();
 			}
 		});
 		istrbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1032,6 +1042,7 @@ public class GuiMain extends JFrame {
 		confbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
+				timer.stop();
 			}
 		});
 		confbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1142,6 +1153,7 @@ public class GuiMain extends JFrame {
 		errbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
+				timer.stop();
 			}
 		});
 		errbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1201,6 +1213,7 @@ public class GuiMain extends JFrame {
 		assbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
+				timer.stop();
 			}
 		});
 		assbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1250,6 +1263,7 @@ public class GuiMain extends JFrame {
 		aboutbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
+				timer.stop();
 			}
 		});
 		aboutbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1264,12 +1278,12 @@ public class GuiMain extends JFrame {
 		about.add(aboutbtnChiudiSessione);
 		
 		JTextPane abouttextPaneInfo = new JTextPane();
-		abouttextPaneInfo.setText("Trash-it è un'applicazione destinata al corretto svolgimento " + 
+		abouttextPaneInfo.setText("Trash-it ï¿½ un'applicazione destinata al corretto svolgimento " + 
 				" della raccolta differenziata. \nScansionando il codice a barre di un prodotto," + 
-				" si potranno ricevere informazioni sul materiale di cui il prodotto è composto" + 
+				" si potranno ricevere informazioni sul materiale di cui il prodotto ï¿½ composto" + 
 				" e le relative indicazioni su dove gettarlo. \nVerranno poi applicate le specifiche policy di riciclo per ogni comune" + 
 				"\nIl vantaggio dell'usp di questo sistema sta nel guadagno punti per l'utente, in modo da ritirare premi." +
-				" \nÈ inoltre possibile accedere alle statistiche relative ai prodotti conferiti nel comune.");
+				" \nï¿½ inoltre possibile accedere alle statistiche relative ai prodotti conferiti nel comune.");
 		abouttextPaneInfo.setOpaque(false);
 		abouttextPaneInfo.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		abouttextPaneInfo.setEditable(false);
