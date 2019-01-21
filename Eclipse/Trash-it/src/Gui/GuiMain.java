@@ -16,8 +16,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -30,12 +29,14 @@ import java.awt.Toolkit;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class GuiMain extends JFrame {
 
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;
+	//private Timer timer = new Timer();
 	private int time = 7;
 	// descrizione prodotto
 	private String barcodeProdotto; // barcode
@@ -47,6 +48,9 @@ public class GuiMain extends JFrame {
 	private JTextField scantxtInputBarcode;	//input barcode
 	
 	private String citta = "AP";
+	
+	//TIMER
+	
 	
 	public Prodotto prodottoScansionato;
 	public Policy policyProdotto;
@@ -60,31 +64,6 @@ public class GuiMain extends JFrame {
 		layeredPane.repaint();
 		layeredPane.revalidate();
 	}
-	
-	public static boolean verifyBarcode(String s) {
-		boolean corretto = false;
-		int lenght = s.length();		
-		System.out.println("---INPUT BARCODE--- ");
-		System.out.println("Text: " + s);
-		System.out.println("Lunghezza: " + lenght);
-		
-		
-		char[] sequenza = s.toCharArray();
-		
-		if (lenght == 13) {
-			for (int i = 0; i < 13; i++) {
-				try {
-					Integer.parseInt(Character.toString(sequenza[i]));
-					corretto = true;
-					
-				} catch (Exception e) {
-					corretto = false;
-				}
-			}
-		}
-		System.out.println("Corretto: " + corretto);
-		return corretto;
-		}
 
 	/**
 	 * Create the frame.
@@ -100,7 +79,7 @@ public class GuiMain extends JFrame {
 		contentPane.setLayout(null);
 
 		layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 0, 1045, 700);
+		layeredPane.setBounds(0, 0, 1045, 653);
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
 
@@ -119,6 +98,12 @@ public class GuiMain extends JFrame {
 		layeredPane.add(home, "name_781337426904700");
 		home.setOpaque(false);
 		home.setLayout(null);
+		//TEMPO-HOME
+		JLabel homelblTempo = new JLabel("0:30");
+		homelblTempo.setHorizontalAlignment(SwingConstants.CENTER);
+		homelblTempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		homelblTempo.setBounds(489, 507, 544, 45);
+		home.add(homelblTempo);
 		
 		//SCANSIONE
 		JPanel scansione = new JPanel();
@@ -226,8 +211,18 @@ public class GuiMain extends JFrame {
 		sessionebtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(home);
+				Timer t = new Timer(1000, new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+						homelblTempo.setText(sdf.format(new java.util.Date()));
+					}
+				});
+				t.start();
 			}
 		});
+		
 		sessionebtnAvviaScansione.setVerticalTextPosition(SwingConstants.CENTER);
 		sessionebtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
 		sessionebtnAvviaScansione.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -349,12 +344,6 @@ public class GuiMain extends JFrame {
 		homebtnChiudiSessione.setBounds(416, 585, 629, 57);
 		home.add(homebtnChiudiSessione);
 		
-		//TEMPO
-		JLabel Tempo = new JLabel("0:30");
-		Tempo.setHorizontalAlignment(SwingConstants.CENTER);
-		Tempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		Tempo.setBounds(877, 612, 141, 45);
-		home.add(Tempo);
 		
 		//SCANSIONE	
 		JLabel scanlblBenvenuto;
@@ -744,7 +733,12 @@ public class GuiMain extends JFrame {
 		errbtnRitentaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-				GuiMain.main(args);
+				try {
+					GuiMain.main(args);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				switchPanel(scansione);				
 			}
 		});
@@ -972,33 +966,12 @@ public class GuiMain extends JFrame {
 		contentPane.add(background);
 		
 		
-		
-		//TIMER
-		Timer timer = new Timer();
-		TimerTask task = new TimerTask() {
-			public void run() {
-				if (time == 7) {
-					Tempo.setText( "" +time);
-					time--;
-				} else if (time >= 0) {
-					Tempo.setText("" + time--);
-				} else {
-					
-					Tempo.setText("Tempo Scaduto");
-					switchPanel(sessione);
-					time=7;
-					
-				}
-			}
-		};
-		timer.scheduleAtFixedRate(task, 0, 1000);
-
 	}
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
