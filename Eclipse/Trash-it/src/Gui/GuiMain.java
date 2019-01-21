@@ -402,6 +402,7 @@ public class GuiMain extends JFrame {
 		ritirobtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
+				seconds = 30;
 			}
 		});
 		ritirobtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
