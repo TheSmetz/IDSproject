@@ -76,6 +76,7 @@ public class GuiMain extends JFrame {
 	public Policy policyProdotto;
 	private JLabel scanlblBenvenuto;
 	private JButton scannbtnInfo;
+	private JTextField textField;
 	//public CestinoSmart cestinoS;	
 
 	public void switchPanel(JPanel panelName) {
@@ -125,6 +126,18 @@ public class GuiMain extends JFrame {
 		homelblTempo.setBounds(752, 505, 281, 45);
 		home.add(homelblTempo);
 		
+		//RITIROPREMIO
+		JPanel ritiroPremio = new JPanel();
+		layeredPane.add(ritiroPremio, "name_1042826559621000");
+		ritiroPremio.setOpaque(false);
+		ritiroPremio.setLayout(null);		
+		
+		//SCANSIONE TESSEERA
+		JPanel scansioneTessera = new JPanel();
+		layeredPane.add(scansioneTessera, "name_1043256396947700");
+		scansioneTessera.setOpaque(false);
+		scansioneTessera.setLayout(null);
+		
 		//SCANSIONE
 		JPanel scansione = new JPanel();
 		layeredPane.add(scansione, "name_47697602642643");
@@ -169,8 +182,7 @@ public class GuiMain extends JFrame {
 		errlblTempo.setHorizontalAlignment(SwingConstants.CENTER);
 		errlblTempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		errlblTempo.setBounds(752, 542, 281, 45);
-		erroreConf.add(errlblTempo);
-		
+		erroreConf.add(errlblTempo);		
 		
 		//ASSISTENZA
 		JPanel assistenza = new JPanel();
@@ -181,8 +193,7 @@ public class GuiMain extends JFrame {
 		asslblTempo.setHorizontalAlignment(SwingConstants.CENTER);
 		asslblTempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		asslblTempo.setBounds(752, 536, 281, 45);
-		assistenza.add(asslblTempo);
-		
+		assistenza.add(asslblTempo);		
 		
 		//ABOUT
 		JPanel about = new JPanel();
@@ -292,7 +303,7 @@ public class GuiMain extends JFrame {
 		homelblBenvenuto.setBounds(416, 0, 629, 57);
 		home.add(homelblBenvenuto);
 		
-		JLabel homelblSelezionaOperazione = new JLabel("Seleziona un operazione");
+		JLabel homelblSelezionaOperazione = new JLabel("Seleziona un'operazione");
 		homelblSelezionaOperazione.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblSelezionaOperazione.setForeground(Color.BLACK);
 		homelblSelezionaOperazione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
@@ -320,6 +331,7 @@ public class GuiMain extends JFrame {
 		JButton homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
 		homebtnRitiroPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(scansioneTessera);
 			}
 		});
 		homebtnRitiroPremio.setVerticalTextPosition(SwingConstants.CENTER);
@@ -391,6 +403,236 @@ public class GuiMain extends JFrame {
 		homebtnChiudiSessione.setBounds(416, 613, 629, 57);
 		home.add(homebtnChiudiSessione);
 		
+		//RITIRO PREMI
+		JLabel ritirolblLogo = new JLabel("");
+		ritirolblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		ritirolblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		ritirolblLogo.setBounds(0, 0, 418, 488);
+		ritiroPremio.add(ritirolblLogo);
+		
+		JButton ritirobtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		ritirobtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
+		ritirobtnInfo.setOpaque(false);
+		ritirobtnInfo.setMargin(new Insets(0, 0, 0, 0));
+		ritirobtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
+		ritirobtnInfo.setForeground(Color.BLACK);
+		ritirobtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		ritirobtnInfo.setContentAreaFilled(false);
+		ritirobtnInfo.setBorderPainted(false);
+		ritirobtnInfo.setBounds(0, 456, 418, 57);
+		ritiroPremio.add(ritirobtnInfo);
+		
+		JButton ritirobtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		ritirobtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
+		ritirobtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
+		ritirobtnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
+		ritirobtnProblemiAssistenza.setForeground(Color.BLACK);
+		ritirobtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		ritirobtnProblemiAssistenza.setContentAreaFilled(false);
+		ritirobtnProblemiAssistenza.setBorderPainted(false);
+		ritirobtnProblemiAssistenza.setBounds(0, 613, 418, 57);
+		ritiroPremio.add(ritirobtnProblemiAssistenza);
+		
+		JButton ritirobtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		ritirobtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
+		ritirobtnChiudiSessione.setOpaque(false);
+		ritirobtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
+		ritirobtnChiudiSessione.setHorizontalTextPosition(SwingConstants.CENTER);
+		ritirobtnChiudiSessione.setForeground(Color.WHITE);
+		ritirobtnChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		ritirobtnChiudiSessione.setContentAreaFilled(false);
+		ritirobtnChiudiSessione.setBorderPainted(false);
+		ritirobtnChiudiSessione.setBounds(416, 613, 629, 57);
+		ritiroPremio.add(ritirobtnChiudiSessione);
+		
+		JLabel ritirolblSelezionePremio = new JLabel("Seleziona un premio");
+		ritirolblSelezionePremio.setHorizontalAlignment(SwingConstants.CENTER);
+		ritirolblSelezionePremio.setForeground(Color.BLACK);
+		ritirolblSelezionePremio.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
+		ritirolblSelezionePremio.setBounds(416, 56, 629, 57);
+		ritiroPremio.add(ritirolblSelezionePremio);
+		
+		JLabel ritirolblRitiroPremio = new JLabel("RITIRO PREMI");
+		ritirolblRitiroPremio.setHorizontalAlignment(SwingConstants.CENTER);
+		ritirolblRitiroPremio.setForeground(Color.BLACK);
+		ritirolblRitiroPremio.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
+		ritirolblRitiroPremio.setBounds(416, 0, 629, 57);
+		ritiroPremio.add(ritirolblRitiroPremio);
+		
+		JLabel ritirolblTempo = new JLabel("Timer Sessione");
+		ritirolblTempo.setHorizontalAlignment(SwingConstants.CENTER);
+		ritirolblTempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		ritirolblTempo.setBounds(752, 505, 281, 45);
+		ritiroPremio.add(ritirolblTempo);
+		
+		JLabel ritirolblPuntiTessera = new JLabel("Punti tessera: ");
+		ritirolblPuntiTessera.setHorizontalAlignment(SwingConstants.CENTER);
+		ritirolblPuntiTessera.setForeground(Color.BLACK);
+		ritirolblPuntiTessera.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
+		ritirolblPuntiTessera.setBounds(416, 127, 629, 57);
+		ritiroPremio.add(ritirolblPuntiTessera);
+		
+		//SCANSIONE TESSERA
+		JLabel scanTesseralblBenvenuto;
+		scanTesseralblBenvenuto = new JLabel("BENVENUTO");
+		scanTesseralblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseralblBenvenuto.setForeground(Color.BLACK);
+		scanTesseralblBenvenuto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
+		scanTesseralblBenvenuto.setBounds(426, 0, 619, 49);
+		scansioneTessera.add(scanTesseralblBenvenuto);
+
+		JButton scanTesserabtnInfo;
+		scanTesserabtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		scanTesserabtnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(about);
+			}
+		});
+		scanTesserabtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
+		scanTesserabtnInfo.setOpaque(false);
+		scanTesserabtnInfo.setMargin(new Insets(0, 0, 0, 0));
+		scanTesserabtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
+		scanTesserabtnInfo.setForeground(Color.BLACK);
+		scanTesserabtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		scanTesserabtnInfo.setContentAreaFilled(false);
+		scanTesserabtnInfo.setBorderPainted(false);
+		scanTesserabtnInfo.setBounds(0, 456, 418, 57);
+		scansioneTessera.add(scanTesserabtnInfo);
+
+		// Avvia scansione		
+		JButton scanTesserabtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(ritiroPremio);
+			}
+		});
+		scanTesserabtnAvviaScansione.setVerticalTextPosition(JButton.CENTER);
+		scanTesserabtnAvviaScansione.setHorizontalTextPosition(JButton.CENTER);
+		scanTesserabtnAvviaScansione.setBorderPainted(false);
+		scanTesserabtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
+		// btnScansionaProdotto.setIcon(new
+		// ImageIcon(Main.class.getResource("/Gui/images/greenbutton.png")));
+		scanTesserabtnAvviaScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		scanTesserabtnAvviaScansione.setForeground(Color.BLACK);
+		scanTesserabtnAvviaScansione.setContentAreaFilled(false);
+		//scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
+//					public void actionPerformed(ActionEvent arg0) {
+//						//leggo il barcode in input
+//						barcodeProdotto = scantxtInputBarcode.getText();
+//						
+//						//prodotto
+//						prodottoScansionato = new Prodotto(barcodeProdotto);
+//						
+//						//VERIFICARE CORRETTEZZA CODICE A BARRE
+//						
+//						// output
+//						if (prodottoScansionato.isPresenza()) {					
+//							
+//							//policy
+//							policyProdotto = new Policy("AP", prodottoScansionato);					
+//							prodottoScansionato.getDati();
+//							
+//							//cestinosmart				
+//							CestinoSmart cestinoS = new CestinoSmart();
+//							try {
+//								cestinoS.conferimentoProdotto(prodottoScansionato);
+//							} catch (IOException e) {
+//								// TODO Auto-generated catch block
+//								e.printStackTrace();
+//							}			
+//							
+//							prodottoScansionato.getDati();
+//					
+//							ImageIcon image = new ImageIcon(prodottoScansionato.getImmagine());
+//							Image im = image.getImage();
+//							Image myImg = im.getScaledInstance(conflblImmagineProdotto.getWidth(),
+//							conflblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
+//							ImageIcon newImage = new ImageIcon(myImg);
+//							conflblImmagineProdotto.setIcon(newImage);
+//							conflblImmagineProdotto.setIcon(newImage);
+//							
+//							//prodotto nel db allora procedo con il conferimento
+//							switchPanel(conferimento);
+//							
+//						} else {
+//							System.out.println("\nProdotto non presente nel DB, invia notifica per aggiungerlo");					
+//							switchPanel(erroreConf);	//pannello di errore
+//						}
+//					}
+//				});
+		scanTesserabtnAvviaScansione.setBounds(416, 212, 629, 96);
+		scansioneTessera.add(scanTesserabtnAvviaScansione);
+
+		JLabel scanTesseralblLogo = new JLabel("");
+		scanTesseralblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseralblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		scanTesseralblLogo.setBounds(0, 0, 418, 488);
+		scansioneTessera.add(scanTesseralblLogo);
+
+		JLabel scanTesseralblScansionaProdotto = new JLabel("Scansione Tessera");
+		scanTesseralblScansionaProdotto.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseralblScansionaProdotto.setForeground(Color.BLACK);
+		scanTesseralblScansionaProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
+		scanTesseralblScansionaProdotto.setBounds(416, 97, 629, 57);
+		scansioneTessera.add(scanTesseralblScansionaProdotto);
+		
+		JLabel scanTesseratxtBarcode = new JLabel();
+		scanTesseratxtBarcode.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseratxtBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		scanTesseratxtBarcode.setText("Codice:");
+		scanTesseratxtBarcode.setBounds(426, 321, 619, 49);
+		scanTesseratxtBarcode.setOpaque(false);
+		scansioneTessera.add(scanTesseratxtBarcode);		
+		
+		JTextField scanTesseratxtInputBarcode = new JTextField();
+		scanTesseratxtInputBarcode.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseratxtInputBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		scanTesseratxtInputBarcode.setBounds(600, 383, 275, 44);
+		scanTesseratxtInputBarcode.setOpaque(false);
+		scansioneTessera.add(scanTesseratxtInputBarcode);
+		scanTesseratxtInputBarcode.setColumns(10);
+		
+		JLabel scanTesseralblInputBackground = new JLabel("");
+		scanTesseralblInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseralblInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png")));
+		scanTesseralblInputBackground.setBounds(430, 357, 615, 96);
+		scansioneTessera.add(scanTesseralblInputBackground);
+		
+		JButton scanTesserabtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		scanTesserabtnProblemiAssistenza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(assistenza);
+			}
+		});
+		scanTesserabtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
+		scanTesserabtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
+		scanTesserabtnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
+		scanTesserabtnProblemiAssistenza.setForeground(Color.BLACK);
+		scanTesserabtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		scanTesserabtnProblemiAssistenza.setContentAreaFilled(false);
+		scanTesserabtnProblemiAssistenza.setBorderPainted(false);
+		scanTesserabtnProblemiAssistenza.setBounds(0, 613, 418, 57);
+		scansioneTessera.add(scanTesserabtnProblemiAssistenza);
+		
+		
+		
+		JButton scanTesserabtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		scanTesserabtnChiudiSessione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(sessione);
+			}
+		});
+		
+		scanTesserabtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
+		scanTesserabtnChiudiSessione.setOpaque(false);
+		scanTesserabtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
+		scanTesserabtnChiudiSessione.setHorizontalTextPosition(SwingConstants.CENTER);
+		scanTesserabtnChiudiSessione.setForeground(Color.WHITE);
+		scanTesserabtnChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		scanTesserabtnChiudiSessione.setContentAreaFilled(false);
+		scanTesserabtnChiudiSessione.setBorderPainted(false);
+		scanTesserabtnChiudiSessione.setBounds(416, 613, 629, 57);
+		scansioneTessera.add(scanTesserabtnChiudiSessione);
 		
 		//SCANSIONE	
 		JLabel scanlblBenvenuto;
