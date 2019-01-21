@@ -16,6 +16,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -34,7 +36,7 @@ public class GuiMain extends JFrame {
 
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;
-
+	private int time = 7;
 	// descrizione prodotto
 	private String barcodeProdotto; // barcode
 	//private String nomeProdotto; // nome
@@ -91,14 +93,14 @@ public class GuiMain extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GuiMain.class.getResource("/Gui/images/aaa.png")));
 		setTitle("Trash-it");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1062, 794);
+		setBounds(100, 100, 1062, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 0, 1045, 734);
+		layeredPane.setBounds(0, 0, 1045, 700);
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
 
@@ -210,14 +212,14 @@ public class GuiMain extends JFrame {
 		JLabel sessionelblLogo = new JLabel("");
 		sessionelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logog.png")));
 		sessionelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		sessionelblLogo.setBounds(0, 83, 1045, 505);
+		sessionelblLogo.setBounds(0, 56, 1045, 505);
 		sessione.add(sessionelblLogo);
 		
 		JLabel sessionelblSessione = new JLabel("Guadagna PREMI salvando l'ambiente!");
 		sessionelblSessione.setHorizontalAlignment(SwingConstants.CENTER);
 		sessionelblSessione.setForeground(Color.BLACK);
 		sessionelblSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 35));
-		sessionelblSessione.setBounds(0, 13, 1045, 57);
+		sessionelblSessione.setBounds(0, -12, 1045, 57);
 		sessione.add(sessionelblSessione);
 		
 		JButton sessionebtnAvviaScansione = new JButton("AVVIA SESSIONE", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbutton.png")));
@@ -233,7 +235,7 @@ public class GuiMain extends JFrame {
 		sessionebtnAvviaScansione.setFont(new Font("Calibri", Font.BOLD, 30));
 		sessionebtnAvviaScansione.setContentAreaFilled(false);
 		sessionebtnAvviaScansione.setBorderPainted(false);
-		sessionebtnAvviaScansione.setBounds(0, 625, 1045, 96);
+		sessionebtnAvviaScansione.setBounds(0, 578, 1045, 96);
 		sessione.add(sessionebtnAvviaScansione);
 		
 		JLabel sesslblFreccia = new JLabel("");
@@ -250,7 +252,7 @@ public class GuiMain extends JFrame {
 		homelblBenvenuto.setBounds(416, 0, 629, 57);
 		home.add(homelblBenvenuto);
 		
-		JLabel homelblSelezionaOperazione = new JLabel("Seleziona operazione");
+		JLabel homelblSelezionaOperazione = new JLabel("Seleziona un operazione");
 		homelblSelezionaOperazione.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblSelezionaOperazione.setForeground(Color.BLACK);
 		homelblSelezionaOperazione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
@@ -273,7 +275,11 @@ public class GuiMain extends JFrame {
 		});
 		home.add(homebtnScansione);
 		
-		JButton homebtnRitiroPremio = new JButton("RITITO PREMI", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		homebtnRitiroPremio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		homebtnRitiroPremio.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnRitiroPremio.setMargin(new Insets(0, 0, 0, 0));
 		homebtnRitiroPremio.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -300,7 +306,7 @@ public class GuiMain extends JFrame {
 		homebtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		homebtnProblemiAssistenza.setContentAreaFilled(false);
 		homebtnProblemiAssistenza.setBorderPainted(false);
-		homebtnProblemiAssistenza.setBounds(0, 613, 418, 57);
+		homebtnProblemiAssistenza.setBounds(0, 585, 418, 57);
 		home.add(homebtnProblemiAssistenza);
 		
 		JButton homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
@@ -340,8 +346,15 @@ public class GuiMain extends JFrame {
 		homebtnChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		homebtnChiudiSessione.setContentAreaFilled(false);
 		homebtnChiudiSessione.setBorderPainted(false);
-		homebtnChiudiSessione.setBounds(416, 613, 629, 57);
+		homebtnChiudiSessione.setBounds(416, 585, 629, 57);
 		home.add(homebtnChiudiSessione);
+		
+		//TEMPO
+		JLabel Tempo = new JLabel("0:30");
+		Tempo.setHorizontalAlignment(SwingConstants.CENTER);
+		Tempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		Tempo.setBounds(877, 612, 141, 45);
+		home.add(Tempo);
 		
 		//SCANSIONE	
 		JLabel scanlblBenvenuto;
@@ -957,6 +970,29 @@ public class GuiMain extends JFrame {
 		background.setBounds(0, -14, 1045, 761);
 		background.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/home.jpg")));
 		contentPane.add(background);
+		
+		
+		
+		//TIMER
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask() {
+			public void run() {
+				if (time == 7) {
+					Tempo.setText( "" +time);
+					time--;
+				} else if (time >= 0) {
+					Tempo.setText("" + time--);
+				} else {
+					
+					Tempo.setText("Tempo Scaduto");
+					switchPanel(sessione);
+					time=7;
+					
+				}
+			}
+		};
+		timer.scheduleAtFixedRate(task, 0, 1000);
+
 	}
 	
 	/**
