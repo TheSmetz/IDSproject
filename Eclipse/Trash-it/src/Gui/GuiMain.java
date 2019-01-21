@@ -602,13 +602,13 @@ public class GuiMain extends JFrame {
 		scanTesseratxtBarcode.setOpaque(false);
 		scansioneTessera.add(scanTesseratxtBarcode);		
 		
-		JTextField scanTesseratxtInputBarcode = new JTextField();
-		scanTesseratxtInputBarcode.setHorizontalAlignment(SwingConstants.CENTER);
-		scanTesseratxtInputBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		scanTesseratxtInputBarcode.setBounds(600, 383, 275, 44);
-		scanTesseratxtInputBarcode.setOpaque(false);
-		scansioneTessera.add(scanTesseratxtInputBarcode);
-		scanTesseratxtInputBarcode.setColumns(10);
+		JTextField scanTesseratxtInputCodice = new JTextField();
+		scanTesseratxtInputCodice.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseratxtInputCodice.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		scanTesseratxtInputCodice.setBounds(600, 383, 275, 44);
+		scanTesseratxtInputCodice.setOpaque(false);
+		scansioneTessera.add(scanTesseratxtInputCodice);
+		scanTesseratxtInputCodice.setColumns(10);
 		
 		JLabel scanTesseralblInputBackground = new JLabel("");
 		scanTesseralblInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
