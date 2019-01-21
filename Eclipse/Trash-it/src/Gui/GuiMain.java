@@ -228,10 +228,10 @@ public class GuiMain extends JFrame {
 		
 		timer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	if (seconds <= 30) {
+            	if (seconds >= 0) {
             	System.out.println(seconds);
                 lblTimer.setText(String.valueOf(seconds));
-                seconds++;
+                seconds--;
             	}else {
             		System.out.println("TEMPO SCADUTO");
             		timer.stop();
@@ -260,7 +260,7 @@ public class GuiMain extends JFrame {
 		sessionebtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(home);
-				seconds = 0;
+				seconds = 30;
 				startTimer();			
 			}
 		});
@@ -308,7 +308,7 @@ public class GuiMain extends JFrame {
 		homebtnScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(scansione);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		home.add(homebtnScansione);
@@ -317,7 +317,7 @@ public class GuiMain extends JFrame {
 		homebtnRitiroPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(scansioneTessera);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		homebtnRitiroPremio.setVerticalTextPosition(SwingConstants.CENTER);
@@ -337,7 +337,7 @@ public class GuiMain extends JFrame {
 		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		homebtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -354,7 +354,7 @@ public class GuiMain extends JFrame {
 		homebtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		homebtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -466,7 +466,7 @@ public class GuiMain extends JFrame {
 		ritirolblPuntiTessera.setHorizontalAlignment(SwingConstants.CENTER);
 		ritirolblPuntiTessera.setForeground(Color.BLACK);
 		ritirolblPuntiTessera.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
-		ritirolblPuntiTessera.setBounds(416, 127, 629, 57);
+		ritirolblPuntiTessera.setBounds(416, 112, 629, 57);
 		ritiroPremio.add(ritirolblPuntiTessera);
 		
 		JButton ritirobtnRitira = new JButton("Ritira", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
@@ -478,8 +478,15 @@ public class GuiMain extends JFrame {
 		ritirobtnRitira.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		ritirobtnRitira.setContentAreaFilled(false);
 		ritirobtnRitira.setBorderPainted(false);
-		ritirobtnRitira.setBounds(416, 488, 629, 57);
+		ritirobtnRitira.setBounds(416, 526, 629, 57);
 		ritiroPremio.add(ritirobtnRitira);
+		
+		JLabel label = new JLabel("Punti tessera: ");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setForeground(Color.BLACK);
+		label.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
+		label.setBounds(416, 198, 629, 57);
+		ritiroPremio.add(label);
 		
 		//SCANSIONE TESSERA
 		JLabel scanTesseralblBenvenuto;
@@ -495,7 +502,7 @@ public class GuiMain extends JFrame {
 		scanTesserabtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(about);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		scanTesserabtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -514,7 +521,7 @@ public class GuiMain extends JFrame {
 		scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(ritiroPremio);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		scanTesserabtnAvviaScansione.setVerticalTextPosition(JButton.CENTER);
@@ -613,7 +620,7 @@ public class GuiMain extends JFrame {
 		scanTesserabtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		scanTesserabtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -660,7 +667,7 @@ public class GuiMain extends JFrame {
 		scannbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(about);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		scannbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -689,7 +696,7 @@ public class GuiMain extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				//avvia timer
-				seconds = 0;
+				seconds = 30;
 				
 				//leggo il barcode in input
 				barcodeProdotto = scantxtInputBarcode.getText();
@@ -768,7 +775,7 @@ public class GuiMain extends JFrame {
 		scanbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		scanbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -823,7 +830,7 @@ public class GuiMain extends JFrame {
 		istrbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		istrbtnProblemiAssistenza.setOpaque(false);
@@ -838,7 +845,7 @@ public class GuiMain extends JFrame {
 		istrbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		istrbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -876,7 +883,7 @@ public class GuiMain extends JFrame {
 		istrbtnNuovaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(scansione);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		istrbtnNuovaScansione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -894,7 +901,7 @@ public class GuiMain extends JFrame {
 		istrbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		istrbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -932,7 +939,7 @@ public class GuiMain extends JFrame {
 		confbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(scansione);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		confbtnProdottoVisualizzatoErrato.setOpaque(false);
@@ -955,7 +962,7 @@ public class GuiMain extends JFrame {
 		confbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(istruzioneConf);
-				seconds = 0;
+				seconds = 30;
 				
 				// prendo il valore dalla variabile globale				
 				istrlblPunti.setText("Punti guadagnati: " + String.valueOf(prodottoScansionato.getPunti()));
@@ -988,7 +995,7 @@ public class GuiMain extends JFrame {
 		confbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(assistenza);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		confbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1006,7 +1013,7 @@ public class GuiMain extends JFrame {
 		confbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(about);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		confbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1074,7 +1081,7 @@ public class GuiMain extends JFrame {
 		errbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		errbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1092,7 +1099,7 @@ public class GuiMain extends JFrame {
 		errbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		errbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1159,7 +1166,7 @@ public class GuiMain extends JFrame {
 		assbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		assbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1221,6 +1228,12 @@ public class GuiMain extends JFrame {
 		about.add(aboutlblInformazioniTrashit);
 		
 		JButton aboutbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		aboutbtnProblemiAssistenza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(assistenza);
+				seconds = 30;
+			}
+		});
 		aboutbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
 		aboutbtnProblemiAssistenza.setOpaque(false);
 		aboutbtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
@@ -1266,7 +1279,7 @@ public class GuiMain extends JFrame {
 		aboutbtnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(home);
-				seconds = 0;
+				seconds = 30;
 			}
 		});
 		aboutbtnHome.setVerticalTextPosition(SwingConstants.CENTER);
