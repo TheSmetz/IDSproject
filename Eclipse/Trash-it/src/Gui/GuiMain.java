@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -30,7 +31,8 @@ import java.awt.Toolkit;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
-import java.util.Timer;
+import javax.swing.Timer;
+
 
 @SuppressWarnings("serial")
 public class GuiMain extends JFrame {
@@ -51,26 +53,20 @@ public class GuiMain extends JFrame {
 	private String citta = "AP";
 	
 	//TIMER
-	private int time = 10;
-	private Timer timer = new Timer();
-	
-	public void startTimer(JLabel lbl, int t) {
-		time = t;
-		TimerTask task = new TimerTask() {
-			public void run() {
-				if (time == t) {
-					lbl.setText("00 : " + time);
-					time--;
-				} else if (time >= 0) {
-					lbl.setText("00 : 0" + time--);
-				} else {
-					lbl.setText("Tempo Scaduto");
-				}
-			}
-		};
-		timer.scheduleAtFixedRate(task, 0, 1000);
-	}
-	
+	private int seconds;
+    private SimpleDateFormat df;
+    private Timer timer;
+
+    public void startTimer() {
+    	if(timer.isRunning()) {
+            timer.stop();
+            System.out.println("STOP");
+        }else {
+            timer.start();
+            System.out.println("START");   
+        }
+    }
+    
 	
 	public Prodotto prodottoScansionato;
 	public Policy policyProdotto;
@@ -119,12 +115,6 @@ public class GuiMain extends JFrame {
 		layeredPane.add(home, "name_781337426904700");
 		home.setOpaque(false);
 		home.setLayout(null);
-		//TEMPO-HOME
-		JLabel homelblTempo = new JLabel("Timer Sessione");
-		homelblTempo.setHorizontalAlignment(SwingConstants.CENTER);
-		homelblTempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		homelblTempo.setBounds(752, 505, 281, 45);
-		home.add(homelblTempo);
 		
 		//RITIROPREMIO
 		JPanel ritiroPremio = new JPanel();
@@ -143,11 +133,6 @@ public class GuiMain extends JFrame {
 		layeredPane.add(scansione, "name_47697602642643");
 		scansione.setOpaque(false);
 		scansione.setLayout(null);
-		JLabel scanlblTempo = new JLabel("Timer Sessione");
-		scanlblTempo.setHorizontalAlignment(SwingConstants.CENTER);
-		scanlblTempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		scanlblTempo.setBounds(752, 524, 281, 45);
-		scansione.add(scanlblTempo);
 		
 		//CONFERIMENTO
 		JPanel conferimento = new JPanel();
@@ -155,22 +140,12 @@ public class GuiMain extends JFrame {
 		conferimento.setOpaque(false);
 		conferimento.setLayout(null);
 		JLabel conflblImmagineProdotto = new JLabel("immagine prodotto");
-		JLabel conflblTempo = new JLabel("Timer Sessione");
-		conflblTempo.setHorizontalAlignment(SwingConstants.CENTER);
-		conflblTempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		conflblTempo.setBounds(752, 541, 281, 45);
-		conferimento.add(conflblTempo);
 		
 		//ISTRUZIONI CONFERIMENTO
 		JPanel istruzioneConf = new JPanel();
 		layeredPane.add(istruzioneConf, "name_47764772881651");
 		istruzioneConf.setOpaque(false);
 		istruzioneConf.setLayout(null);
-		JLabel istrlblTempo = new JLabel("Timer Sessione");
-		istrlblTempo.setHorizontalAlignment(SwingConstants.CENTER);
-		istrlblTempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		istrlblTempo.setBounds(752, 540, 281, 45);
-		istruzioneConf.add(istrlblTempo);
 		String newLine = System.getProperty("line.separator");
 		
 		//ERRORE CONFERIMENTO
@@ -178,33 +153,18 @@ public class GuiMain extends JFrame {
 		erroreConf.setLayout(null);
 		erroreConf.setOpaque(false);
 		layeredPane.add(erroreConf, "name_2585705284100");
-		JLabel errlblTempo = new JLabel("Timer Sessione");
-		errlblTempo.setHorizontalAlignment(SwingConstants.CENTER);
-		errlblTempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		errlblTempo.setBounds(752, 542, 281, 45);
-		erroreConf.add(errlblTempo);		
 		
 		//ASSISTENZA
 		JPanel assistenza = new JPanel();
 		layeredPane.add(assistenza, "name_783099324881200");
 		assistenza.setLayout(null);
 		assistenza.setOpaque(false);
-		JLabel asslblTempo = new JLabel("Timer Sessione");
-		asslblTempo.setHorizontalAlignment(SwingConstants.CENTER);
-		asslblTempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		asslblTempo.setBounds(752, 536, 281, 45);
-		assistenza.add(asslblTempo);		
 		
 		//ABOUT
 		JPanel about = new JPanel();
 		layeredPane.add(about, "name_962290729165700");
 		about.setLayout(null);
 		about.setOpaque(false);
-		JLabel aboutlblTempo = new JLabel("Timer Sessione");
-		aboutlblTempo.setHorizontalAlignment(SwingConstants.CENTER);
-		aboutlblTempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		aboutlblTempo.setBounds(752, 443, 281, 45);
-		about.add(aboutlblTempo);
 
 		// BOTTONI NAVIGAZIONE SCHEDE (provvisori)
 //		JButton btnPanel1 = new JButton("HOME");
@@ -255,7 +215,32 @@ public class GuiMain extends JFrame {
 		//--------------CONTENUTI PIU' UTILIZZATI--------------
 		
 		
-		//--------------CONTENUTI PANEL--------------		
+		//--------------CONTENUTI PANEL--------------	
+		
+		
+		//TIMER
+		JLabel lblTimer = new JLabel("Timer Sessione");
+		lblTimer.setBounds(0, 0, 281, 45);
+		contentPane.add(lblTimer);
+		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTimer.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		
+		
+		timer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	if (seconds <= 30) {
+            	System.out.println(seconds);
+                lblTimer.setText(String.valueOf(seconds));
+                seconds++;
+            	}else {
+            		System.out.println("TEMPO SCADUTO");
+            		timer.stop();
+            		
+            		//salvare impostazioni
+            		switchPanel(sessione);
+            	}
+            }
+        });
 		
 		//SESSIONE
 		JLabel sessionelblLogo = new JLabel("");
@@ -275,7 +260,8 @@ public class GuiMain extends JFrame {
 		sessionebtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(home);
-				startTimer(homelblTempo, 10);
+				seconds = 0;
+				startTimer();			
 			}
 		});
 		
@@ -322,8 +308,7 @@ public class GuiMain extends JFrame {
 		homebtnScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(scansione);
-				time = 10;
-				startTimer(scanlblTempo, 20);
+				seconds = 0;
 			}
 		});
 		home.add(homebtnScansione);
@@ -332,6 +317,7 @@ public class GuiMain extends JFrame {
 		homebtnRitiroPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(scansioneTessera);
+				seconds = 0;
 			}
 		});
 		homebtnRitiroPremio.setVerticalTextPosition(SwingConstants.CENTER);
@@ -351,6 +337,7 @@ public class GuiMain extends JFrame {
 		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
+				seconds = 0;
 			}
 		});
 		homebtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -367,6 +354,7 @@ public class GuiMain extends JFrame {
 		homebtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
+				seconds = 0;
 			}
 		});
 		homebtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -411,6 +399,11 @@ public class GuiMain extends JFrame {
 		ritiroPremio.add(ritirolblLogo);
 		
 		JButton ritirobtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		ritirobtnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(about);
+			}
+		});
 		ritirobtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
 		ritirobtnInfo.setOpaque(false);
 		ritirobtnInfo.setMargin(new Insets(0, 0, 0, 0));
@@ -423,6 +416,11 @@ public class GuiMain extends JFrame {
 		ritiroPremio.add(ritirobtnInfo);
 		
 		JButton ritirobtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		ritirobtnProblemiAssistenza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(assistenza);
+			}
+		});
 		ritirobtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
 		ritirobtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
 		ritirobtnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -434,6 +432,11 @@ public class GuiMain extends JFrame {
 		ritiroPremio.add(ritirobtnProblemiAssistenza);
 		
 		JButton ritirobtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		ritirobtnChiudiSessione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switchPanel(sessione);
+			}
+		});
 		ritirobtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
 		ritirobtnChiudiSessione.setOpaque(false);
 		ritirobtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
@@ -459,18 +462,24 @@ public class GuiMain extends JFrame {
 		ritirolblRitiroPremio.setBounds(416, 0, 629, 57);
 		ritiroPremio.add(ritirolblRitiroPremio);
 		
-		JLabel ritirolblTempo = new JLabel("Timer Sessione");
-		ritirolblTempo.setHorizontalAlignment(SwingConstants.CENTER);
-		ritirolblTempo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		ritirolblTempo.setBounds(752, 505, 281, 45);
-		ritiroPremio.add(ritirolblTempo);
-		
 		JLabel ritirolblPuntiTessera = new JLabel("Punti tessera: ");
 		ritirolblPuntiTessera.setHorizontalAlignment(SwingConstants.CENTER);
 		ritirolblPuntiTessera.setForeground(Color.BLACK);
 		ritirolblPuntiTessera.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
 		ritirolblPuntiTessera.setBounds(416, 127, 629, 57);
 		ritiroPremio.add(ritirolblPuntiTessera);
+		
+		JButton ritirobtnRitira = new JButton("Ritira", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		ritirobtnRitira.setVerticalTextPosition(SwingConstants.CENTER);
+		ritirobtnRitira.setOpaque(false);
+		ritirobtnRitira.setMargin(new Insets(0, 0, 0, 0));
+		ritirobtnRitira.setHorizontalTextPosition(SwingConstants.CENTER);
+		ritirobtnRitira.setForeground(Color.BLACK);
+		ritirobtnRitira.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		ritirobtnRitira.setContentAreaFilled(false);
+		ritirobtnRitira.setBorderPainted(false);
+		ritirobtnRitira.setBounds(416, 488, 629, 57);
+		ritiroPremio.add(ritirobtnRitira);
 		
 		//SCANSIONE TESSERA
 		JLabel scanTesseralblBenvenuto;
@@ -486,6 +495,7 @@ public class GuiMain extends JFrame {
 		scanTesserabtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(about);
+				seconds = 0;
 			}
 		});
 		scanTesserabtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -504,6 +514,7 @@ public class GuiMain extends JFrame {
 		scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(ritiroPremio);
+				seconds = 0;
 			}
 		});
 		scanTesserabtnAvviaScansione.setVerticalTextPosition(JButton.CENTER);
@@ -602,6 +613,7 @@ public class GuiMain extends JFrame {
 		scanTesserabtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
+				seconds = 0;
 			}
 		});
 		scanTesserabtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -648,6 +660,7 @@ public class GuiMain extends JFrame {
 		scannbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(about);
+				seconds = 0;
 			}
 		});
 		scannbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -674,6 +687,10 @@ public class GuiMain extends JFrame {
 		scanbtnAvviaScansione.setContentAreaFilled(false);
 		scanbtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				//avvia timer
+				seconds = 0;
+				
 				//leggo il barcode in input
 				barcodeProdotto = scantxtInputBarcode.getText();
 				
@@ -751,6 +768,7 @@ public class GuiMain extends JFrame {
 		scanbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
+				seconds = 0;
 			}
 		});
 		scanbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -805,6 +823,7 @@ public class GuiMain extends JFrame {
 		istrbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
+				seconds = 0;
 			}
 		});
 		istrbtnProblemiAssistenza.setOpaque(false);
@@ -819,6 +838,7 @@ public class GuiMain extends JFrame {
 		istrbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
+				seconds = 0;
 			}
 		});
 		istrbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -856,6 +876,7 @@ public class GuiMain extends JFrame {
 		istrbtnNuovaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(scansione);
+				seconds = 0;
 			}
 		});
 		istrbtnNuovaScansione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -873,6 +894,7 @@ public class GuiMain extends JFrame {
 		istrbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
+				seconds = 0;
 			}
 		});
 		istrbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -910,6 +932,7 @@ public class GuiMain extends JFrame {
 		confbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(scansione);
+				seconds = 0;
 			}
 		});
 		confbtnProdottoVisualizzatoErrato.setOpaque(false);
@@ -932,6 +955,7 @@ public class GuiMain extends JFrame {
 		confbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(istruzioneConf);
+				seconds = 0;
 				
 				// prendo il valore dalla variabile globale				
 				istrlblPunti.setText("Punti guadagnati: " + String.valueOf(prodottoScansionato.getPunti()));
@@ -964,6 +988,7 @@ public class GuiMain extends JFrame {
 		confbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(assistenza);
+				seconds = 0;
 			}
 		});
 		confbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -981,6 +1006,7 @@ public class GuiMain extends JFrame {
 		confbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(about);
+				seconds = 0;
 			}
 		});
 		confbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1022,6 +1048,7 @@ public class GuiMain extends JFrame {
 		JButton errbtnRitentaScansione = new JButton("Ritenta scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
 		errbtnRitentaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				dispose();
 				try {
 					GuiMain.main(args);
@@ -1047,6 +1074,7 @@ public class GuiMain extends JFrame {
 		errbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
+				seconds = 0;
 			}
 		});
 		errbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1064,6 +1092,7 @@ public class GuiMain extends JFrame {
 		errbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
+				seconds = 0;
 			}
 		});
 		errbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1130,6 +1159,7 @@ public class GuiMain extends JFrame {
 		assbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
+				seconds = 0;
 			}
 		});
 		assbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -1236,6 +1266,7 @@ public class GuiMain extends JFrame {
 		aboutbtnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(home);
+				seconds = 0;
 			}
 		});
 		aboutbtnHome.setVerticalTextPosition(SwingConstants.CENTER);
