@@ -470,25 +470,25 @@ public class GuiMain extends JFrame {
 		
 		JRadioButton option10 = new JRadioButton(" 10%");
 		option10.setFont(new Font("Dialog", Font.PLAIN, 30));
-		option10.setBounds(538, 250, 127, 50);
+		option10.setBounds(474, 248, 127, 50);
 		ritiroPremio.add(option10);
 		option10.setOpaque(false);
 		
 		JRadioButton option30 = new JRadioButton(" 30%");
 		option30.setFont(new Font("Dialog", Font.PLAIN, 30));
-		option30.setBounds(538, 300, 127, 50);
+		option30.setBounds(474, 298, 127, 50);
 		ritiroPremio.add(option30);
 		option30.setOpaque(false);
 		
 		JRadioButton option50 = new JRadioButton(" 50%");
 		option50.setFont(new Font("Dialog", Font.PLAIN, 30));
-		option50.setBounds(538, 350, 127, 50);
+		option50.setBounds(474, 348, 127, 50);
 		ritiroPremio.add(option50);
 		option50.setOpaque(false);
 		
 		JRadioButton option75 = new JRadioButton(" 75%");
 		option75.setFont(new Font("Dialog", Font.PLAIN, 30));
-		option75.setBounds(538, 400, 127, 50);
+		option75.setBounds(474, 398, 127, 50);
 		ritiroPremio.add(option75);
 		option75.setOpaque(false);
 		
@@ -497,6 +497,11 @@ public class GuiMain extends JFrame {
 		buoniSconto.add(option30);
 		buoniSconto.add(option50);
 		buoniSconto.add(option75);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/ccc.png")));
+		label.setBounds(609, 248, 424, 199);
+		ritiroPremio.add(label);
 		//SCANSIONE TESSERA
 		JLabel scanTesseralblBenvenuto;
 		scanTesseralblBenvenuto = new JLabel("BENVENUTO");
