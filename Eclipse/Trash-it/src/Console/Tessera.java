@@ -11,6 +11,7 @@ public class Tessera implements GestoreTessera {
 	private String cognome;
 	private Date nascita;
 	private int punti;	
+	private boolean presenza;
 	private CreateConnection tesseraConnection = new CreateConnection();
 	
 	public int getPunti() {
@@ -47,6 +48,7 @@ public class Tessera implements GestoreTessera {
 				this.cognome = tesseraConnection.getRsQuery().getString("cognome");
 				this.nascita = tesseraConnection.getRsQuery().getDate("nascita");
 				this.punti = tesseraConnection.getRsQuery().getInt("punti");
+				this.presenza = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,8 +57,7 @@ public class Tessera implements GestoreTessera {
 	
 	@Override
 	public boolean verificaPresenza() {
-		//DA FARE
-		return true;
+		return presenza;
 	}
 	@Override
 	public void getDati() {
