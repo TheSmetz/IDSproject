@@ -101,7 +101,7 @@ public class Prodotto{
 	
 
 	public void creaConnessione() {
-		String query = "SELECT * FROM prodotto WHERE IDProdotto = " + this.codiceABarre;		
+		String query = "SELECT * FROM prodotto WHERE IDProdotto = '" + this.codiceABarre + "'";		
 		prodottoConnection.executeQuery(query);		
 		try {
 			if (prodottoConnection.getRsQuery().next()) {	

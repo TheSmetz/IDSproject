@@ -42,7 +42,7 @@ public class Policy {
 				+ "FROM (( prodotto INNER JOIN componente ON prodotto.IDprodotto = componente.prodottoID )"
 				+ "INNER JOIN policy ON componente.IDcomponente = policy.componenteID ) "
 				+ "INNER JOIN area ON area.IDarea = policy.areaID WHERE policy.areaID = '"+this.zona+ "'"
-				+ "AND prodotto.IDprodotto = "+this.prodotto.getcodiceABarre()+" GROUP BY componente.IDcomponente";
+				+ "AND prodotto.IDprodotto = '"+this.prodotto.getcodiceABarre()+"' GROUP BY componente.IDcomponente";
 		policyConnection.executeQuery(query);
 		
 		String queryPunti = "SELECT raccoltaPunti FROM area WHERE IDarea = '" + this.zona + "'";
