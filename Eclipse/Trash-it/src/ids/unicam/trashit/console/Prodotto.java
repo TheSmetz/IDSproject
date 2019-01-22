@@ -1,11 +1,11 @@
-package Console;
+package ids.unicam.trashit.console;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import dbConnection.CreateConnection;
+import ids.unicam.trashit.database.CreateConnection;
 
-public class Prodotto implements GestoreProdotto{
+public class Prodotto{
 	
 	//attributi
 	private String codiceABarre; //id
@@ -17,6 +17,7 @@ public class Prodotto implements GestoreProdotto{
 	private int punti;
 	private boolean presenza;
 	private String descrizione;
+	private CreateConnection prodottoConnection = new CreateConnection();
 	
 	public String getDescrizione() {
 		return descrizione;
@@ -26,8 +27,6 @@ public class Prodotto implements GestoreProdotto{
 		this.descrizione = descrizione;
 	}
 
-	private CreateConnection prodottoConnection = new CreateConnection();
-	
 	
 	public ArrayList<Materiale> getCollocazioneCestini() {
 		return collocazioneCestini;
@@ -100,9 +99,8 @@ public class Prodotto implements GestoreProdotto{
 		creaConnessione();
 	}	
 	
-	@Override
-	public void creaConnessione() {
 
+	public void creaConnessione() {
 		String query = "SELECT * FROM prodotto WHERE IDProdotto = " + this.codiceABarre;		
 		prodottoConnection.executeQuery(query);		
 		try {
@@ -119,7 +117,6 @@ public class Prodotto implements GestoreProdotto{
 		}					
 	}
 	
-	@Override
 	public void getDati() {
 		System.out.println("--- " + this.nome + " ---"+
 				 "\nCodice a barre: " + this.codiceABarre +

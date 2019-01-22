@@ -1,11 +1,11 @@
-package Console;
+package ids.unicam.trashit.console;
 
 import java.io.IOException;
 import java.util.Date;
 
-import dbConnection.CreateConnection;
+import ids.unicam.trashit.database.CreateConnection;
 
-public class Tessera implements GestoreTessera {
+public class Tessera{
 	private String idtessera;
 	private String nome;
 	private String cognome;
@@ -55,11 +55,11 @@ public class Tessera implements GestoreTessera {
 		}
 	}
 	
-	@Override
+
 	public boolean verificaPresenza() {
 		return presenza;
 	}
-	@Override
+
 	public void getDati() {
 		System.out.println("--- " + this.idtessera + " ---"+
 				 "\nNome: " + this.nome +
@@ -68,7 +68,7 @@ public class Tessera implements GestoreTessera {
 				"\nPunti: " + this.punti);
 	}
 	
-	@Override
+
 	public void aggiornaPunti() {
 		String query = "UPDATE tessera SET punti = " + this.punti + 
 				" WHERE IDtessera = '" + this.idtessera + "'";		
@@ -76,7 +76,7 @@ public class Tessera implements GestoreTessera {
 		
 	}
 	
-	@Override
+
 	public void accreditoPunti(int acPunti, boolean utilizzoPunti) throws IOException {
 		if(utilizzoPunti && ((acPunti+this.punti) <= 9999999))  {
 			this.punti += acPunti;	
@@ -84,7 +84,7 @@ public class Tessera implements GestoreTessera {
 		}else throw new IOException("Punti sopra la soglia massima");
 	}
 	
-	@Override
+
 	public void addebitoPunti(int adPunti, boolean utilizzoPunti) throws IOException {
 		if((this.punti-adPunti)<0) throw new IOException("Punti negativi");
 		else {

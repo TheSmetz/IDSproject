@@ -1,9 +1,4 @@
-package Gui;
-
-import Console.CestinoSmart;
-import Console.Policy;
-import Console.Prodotto;
-import Console.Tessera;
+package ids.unicam.trashit.grafica;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -14,6 +9,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+
+import ids.unicam.trashit.console.CestinoSmart;
+import ids.unicam.trashit.console.Policy;
+import ids.unicam.trashit.console.Prodotto;
+import ids.unicam.trashit.console.Tessera;
+import ids.unicam.trashit.start.Start;
+
 import java.awt.CardLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JButton;
@@ -101,7 +103,7 @@ public class GuiMain extends JFrame {
 	 * Create the frame.
 	 */
 	public GuiMain() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(GuiMain.class.getResource("/Gui/images/aaa.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/aaa.png")));
 		setTitle("Trash-it");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 746);
@@ -222,8 +224,8 @@ public class GuiMain extends JFrame {
         });
 		
 		//SESSIONE
-		JLabel sessionelblLogo = new JLabel("");
-		sessionelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logog.png")));
+		JLabel sessionelblLogo = new JLabel(""); 
+		sessionelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logog.png")));
 		sessionelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		sessionelblLogo.setBounds(0, 68, 1045, 505);
 		sessione.add(sessionelblLogo);
@@ -235,7 +237,7 @@ public class GuiMain extends JFrame {
 		sessionelblSessione.setBounds(0, 0, 1045, 57);
 		sessione.add(sessionelblSessione);
 		
-		JButton sessionebtnAvviaScansione = new JButton("AVVIA SESSIONE", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbutton.png")));
+		JButton sessionebtnAvviaScansione = new JButton("AVVIA SESSIONE", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
 		sessionebtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(home);
@@ -256,7 +258,7 @@ public class GuiMain extends JFrame {
 		
 		JLabel sesslblFreccia = new JLabel("");
 		sesslblFreccia.setToolTipText("");
-		sesslblFreccia.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/freccia.gif")));
+		sesslblFreccia.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/freccia.gif")));
 		sesslblFreccia.setBounds(728, 54, 240, 598);
 		sessione.add(sesslblFreccia);
 		
@@ -275,7 +277,7 @@ public class GuiMain extends JFrame {
 		homelblSelezionaOperazione.setBounds(416, 97, 629, 57);
 		home.add(homelblSelezionaOperazione);
 		
-		JButton homebtnScansione = new JButton("SCANSIONA PRODOTTO", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton homebtnScansione = new JButton("SCANSIONA PRODOTTO", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnScansione.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnScansione.setMargin(new Insets(0, 0, 0, 0));
 		homebtnScansione.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -292,7 +294,7 @@ public class GuiMain extends JFrame {
 		});
 		home.add(homebtnScansione);
 		
-		JButton homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnRitiroPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(scansioneTessera);
@@ -312,7 +314,7 @@ public class GuiMain extends JFrame {
 		StyleConstants.setAlignment(centerT, StyleConstants.ALIGN_CENTER);
 
 		
-		JButton homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
@@ -329,7 +331,7 @@ public class GuiMain extends JFrame {
 		homebtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		home.add(homebtnProblemiAssistenza);
 		
-		JButton homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
@@ -348,12 +350,12 @@ public class GuiMain extends JFrame {
 		home.add(homebtnInfo);
 		
 		JLabel homelblLogo = new JLabel("");
-		homelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		homelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		homelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblLogo.setBounds(0, 0, 418, 488);
 		home.add(homelblLogo);
 		
-		JButton homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		JButton homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		homebtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
@@ -373,7 +375,7 @@ public class GuiMain extends JFrame {
 		
 		//RITIRO PREMI
 		JLabel ritirolblLogo = new JLabel("");
-		ritirolblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		ritirolblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		ritirolblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		ritirolblLogo.setBounds(0, 0, 418, 488);
 		ritiroPremio.add(ritirolblLogo);
@@ -383,7 +385,7 @@ public class GuiMain extends JFrame {
 		
 		
 		
-		JButton ritirobtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton ritirobtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		ritirobtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
@@ -401,7 +403,7 @@ public class GuiMain extends JFrame {
 		ritirobtnInfo.setBounds(0, 456, 418, 57);
 		ritiroPremio.add(ritirobtnInfo);
 		
-		JButton ritirobtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton ritirobtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		ritirobtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
@@ -417,7 +419,7 @@ public class GuiMain extends JFrame {
 		ritirobtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		ritiroPremio.add(ritirobtnProblemiAssistenza);
 		
-		JButton ritirobtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		JButton ritirobtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		ritirobtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
@@ -456,7 +458,7 @@ public class GuiMain extends JFrame {
 		ritirolblPuntiTessera.setBounds(416, 113, 629, 57);
 		ritiroPremio.add(ritirolblPuntiTessera);
 		
-		JButton ritirobtnRitira = new JButton("Ritira", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton ritirobtnRitira = new JButton("Ritira", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		ritirobtnRitira.setVerticalTextPosition(SwingConstants.CENTER);
 		ritirobtnRitira.setOpaque(false);
 		ritirobtnRitira.setMargin(new Insets(0, 0, 0, 0));
@@ -499,7 +501,7 @@ public class GuiMain extends JFrame {
 		buoniSconto.add(option75);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/ccc.png")));
+		label.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/ccc.png")));
 		label.setBounds(609, 248, 424, 199);
 		ritiroPremio.add(label);
 		//SCANSIONE TESSERA
@@ -512,7 +514,7 @@ public class GuiMain extends JFrame {
 		scansioneTessera.add(scanTesseralblBenvenuto);
 
 		JButton scanTesserabtnInfo;
-		scanTesserabtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		scanTesserabtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanTesserabtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(about);
@@ -531,7 +533,7 @@ public class GuiMain extends JFrame {
 		scansioneTessera.add(scanTesserabtnInfo);
 
 		// Avvia scansione		
-		JButton scanTesserabtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton scanTesserabtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				seconds = 30;
@@ -549,7 +551,7 @@ public class GuiMain extends JFrame {
 		scanTesserabtnAvviaScansione.setBorderPainted(false);
 		scanTesserabtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
 		// btnScansionaProdotto.setIcon(new
-		// ImageIcon(Main.class.getResource("/Gui/images/greenbutton.png")));
+		// ImageIcon(Main.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
 		scanTesserabtnAvviaScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		scanTesserabtnAvviaScansione.setForeground(Color.BLACK);
 		scanTesserabtnAvviaScansione.setContentAreaFilled(false);
@@ -603,7 +605,7 @@ public class GuiMain extends JFrame {
 
 		JLabel scanTesseralblLogo = new JLabel("");
 		scanTesseralblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		scanTesseralblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		scanTesseralblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		scanTesseralblLogo.setBounds(0, 0, 418, 488);
 		scansioneTessera.add(scanTesseralblLogo);
 
@@ -626,11 +628,11 @@ public class GuiMain extends JFrame {
 		
 		JLabel scanTesseralblInputBackground = new JLabel("");
 		scanTesseralblInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
-		scanTesseralblInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebutton.png")));
+		scanTesseralblInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
 		scanTesseralblInputBackground.setBounds(430, 357, 615, 96);
 		scansioneTessera.add(scanTesseralblInputBackground);
 		
-		JButton scanTesserabtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton scanTesserabtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanTesserabtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
@@ -649,7 +651,7 @@ public class GuiMain extends JFrame {
 		
 		
 		
-		JButton scanTesserabtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		JButton scanTesserabtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		scanTesserabtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
@@ -678,7 +680,7 @@ public class GuiMain extends JFrame {
 		scansione.add(scanlblBenvenuto);
 
 		JButton scanbtnInfo;
-		scannbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		scannbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scannbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(about);
@@ -697,13 +699,13 @@ public class GuiMain extends JFrame {
 		scansione.add(scannbtnInfo);
 
 		// Avvia scansione		
-		JButton scanbtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton scanbtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanbtnAvviaScansione.setVerticalTextPosition(JButton.CENTER);
 		scanbtnAvviaScansione.setHorizontalTextPosition(JButton.CENTER);
 		scanbtnAvviaScansione.setBorderPainted(false);
 		scanbtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
 		// btnScansionaProdotto.setIcon(new
-		// ImageIcon(Main.class.getResource("/Gui/images/greenbutton.png")));
+		// ImageIcon(Main.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
 		scanbtnAvviaScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		scanbtnAvviaScansione.setForeground(Color.BLACK);
 		scanbtnAvviaScansione.setContentAreaFilled(false);
@@ -761,7 +763,7 @@ public class GuiMain extends JFrame {
 
 		JLabel scanlblLogo = new JLabel("");
 		scanlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		scanlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		scanlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		scanlblLogo.setBounds(0, 0, 418, 488);
 		scansione.add(scanlblLogo);
 
@@ -782,11 +784,11 @@ public class GuiMain extends JFrame {
 		
 		JLabel scanlblInputBackground = new JLabel("");
 		scanlblInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
-		scanlblInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonsmall.png")));
+		scanlblInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonsmall.png")));
 		scanlblInputBackground.setBounds(430, 357, 615, 96);
 		scansione.add(scanlblInputBackground);
 		
-		JButton scanbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton scanbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
@@ -811,7 +813,7 @@ public class GuiMain extends JFrame {
 		scantxtBarcode.setOpaque(false);
 		scansione.add(scantxtBarcode);		
 		
-		JButton scanbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		JButton scanbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		scanbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
@@ -839,10 +841,10 @@ public class GuiMain extends JFrame {
 		istrlblConferimentoProdotto.setBounds(416, 0, 629, 57);
 		istruzioneConf.add(istrlblConferimentoProdotto);
 
-		JButton istrbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton istrbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		istrbtnProblemiAssistenza.setVerticalTextPosition(JButton.CENTER);
 		istrbtnProblemiAssistenza.setHorizontalTextPosition(JButton.CENTER);
-		istrbtnProblemiAssistenza.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		istrbtnProblemiAssistenza.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		istrbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
@@ -857,7 +859,7 @@ public class GuiMain extends JFrame {
 		istrbtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		istruzioneConf.add(istrbtnProblemiAssistenza);
 
-		JButton istrbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton istrbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		istrbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
@@ -877,7 +879,7 @@ public class GuiMain extends JFrame {
 
 		JLabel istrlblLogo = new JLabel("");
 		istrlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		istrlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		istrlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		istrlblLogo.setBounds(0, 0, 418, 488);
 		istruzioneConf.add(istrlblLogo);
 
@@ -895,7 +897,7 @@ public class GuiMain extends JFrame {
 		istruzioneConf.add(istrlblPunti);
 		
 		//nuova scansione
-		JButton istrbtnNuovaScansione = new JButton("Nuova scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton istrbtnNuovaScansione = new JButton("Nuova scansione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		istrbtnNuovaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(scansione);
@@ -913,7 +915,7 @@ public class GuiMain extends JFrame {
 		istrbtnNuovaScansione.setBounds(416, 456, 629, 57);
 		istruzioneConf.add(istrbtnNuovaScansione);
 		
-		JButton istrbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		JButton istrbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		istrbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
@@ -944,7 +946,7 @@ public class GuiMain extends JFrame {
 		conferimento.add(conflblScansioneProdotto);		
 		
 		// prodotto errato		
-		JButton confbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		JButton confbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonSmall.png")));
 		confbtnProdottoVisualizzatoErrato.setVerticalTextPosition(JButton.CENTER);
 		confbtnProdottoVisualizzatoErrato.setHorizontalTextPosition(JButton.CENTER);
 		confbtnProdottoVisualizzatoErrato.setBorderPainted(false);
@@ -967,7 +969,7 @@ public class GuiMain extends JFrame {
 		conferimento.add(confbtnProdottoVisualizzatoErrato);
 
 		// prodotto corretto		
-		JButton confbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton confbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		confbtnProdottoVisualizzatoCorretto.setVerticalTextPosition(JButton.CENTER);
 		confbtnProdottoVisualizzatoCorretto.setHorizontalTextPosition(JButton.CENTER);
 		confbtnProdottoVisualizzatoCorretto.setBorderPainted(false);
@@ -1003,11 +1005,11 @@ public class GuiMain extends JFrame {
 
 		JLabel conflblLogo = new JLabel("");
 		conflblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		conflblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		conflblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		conflblLogo.setBounds(0, 0, 418, 488);
 		conferimento.add(conflblLogo);
 		
-		JButton confbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton confbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		confbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(assistenza);
@@ -1025,7 +1027,7 @@ public class GuiMain extends JFrame {
 		confbtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		conferimento.add(confbtnProblemiAssistenza);
 		
-		JButton confbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton confbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		confbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switchPanel(about);
@@ -1043,7 +1045,7 @@ public class GuiMain extends JFrame {
 		confbtnInfo.setBounds(0, 456, 418, 57);
 		conferimento.add(confbtnInfo);		
 		
-		JButton confbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		JButton confbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		confbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
@@ -1069,13 +1071,13 @@ public class GuiMain extends JFrame {
 		errlblErroreProdotto.setBounds(416, 0, 629, 57);
 		erroreConf.add(errlblErroreProdotto);
 		
-		JButton errbtnRitentaScansione = new JButton("Ritenta scansione", new ImageIcon(GuiMain.class.getResource("/Gui/images/whitebuttonSmall.png")));
+		JButton errbtnRitentaScansione = new JButton("Ritenta scansione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonSmall.png")));
 		errbtnRitentaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				dispose();
 				try {
-					GuiMain.main(args);
+					Start.main(args);   //da controlla
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1094,7 +1096,7 @@ public class GuiMain extends JFrame {
 		errbtnRitentaScansione.setBounds(416, 464, 628, 57);
 		erroreConf.add(errbtnRitentaScansione);
 		
-		JButton errbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton errbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		errbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
@@ -1112,7 +1114,7 @@ public class GuiMain extends JFrame {
 		erroreConf.add(errbtnProblemiAssistenza);
 		
 		
-		JButton errbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton errbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		errbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
@@ -1132,7 +1134,7 @@ public class GuiMain extends JFrame {
 		
 		JLabel errlblErrorImage = new JLabel("Image Not Found");
 		errlblErrorImage.setFont(new Font("Tahoma", Font.BOLD, 20));
-		errlblErrorImage.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/errorimage.png")));
+		errlblErrorImage.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/errorimage.png")));
 		errlblErrorImage.setHorizontalAlignment(SwingConstants.CENTER);
 		errlblErrorImage.setHorizontalTextPosition(JLabel.CENTER);
 		errlblErrorImage.setVerticalTextPosition(JLabel.BOTTOM);
@@ -1140,7 +1142,7 @@ public class GuiMain extends JFrame {
 		erroreConf.add(errlblErrorImage);
 		
 		JLabel errlblLogo = new JLabel("");
-		errlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		errlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		errlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		errlblLogo.setBounds(0, 0, 418, 488);
 		erroreConf.add(errlblLogo);
@@ -1154,7 +1156,7 @@ public class GuiMain extends JFrame {
 		errtxtpnErroreRecuperoImmagine.setBounds(426, 70, 629, 73);
 		erroreConf.add(errtxtpnErroreRecuperoImmagine);
 		
-		JButton errbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		JButton errbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		errbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
@@ -1180,7 +1182,7 @@ public class GuiMain extends JFrame {
 		asslblAssistenza.setBounds(416, 0, 629, 57);
 		assistenza.add(asslblAssistenza);
 		
-		JButton assbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton assbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		assbtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(about);
@@ -1199,7 +1201,7 @@ public class GuiMain extends JFrame {
 		assistenza.add(assbtnInfo);
 		
 		JLabel asslblLogo = new JLabel("");
-		asslblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		asslblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		asslblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		asslblLogo.setBounds(0, 0, 418, 488);
 		assistenza.add(asslblLogo);
@@ -1214,7 +1216,7 @@ public class GuiMain extends JFrame {
 		StyledDocument docAss = asstxtpnTelefonoEmail.getStyledDocument();
 		assistenza.add(asstxtpnTelefonoEmail);
 		
-		JButton assbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		JButton assbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		assbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
@@ -1234,7 +1236,7 @@ public class GuiMain extends JFrame {
 		
 		//ABOUT
 		JLabel aboutlblLogo = new JLabel("");
-		aboutlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/logo.png")));
+		aboutlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		aboutlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		aboutlblLogo.setBounds(0, 0, 418, 488);
 		about.add(aboutlblLogo);
@@ -1246,7 +1248,7 @@ public class GuiMain extends JFrame {
 		aboutlblInformazioniTrashit.setBounds(416, 0, 629, 57);
 		about.add(aboutlblInformazioniTrashit);
 		
-		JButton aboutbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton aboutbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		aboutbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(assistenza);
@@ -1264,7 +1266,7 @@ public class GuiMain extends JFrame {
 		aboutbtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		about.add(aboutbtnProblemiAssistenza);
 		
-		JButton aboutbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/Gui/images/redbuttonSmall.png")));
+		JButton aboutbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		aboutbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(sessione);
@@ -1283,19 +1285,19 @@ public class GuiMain extends JFrame {
 		about.add(aboutbtnChiudiSessione);
 		
 		JTextPane abouttextPaneInfo = new JTextPane();
-		abouttextPaneInfo.setText("Trash-it � un'applicazione destinata al corretto svolgimento " + 
+		abouttextPaneInfo.setText("Trash-it e' un'applicazione destinata al corretto svolgimento " + 
 				" della raccolta differenziata. \nScansionando il codice a barre di un prodotto," + 
-				" si potranno ricevere informazioni sul materiale di cui il prodotto � composto" + 
+				" si potranno ricevere informazioni sul materiale di cui il prodotto e' composto" + 
 				" e le relative indicazioni su dove gettarlo. \nVerranno poi applicate le specifiche policy di riciclo per ogni comune" + 
-				"\nIl vantaggio dell'usp di questo sistema sta nel guadagno punti per l'utente, in modo da ritirare premi." +
-				" \n� inoltre possibile accedere alle statistiche relative ai prodotti conferiti nel comune.");
+				"\nIl vantaggio dell'uso di questo sistema sta nel guadagno punti per l'utente, in modo da ritirare premi." +
+				" \nE' inoltre possibile accedere alle statistiche relative ai prodotti conferiti nel comune.");
 		abouttextPaneInfo.setOpaque(false);
 		abouttextPaneInfo.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		abouttextPaneInfo.setEditable(false);
 		abouttextPaneInfo.setBounds(441, 70, 604, 342);
 		about.add(abouttextPaneInfo);
 		
-		JButton aboutbtnHome = new JButton("Home Page", new ImageIcon(GuiMain.class.getResource("/Gui/images/greenbuttonSmall.png")));
+		JButton aboutbtnHome = new JButton("Home Page", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		aboutbtnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(home);
@@ -1316,28 +1318,11 @@ public class GuiMain extends JFrame {
 		//BACKGROUND
 		JLabel background = new JLabel("");
 		background.setBounds(0, -14, 1045, 761);
-		background.setIcon(new ImageIcon(GuiMain.class.getResource("/Gui/images/home.jpg")));
+		background.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/home.jpg")));
 		contentPane.add(background);
 		
 		
 	}
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) throws Exception{
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GuiMain frame = new GuiMain();
-					frame.setLocationRelativeTo(null);
-					frame.setResizable(false);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 }
 

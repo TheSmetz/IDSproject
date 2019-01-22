@@ -1,4 +1,4 @@
-package Console;
+package ids.unicam.trashit.console;
 
 import java.io.IOException;
 import java.util.ArrayList;

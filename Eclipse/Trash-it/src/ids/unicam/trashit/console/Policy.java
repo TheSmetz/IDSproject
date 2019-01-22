@@ -1,8 +1,8 @@
-package Console;
+package ids.unicam.trashit.console;
 
 import java.sql.SQLException;
 
-import dbConnection.CreateConnection;
+import ids.unicam.trashit.database.CreateConnection;
 
 public class Policy {
 

@@ -1,9 +1,9 @@
-package Console;
+package ids.unicam.trashit.console;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import dbConnection.CreateConnection;
+import ids.unicam.trashit.database.CreateConnection;
 
 public class Statistica {
 	

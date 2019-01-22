@@ -1,4 +1,4 @@
-package dbConnection;
+package ids.unicam.trashit.database;
 
 import java.io.FileInputStream;
 import java.sql.Connection;

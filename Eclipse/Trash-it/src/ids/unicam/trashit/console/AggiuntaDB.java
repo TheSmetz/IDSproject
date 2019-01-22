@@ -1,13 +1,14 @@
-package Console;
+package ids.unicam.trashit.console;
 
 import java.io.FileInputStream;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import ids.unicam.trashit.database.CreateConnection;
+
 import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
-
-import dbConnection.CreateConnection;
 
 public class AggiuntaDB {
 	private CreateConnection tConnection = new CreateConnection();
