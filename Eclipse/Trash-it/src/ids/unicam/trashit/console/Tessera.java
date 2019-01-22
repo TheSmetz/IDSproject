@@ -52,6 +52,7 @@ public class Tessera{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			this.presenza = false;
 		}
 	}
 	
