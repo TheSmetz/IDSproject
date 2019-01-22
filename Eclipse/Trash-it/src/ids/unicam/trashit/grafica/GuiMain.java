@@ -1,15 +1,14 @@
 package ids.unicam.trashit.grafica;
 
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.DateFormatter;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import ids.unicam.trashit.console.AggiuntaDB;
 import ids.unicam.trashit.console.CestinoSmart;
 import ids.unicam.trashit.console.Policy;
 import ids.unicam.trashit.console.Prodotto;
@@ -18,15 +17,12 @@ import ids.unicam.trashit.start.Start;
 
 import java.awt.CardLayout;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.beans.DesignMode;
 import java.io.IOException;
-import java.security.acl.Group;
-import java.security.cert.PKIXRevocationChecker.Option;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -36,15 +32,18 @@ import java.awt.Insets;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
-import javax.swing.JTextArea;
 import javax.swing.Timer;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JInternalFrame;
+import javax.swing.JFormattedTextField;
+import com.toedter.calendar.JDateChooser;
 
 
 @SuppressWarnings("serial")
@@ -52,14 +51,23 @@ public class GuiMain extends JFrame {
 
 	private JPanel contentPane;
 	private JLayeredPane layeredPane;
-	//private Timer timer = new Timer();
 	
+	//tessera
 	private int puntiTessera;
 	private String idTessera;
 	
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	private String nascitaTessera;
 	
+	private Tessera tesseraGui;
+	
+	
+	// descrizione prodotto
 	private String barcodeProdotto; // barcode
-
+	//private String nomeProdotto; // nome
+	//private String descrizioneProdotto; // decrizione
+	//private byte[] imgProdotto; // immagine
+	//private int puntiProdotto; //punti
 	protected String[] args;
 	private JTextField scantxtInputBarcode;	//input barcode
 	
@@ -87,6 +95,9 @@ public class GuiMain extends JFrame {
 	private JButton scannbtnInfo;
 	private JTextField textField;
 	private Tessera tesseraScansionata;
+	private JTextField regtxtCodiceFiscale;
+	private JTextField regtextFieldNome;
+	private JTextField regtextFieldCognome;
 	//public CestinoSmart cestinoS;	
 
 	public void switchPanel(JPanel panelName) {
@@ -130,6 +141,176 @@ public class GuiMain extends JFrame {
 		home.setOpaque(false);
 		home.setLayout(null);
 		
+		//REGISTRAZIONE
+		JPanel registrazione = new JPanel();
+		layeredPane.add(registrazione, "name_1727413037300");
+		registrazione.setOpaque(false);
+		registrazione.setLayout(null);	
+		
+		JLabel reglblCF = new JLabel("Codice Fiscale:");
+		reglblCF.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		reglblCF.setHorizontalAlignment(SwingConstants.CENTER);
+		reglblCF.setBounds(416, 113, 192, 31);
+		registrazione.add(reglblCF);
+		
+		JLabel reglblNome = new JLabel("Nome:");
+		reglblNome.setHorizontalAlignment(SwingConstants.CENTER);
+		reglblNome.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		reglblNome.setBounds(416, 185, 192, 31);
+		registrazione.add(reglblNome);
+		
+		JLabel reglblCognome = new JLabel("Cognome:");
+		reglblCognome.setHorizontalAlignment(SwingConstants.CENTER);
+		reglblCognome.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		reglblCognome.setBounds(416, 264, 192, 31);
+		registrazione.add(reglblCognome);
+		
+		
+		
+		
+		
+		JLabel reglblLogo = new JLabel("");
+		reglblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
+		reglblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		reglblLogo.setBounds(0, 0, 418, 488);
+		registrazione.add(reglblLogo);
+		
+		JButton regbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		regbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
+		regbtnInfo.setOpaque(false);
+		regbtnInfo.setMargin(new Insets(0, 0, 0, 0));
+		regbtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
+		regbtnInfo.setForeground(Color.BLACK);
+		regbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		regbtnInfo.setContentAreaFilled(false);
+		regbtnInfo.setBorderPainted(false);
+		regbtnInfo.setBounds(0, 456, 418, 57);
+		registrazione.add(regbtnInfo);
+		
+		JButton regbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		regbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
+		regbtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
+		regbtnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
+		regbtnProblemiAssistenza.setForeground(Color.BLACK);
+		regbtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		regbtnProblemiAssistenza.setContentAreaFilled(false);
+		regbtnProblemiAssistenza.setBorderPainted(false);
+		regbtnProblemiAssistenza.setBounds(0, 613, 418, 57);
+		registrazione.add(regbtnProblemiAssistenza);
+		
+		JButton regChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
+		regChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
+		regChiudiSessione.setOpaque(false);
+		regChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
+		regChiudiSessione.setHorizontalTextPosition(SwingConstants.CENTER);
+		regChiudiSessione.setForeground(Color.WHITE);
+		regChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		regChiudiSessione.setContentAreaFilled(false);
+		regChiudiSessione.setBorderPainted(false);
+		regChiudiSessione.setBounds(416, 613, 629, 57);
+		registrazione.add(regChiudiSessione);
+		
+		//data
+		JDateChooser regdateChooser = new JDateChooser();
+		regdateChooser.setBounds(694, 328, 275, 45);
+		regdateChooser.getJCalendar().setPreferredSize(new Dimension(400, 300));
+		registrazione.add(regdateChooser);
+		
+		regtxtCodiceFiscale = new JTextField();
+		regtxtCodiceFiscale.setOpaque(false);
+		regtxtCodiceFiscale.setHorizontalAlignment(SwingConstants.CENTER);
+		regtxtCodiceFiscale.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		regtxtCodiceFiscale.setColumns(10);
+		regtxtCodiceFiscale.setBounds(694, 106, 275, 44);
+		registrazione.add(regtxtCodiceFiscale);
+		
+		JLabel reglblSfondoCodiceFiscale = new JLabel("");
+		reglblSfondoCodiceFiscale.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
+		reglblSfondoCodiceFiscale.setHorizontalAlignment(SwingConstants.CENTER);
+		reglblSfondoCodiceFiscale.setBounds(620, 94, 425, 68);
+		registrazione.add(reglblSfondoCodiceFiscale);
+		
+		JButton regbtnStampaTessera = new JButton("Stampa tessera", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
+		regbtnStampaTessera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//verifica input corretti
+				if (regtxtCodiceFiscale.getText() !=null && regtextFieldNome.getText() !=null && regtextFieldCognome.getText() !=null && regdateChooser.getDate()!=null) {
+					//verifica tessera già nel db
+					tesseraGui = new Tessera(regtxtCodiceFiscale.getText());
+					if(tesseraGui.verificaPresenza()==false) { //non presente nel db
+						AggiuntaDB aggiungiTessera = new AggiuntaDB();
+						nascitaTessera = sdf.format(regdateChooser.getDate());
+						//System.out.println(nascitaTessera);
+						aggiungiTessera.registrazioneTessera(regtxtCodiceFiscale.getText(), 
+								regtextFieldNome.getText(), regtextFieldCognome.getText(), nascitaTessera);
+					} else {
+						//popup-tessera già presente
+						System.out.println("TESSERA GIA' NEL DB");
+						JOptionPane.showMessageDialog(registrazione, "TESSERA GIA' NEL DATABASE.");
+						switchPanel(home);
+						seconds = 30;
+					}
+				}
+				
+//				tesseraGui = new Tessera(regtxtCodiceFiscale.getText());
+				nascitaTessera = sdf.format(regdateChooser.getDate());
+//				System.out.println(regtxtCodiceFiscale.getText());
+			}
+		});
+		regbtnStampaTessera.setVerticalTextPosition(SwingConstants.CENTER);
+		regbtnStampaTessera.setMargin(new Insets(0, 0, 0, 0));
+		regbtnStampaTessera.setHorizontalTextPosition(SwingConstants.CENTER);
+		regbtnStampaTessera.setForeground(Color.WHITE);
+		regbtnStampaTessera.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		regbtnStampaTessera.setContentAreaFilled(false);
+		regbtnStampaTessera.setBorderPainted(false);
+		regbtnStampaTessera.setBounds(416, 532, 629, 68);
+		registrazione.add(regbtnStampaTessera);
+		
+		JLabel reglblRegistrazioneTessera = new JLabel("Registrazione tessera, inserisci i tuoi dati:");
+		reglblRegistrazioneTessera.setHorizontalAlignment(SwingConstants.CENTER);
+		reglblRegistrazioneTessera.setForeground(Color.BLACK);
+		reglblRegistrazioneTessera.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
+		reglblRegistrazioneTessera.setBounds(416, 0, 629, 57);
+		registrazione.add(reglblRegistrazioneTessera);
+		
+		
+		regtextFieldNome = new JTextField();
+		regtextFieldNome.setOpaque(false);
+		regtextFieldNome.setHorizontalAlignment(SwingConstants.CENTER);
+		regtextFieldNome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		regtextFieldNome.setColumns(10);
+		regtextFieldNome.setBounds(698, 178, 271, 44);
+		registrazione.add(regtextFieldNome);
+		
+		
+		
+		regtextFieldCognome = new JTextField();
+		regtextFieldCognome.setOpaque(false);
+		regtextFieldCognome.setHorizontalAlignment(SwingConstants.CENTER);
+		regtextFieldCognome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		regtextFieldCognome.setColumns(10);
+		regtextFieldCognome.setBounds(698, 256, 271, 44);
+		registrazione.add(regtextFieldCognome);
+		
+		JLabel reglblDataDiNascita = new JLabel("Data di nascita:");
+		reglblDataDiNascita.setHorizontalAlignment(SwingConstants.CENTER);
+		reglblDataDiNascita.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		reglblDataDiNascita.setBounds(416, 339, 192, 31);
+		registrazione.add(reglblDataDiNascita);
+		
+		JLabel reglblSfondoNome = new JLabel("");
+		reglblSfondoNome.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
+		reglblSfondoNome.setHorizontalAlignment(SwingConstants.CENTER);
+		reglblSfondoNome.setBounds(620, 166, 429, 68);
+		registrazione.add(reglblSfondoNome);
+		
+		JLabel reglblSfondoCognome = new JLabel("");
+		reglblSfondoCognome.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
+		reglblSfondoCognome.setHorizontalAlignment(SwingConstants.CENTER);
+		reglblSfondoCognome.setBounds(620, 244, 425, 68);
+		registrazione.add(reglblSfondoCognome);
 		
 		//RITIROPREMIO
 		JPanel ritiroPremio = new JPanel();
@@ -188,8 +369,6 @@ public class GuiMain extends JFrame {
 		layeredPane.add(about, "name_962290729165700");
 		about.setLayout(null);
 		about.setOpaque(false);
-
-		
 	
 		
 		
@@ -282,7 +461,7 @@ public class GuiMain extends JFrame {
 		homebtnScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		homebtnScansione.setContentAreaFilled(false);
 		homebtnScansione.setBorderPainted(false);
-		homebtnScansione.setBounds(416, 262, 629, 96);
+		homebtnScansione.setBounds(416, 167, 629, 82);
 		homebtnScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switchPanel(scansione);
@@ -305,7 +484,7 @@ public class GuiMain extends JFrame {
 		homebtnRitiroPremio.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		homebtnRitiroPremio.setContentAreaFilled(false);
 		homebtnRitiroPremio.setBorderPainted(false);
-		homebtnRitiroPremio.setBounds(416, 371, 629, 96);
+		homebtnRitiroPremio.setBounds(416, 276, 629, 72);
 		home.add(homebtnRitiroPremio);
 		SimpleAttributeSet centerT = new SimpleAttributeSet();
 		StyleConstants.setAlignment(centerT, StyleConstants.ALIGN_CENTER);
@@ -369,6 +548,29 @@ public class GuiMain extends JFrame {
 		homebtnChiudiSessione.setBorderPainted(false);
 		homebtnChiudiSessione.setBounds(416, 613, 629, 57);
 		home.add(homebtnChiudiSessione);
+		
+		JButton homebtnCreaTessera = new JButton("CREA TESSERA", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
+		homebtnCreaTessera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switchPanel(registrazione);
+				seconds = 60;
+			}
+		});
+		homebtnCreaTessera.setVerticalTextPosition(SwingConstants.CENTER);
+		homebtnCreaTessera.setMargin(new Insets(0, 0, 0, 0));
+		homebtnCreaTessera.setHorizontalTextPosition(SwingConstants.CENTER);
+		homebtnCreaTessera.setForeground(Color.WHITE);
+		homebtnCreaTessera.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		homebtnCreaTessera.setContentAreaFilled(false);
+		homebtnCreaTessera.setBorderPainted(false);
+		homebtnCreaTessera.setBounds(416, 438, 629, 96);
+		home.add(homebtnCreaTessera);
+		
+		JLabel homelblSeiNuovo = new JLabel("Sei nuovo in Trash-it? Crea la tua tessera");
+		homelblSeiNuovo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		homelblSeiNuovo.setHorizontalAlignment(SwingConstants.CENTER);
+		homelblSeiNuovo.setBounds(416, 400, 629, 40);
+		home.add(homelblSeiNuovo);
 		
 		//RITIRO PREMI
 		JLabel ritirolblLogo = new JLabel("");
@@ -529,12 +731,7 @@ public class GuiMain extends JFrame {
 		scanTesserabtnInfo.setBounds(0, 456, 418, 57);
 		scansioneTessera.add(scanTesserabtnInfo);
 
-		// Avvia scansione	
-		JLabel scanTesseralblErr = new JLabel("");
-		scanTesseralblErr.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		scanTesseralblErr.setBounds(614, 456, 250, 115);
-		scansioneTessera.add(scanTesseralblErr);
-		
+		// Avvia scansione		
 		JButton scanTesserabtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -545,9 +742,6 @@ public class GuiMain extends JFrame {
 					puntiTessera = tesseraScansionata.getPunti();
 					ritirolblPuntiTessera.setText("Punti tessera: "+String.valueOf(puntiTessera));
 					switchPanel(ritiroPremio);
-				}else {
-					scanTesseralblErr.setText("Attenzione, riconoscimento fallito"
-							+ "					  Vi invitiamo a riprovare");
 				}		
 			}
 		});
@@ -555,11 +749,56 @@ public class GuiMain extends JFrame {
 		scanTesserabtnAvviaScansione.setHorizontalTextPosition(JButton.CENTER);
 		scanTesserabtnAvviaScansione.setBorderPainted(false);
 		scanTesserabtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
-		
+		// btnScansionaProdotto.setIcon(new
+		// ImageIcon(Main.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
 		scanTesserabtnAvviaScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		scanTesserabtnAvviaScansione.setForeground(Color.BLACK);
 		scanTesserabtnAvviaScansione.setContentAreaFilled(false);
-
+		//scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
+//					public void actionPerformed(ActionEvent arg0) {
+//						//leggo il barcode in input
+//						barcodeProdotto = scantxtInputBarcode.getText();
+//						
+//						//prodotto
+//						prodottoScansionato = new Prodotto(barcodeProdotto);
+//						
+//						//VERIFICARE CORRETTEZZA CODICE A BARRE
+//						
+//						// output
+//						if (prodottoScansionato.isPresenza()) {					
+//							
+//							//policy
+//							policyProdotto = new Policy("AP", prodottoScansionato);					
+//							prodottoScansionato.getDati();
+//							
+//							//cestinosmart				
+//							CestinoSmart cestinoS = new CestinoSmart();
+//							try {
+//								cestinoS.conferimentoProdotto(prodottoScansionato);
+//							} catch (IOException e) {
+//								// TODO Auto-generated catch block
+//								e.printStackTrace();
+//							}			
+//							
+//							prodottoScansionato.getDati();
+//					
+//							ImageIcon image = new ImageIcon(prodottoScansionato.getImmagine());
+//							Image im = image.getImage();
+//							Image myImg = im.getScaledInstance(conflblImmagineProdotto.getWidth(),
+//							conflblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
+//							ImageIcon newImage = new ImageIcon(myImg);
+//							conflblImmagineProdotto.setIcon(newImage);
+//							conflblImmagineProdotto.setIcon(newImage);
+//							
+//							//prodotto nel db allora procedo con il conferimento
+//							switchPanel(conferimento);
+//							
+//						} else {
+//							System.out.println("\nProdotto non presente nel DB, invia notifica per aggiungerlo");					
+//							switchPanel(erroreConf);	//pannello di errore
+//						}
+//					}
+//				});
 		scanTesserabtnAvviaScansione.setBounds(416, 212, 629, 96);
 		scansioneTessera.add(scanTesserabtnAvviaScansione);
 
@@ -629,8 +868,6 @@ public class GuiMain extends JFrame {
 		scanTesserabtnChiudiSessione.setBorderPainted(false);
 		scanTesserabtnChiudiSessione.setBounds(416, 613, 629, 57);
 		scansioneTessera.add(scanTesserabtnChiudiSessione);
-		
-		
 		
 		//SCANSIONE	
 		JLabel scanlblBenvenuto;
@@ -1286,4 +1523,3 @@ public class GuiMain extends JFrame {
 		
 	}
 }
-
