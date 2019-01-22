@@ -57,12 +57,9 @@ public class GuiMain extends JFrame {
 	private int puntiTessera;
 	private String idTessera;
 	
-	// descrizione prodotto
+	
 	private String barcodeProdotto; // barcode
-	//private String nomeProdotto; // nome
-	//private String descrizioneProdotto; // decrizione
-	//private byte[] imgProdotto; // immagine
-	//private int puntiProdotto; //punti
+
 	protected String[] args;
 	private JTextField scantxtInputBarcode;	//input barcode
 	
@@ -532,7 +529,12 @@ public class GuiMain extends JFrame {
 		scanTesserabtnInfo.setBounds(0, 456, 418, 57);
 		scansioneTessera.add(scanTesserabtnInfo);
 
-		// Avvia scansione		
+		// Avvia scansione	
+		JLabel scanTesseralblErr = new JLabel("");
+		scanTesseralblErr.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		scanTesseralblErr.setBounds(614, 456, 250, 115);
+		scansioneTessera.add(scanTesseralblErr);
+		
 		JButton scanTesserabtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -543,6 +545,9 @@ public class GuiMain extends JFrame {
 					puntiTessera = tesseraScansionata.getPunti();
 					ritirolblPuntiTessera.setText("Punti tessera: "+String.valueOf(puntiTessera));
 					switchPanel(ritiroPremio);
+				}else {
+					scanTesseralblErr.setText("Attenzione, riconoscimento fallito"
+							+ "					  Vi invitiamo a riprovare");
 				}		
 			}
 		});
@@ -550,56 +555,11 @@ public class GuiMain extends JFrame {
 		scanTesserabtnAvviaScansione.setHorizontalTextPosition(JButton.CENTER);
 		scanTesserabtnAvviaScansione.setBorderPainted(false);
 		scanTesserabtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
-		// btnScansionaProdotto.setIcon(new
-		// ImageIcon(Main.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
+		
 		scanTesserabtnAvviaScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		scanTesserabtnAvviaScansione.setForeground(Color.BLACK);
 		scanTesserabtnAvviaScansione.setContentAreaFilled(false);
-		//scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
-//					public void actionPerformed(ActionEvent arg0) {
-//						//leggo il barcode in input
-//						barcodeProdotto = scantxtInputBarcode.getText();
-//						
-//						//prodotto
-//						prodottoScansionato = new Prodotto(barcodeProdotto);
-//						
-//						//VERIFICARE CORRETTEZZA CODICE A BARRE
-//						
-//						// output
-//						if (prodottoScansionato.isPresenza()) {					
-//							
-//							//policy
-//							policyProdotto = new Policy("AP", prodottoScansionato);					
-//							prodottoScansionato.getDati();
-//							
-//							//cestinosmart				
-//							CestinoSmart cestinoS = new CestinoSmart();
-//							try {
-//								cestinoS.conferimentoProdotto(prodottoScansionato);
-//							} catch (IOException e) {
-//								// TODO Auto-generated catch block
-//								e.printStackTrace();
-//							}			
-//							
-//							prodottoScansionato.getDati();
-//					
-//							ImageIcon image = new ImageIcon(prodottoScansionato.getImmagine());
-//							Image im = image.getImage();
-//							Image myImg = im.getScaledInstance(conflblImmagineProdotto.getWidth(),
-//							conflblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
-//							ImageIcon newImage = new ImageIcon(myImg);
-//							conflblImmagineProdotto.setIcon(newImage);
-//							conflblImmagineProdotto.setIcon(newImage);
-//							
-//							//prodotto nel db allora procedo con il conferimento
-//							switchPanel(conferimento);
-//							
-//						} else {
-//							System.out.println("\nProdotto non presente nel DB, invia notifica per aggiungerlo");					
-//							switchPanel(erroreConf);	//pannello di errore
-//						}
-//					}
-//				});
+
 		scanTesserabtnAvviaScansione.setBounds(416, 212, 629, 96);
 		scansioneTessera.add(scanTesserabtnAvviaScansione);
 
@@ -669,6 +629,8 @@ public class GuiMain extends JFrame {
 		scanTesserabtnChiudiSessione.setBorderPainted(false);
 		scanTesserabtnChiudiSessione.setBounds(416, 613, 629, 57);
 		scansioneTessera.add(scanTesserabtnChiudiSessione);
+		
+		
 		
 		//SCANSIONE	
 		JLabel scanlblBenvenuto;
@@ -1323,6 +1285,5 @@ public class GuiMain extends JFrame {
 		
 		
 	}
-	
 }
 

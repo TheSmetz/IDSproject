@@ -65,16 +65,4 @@ public class Policy {
 			e.printStackTrace();
 		}
 	}
-
-	public static void main(String[] args) {
-		Prodotto p = new Prodotto("8410668111116");
-		Policy pol = new Policy("AP", p);
-		p.creaConnessione();
-		p.getDati();
-		pol.importaDB();
-		p.getComponenti();
-		p.getDescrizioni();
-		System.out.println(pol.utilizzoPunti);
-	}
-
 }
