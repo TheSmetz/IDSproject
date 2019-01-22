@@ -39,12 +39,12 @@ public class About extends JFrame {
 		about.add(aboutlblInformazioniTrashit);
 		
 		JButton aboutbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-		aboutbtnProblemiAssistenza.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(assistenza);
-				seconds = 30;
-			}
-		});
+//		aboutbtnProblemiAssistenza.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				switchPanel(assistenza);
+//				seconds = 30;
+//			}
+//		});
 		aboutbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
 		aboutbtnProblemiAssistenza.setOpaque(false);
 		aboutbtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
@@ -57,12 +57,12 @@ public class About extends JFrame {
 		about.add(aboutbtnProblemiAssistenza);
 		
 		JButton aboutbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
-		aboutbtnChiudiSessione.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(sessione);
-				timer.stop();
-			}
-		});
+//		aboutbtnChiudiSessione.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				switchPanel(sessione);
+//				timer.stop();
+//			}
+//		});
 		aboutbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
 		aboutbtnChiudiSessione.setOpaque(false);
 		aboutbtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
@@ -88,12 +88,12 @@ public class About extends JFrame {
 		about.add(abouttextPaneInfo);
 		
 		JButton aboutbtnHome = new JButton("Home Page", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-		aboutbtnHome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(home);
-				seconds = 30;
-			}
-		});
+//		aboutbtnHome.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				switchPanel(home);
+//				seconds = 30;
+//			}
+//		});
 		aboutbtnHome.setVerticalTextPosition(SwingConstants.CENTER);
 		aboutbtnHome.setOpaque(false);
 		aboutbtnHome.setMargin(new Insets(0, 0, 0, 0));

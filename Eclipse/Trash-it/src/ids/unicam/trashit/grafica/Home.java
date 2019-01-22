@@ -2,7 +2,10 @@ package ids.unicam.trashit.grafica;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -58,37 +61,29 @@ public class Home extends JFrame{
 	
 	
 	private void setjPanel() {
-		
-	}
-	
-	
-	
-	public Home() {		
-
-		jpanel();
-		jlayeredpane();
-		
-		//HOME
 		home = new JPanel();
 		layeredPane.add(home, "name_781337426904700");
 		home.setOpaque(false);
 		home.setLayout(null);
-		
-		//contenuti
+	}
+	
+	private void background() {
+		background = new JLabel("");
+		background.setBounds(0, -14, 1045, 761);
+		background.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/home.jpg")));
+		contentPane.add(background);
+	}
+	
+	private void lblSelezionaOperazione() {
 		homelblBenvenuto = new JLabel("BENVENUTO");
 		homelblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblBenvenuto.setForeground(Color.BLACK);
 		homelblBenvenuto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
 		homelblBenvenuto.setBounds(416, 0, 629, 57);
 		home.add(homelblBenvenuto);
-		
-		homelblSelezionaOperazione = new JLabel("Seleziona un'operazione");
-		homelblSelezionaOperazione.setHorizontalAlignment(SwingConstants.CENTER);
-		homelblSelezionaOperazione.setForeground(Color.BLACK);
-		homelblSelezionaOperazione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
-		homelblSelezionaOperazione.setBounds(416, 97, 629, 57);
-		home.add(homelblSelezionaOperazione);
-		
+	}
+	
+	private void btnScansione() {
 		homebtnScansione = new JButton("SCANSIONA PRODOTTO", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnScansione.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnScansione.setMargin(new Insets(0, 0, 0, 0));
@@ -98,14 +93,20 @@ public class Home extends JFrame{
 		homebtnScansione.setContentAreaFilled(false);
 		homebtnScansione.setBorderPainted(false);
 		homebtnScansione.setBounds(416, 167, 629, 82);
-//		homebtnScansione.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
+		homebtnScansione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Home h = new Home();
+				h.setVisible(true);
+				
 //				switchPanel(scansione);
 //				seconds = 30;
-//			}
-//		});
+			}
+		});
 		home.add(homebtnScansione);
-		
+	}
+	
+	private void btnRitiroPremio() {
 		homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		homebtnRitiroPremio.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent arg0) {
@@ -124,8 +125,9 @@ public class Home extends JFrame{
 		home.add(homebtnRitiroPremio);
 		SimpleAttributeSet centerT = new SimpleAttributeSet();
 		StyleConstants.setAlignment(centerT, StyleConstants.ALIGN_CENTER);
-
-		
+		}
+	
+	private void btnProblemiAssistenza() {
 		homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -142,7 +144,9 @@ public class Home extends JFrame{
 		homebtnProblemiAssistenza.setBorderPainted(false);
 		homebtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		home.add(homebtnProblemiAssistenza);
-		
+	}
+	
+	private void btnInfo() {
 		homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		homebtnInfo.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -160,13 +164,17 @@ public class Home extends JFrame{
 		homebtnInfo.setBorderPainted(false);
 		homebtnInfo.setBounds(0, 456, 418, 57);
 		home.add(homebtnInfo);
-		
+	}
+	
+	private void lblLogo() {
 		homelblLogo = new JLabel("");
 		homelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		homelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblLogo.setBounds(0, 0, 418, 488);
 		home.add(homelblLogo);
-		
+	}
+	
+	private void btnChiudiSessione() {
 		homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 //		homebtnChiudiSessione.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -184,7 +192,10 @@ public class Home extends JFrame{
 		homebtnChiudiSessione.setBorderPainted(false);
 		homebtnChiudiSessione.setBounds(416, 613, 629, 57);
 		home.add(homebtnChiudiSessione);
-		
+	}
+	
+	private void btnCreaTessera() {
+
 		JButton homebtnCreaTessera = new JButton("CREA TESSERA", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
 		homebtnCreaTessera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -201,19 +212,33 @@ public class Home extends JFrame{
 		homebtnCreaTessera.setBorderPainted(false);
 		homebtnCreaTessera.setBounds(416, 438, 629, 96);
 		home.add(homebtnCreaTessera);
-		
+	}
+	
+	private void lblSeiNuovo() {
 		homelblSeiNuovo = new JLabel("Sei nuovo in Trash-it? Crea la tua tessera");
 		homelblSeiNuovo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		homelblSeiNuovo.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblSeiNuovo.setBounds(416, 400, 629, 40);
 		home.add(homelblSeiNuovo);
-		
-		
-		background = new JLabel("");
-		background.setBounds(0, -14, 1045, 761);
-		background.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/home.jpg")));
-		contentPane.add(background);
-		
 	}
-
+	
+	
+	public Home() {	
+		
+		jpanel();
+		jlayeredpane();
+		setjPanel();				
+		
+		lblSelezionaOperazione();
+		btnScansione();
+		btnRitiroPremio();
+		btnProblemiAssistenza();	
+		btnInfo();
+		lblLogo();
+		btnChiudiSessione();
+		btnCreaTessera();		
+		lblSeiNuovo();
+		
+		background();
+	}
 }

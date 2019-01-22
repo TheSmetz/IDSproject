@@ -45,6 +45,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JFormattedTextField;
 import com.toedter.calendar.JDateChooser;
 
+//------------------------------------------DA FINIRE TIMER E BACKGROUD
 
 @SuppressWarnings("serial")
 public class GuiMain extends JFrame {
