@@ -17,6 +17,7 @@ import ids.unicam.trashit.grafica.Conferimento;
 import ids.unicam.trashit.grafica.GuiMain;
 import ids.unicam.trashit.grafica.Home;
 import ids.unicam.trashit.grafica.Scansione;
+import ids.unicam.trashit.grafica.ScansioneTessera;
 import ids.unicam.trashit.grafica.Sessione;
 
 import java.awt.CardLayout;
@@ -58,19 +59,20 @@ public class Start extends JFrame {
 //		Sessione s = new Sessione();
 //		layeredPane.add(s.getJPanelSessione());
 		
-<<<<<<< HEAD
-		Scansione c =new Scansione();
-		layeredPane.add(c.getJPanelScansione());
+//		Scansione c =new Scansione();
+//		layeredPane.add(c.getJPanelScansione());
 		
 //		About a = new About();
 //		layeredPane.add(a.getJPanelAbout());
-=======
+
 //		About a = new About();
 //		layeredPane.add(a.getJPanelAbout());
 		
-		Conferimento c = new Conferimento();
-		layeredPane.add(c.getJPanelConferimento());
->>>>>>> e1120307e590708ca6c5fc7cb7395c24cb6a7671
+//		Conferimento c = new Conferimento();
+//		layeredPane.add(c.getJPanelConferimento());
+
+		ScansioneTessera t = new ScansioneTessera();
+		layeredPane.add(t.getJPanelScansioneTessera());
 		
 		background();
 
