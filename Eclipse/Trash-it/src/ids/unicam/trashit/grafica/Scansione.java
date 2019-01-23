@@ -23,10 +23,15 @@ import ids.unicam.trashit.grafica.Home;
 
 public class Scansione {
 
-	private JPanel scansione;
-	private JLabel scanlblLogo;
+	private static JPanel scansione;
+
 	private JLabel scanlblScansionaProdotto;
 	private JTextField scantxtInputBarcode;
+	private JButton scanbtnAvviaScansione;
+	private JLabel scantxtBarcode;
+	private JButton scanbtnChiudiSessione;
+	public static JButton scanbtnIndietro;
+	
 	
 	public Scansione() {
 		scansione = new JPanel();
@@ -36,43 +41,47 @@ public class Scansione {
 		scansione.setVisible(true);
 		//creaPanel();		
 		lblBenvenuto();
-		btnInfo();
-
+		Home.btnInfo();
+		Home.lblLogo();
+		Home.btnProblemiAssistenza();
 		// Avvia scansione		
-		btnAvviaScansione();
+		btnAvviaScansione();		
 		
-		lblLogo();
 		lblScanProdotto();
-		txtBarcode();
+		txtBarcode();		
+		lblInputBackground();		
+
+		lblBarcode();
+		btnChiusuraSessione();
 		
-		lblInputBackground();
+		//indietro
+		btnIndietro();
 		
-		JButton scanbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-		scanbtnProblemiAssistenza.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			//	switchPanel(assistenza);
-			//	seconds = 30;
-			}
-		});
-		scanbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
-		scanbtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
-		scanbtnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
-		scanbtnProblemiAssistenza.setForeground(Color.BLACK);
-		scanbtnProblemiAssistenza.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		scanbtnProblemiAssistenza.setContentAreaFilled(false);
-		scanbtnProblemiAssistenza.setBorderPainted(false);
-		scanbtnProblemiAssistenza.setBounds(0, 613, 418, 57);
-		scansione.add(scanbtnProblemiAssistenza);
 		
-		JLabel scantxtBarcode = new JLabel();
-		scantxtBarcode.setHorizontalAlignment(SwingConstants.CENTER);
-		scantxtBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		scantxtBarcode.setText("Barcode:");
-		scantxtBarcode.setBounds(426, 321, 619, 49);
-		scantxtBarcode.setOpaque(false);
-		scansione.add(scantxtBarcode);		
+	}
+
+
+	public static void btnIndietro() {
+		scanbtnIndietro = new JButton("",new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
+        scanbtnIndietro.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
+        scanbtnIndietro.setBounds(938, 11, 97, 87);
+        scansione.add(scanbtnIndietro);
+        scanbtnIndietro.setOpaque(false);
+        scanbtnIndietro.setBorder(null);
+        scanbtnIndietro.setContentAreaFilled(false);
+        scanbtnIndietro.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	
+            //    switchPanel(home);
+            //    seconds = 30;
+            }
+        });
 		
-		JButton scanbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
+	}
+
+
+	private void btnChiusuraSessione() {
+		 scanbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		scanbtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			//	switchPanel(sessione);
@@ -91,21 +100,17 @@ public class Scansione {
 		scanbtnChiudiSessione.setBounds(416, 613, 629, 57);
 		scansione.add(scanbtnChiudiSessione);
 		
-		//indietro
-		JButton scanbtnIndietro = new JButton("",new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
-        scanbtnIndietro.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
-        scanbtnIndietro.setBounds(938, 11, 97, 87);
-        scansione.add(scanbtnIndietro);
-        scanbtnIndietro.setOpaque(false);
-        scanbtnIndietro.setBorder(null);
-        scanbtnIndietro.setContentAreaFilled(false);
-        scanbtnIndietro.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            //    switchPanel(home);
-            //    seconds = 30;
-            }
-        });
-		
+	}
+
+
+	private void lblBarcode() {
+		scantxtBarcode = new JLabel();
+		scantxtBarcode.setHorizontalAlignment(SwingConstants.CENTER);
+		scantxtBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		scantxtBarcode.setText("Barcode:");
+		scantxtBarcode.setBounds(426, 321, 619, 49);
+		scantxtBarcode.setOpaque(false);
+		scansione.add(scantxtBarcode);	
 		
 	}
 
@@ -113,7 +118,7 @@ public class Scansione {
 	private void lblInputBackground() {
 		JLabel scanlblInputBackground = new JLabel("");
 		scanlblInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
-		scanlblInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonsmall.png")));
+		scanlblInputBackground.setIcon(new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonsmall.png")));
 		scanlblInputBackground.setBounds(430, 357, 615, 96);
 		scansione.add(scanlblInputBackground);
 		
@@ -141,18 +146,8 @@ public class Scansione {
 	}
 
 
-	private void lblLogo() {
-		scanlblLogo = new JLabel("");
-		scanlblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		scanlblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
-		scanlblLogo.setBounds(0, 0, 418, 488);
-		scansione.add(scanlblLogo);
-		
-	}
-
-
 	private void btnAvviaScansione() {  //DA RIDURRE
-		JButton scanbtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		scanbtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanbtnAvviaScansione.setVerticalTextPosition(JButton.CENTER);
 		scanbtnAvviaScansione.setHorizontalTextPosition(JButton.CENTER);
 		scanbtnAvviaScansione.setBorderPainted(false);
@@ -164,7 +159,7 @@ public class Scansione {
 		scanbtnAvviaScansione.setContentAreaFilled(false);
 		scanbtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//DA FAREEE				
+//DA FAREEE	SU UN ALTRO METODO			
 //				//avvia timer
 //				seconds = 30;
 //				
@@ -213,28 +208,6 @@ public class Scansione {
 		});
 		scanbtnAvviaScansione.setBounds(416, 212, 629, 96);
 		scansione.add(scanbtnAvviaScansione);		
-	}
-
-
-	private void btnInfo() {
-		JButton scanbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-		scanbtnInfo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//switchPanel(about);
-				//seconds = 30;
-			}
-		});
-		scanbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
-		scanbtnInfo.setOpaque(false);
-		scanbtnInfo.setMargin(new Insets(0, 0, 0, 0));
-		scanbtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
-		scanbtnInfo.setForeground(Color.BLACK);
-		scanbtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		scanbtnInfo.setContentAreaFilled(false);
-		scanbtnInfo.setBorderPainted(false);
-		scanbtnInfo.setBounds(0, 456, 418, 57);
-		scansione.add(scanbtnInfo);
-		
 	}
 
 
