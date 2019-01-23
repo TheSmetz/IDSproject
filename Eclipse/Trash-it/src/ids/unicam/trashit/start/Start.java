@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 
 import ids.unicam.trashit.grafica.GuiMain;
 import ids.unicam.trashit.grafica.Home;
+import ids.unicam.trashit.grafica.Sessione;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 
@@ -47,8 +49,11 @@ public class Start extends JFrame {
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
 		
-		Home h=new Home();
-		layeredPane.add(h.getPanelHome() , "name_781337426904700");
+//		Home h=new Home();
+//		layeredPane.add(h.getPanelHome());
+		
+		Sessione s = new Sessione();
+		layeredPane.add(s.getJPanelSessione());
 		background();
 
 		
