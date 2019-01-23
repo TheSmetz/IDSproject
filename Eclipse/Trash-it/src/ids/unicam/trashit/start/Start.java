@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import ids.unicam.trashit.grafica.About;
+import ids.unicam.trashit.grafica.Conferimento;
 import ids.unicam.trashit.grafica.GuiMain;
 import ids.unicam.trashit.grafica.Home;
 import ids.unicam.trashit.grafica.Sessione;
@@ -56,8 +57,11 @@ public class Start extends JFrame {
 //		Sessione s = new Sessione();
 //		layeredPane.add(s.getJPanelSessione());
 		
-		About a = new About();
-		layeredPane.add(a.getJPanelAbout());
+//		About a = new About();
+//		layeredPane.add(a.getJPanelAbout());
+		
+		Conferimento c = new Conferimento();
+		layeredPane.add(c.getJPanelConferimento());
 		
 		background();
 

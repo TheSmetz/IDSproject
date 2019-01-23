@@ -14,48 +14,37 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class Conferimento extends JFrame {
-	private JPanel contentPane;
-	private JLayeredPane layeredPane;
+public class Conferimento extends JPanel {
 	
-	public Conferimento() {
-		JPanel conferimento = new JPanel();
-		layeredPane.add(conferimento, "name_47730555398847");
+	JPanel conferimento;
+	
+	JLabel conflblImmagineProdotto;
+	JLabel conflblScansioneProdotto;
+	JButton confbtnProdottoVisualizzatoErrato;
+	JButton confbtnProdottoVisualizzatoCorretto;
+	JLabel conflblLogo;	
+	JButton confbtnProblemiAssistenza;	
+	JButton confbtnInfo;		
+	JButton confbtnChiudiSessione;
+
+	
+	private void setJPanelConferimento() {
+		conferimento = new JPanel();
 		conferimento.setOpaque(false);
 		conferimento.setLayout(null);
-		JLabel conflblImmagineProdotto = new JLabel("immagine prodotto");
-		JLabel conflblScansioneProdotto = new JLabel("CONFERIMENTO PRODOTTO");
+	}
+	
+	private void lblScansioneProdotto() {
+		conflblScansioneProdotto = new JLabel("CONFERIMENTO PRODOTTO");
 		conflblScansioneProdotto.setHorizontalAlignment(SwingConstants.CENTER);
 		conflblScansioneProdotto.setForeground(Color.BLACK);
 		conflblScansioneProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
 		conflblScansioneProdotto.setBounds(416, 0, 629, 57);
-		conferimento.add(conflblScansioneProdotto);		
-		
-		// prodotto errato		
-		JButton confbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonSmall.png")));
-		confbtnProdottoVisualizzatoErrato.setVerticalTextPosition(JButton.CENTER);
-		confbtnProdottoVisualizzatoErrato.setHorizontalTextPosition(JButton.CENTER);
-		confbtnProdottoVisualizzatoErrato.setBorderPainted(false);
-		confbtnProdottoVisualizzatoErrato.setMargin(new Insets(0, 0, 0, 0));
-		confbtnProdottoVisualizzatoErrato.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		confbtnProdottoVisualizzatoErrato.setForeground(Color.BLACK);
-		confbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
-		confbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(scansione);
-				seconds = 30;
-			}
-		});
-		confbtnProdottoVisualizzatoErrato.setOpaque(false);
-		confbtnProdottoVisualizzatoErrato.setForeground(Color.BLACK);
-		confbtnProdottoVisualizzatoErrato.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		confbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
-		confbtnProdottoVisualizzatoErrato.setBorderPainted(false);
-		confbtnProdottoVisualizzatoErrato.setBounds(749, 449, 255, 57);
-		conferimento.add(confbtnProdottoVisualizzatoErrato);
-
-		// prodotto corretto		
-		JButton confbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		conferimento.add(conflblScansioneProdotto);
+	}
+	
+	private void btnProdottoVisualizzatoCorretto() {
+		confbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		confbtnProdottoVisualizzatoCorretto.setVerticalTextPosition(JButton.CENTER);
 		confbtnProdottoVisualizzatoCorretto.setHorizontalTextPosition(JButton.CENTER);
 		confbtnProdottoVisualizzatoCorretto.setBorderPainted(false);
@@ -63,19 +52,19 @@ public class Conferimento extends JFrame {
 		confbtnProdottoVisualizzatoCorretto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		confbtnProdottoVisualizzatoCorretto.setForeground(Color.BLACK);
 		confbtnProdottoVisualizzatoCorretto.setContentAreaFilled(false);
-		confbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(istruzioneConf);
-				seconds = 30;
-				
-				// prendo il valore dalla variabile globale				
-				istrlblPunti.setText("Punti guadagnati: " + String.valueOf(prodottoScansionato.getPunti()));
-				
-				//DA AGGIUNGERE DESCRIZIONE
-				istrlblDescrizione.setText(prodottoScansionato.getDescrizione());
-			}
-
-		});
+//		confbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				switchPanel(istruzioneConf);
+//				seconds = 30;
+//				
+//				// prendo il valore dalla variabile globale				
+//				istrlblPunti.setText("Punti guadagnati: " + String.valueOf(prodottoScansionato.getPunti()));
+//				
+//				//DA AGGIUNGERE DESCRIZIONE
+//				istrlblDescrizione.setText(prodottoScansionato.getDescrizione());
+//			}
+//
+//		});
 		confbtnProdottoVisualizzatoCorretto.setOpaque(false);
 		confbtnProdottoVisualizzatoCorretto.setForeground(Color.BLACK);
 		confbtnProdottoVisualizzatoCorretto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
@@ -83,25 +72,47 @@ public class Conferimento extends JFrame {
 		confbtnProdottoVisualizzatoCorretto.setBorderPainted(false);
 		confbtnProdottoVisualizzatoCorretto.setBounds(470, 449, 255, 57);
 		conferimento.add(confbtnProdottoVisualizzatoCorretto);
+	}
 
-//		JLabel conflblImmagineProdotto = new JLabel("immagine prodotto");
+	private void btnProdottoVisualizzatoErrato() {
+		confbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonSmall.png")));
+		confbtnProdottoVisualizzatoErrato.setVerticalTextPosition(JButton.CENTER);
+		confbtnProdottoVisualizzatoErrato.setHorizontalTextPosition(JButton.CENTER);
+		confbtnProdottoVisualizzatoErrato.setBorderPainted(false);
+		confbtnProdottoVisualizzatoErrato.setMargin(new Insets(0, 0, 0, 0));
+		confbtnProdottoVisualizzatoErrato.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		confbtnProdottoVisualizzatoErrato.setForeground(Color.BLACK);
+		confbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
+//		confbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				switchPanel(scansione);
+//				seconds = 30;
+//			}
+//		});
+		confbtnProdottoVisualizzatoErrato.setOpaque(false);
+		confbtnProdottoVisualizzatoErrato.setForeground(Color.BLACK);
+		confbtnProdottoVisualizzatoErrato.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		confbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
+		confbtnProdottoVisualizzatoErrato.setBorderPainted(false);
+		confbtnProdottoVisualizzatoErrato.setBounds(749, 449, 255, 57);
+		conferimento.add(confbtnProdottoVisualizzatoErrato);
+	}
+	
+	private void lblImmagineProdotto() {
+		conflblImmagineProdotto = new JLabel("immagine prodotto");
 		conflblImmagineProdotto.setHorizontalAlignment(SwingConstants.CENTER);
 		conflblImmagineProdotto.setBounds(600, 84, 269, 257);
 		conferimento.add(conflblImmagineProdotto);
+	}
 
-		JLabel conflblLogo = new JLabel("");
-		conflblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		conflblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
-		conflblLogo.setBounds(0, 0, 418, 488);
-		conferimento.add(conflblLogo);
-		
-		JButton confbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-		confbtnProblemiAssistenza.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(assistenza);
-				seconds = 30;
-			}
-		});
+	private void btnProblemiAssistenza() {
+		confbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+//		confbtnProblemiAssistenza.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				switchPanel(assistenza);
+//				seconds = 30;
+//			}
+//		});
 		confbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
 		confbtnProblemiAssistenza.setOpaque(false);
 		confbtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
@@ -112,14 +123,16 @@ public class Conferimento extends JFrame {
 		confbtnProblemiAssistenza.setBorderPainted(false);
 		confbtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		conferimento.add(confbtnProblemiAssistenza);
-		
-		JButton confbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-		confbtnInfo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(about);
-				seconds = 30;
-			}
-		});
+	}
+
+	private void btnInfo() {
+		confbtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+//		confbtnInfo.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				switchPanel(about);
+//				seconds = 30;
+//			}
+//		});
 		confbtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
 		confbtnInfo.setOpaque(false);
 		confbtnInfo.setMargin(new Insets(0, 0, 0, 0));
@@ -129,15 +142,17 @@ public class Conferimento extends JFrame {
 		confbtnInfo.setContentAreaFilled(false);
 		confbtnInfo.setBorderPainted(false);
 		confbtnInfo.setBounds(0, 456, 418, 57);
-		conferimento.add(confbtnInfo);		
-		
-		JButton confbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
-		confbtnChiudiSessione.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switchPanel(sessione);
-				timer.stop();
-			}
-		});
+		conferimento.add(confbtnInfo);	
+	}
+
+	private void btnChiudiSessione() {
+		confbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
+//		confbtnChiudiSessione.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				switchPanel(sessione);
+//				timer.stop();
+//			}
+//		});
 		confbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
 		confbtnChiudiSessione.setOpaque(false);
 		confbtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
@@ -148,7 +163,19 @@ public class Conferimento extends JFrame {
 		confbtnChiudiSessione.setBorderPainted(false);
 		confbtnChiudiSessione.setBounds(416, 613, 629, 57);
 		conferimento.add(confbtnChiudiSessione);
-		
-		
 	}
+	
+	
+	public JPanel getJPanelConferimento() {
+		setJPanelConferimento();
+		lblScansioneProdotto();
+		btnProdottoVisualizzatoErrato();
+		btnProdottoVisualizzatoCorretto();
+		lblImmagineProdotto();
+		Home.lblLogo(conferimento);
+		btnProblemiAssistenza();		
+		btnInfo();		
+		btnChiudiSessione();	
+		return conferimento;
+	}	
 }
