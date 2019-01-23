@@ -20,26 +20,28 @@ import ids.unicam.trashit.console.CestinoSmart;
 import ids.unicam.trashit.console.Policy;
 import ids.unicam.trashit.console.Prodotto;
 import ids.unicam.trashit.grafica.Home;
+import ids.unicam.trashit.start.Start;
 
 public class Scansione extends JPanel{
 
 	private static JPanel scansione;
 
-	private JLabel scanlblScansionaProdotto;
+	public JLabel scanlblScansionaProdotto;
 	private JTextField scantxtInputBarcode;
 	private JButton scanbtnAvviaScansione;
 	private JLabel scantxtBarcode;
 	private JButton scanbtnChiudiSessione;
 	public static JButton scanbtnIndietro;
-	
+	ActionListener action;
+	static Home homepage;
 	
 	public Scansione() {
-		super();
 		scansione = new JPanel();
 		Home.layeredPane.add(scansione, "name_47697602642643");
 		scansione.setOpaque(false);
 		scansione.setLayout(null);
 		scansione.setVisible(true);
+		btnIndietro();
 		//creaPanel();		
 		lblBenvenuto();
 		Home.btnInfo();
@@ -56,11 +58,11 @@ public class Scansione extends JPanel{
 		btnChiusuraSessione();
 		
 		//indietro
-		btnIndietro();
+		
 		
 		
 	}
-
+	
 
 	public static void btnIndietro() {
 		scanbtnIndietro = new JButton("",new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
@@ -72,7 +74,11 @@ public class Scansione extends JPanel{
         scanbtnIndietro.setContentAreaFilled(false);
         scanbtnIndietro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	
+            	//Home.home.removeAll();
+//            	scansione.removeAll();
+//				Home.home.add(homepage.setta());
+//            	Home.home.revalidate();
+//            	Home.home.repaint();
             //    switchPanel(home);
             //    seconds = 30;
             }

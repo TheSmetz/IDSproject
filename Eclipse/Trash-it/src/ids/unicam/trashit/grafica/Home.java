@@ -2,6 +2,7 @@ package ids.unicam.trashit.grafica;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -19,7 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-public class Home extends JPanel{
+public class Home extends JFrame{
 	
 	//COMPONENTI
 	public static JPanel contentPane;
@@ -37,15 +38,18 @@ public class Home extends JPanel{
 	public static JButton homebtnChiudiSessione;
 	JLabel background;
 	
+	Scansione h;
+
+	
 	
 	private void jpanel() {
-		//setIconImage(Toolkit.getDefaultToolkit().getImage(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/aaa.png")));
-		//setTitle("Trash-it");
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/aaa.png")));
+		setTitle("Trash-it");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 746);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		//setContentPane(contentPane);
+		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	}
 	
@@ -93,9 +97,10 @@ public class Home extends JPanel{
 		homebtnScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				home.removeAll();
-				Scansione h = new Scansione();
+				home.add(h=new Scansione());
+				home.revalidate();
+				home.repaint();
 				
-				h.setVisible(true);
 				
 //				switchPanel(scansione);
 //				seconds = 30;
@@ -235,7 +240,6 @@ public class Home extends JPanel{
 		btnProblemiAssistenza();	
 		btnInfo();	
 	}
-	
 
 	
 	public Home() {	
@@ -245,5 +249,6 @@ public class Home extends JPanel{
 		creaAllBtn();
 		creaAllLbl();	
 		background();
+		
 	}
 }

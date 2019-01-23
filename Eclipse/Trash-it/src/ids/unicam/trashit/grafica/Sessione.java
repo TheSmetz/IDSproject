@@ -45,9 +45,9 @@ public class Sessione extends JFrame {
 		JButton sessionebtnAvviaScansione = new JButton("AVVIA SESSIONE", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
 	    sessionebtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switchPanel(home);
-				seconds = 30;
-				startTimer();			
+			//	switchPanel(home);
+			//	seconds = 30;
+			//	startTimer();			
 			}
 		});
 		
