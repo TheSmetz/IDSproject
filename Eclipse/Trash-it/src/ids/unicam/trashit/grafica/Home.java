@@ -99,7 +99,7 @@ public class Home extends JPanel{
 		StyleConstants.setAlignment(centerT, StyleConstants.ALIGN_CENTER);
 		}
 	
-	private void btnProblemiAssistenza() {
+	public static void btnProblemiAssistenza() {
 		homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -118,7 +118,7 @@ public class Home extends JPanel{
 		home.add(homebtnProblemiAssistenza);
 	}
 	
-	private void btnInfo() {
+	public static void btnInfo() {
 		homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		homebtnInfo.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -138,7 +138,7 @@ public class Home extends JPanel{
 		home.add(homebtnInfo);
 	}
 	
-	private void lblLogo() {
+	public static void lblLogo() {
 		homelblLogo = new JLabel("");
 		homelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		homelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -146,7 +146,7 @@ public class Home extends JPanel{
 		home.add(homelblLogo);
 	}
 	
-	private void btnChiudiSessione() {
+	public static void btnChiudiSessione() {
 		homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 //		homebtnChiudiSessione.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
