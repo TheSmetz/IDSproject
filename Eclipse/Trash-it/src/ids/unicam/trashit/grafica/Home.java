@@ -2,10 +2,7 @@ package ids.unicam.trashit.grafica;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -25,8 +22,8 @@ import javax.swing.text.StyleConstants;
 public class Home extends JFrame{
 	
 	//COMPONENTI
-	private JPanel contentPane;
-	private JLayeredPane layeredPane;
+	public static JPanel contentPane;
+	public static JLayeredPane layeredPane;
 	JPanel home;
 	JLabel homelblBenvenuto;
 	JLabel homelblSelezionaOperazione;
@@ -96,7 +93,8 @@ public class Home extends JFrame{
 		homebtnScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Home h = new Home();
+				Scansione h = new Scansione();
+				
 				h.setVisible(true);
 				
 //				switchPanel(scansione);
@@ -221,24 +219,33 @@ public class Home extends JFrame{
 		homelblSeiNuovo.setBounds(416, 400, 629, 40);
 		home.add(homelblSeiNuovo);
 	}
-	
-	
-	public Home() {	
-		
-		jpanel();
-		jlayeredpane();
-		setjPanel();				
-		
+
+	private void creaAllLbl() {
 		lblSelezionaOperazione();
+		lblLogo();
+		lblSeiNuovo();
+		
+	}
+
+	private void creaAllBtn() {
+		btnChiudiSessione();
+		btnCreaTessera();
 		btnScansione();
 		btnRitiroPremio();
 		btnProblemiAssistenza();	
-		btnInfo();
-		lblLogo();
-		btnChiudiSessione();
-		btnCreaTessera();		
-		lblSeiNuovo();
-		
+		btnInfo();	
+	}
+	
+	public void setVisible(boolean a) {
+		home.setVisible(a);
+	}
+	
+	public Home() {	
+		jpanel();
+		jlayeredpane();
+		setjPanel();
+		creaAllBtn();
+		creaAllLbl();	
 		background();
 	}
 }
