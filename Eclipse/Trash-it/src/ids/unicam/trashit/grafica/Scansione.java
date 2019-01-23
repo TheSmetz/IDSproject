@@ -20,7 +20,7 @@ import ids.unicam.trashit.grafica.Home;
 
 public class Scansione extends JPanel {
 
-	private JPanel scansione;
+	public static JPanel scansione;
 	public JLabel scanlblScansionaProdotto;
 	private JTextField scantxtInputBarcode;
 	private JButton scanbtnAvviaScansione;

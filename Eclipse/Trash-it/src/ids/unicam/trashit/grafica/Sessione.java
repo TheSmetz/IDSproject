@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 
 public class Sessione extends JPanel {
 	
-	JPanel sessione;
+	public static JPanel sessione;
 	JLabel sessionelblLogo;
 	JLabel sessionelblSessione;
 	JButton sessionebtnAvviaScansione;

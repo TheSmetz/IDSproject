@@ -1,26 +1,22 @@
 package ids.unicam.trashit.grafica;
 
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-public class Home extends JPanel{
+import ids.unicam.trashit.start.Start;
+
+public class Home extends JPanel implements ActionListener{
 	
 	//COMPONENTI
 	public static JPanel contentPane;
@@ -36,6 +32,19 @@ public class Home extends JPanel{
 	JButton homebtnCreaTessera;
 	JLabel homelblSeiNuovo;
 	public static JButton homebtnChiudiSessione;
+	
+//	public static ActionListener action;
+	
+//	public void listnerHome() {
+//		action = new ActionListener() {			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				if(e.getSource() == homebtnScansione) {
+//					System.out.println("BELLAAAAAA");
+//				}
+//			}
+//		};
+//	}
 
 	
 	private void setjPanel() {
@@ -43,7 +52,6 @@ public class Home extends JPanel{
 		home.setOpaque(false);
 		home.setLayout(null);
 	}
-
 
 	private void lblSelezionaOperazione() {
 		homelblBenvenuto = new JLabel("BENVENUTO");
@@ -64,8 +72,8 @@ public class Home extends JPanel{
 		homebtnScansione.setContentAreaFilled(false);
 		homebtnScansione.setBorderPainted(false);
 		homebtnScansione.setBounds(416, 167, 629, 82);
-		homebtnScansione.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+//		homebtnScansione.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
 				
 			//	ScansionaProdotto h = new ScansionaProdotto();
 				
@@ -73,8 +81,9 @@ public class Home extends JPanel{
 				
 //				switchPanel(scansione);
 //				seconds = 30;
-			}
-		});
+//			}
+//		});
+		homebtnScansione.addActionListener(this);
 		home.add(homebtnScansione);
 	}
 	
@@ -214,11 +223,23 @@ public class Home extends JPanel{
 		setjPanel();
 		creaAllBtn();
 		creaAllLbl();	
+		//listnerHome();
 	}
 	
 	public JPanel getPanelHome() {
 		creaPanelHome();
 		return home;
 }
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == homebtnScansione) {
+			Start.switchPanel(Scansione.scansione);
+		}else if (e.getSource() == homebtnChiudiSessione) {
+			Start.switchPanel(Scansione.scansione);
+		}
+		
+	}
 
 }

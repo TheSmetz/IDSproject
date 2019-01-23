@@ -35,8 +35,8 @@ import javax.swing.JLayeredPane;
 
 public class Start extends JFrame {
 	
-	private JPanel contentPane;
-	private JLayeredPane layeredPane;
+	public static JPanel contentPane;
+	public static JLayeredPane layeredPane;
 	private JLabel background;
 	
 	public Start() {
@@ -54,14 +54,14 @@ public class Start extends JFrame {
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
 		
-//		Home h=new Home();
-//		layeredPane.add(h.getPanelHome());
+		Home h=new Home();		
+		layeredPane.add(h.getPanelHome());
 		
-//		Sessione s = new Sessione();
-//		layeredPane.add(s.getJPanelSessione());
+		Sessione s = new Sessione();
+		layeredPane.add(s.getJPanelSessione());
 		
-//		Scansione c =new Scansione();
-//		layeredPane.add(c.getJPanelScansione());
+		Scansione c =new Scansione();
+		layeredPane.add(c.getJPanelScansione());
 		
 //		About a = new About();
 //		layeredPane.add(a.getJPanelAbout());
@@ -82,6 +82,13 @@ public class Start extends JFrame {
 		background();
 
 		
+	}
+	
+	public static void switchPanel(JPanel panelName) {
+		layeredPane.removeAll();
+		layeredPane.add(panelName);
+		layeredPane.repaint();
+		layeredPane.revalidate();
 	}
 	
 	private void background() {
