@@ -75,8 +75,8 @@ public class Start extends JFrame {
 //		ScansioneTessera t = new ScansioneTessera();
 //		layeredPane.add(t.getJPanelScansioneTessera());
 		
-		IstruzioniConferimento d = new IstruzioniConferimento();
-		layeredPane.add(d.getJPanelIstruzioni());
+//		IstruzioniConferimento d = new IstruzioniConferimento();
+//		layeredPane.add(d.getJPanelIstruzioni());
 
 		
 		background();

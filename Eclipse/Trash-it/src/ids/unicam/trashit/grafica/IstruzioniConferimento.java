@@ -72,7 +72,7 @@ public class IstruzioniConferimento extends JPanel {
 		
 	}
 
-	private void setJPanel() {
+	private void setJPanelIstruzioni() {
 		istruzioneConf = new JPanel();
 		istruzioneConf.setOpaque(false);
 		istruzioneConf.setLayout(null);
@@ -90,7 +90,7 @@ public class IstruzioniConferimento extends JPanel {
 	
 	
 	public JPanel getJPanelIstruzioni() {
-		setJPanel();
+		setJPanelIstruzioni();
 		return istruzioneConf;
 		
 	}

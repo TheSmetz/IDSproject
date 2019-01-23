@@ -21,12 +21,6 @@ public class Assistenza extends JFrame {
 	JPanel assistenza;
 	JLabel asslblAssistenza;
 	JTextPane asstxtpnTelefonoEmail;
-	
-	private void setJPanelAssistenza() {
-		assistenza = new JPanel();
-		assistenza.setLayout(null);
-		assistenza.setOpaque(false);
-	}
 
 	private void lblAssistenza() {
 		JLabel asslblAssistenza = new JLabel("ASSISTENZA");
@@ -48,14 +42,20 @@ public class Assistenza extends JFrame {
 		assistenza.add(asstxtpnTelefonoEmail);
 	}
 	
-	public JPanel getJPanelAssistenza() {
-		setJPanelAssistenza();
+	private void setJPanelAssistenza() {
+		assistenza = new JPanel();
+		assistenza.setLayout(null);
+		assistenza.setOpaque(false);
 		lblAssistenza();
 		txtpnTelefonoEmail();		
 		Home.btnInfo(assistenza);		
 		Home.lblLogo(assistenza);
 		Home.btnChiudiSessione(assistenza);
 		About.btnHomePage(assistenza);
+	}
+	
+	public JPanel getJPanelAssistenza() {
+		setJPanelAssistenza();
 		return assistenza;
 	}
 }

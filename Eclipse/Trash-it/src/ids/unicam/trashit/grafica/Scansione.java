@@ -29,25 +29,6 @@ public class Scansione extends JPanel {
 	public static JButton scanbtnIndietro;
 	ActionListener action;
 
-	private void setJPanelScansione() {
-		scansione = new JPanel();
-		scansione.setOpaque(false);
-		scansione.setLayout(null);
-		scansione.setVisible(true);
-		btnIndietro(scansione);
-		creaPanel();
-		lblBenvenuto();
-		Home.btnInfo(scansione);
-		Home.lblLogo(scansione);
-		Home.btnProblemiAssistenza(scansione);
-		btnAvviaScansione();
-		lblScanProdotto();
-		txtBarcode();
-		lblInputBackground();
-		lblBarcode();
-		Home.btnChiudiSessione(scansione);
-	}
-
 	public static void btnIndietro(JPanel wherePanel) {
 		scanbtnIndietro = new JButton("",
 				new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
@@ -178,11 +159,7 @@ public class Scansione extends JPanel {
 		scanbtnAvviaScansione.setBounds(416, 212, 629, 96);
 		scansione.add(scanbtnAvviaScansione);
 	}
-
-	private void creaPanel() {
-
-	}
-
+	
 	private void lblBenvenuto() {
 		JLabel scanlblBenvenuto = new JLabel("BENVENUTO");
 		scanlblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
@@ -192,6 +169,24 @@ public class Scansione extends JPanel {
 		scansione.add(scanlblBenvenuto);
 
 	}
+
+	private void setJPanelScansione() {
+		scansione = new JPanel();
+		scansione.setOpaque(false);
+		scansione.setLayout(null);
+		scansione.setVisible(true);
+		btnIndietro(scansione);
+		lblBenvenuto();
+		Home.btnInfo(scansione);
+		Home.lblLogo(scansione);
+		Home.btnProblemiAssistenza(scansione);
+		btnAvviaScansione();
+		lblScanProdotto();
+		txtBarcode();
+		lblInputBackground();
+		lblBarcode();
+		Home.btnChiudiSessione(scansione);
+	}	
 
 	public JPanel getJPanelScansione() {
 		setJPanelScansione();

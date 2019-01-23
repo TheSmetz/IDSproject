@@ -134,13 +134,13 @@ public class ScansioneTessera extends JFrame {
 		Home.btnProblemiAssistenza(scansioneTessera);
 		Home.btnChiudiSessione(scansioneTessera);
 		Scansione.btnIndietro(scansioneTessera);	
-		this.txtInputCodice();
-		this.lblBenvenuto();
-		this.txtTesseraErrata();		
-		this.btnAvviaSessioneTessera();
-		this.lblScansionaProdotto();
-		this.txtBarcode();
-		this.lblInputBackground();
+		txtInputCodice();
+		lblBenvenuto();
+		txtTesseraErrata();		
+		btnAvviaSessioneTessera();
+		lblScansionaProdotto();
+		txtBarcode();
+		lblInputBackground();
 	}
 	
 	public JPanel getJPanelScansioneTessera() {

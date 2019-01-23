@@ -74,14 +74,14 @@ public class Sessione extends JPanel {
 		sessione.setOpaque(true);
 		sessione.setLayout(null);
 		sessione.setBackground(Color.WHITE);
-	}
-	
-	public JPanel getJPanelSessione() {
-		setJPanelSessione();
 		lblLogo();
 		lblSessione();
 		btnAvviaSessione();
 		lblFreccia();
+	}
+	
+	public JPanel getJPanelSessione() {
+		setJPanelSessione();		
 		return sessione;		
 	}
 

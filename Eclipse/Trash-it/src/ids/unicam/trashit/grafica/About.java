@@ -23,12 +23,6 @@ public class About extends JPanel {
 	JTextPane abouttextPaneInfo;
 	static JButton aboutbtnHomePage;
 	
-	public void setJPanelAbout() {
-		about = new JPanel();
-		about.setLayout(null);
-		about.setOpaque(false);
-	}
-	
 	private void lblInformazioniTrashit() {
 		aboutlblInformazioniTrashit = new JLabel("INFORMAZIONI TRASH-IT");
 		aboutlblInformazioniTrashit.setHorizontalAlignment(SwingConstants.CENTER);
@@ -93,14 +87,21 @@ public class About extends JPanel {
 		wherePanel.add(aboutbtnHomePage);
 	}
 	
-	public JPanel getJPanelAbout() {
-		setJPanelAbout();
+	private void setJPanelAbout() {
+		about = new JPanel();
+		about.setLayout(null);
+		about.setOpaque(false);
 		lblInformazioniTrashit();
 		btnProblemiAssistenza();
 		Home.btnChiudiSessione(about);
 		textPaneInfo();
 		btnHomePage(about);
 		Home.lblLogo(this.about);
+	}
+	
+	public JPanel getJPanelAbout() {
+		setJPanelAbout();
+		
 		return about;
 	}
 

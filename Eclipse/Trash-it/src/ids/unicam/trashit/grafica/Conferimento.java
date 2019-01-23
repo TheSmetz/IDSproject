@@ -26,12 +26,6 @@ public class Conferimento extends JPanel {
 	JButton confbtnInfo;			
 	JButton confbtnChiudiSessione;
 	
-	public void setJPanelConferimento() {
-		conferimento = new JPanel();
-		conferimento.setOpaque(false);
-		conferimento.setLayout(null);
-	}
-
 	private void lblScansioneProdotto() {
 		conflblScansioneProdotto = new JLabel("CONFERIMENTO PRODOTTO");
 		conflblScansioneProdotto.setHorizontalAlignment(SwingConstants.CENTER);
@@ -104,10 +98,11 @@ public class Conferimento extends JPanel {
 	}
 	
 	//da fare metodo set immagine prodotto da database
-
 	
-	public JPanel getJPanelConferimento() {
-		setJPanelConferimento();
+	private void setJPanelConferimento() {
+		conferimento = new JPanel();
+		conferimento.setOpaque(false);
+		conferimento.setLayout(null);
 		lblScansioneProdotto();		
 		btnProdottoVisualizzatoErrato();			
 		btnProdottoVisualizzatoCorretto();		
@@ -116,6 +111,10 @@ public class Conferimento extends JPanel {
 		Home.btnProblemiAssistenza(conferimento);
 		Home.btnInfo(conferimento);
 		Home.btnChiudiSessione(conferimento);	
+	}
+	
+	public JPanel getJPanelConferimento() {
+		setJPanelConferimento();		
 		return this.conferimento;
 	}
 }
