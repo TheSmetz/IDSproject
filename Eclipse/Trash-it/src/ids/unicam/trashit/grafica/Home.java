@@ -202,7 +202,7 @@ public class Home extends JPanel{
 	}
 
 	private void creaAllBtn() {
-		btnChiudiSessione();
+		btnChiudiSessione(home);
 		btnCreaTessera();
 		btnScansione();
 		btnRitiroPremio();

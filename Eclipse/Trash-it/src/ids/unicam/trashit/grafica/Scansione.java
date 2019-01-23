@@ -18,8 +18,7 @@ import javax.swing.SwingConstants;
 
 import ids.unicam.trashit.grafica.Home;
 
-
-public class Scansione extends JPanel{
+public class Scansione extends JPanel {
 
 	private JPanel scansione;
 	public JLabel scanlblScansionaProdotto;
@@ -30,72 +29,49 @@ public class Scansione extends JPanel{
 	public static JButton scanbtnIndietro;
 	ActionListener action;
 
-	
-
 	private void setJPanelScansione() {
 		scansione = new JPanel();
 		scansione.setOpaque(false);
 		scansione.setLayout(null);
 		scansione.setVisible(true);
-		btnIndietro();
-		creaPanel();		
+		btnIndietro(scansione);
+		creaPanel();
 		lblBenvenuto();
 		Home.btnInfo(scansione);
 		Home.lblLogo(scansione);
 		Home.btnProblemiAssistenza(scansione);
-		btnAvviaScansione();		
+		btnAvviaScansione();
 		lblScanProdotto();
-		txtBarcode();		
-		lblInputBackground();		
+		txtBarcode();
+		lblInputBackground();
 		lblBarcode();
-		btnChiusuraSessione();
+		Home.btnChiudiSessione(scansione);
 	}
 
+	public static void btnIndietro(JPanel wherePanel) {
+		scanbtnIndietro = new JButton("",
+				new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
+		scanbtnIndietro
+				.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
+		scanbtnIndietro.setBounds(938, 11, 97, 87);
 
-	public void btnIndietro() {
-		scanbtnIndietro = new JButton("",new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
-        scanbtnIndietro.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
-        scanbtnIndietro.setBounds(938, 11, 97, 87);
-        scansione.add(scanbtnIndietro);
-        scanbtnIndietro.setOpaque(false);
-        scanbtnIndietro.setBorder(null);
-        scanbtnIndietro.setContentAreaFilled(false);
-        scanbtnIndietro.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	//Home.home.removeAll();
+		scanbtnIndietro.setOpaque(false);
+		scanbtnIndietro.setBorder(null);
+		scanbtnIndietro.setContentAreaFilled(false);
+		scanbtnIndietro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Home.home.removeAll();
 //            	scansione.removeAll();
 //				Home.home.add(homepage.setta());
 //            	Home.home.revalidate();
 //            	Home.home.repaint();
-            //    switchPanel(home);
-            //    seconds = 30;
-            }
-        });
-		
-	}
-
-
-	private void btnChiusuraSessione() {
-		 scanbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
-		scanbtnChiudiSessione.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			//	switchPanel(sessione);
-			//	timer.stop();
+				// switchPanel(home);
+				// seconds = 30;
 			}
 		});
-		
-		scanbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
-		scanbtnChiudiSessione.setOpaque(false);
-		scanbtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
-		scanbtnChiudiSessione.setHorizontalTextPosition(SwingConstants.CENTER);
-		scanbtnChiudiSessione.setForeground(Color.WHITE);
-		scanbtnChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		scanbtnChiudiSessione.setContentAreaFilled(false);
-		scanbtnChiudiSessione.setBorderPainted(false);
-		scanbtnChiudiSessione.setBounds(416, 613, 629, 57);
-		scansione.add(scanbtnChiudiSessione);
-		
+		wherePanel.add(scanbtnIndietro);
 	}
+
 
 
 	private void lblBarcode() {
@@ -105,20 +81,19 @@ public class Scansione extends JPanel{
 		scantxtBarcode.setText("Barcode:");
 		scantxtBarcode.setBounds(426, 321, 619, 49);
 		scantxtBarcode.setOpaque(false);
-		scansione.add(scantxtBarcode);	
-		
-	}
+		scansione.add(scantxtBarcode);
 
+	}
 
 	private void lblInputBackground() {
 		JLabel scanlblInputBackground = new JLabel("");
 		scanlblInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
-		scanlblInputBackground.setIcon(new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonsmall.png")));
+		scanlblInputBackground.setIcon(
+				new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonsmall.png")));
 		scanlblInputBackground.setBounds(430, 357, 615, 96);
 		scansione.add(scanlblInputBackground);
-		
-	}
 
+	}
 
 	private void txtBarcode() {
 		scantxtInputBarcode = new JTextField();
@@ -130,7 +105,6 @@ public class Scansione extends JPanel{
 		scantxtInputBarcode.setColumns(10);
 	}
 
-
 	private void lblScanProdotto() {
 		scanlblScansionaProdotto = new JLabel("Scansione Prodotto");
 		scanlblScansionaProdotto.setHorizontalAlignment(SwingConstants.CENTER);
@@ -140,9 +114,9 @@ public class Scansione extends JPanel{
 		scansione.add(scanlblScansionaProdotto);
 	}
 
-
-	private void btnAvviaScansione() {  //DA RIDURRE
-		scanbtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+	private void btnAvviaScansione() { // DA RIDURRE
+		scanbtnAvviaScansione = new JButton("Avvia scansione",
+				new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanbtnAvviaScansione.setVerticalTextPosition(JButton.CENTER);
 		scanbtnAvviaScansione.setHorizontalTextPosition(JButton.CENTER);
 		scanbtnAvviaScansione.setBorderPainted(false);
@@ -202,14 +176,12 @@ public class Scansione extends JPanel{
 			}
 		});
 		scanbtnAvviaScansione.setBounds(416, 212, 629, 96);
-		scansione.add(scanbtnAvviaScansione);		
+		scansione.add(scanbtnAvviaScansione);
 	}
-
 
 	private void creaPanel() {
-		
-	}
 
+	}
 
 	private void lblBenvenuto() {
 		JLabel scanlblBenvenuto = new JLabel("BENVENUTO");
@@ -218,9 +190,9 @@ public class Scansione extends JPanel{
 		scanlblBenvenuto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
 		scanlblBenvenuto.setBounds(426, 0, 619, 49);
 		scansione.add(scanlblBenvenuto);
-		
+
 	}
-	
+
 	public JPanel getJPanelScansione() {
 		setJPanelScansione();
 		return scansione;
