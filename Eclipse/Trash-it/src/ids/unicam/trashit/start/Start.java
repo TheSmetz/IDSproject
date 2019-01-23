@@ -12,8 +12,8 @@ public class Start {
 			public void run() {
 				try {
 					Home frame = new Home();
-					frame.setLocationRelativeTo(null);
-					frame.setResizable(false);
+					//frame.setLocationRelativeTo(null);
+					//frame.setResizable(false);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

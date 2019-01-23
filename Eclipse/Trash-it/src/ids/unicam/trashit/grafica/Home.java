@@ -19,7 +19,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-public class Home extends JFrame{
+public class Home extends JPanel{
 	
 	//COMPONENTI
 	public static JPanel contentPane;
@@ -39,13 +39,13 @@ public class Home extends JFrame{
 	
 	
 	private void jpanel() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/aaa.png")));
-		setTitle("Trash-it");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setIconImage(Toolkit.getDefaultToolkit().getImage(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/aaa.png")));
+		//setTitle("Trash-it");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 746);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		//setContentPane(contentPane);
 		contentPane.setLayout(null);
 	}
 	

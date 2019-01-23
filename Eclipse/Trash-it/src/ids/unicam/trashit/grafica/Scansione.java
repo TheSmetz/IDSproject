@@ -21,7 +21,7 @@ import ids.unicam.trashit.console.Policy;
 import ids.unicam.trashit.console.Prodotto;
 import ids.unicam.trashit.grafica.Home;
 
-public class Scansione {
+public class Scansione extends JPanel{
 
 	private static JPanel scansione;
 
@@ -34,6 +34,7 @@ public class Scansione {
 	
 	
 	public Scansione() {
+		super();
 		scansione = new JPanel();
 		Home.layeredPane.add(scansione, "name_47697602642643");
 		scansione.setOpaque(false);
