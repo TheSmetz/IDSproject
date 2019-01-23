@@ -236,9 +236,7 @@ public class Home extends JFrame{
 		btnInfo();	
 	}
 	
-	public void setVisible(boolean a) {
-		home.setVisible(a);
-	}
+
 	
 	public Home() {	
 		jpanel();
