@@ -36,9 +36,7 @@ public class Home extends JPanel{
 	JButton homebtnCreaTessera;
 	JLabel homelblSeiNuovo;
 	public static JButton homebtnChiudiSessione;
-	
-	
-	Scansione h;
+
 	
 	private void setjPanel() {
 		home = new JPanel();
@@ -46,9 +44,7 @@ public class Home extends JPanel{
 		home.setLayout(null);
 	}
 
-	
 
-	
 	private void lblSelezionaOperazione() {
 		homelblBenvenuto = new JLabel("BENVENUTO");
 		homelblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
@@ -73,7 +69,7 @@ public class Home extends JPanel{
 				
 			//	ScansionaProdotto h = new ScansionaProdotto();
 				
-				h.setVisible(true);
+			//	h.setVisible(true);
 				
 //				switchPanel(scansione);
 //				seconds = 30;
@@ -213,11 +209,15 @@ public class Home extends JPanel{
 		btnProblemiAssistenza();	
 		btnInfo();	
 	}
-	public JPanel getPanelHome() {
+	
+	public void creaPanelHome() {
 		setjPanel();
 		creaAllBtn();
 		creaAllLbl();	
-		//background();
+	}
+	
+	public JPanel getPanelHome() {
+		creaPanelHome();
 		return home;
 }
 
