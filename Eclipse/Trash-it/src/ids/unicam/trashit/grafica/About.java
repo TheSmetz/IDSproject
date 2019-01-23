@@ -14,12 +14,14 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 public class About extends JPanel {
+	public About() {
+	}
 	
 	JPanel about;
 	JLabel aboutlblInformazioniTrashit;
 	JButton aboutbtnProblemiAssistenza;
 	JTextPane abouttextPaneInfo;
-	JButton aboutbtnHome;
+	static JButton aboutbtnHomePage;
 	
 	public void setJPanelAbout() {
 		about = new JPanel();
@@ -71,24 +73,24 @@ public class About extends JPanel {
 		about.add(abouttextPaneInfo);
 	}
 
-	private void btnHome() {
-		aboutbtnHome = new JButton("Home Page", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+	public static void btnHomePage(JPanel wherePanel) {
+		aboutbtnHomePage = new JButton("Home Page", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		aboutbtnHome.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
 //				switchPanel(home);
 //				seconds = 30;
 //			}
 //		});
-		aboutbtnHome.setVerticalTextPosition(SwingConstants.CENTER);
-		aboutbtnHome.setOpaque(false);
-		aboutbtnHome.setMargin(new Insets(0, 0, 0, 0));
-		aboutbtnHome.setHorizontalTextPosition(SwingConstants.CENTER);
-		aboutbtnHome.setForeground(Color.WHITE);
-		aboutbtnHome.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		aboutbtnHome.setContentAreaFilled(false);
-		aboutbtnHome.setBorderPainted(false);
-		aboutbtnHome.setBounds(416, 509, 629, 57);
-		about.add(aboutbtnHome);
+		aboutbtnHomePage.setVerticalTextPosition(SwingConstants.CENTER);
+		aboutbtnHomePage.setOpaque(false);
+		aboutbtnHomePage.setMargin(new Insets(0, 0, 0, 0));
+		aboutbtnHomePage.setHorizontalTextPosition(SwingConstants.CENTER);
+		aboutbtnHomePage.setForeground(Color.WHITE);
+		aboutbtnHomePage.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		aboutbtnHomePage.setContentAreaFilled(false);
+		aboutbtnHomePage.setBorderPainted(false);
+		aboutbtnHomePage.setBounds(416, 509, 629, 57);
+		wherePanel.add(aboutbtnHomePage);
 	}
 	
 	public JPanel getJPanelAbout() {
@@ -97,7 +99,7 @@ public class About extends JPanel {
 		btnProblemiAssistenza();
 		Home.btnChiudiSessione(about);
 		textPaneInfo();
-		btnHome();
+		btnHomePage(about);
 		Home.lblLogo(this.about);
 		return about;
 	}
