@@ -11,21 +11,17 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import ids.unicam.trashit.console.CestinoSmart;
-import ids.unicam.trashit.console.Policy;
-import ids.unicam.trashit.console.Prodotto;
 import ids.unicam.trashit.grafica.Home;
-import ids.unicam.trashit.start.Start;
+
 
 public class Scansione extends JPanel{
 
-	private static JPanel scansione;
-
+	private JPanel scansione;
 	public JLabel scanlblScansionaProdotto;
 	private JTextField scantxtInputBarcode;
 	private JButton scanbtnAvviaScansione;
@@ -33,38 +29,30 @@ public class Scansione extends JPanel{
 	private JButton scanbtnChiudiSessione;
 	public static JButton scanbtnIndietro;
 	ActionListener action;
-	static Home homepage;
+
 	
-	public Scansione() {
+
+	private void setJPanelScansione() {
 		scansione = new JPanel();
-		Home.layeredPane.add(scansione, "name_47697602642643");
 		scansione.setOpaque(false);
 		scansione.setLayout(null);
 		scansione.setVisible(true);
 		btnIndietro();
-		//creaPanel();		
+		creaPanel();		
 		lblBenvenuto();
-		Home.btnInfo();
-		Home.lblLogo();
-		Home.btnProblemiAssistenza();
-		// Avvia scansione		
+		Home.btnInfo(scansione);
+		Home.lblLogo(scansione);
+		Home.btnProblemiAssistenza(scansione);
 		btnAvviaScansione();		
-		
 		lblScanProdotto();
 		txtBarcode();		
 		lblInputBackground();		
-
 		lblBarcode();
 		btnChiusuraSessione();
-		
-		//indietro
-		
-		
-		
 	}
-	
 
-	public static void btnIndietro() {
+
+	public void btnIndietro() {
 		scanbtnIndietro = new JButton("",new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
         scanbtnIndietro.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
         scanbtnIndietro.setBounds(938, 11, 97, 87);
@@ -232,10 +220,10 @@ public class Scansione extends JPanel{
 		scansione.add(scanlblBenvenuto);
 		
 	}
-
-
-	public void setVisible(boolean b) {
-		scansione.setVisible(true);
-		
+	
+	public JPanel getJPanelScansione() {
+		setJPanelScansione();
+		return scansione;
 	}
+
 }

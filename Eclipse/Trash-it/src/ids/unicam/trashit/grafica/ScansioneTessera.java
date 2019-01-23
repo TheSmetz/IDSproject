@@ -19,124 +19,37 @@ import javax.swing.SwingConstants;
 import ids.unicam.trashit.console.Tessera;
 
 public class ScansioneTessera extends JFrame {
-	private JPanel contentPane;
-	private JLayeredPane layeredPane;
+	JPanel scansioneTessera;
+	JTextField scanTesseratxtInputCodice;
+	JLabel scanTesseralblBenvenuto;
+	JButton scanTesserabtnInfo;
+	JTextPane scanTesseratxtpnErr;
+	JLabel scanTesseralblScansionaProdotto;
+	JLabel scanTesseralblInputBackground;
 	
 	public ScansioneTessera() {
-		JPanel scansioneTessera = new JPanel();
-		layeredPane.add(scansioneTessera, "name_1043256396947700");
-		scansioneTessera.setOpaque(false);
-		scansioneTessera.setLayout(null);
+		setJPanelScansioneTessera();
+		txtInputCodice();
+		lblBenvenuto();
+		Home.btnInfo(scansioneTessera);
+		txtTesseraErrata();		
+		btnAvviaSessioneTessera();
+		Home.lblLogo(scansioneTessera);
+		lblScansionaProdotto();
+		txtBarcode();
+		lblInputBackground();
 		
-		JTextField scanTesseratxtInputCodice = new JTextField();
-		scanTesseratxtInputCodice.setHorizontalAlignment(SwingConstants.CENTER);
-		scanTesseratxtInputCodice.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		scanTesseratxtInputCodice.setBounds(600, 383, 275, 44);
-		scanTesseratxtInputCodice.setOpaque(false);
-		scansioneTessera.add(scanTesseratxtInputCodice);
-		scanTesseratxtInputCodice.setColumns(10);
-		
-		JLabel scanTesseralblBenvenuto;
-		scanTesseralblBenvenuto = new JLabel("BENVENUTO");
-		scanTesseralblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
-		scanTesseralblBenvenuto.setForeground(Color.BLACK);
-		scanTesseralblBenvenuto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
-		scanTesseralblBenvenuto.setBounds(426, 0, 619, 49);
-		scansioneTessera.add(scanTesseralblBenvenuto);
-
-		JButton scanTesserabtnInfo;
-		scanTesserabtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-		scanTesserabtnInfo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switchPanel(about);
-				seconds = 30;
-			}
-		});
-		scanTesserabtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
-		scanTesserabtnInfo.setOpaque(false);
-		scanTesserabtnInfo.setMargin(new Insets(0, 0, 0, 0));
-		scanTesserabtnInfo.setHorizontalTextPosition(SwingConstants.CENTER);
-		scanTesserabtnInfo.setForeground(Color.BLACK);
-		scanTesserabtnInfo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		scanTesserabtnInfo.setContentAreaFilled(false);
-		scanTesserabtnInfo.setBorderPainted(false);
-		scanTesserabtnInfo.setBounds(0, 456, 418, 57);
-		scansioneTessera.add(scanTesserabtnInfo);
-		
-		//tessera errata
-		JTextPane scanTesseratxtpnErr = new JTextPane();
-        scanTesseratxtpnErr.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        scanTesseratxtpnErr.setText(" ");
-        scanTesseratxtpnErr.setBounds(600, 484, 275, 66);
-        scansioneTessera.add(scanTesseratxtpnErr);
-        scanTesseratxtpnErr.setBackground(null);
-        scanTesseratxtpnErr.setBorder(null);
-        scanTesseratxtpnErr.setOpaque(false);
-
-		// Avvia scansione		
-		JButton scanTesserabtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-		scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                seconds = 30;
-                idTessera = scanTesseratxtInputCodice.getText();
-                tesseraScansionata = new Tessera(idTessera);
-                if (tesseraScansionata.verificaPresenza()) {
-                    puntiTessera = tesseraScansionata.getPunti();
-                    ritirolblPuntiTessera.setText("Punti tessera: "+String.valueOf(puntiTessera));
-                    switchPanel(ritiroPremio);
-                }else {
-                    scanTesseratxtpnErr.setText("Attenzione riconoscimento fallito \n      "
-                                                 + "Vi invitiamo a riprovare");
-                    scanTesseratxtInputCodice.setText("");
-                }
-            }
-		});
-		scanTesserabtnAvviaScansione.setVerticalTextPosition(JButton.CENTER);
-		scanTesserabtnAvviaScansione.setHorizontalTextPosition(JButton.CENTER);
-		scanTesserabtnAvviaScansione.setBorderPainted(false);
-		scanTesserabtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
-		// btnScansionaProdotto.setIcon(new
-		// ImageIcon(Main.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
-		scanTesserabtnAvviaScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		scanTesserabtnAvviaScansione.setForeground(Color.BLACK);
-		scanTesserabtnAvviaScansione.setContentAreaFilled(false);
-		scanTesserabtnAvviaScansione.setBounds(416, 212, 629, 96);
-		scansioneTessera.add(scanTesserabtnAvviaScansione);
-
-		JLabel scanTesseralblLogo = new JLabel("");
-		scanTesseralblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		scanTesseralblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
-		scanTesseralblLogo.setBounds(0, 0, 418, 488);
-		scansioneTessera.add(scanTesseralblLogo);
-
-		JLabel scanTesseralblScansionaProdotto = new JLabel("Scansione Tessera");
-		scanTesseralblScansionaProdotto.setHorizontalAlignment(SwingConstants.CENTER);
-		scanTesseralblScansionaProdotto.setForeground(Color.BLACK);
-		scanTesseralblScansionaProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
-		scanTesseralblScansionaProdotto.setBounds(416, 97, 629, 57);
-		scansioneTessera.add(scanTesseralblScansionaProdotto);
-		
-		JLabel scanTesseratxtBarcode = new JLabel();
-		scanTesseratxtBarcode.setHorizontalAlignment(SwingConstants.CENTER);
-		scanTesseratxtBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		scanTesseratxtBarcode.setText("Codice:");
-		scanTesseratxtBarcode.setBounds(426, 321, 619, 49);
-		scanTesseratxtBarcode.setOpaque(false);
-		scansioneTessera.add(scanTesseratxtBarcode);		
+			
 		
 		
 		
-		JLabel scanTesseralblInputBackground = new JLabel("");
-		scanTesseralblInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
-		scanTesseralblInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
-		scanTesseralblInputBackground.setBounds(430, 357, 615, 96);
-		scansioneTessera.add(scanTesseralblInputBackground);
+		 
 		
 		JButton scanTesserabtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanTesserabtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switchPanel(assistenza);
-				seconds = 30;
+			//	switchPanel(assistenza);
+			//	seconds = 30;
 			}
 		});
 		scanTesserabtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -154,9 +67,9 @@ public class ScansioneTessera extends JFrame {
 		JButton scanTesserabtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		scanTesserabtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switchPanel(sessione);
-				timer.stop();
-				scanTesseratxtpnErr.setText("");
+			//	switchPanel(sessione);
+			//	timer.stop();
+			//	scanTesseratxtpnErr.setText("");
 			}
 		});
 		
@@ -181,12 +94,114 @@ public class ScansioneTessera extends JFrame {
 		scanTesserabtnIndietro.setContentAreaFilled(false);
 		scanTesserabtnIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switchPanel(home);
-				seconds = 30;
-				scanTesseratxtpnErr.setText("");
+			//	switchPanel(home);
+			//	seconds = 30;
+			//	scanTesseratxtpnErr.setText("");
 			}
 		});
 		
+		
+	}
+
+	private void lblInputBackground() {
+		scanTesseralblInputBackground = new JLabel("");
+		scanTesseralblInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseralblInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
+		scanTesseralblInputBackground.setBounds(430, 357, 615, 96);
+		scansioneTessera.add(scanTesseralblInputBackground);
+		
+	}
+
+	private void txtBarcode() {
+		JLabel scanTesseratxtBarcode = new JLabel();
+		scanTesseratxtBarcode.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseratxtBarcode.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		scanTesseratxtBarcode.setText("Codice:");
+		scanTesseratxtBarcode.setBounds(426, 321, 619, 49);
+		scanTesseratxtBarcode.setOpaque(false);
+		scansioneTessera.add(scanTesseratxtBarcode);	
+		
+	}
+
+	private void lblScansionaProdotto() {
+		scanTesseralblScansionaProdotto = new JLabel("Scansione Tessera");
+		scanTesseralblScansionaProdotto.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseralblScansionaProdotto.setForeground(Color.BLACK);
+		scanTesseralblScansionaProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
+		scanTesseralblScansionaProdotto.setBounds(416, 97, 629, 57);
+		scansioneTessera.add(scanTesseralblScansionaProdotto);
+		
+	}
+
+	private void btnAvviaSessioneTessera() {
+		JButton scanTesserabtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//                seconds = 30;
+//                idTessera = scanTesseratxtInputCodice.getText();
+//                tesseraScansionata = new Tessera(idTessera);
+//                if (tesseraScansionata.verificaPresenza()) {
+//                    puntiTessera = tesseraScansionata.getPunti();
+//                    ritirolblPuntiTessera.setText("Punti tessera: "+String.valueOf(puntiTessera));
+//                    switchPanel(ritiroPremio);
+//                }else {
+//                    scanTesseratxtpnErr.setText("Attenzione riconoscimento fallito \n      "
+//                                                 + "Vi invitiamo a riprovare");
+//                    scanTesseratxtInputCodice.setText("");
+//                }
+            }
+		});
+		scanTesserabtnAvviaScansione.setVerticalTextPosition(JButton.CENTER);
+		scanTesserabtnAvviaScansione.setHorizontalTextPosition(JButton.CENTER);
+		scanTesserabtnAvviaScansione.setBorderPainted(false);
+		scanTesserabtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
+		// btnScansionaProdotto.setIcon(new
+		// ImageIcon(Main.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
+		scanTesserabtnAvviaScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		scanTesserabtnAvviaScansione.setForeground(Color.BLACK);
+		scanTesserabtnAvviaScansione.setContentAreaFilled(false);
+		scanTesserabtnAvviaScansione.setBounds(416, 212, 629, 96);
+		scansioneTessera.add(scanTesserabtnAvviaScansione);
+		
+	}
+
+	private void txtTesseraErrata() {
+		scanTesseratxtpnErr = new JTextPane();
+        scanTesseratxtpnErr.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        scanTesseratxtpnErr.setText(" ");
+        scanTesseratxtpnErr.setBounds(600, 484, 275, 66);
+        scansioneTessera.add(scanTesseratxtpnErr);
+        scanTesseratxtpnErr.setBackground(null);
+        scanTesseratxtpnErr.setBorder(null);
+        scanTesseratxtpnErr.setOpaque(false);
+		
+	}
+
+	private void lblBenvenuto() {
+		scanTesseralblBenvenuto = new JLabel("BENVENUTO");
+		scanTesseralblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseralblBenvenuto.setForeground(Color.BLACK);
+		scanTesseralblBenvenuto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
+		scanTesseralblBenvenuto.setBounds(426, 0, 619, 49);
+		scansioneTessera.add(scanTesseralblBenvenuto);
+		
+	}
+
+	private void txtInputCodice() {
+		scanTesseratxtInputCodice = new JTextField();
+		scanTesseratxtInputCodice.setHorizontalAlignment(SwingConstants.CENTER);
+		scanTesseratxtInputCodice.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		scanTesseratxtInputCodice.setBounds(600, 383, 275, 44);
+		scanTesseratxtInputCodice.setOpaque(false);
+		scansioneTessera.add(scanTesseratxtInputCodice);
+		scanTesseratxtInputCodice.setColumns(10);
+		
+	}
+
+	private void setJPanelScansioneTessera() {
+		JPanel scansioneTessera = new JPanel();
+		scansioneTessera.setOpaque(false);
+		scansioneTessera.setLayout(null);
 		
 	}
 }

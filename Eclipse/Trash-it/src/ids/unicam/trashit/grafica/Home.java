@@ -99,7 +99,7 @@ public class Home extends JPanel{
 		StyleConstants.setAlignment(centerT, StyleConstants.ALIGN_CENTER);
 		}
 	
-	public static void btnProblemiAssistenza() {
+	public static void btnProblemiAssistenza(JPanel wherePanel) {
 		homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -115,10 +115,10 @@ public class Home extends JPanel{
 		homebtnProblemiAssistenza.setContentAreaFilled(false);
 		homebtnProblemiAssistenza.setBorderPainted(false);
 		homebtnProblemiAssistenza.setBounds(0, 613, 418, 57);
-		home.add(homebtnProblemiAssistenza);
+		wherePanel.add(homebtnProblemiAssistenza);
 	}
 	
-	public static void btnInfo() {
+	public static void btnInfo(JPanel wherePanel) {
 		homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		homebtnInfo.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -135,7 +135,7 @@ public class Home extends JPanel{
 		homebtnInfo.setContentAreaFilled(false);
 		homebtnInfo.setBorderPainted(false);
 		homebtnInfo.setBounds(0, 456, 418, 57);
-		home.add(homebtnInfo);
+		wherePanel.add(homebtnInfo);
 	}
 	
 	public static void lblLogo(JPanel wherePanel) {
@@ -146,7 +146,7 @@ public class Home extends JPanel{
 		wherePanel.add(homelblLogo);
 	}
 	
-	public static void btnChiudiSessione() {
+	public static void btnChiudiSessione(JPanel wherePanel) {
 		homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 //		homebtnChiudiSessione.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -163,7 +163,7 @@ public class Home extends JPanel{
 		homebtnChiudiSessione.setContentAreaFilled(false);
 		homebtnChiudiSessione.setBorderPainted(false);
 		homebtnChiudiSessione.setBounds(416, 613, 629, 57);
-		home.add(homebtnChiudiSessione);
+		wherePanel.add(homebtnChiudiSessione);
 	}
 	
 	private void btnCreaTessera() {
@@ -196,7 +196,7 @@ public class Home extends JPanel{
 
 	private void creaAllLbl() {
 		lblSelezionaOperazione();
-		lblLogo(this.home);
+		lblLogo(home);
 		lblSeiNuovo();
 		
 	}
@@ -206,8 +206,8 @@ public class Home extends JPanel{
 		btnCreaTessera();
 		btnScansione();
 		btnRitiroPremio();
-		btnProblemiAssistenza();	
-		btnInfo();	
+		btnProblemiAssistenza(home);	
+		btnInfo(home);	
 	}
 	
 	public void creaPanelHome() {
