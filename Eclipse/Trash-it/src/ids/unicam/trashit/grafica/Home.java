@@ -138,12 +138,12 @@ public class Home extends JPanel{
 		home.add(homebtnInfo);
 	}
 	
-	public static void lblLogo() {
+	public static void lblLogo(JPanel wherePanel) {
 		homelblLogo = new JLabel("");
 		homelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		homelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblLogo.setBounds(0, 0, 418, 488);
-		home.add(homelblLogo);
+		wherePanel.add(homelblLogo);
 	}
 	
 	public static void btnChiudiSessione() {
@@ -196,7 +196,7 @@ public class Home extends JPanel{
 
 	private void creaAllLbl() {
 		lblSelezionaOperazione();
-		lblLogo();
+		lblLogo(this.home);
 		lblSeiNuovo();
 		
 	}

@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import ids.unicam.trashit.grafica.About;
 import ids.unicam.trashit.grafica.GuiMain;
 import ids.unicam.trashit.grafica.Home;
 import ids.unicam.trashit.grafica.Sessione;
@@ -52,8 +53,12 @@ public class Start extends JFrame {
 //		Home h=new Home();
 //		layeredPane.add(h.getPanelHome());
 		
-		Sessione s = new Sessione();
-		layeredPane.add(s.getJPanelSessione());
+//		Sessione s = new Sessione();
+//		layeredPane.add(s.getJPanelSessione());
+		
+		About a = new About();
+		layeredPane.add(a.getJPanelAbout());
+		
 		background();
 
 		

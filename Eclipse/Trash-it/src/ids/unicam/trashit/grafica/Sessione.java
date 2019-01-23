@@ -14,7 +14,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class Sessione extends JFrame {
+public class Sessione extends JPanel {
 	
 	JPanel sessione;
 	JLabel sessionelblLogo;
