@@ -20,6 +20,7 @@ public class Sessione extends JFrame {
 	private JLayeredPane layeredPane;
 	
 	public Sessione() {
+		
 		JPanel sessione = new JPanel();
 		layeredPane.add(sessione, "name_793346484234400");
 		sessione.setOpaque(true);

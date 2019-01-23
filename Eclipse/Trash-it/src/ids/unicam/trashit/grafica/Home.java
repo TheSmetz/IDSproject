@@ -20,11 +20,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-public class Home extends JFrame{
+public class Home extends JPanel{
 	
 	//COMPONENTI
 	public static JPanel contentPane;
-	public static JLayeredPane layeredPane;
+//	public static JLayeredPane layeredPane;
 	public static JPanel home;
 	JLabel homelblBenvenuto;
 	JLabel homelblSelezionaOperazione;
@@ -36,44 +36,18 @@ public class Home extends JFrame{
 	JButton homebtnCreaTessera;
 	JLabel homelblSeiNuovo;
 	public static JButton homebtnChiudiSessione;
-	JLabel background;
+	
 	
 	Scansione h;
-
-	
-	
-	private void jpanel() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/aaa.png")));
-		setTitle("Trash-it");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1062, 746);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-	}
-	
-	private void jlayeredpane() {
-		layeredPane = new JLayeredPane();
-		layeredPane.setBounds(0, 0, 1045, 699);
-		contentPane.add(layeredPane);
-		layeredPane.setLayout(new CardLayout(0, 0));
-	}
-	
 	
 	private void setjPanel() {
 		home = new JPanel();
-		layeredPane.add(home, "name_781337426904700");
 		home.setOpaque(false);
 		home.setLayout(null);
 	}
+
 	
-	private void background() {
-		background = new JLabel("");
-		background.setBounds(0, -14, 1045, 761);
-		background.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/home.jpg")));
-		contentPane.add(background);
-	}
+
 	
 	private void lblSelezionaOperazione() {
 		homelblBenvenuto = new JLabel("BENVENUTO");
@@ -96,11 +70,10 @@ public class Home extends JFrame{
 		homebtnScansione.setBounds(416, 167, 629, 82);
 		homebtnScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				home.removeAll();
-				home.add(h=new Scansione());
-				home.revalidate();
-				home.repaint();
 				
+			//	ScansionaProdotto h = new ScansionaProdotto();
+				
+				h.setVisible(true);
 				
 //				switchPanel(scansione);
 //				seconds = 30;
@@ -130,7 +103,7 @@ public class Home extends JFrame{
 		StyleConstants.setAlignment(centerT, StyleConstants.ALIGN_CENTER);
 		}
 	
-	public static  void btnProblemiAssistenza() {
+	private void btnProblemiAssistenza() {
 		homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -149,7 +122,7 @@ public class Home extends JFrame{
 		home.add(homebtnProblemiAssistenza);
 	}
 	
-	public static void btnInfo() {
+	private void btnInfo() {
 		homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		homebtnInfo.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -169,7 +142,7 @@ public class Home extends JFrame{
 		home.add(homebtnInfo);
 	}
 	
-	public static  void lblLogo() {
+	private void lblLogo() {
 		homelblLogo = new JLabel("");
 		homelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		homelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -177,7 +150,7 @@ public class Home extends JFrame{
 		home.add(homelblLogo);
 	}
 	
-	public static void btnChiudiSessione() {
+	private void btnChiudiSessione() {
 		homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 //		homebtnChiudiSessione.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -240,15 +213,12 @@ public class Home extends JFrame{
 		btnProblemiAssistenza();	
 		btnInfo();	
 	}
-
-	
-	public Home() {	
-		jpanel();
-		jlayeredpane();
+	public JPanel getPanelHome() {
 		setjPanel();
 		creaAllBtn();
 		creaAllLbl();	
-		background();
-		
-	}
+		//background();
+		return home;
+}
+
 }
