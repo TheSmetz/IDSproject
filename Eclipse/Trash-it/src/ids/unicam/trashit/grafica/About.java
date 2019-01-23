@@ -18,7 +18,6 @@ public class About extends JPanel {
 	JPanel about;
 	JLabel aboutlblInformazioniTrashit;
 	JButton aboutbtnProblemiAssistenza;
-	JButton aboutbtnChiudiSessione;
 	JTextPane abouttextPaneInfo;
 	JButton aboutbtnHome;
 	
@@ -55,26 +54,6 @@ public class About extends JPanel {
 		aboutbtnProblemiAssistenza.setBorderPainted(false);
 		aboutbtnProblemiAssistenza.setBounds(0, 613, 418, 57);
 		about.add(aboutbtnProblemiAssistenza);
-	}
-	
-	private void btnChiudiSessione() {
-		aboutbtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
-//		aboutbtnChiudiSessione.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				switchPanel(sessione);
-//				timer.stop();
-//			}
-//		});
-		aboutbtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
-		aboutbtnChiudiSessione.setOpaque(false);
-		aboutbtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));
-		aboutbtnChiudiSessione.setHorizontalTextPosition(SwingConstants.CENTER);
-		aboutbtnChiudiSessione.setForeground(Color.WHITE);
-		aboutbtnChiudiSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
-		aboutbtnChiudiSessione.setContentAreaFilled(false);
-		aboutbtnChiudiSessione.setBorderPainted(false);
-		aboutbtnChiudiSessione.setBounds(416, 613, 629, 57);
-		about.add(aboutbtnChiudiSessione);
 	}
 	
 	private void textPaneInfo() {
@@ -116,7 +95,7 @@ public class About extends JPanel {
 		setJPanelAbout();
 		lblInformazioniTrashit();
 		btnProblemiAssistenza();
-		btnChiudiSessione();
+		Home.btnChiudiSessione(about);
 		textPaneInfo();
 		btnHome();
 		Home.lblLogo(this.about);
