@@ -68,10 +68,11 @@ public class Start extends JFrame implements ActionListener{
 	
 	private void creaJPanels() {
 		h = new Home();		
-		h.creaPanelHome();
+		h.setJPanelHome();
 		layeredPane.add(h.getJPanelHome());
 		
 //		c = new Scansione();
+//		c.setJPanelScansione();
 //		layeredPane.add(c.getJPanelScansione());
 //		
 //		sess = new Sessione();
@@ -107,8 +108,18 @@ public class Start extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == h.gethomebtnScansione()) {
-			switchPanel(c.scansione);
+		if (e.getSource() == h.gethomebtnScansione()) {
+			//switchPanel(c.getJPanelScansione());
+		}else if (e.getSource() == h.gethomebtnRitiroPremio()) {
+			
+		}else if (e.getSource() == h.getHomebtnCreaTessera()) {
+			
+		}else if (e.getSource() == h.gethomebtnInfo()) {
+			
+		}else if (e.getSource() == h.getHomebtnProblemiAssistenza()) {
+			
+		}else if (e.getSource() == h.gethomebtnChiudiSessione()) {
+			
 		}
 	}
 	
