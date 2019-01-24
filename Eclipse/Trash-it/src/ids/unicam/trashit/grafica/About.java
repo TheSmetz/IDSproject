@@ -94,9 +94,9 @@ public class About {
 		about.setOpaque(false);
 		lblInformazioniTrashit();
 		btnProblemiAssistenza();
-		h = new Home();
-		h.btnChiudiSessione(about);
-		h.lblLogo(this.about);
+//		h = new Home();
+//		h.btnChiudiSessione(about);
+//		h.lblLogo(this.about);
 		textPaneInfo();
 		btnHomePage(about);
 	}

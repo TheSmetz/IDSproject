@@ -14,12 +14,15 @@ import javax.swing.SwingConstants;
 
 public class Sessione {
 	
-	public JPanel sessione;
+	private JPanel sessione;
 	private JLabel sessionelblLogo;
 	private JLabel sessionelblSessione;
-	private JButton sessionebtnAvviaScansione;
+	private JButton sessionebtnAvviaSessione;
 	private JLabel sesslblFreccia;
 	
+	public JButton getsessionebtnAvviaSessione() {
+		return this.sessionebtnAvviaSessione;
+	}
 	
 	private void lblLogo() {
 		sessionelblLogo = new JLabel(""); 
@@ -40,8 +43,8 @@ public class Sessione {
 	}
 	
 	private void btnAvviaSessione() {
-		sessionebtnAvviaScansione = new JButton("AVVIA SESSIONE", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
-	    sessionebtnAvviaScansione.addActionListener(new ActionListener() {
+		sessionebtnAvviaSessione = new JButton("AVVIA SESSIONE", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
+		sessionebtnAvviaSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			//	switchPanel(home);
 			//	seconds = 30;
@@ -49,15 +52,15 @@ public class Sessione {
 			}
 		});
 		
-		sessionebtnAvviaScansione.setVerticalTextPosition(SwingConstants.CENTER);
-		sessionebtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
-		sessionebtnAvviaScansione.setHorizontalTextPosition(SwingConstants.CENTER);
-		sessionebtnAvviaScansione.setForeground(Color.BLACK);
-		sessionebtnAvviaScansione.setFont(new Font("Calibri", Font.BOLD, 30));
-		sessionebtnAvviaScansione.setContentAreaFilled(false);
-		sessionebtnAvviaScansione.setBorderPainted(false);
-		sessionebtnAvviaScansione.setBounds(0, 590, 1045, 96);
-		sessione.add(sessionebtnAvviaScansione);
+		sessionebtnAvviaSessione.setVerticalTextPosition(SwingConstants.CENTER);
+		sessionebtnAvviaSessione.setMargin(new Insets(0, 0, 0, 0));
+		sessionebtnAvviaSessione.setHorizontalTextPosition(SwingConstants.CENTER);
+		sessionebtnAvviaSessione.setForeground(Color.BLACK);
+		sessionebtnAvviaSessione.setFont(new Font("Calibri", Font.BOLD, 30));
+		sessionebtnAvviaSessione.setContentAreaFilled(false);
+		sessionebtnAvviaSessione.setBorderPainted(false);
+		sessionebtnAvviaSessione.setBounds(0, 590, 1045, 96);
+		sessione.add(sessionebtnAvviaSessione);
 	}
 	
 	private void lblFreccia() {
@@ -68,7 +71,6 @@ public class Sessione {
 		sessione.add(sesslblFreccia);
 	}
 	
-	@SuppressWarnings("unused")
 	public void setJPanelSessione() {
 		sessione = new JPanel();
 		sessione.setOpaque(true);
@@ -81,7 +83,7 @@ public class Sessione {
 	}
 	
 	public JPanel getJPanelSessione() {		
-		return sessione;		
+		return this.sessione;		
 	}
 
 }

@@ -169,8 +169,8 @@ public class Scansione extends JPanel {
 		scansione.add(scanlblBenvenuto);
 
 	}
-
-	@SuppressWarnings("unused") //CONTROLLARE
+	
+	//CONTROLLARE
 	public void setJPanelScansione() {
 		scansione = new JPanel();
 		scansione.setOpaque(false);
@@ -192,7 +192,7 @@ public class Scansione extends JPanel {
 	}	
 
 	public JPanel getJPanelScansione() {
-		return scansione;
+		return this.scansione;
 	}
 
 }

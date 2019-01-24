@@ -67,17 +67,19 @@ public class Start extends JFrame implements ActionListener{
 	}
 	
 	private void creaJPanels() {
+		
+		sess = new Sessione();
+		sess.setJPanelSessione();
+		layeredPane.add(sess.getJPanelSessione());
+		
 		h = new Home();		
 		h.setJPanelHome();
 		layeredPane.add(h.getJPanelHome());
 		
 		c = new Scansione();
 		c.setJPanelScansione();
-		layeredPane.add(c.getJPanelScansione());
-//		
-//		sess = new Sessione();
-//		layeredPane.add(sess.getJPanelSessione());
-//		
+		layeredPane.add(c.getJPanelScansione());		
+		
 		ritPremio = new RitiroPremio();
 		ritPremio.setJPanelRitiro();
 		layeredPane.add(ritPremio.getJPanelRitiroPremio());
@@ -108,8 +110,13 @@ public class Start extends JFrame implements ActionListener{
 		h.gethomebtnChiudiSessione().addActionListener(this);
 	}
 	
+	private void addActionListnerSessione() {
+		sess.getsessionebtnAvviaSessione().addActionListener(this);
+	}
+	
 	private void addActionListnerScansione() {
 		c.getBtnIndietro().addActionListener(this);
+		//c.getbtnChiudiSessione().addActionListener(this);
 	}
 	
 	private void addActionListnerAbout() {
@@ -122,6 +129,11 @@ public class Start extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//SESSIONE
+		if(e.getSource() == sess.getsessionebtnAvviaSessione()) {
+			switchPanel(h.getJPanelHome());
+		}
+		
 		//HOME
 		if (e.getSource() == h.gethomebtnScansione()) {
 			System.out.println("SCANSIONE");
@@ -135,12 +147,14 @@ public class Start extends JFrame implements ActionListener{
 		}else if (e.getSource() == h.getHomebtnProblemiAssistenza()) {
 			System.out.println("PROBLEMI");
 		}else if (e.getSource() == h.gethomebtnChiudiSessione()) {
-			System.out.println("SESSIONE");
+			switchPanel(sess.getJPanelSessione());
 		}
 		
 		//SCANSIONE
 		if (e.getSource() == c.getBtnIndietro()) {
 			switchPanel(h.getJPanelHome());
+//		}else if (e.getSource() == c.getbtnChiudiSessione()) {
+//			switchPanel(sess.getJPanelSessione());
 		}
 		
 		//RITIRO PREMIO
@@ -172,6 +186,7 @@ public class Start extends JFrame implements ActionListener{
 	public Start() {
 		creaJFrame();
 		creaJPanels();
+		addActionListnerSessione();
 		addActionListnerHome();
 		addActionListnerScansione();
 		addActionListnerRitiroPremio();
