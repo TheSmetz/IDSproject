@@ -78,8 +78,9 @@ public class Start extends JFrame implements ActionListener{
 //		sess = new Sessione();
 //		layeredPane.add(sess.getJPanelSessione());
 //		
-//		ritPremio = new RitiroPremio();
-//		layeredPane.add(ritPremio.getJPanelRitiroPremio());
+		ritPremio = new RitiroPremio();
+		ritPremio.setJPanelRitiro();
+		layeredPane.add(ritPremio.getJPanelRitiroPremio());
 //		
 //		reg = new Registrazione();
 //		layeredPane.add(reg.getJPanelRegistrazione());
@@ -117,7 +118,7 @@ public class Start extends JFrame implements ActionListener{
 			System.out.println("SCANSIONE");
 			switchPanel(c.getJPanelScansione());
 		}else if (e.getSource() == h.gethomebtnRitiroPremio()) {
-			System.out.println("PREMIO");
+			switchPanel(ritPremio.getJPanelRitiroPremio());
 		}else if (e.getSource() == h.getHomebtnCreaTessera()) {
 			System.out.println("TESSERA");
 		}else if (e.getSource() == h.gethomebtnInfo()) {
