@@ -242,7 +242,7 @@ public class Home{
 		//listnerHome();
 	}
 	
-	public JPanel getPanelHome() {
+	public JPanel getJPanelHome() {
 		return home;
 	}
 }

@@ -107,7 +107,7 @@ public class Start extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == .homebtnScansione) {
+		if(e.getSource() == h.gethomebtnScansione()) {
 			switchPanel(c.scansione);
 		}
 	}
