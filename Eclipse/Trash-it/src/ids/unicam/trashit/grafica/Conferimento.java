@@ -108,6 +108,7 @@ public class Conferimento {
 		btnProdottoVisualizzatoErrato();			
 		btnProdottoVisualizzatoCorretto();		
 		lblImmagineProdotto();
+		h=new Home();
 		h.lblLogo(conferimento);
 		h.btnProblemiAssistenza(conferimento);
 		h.btnInfo(conferimento);
