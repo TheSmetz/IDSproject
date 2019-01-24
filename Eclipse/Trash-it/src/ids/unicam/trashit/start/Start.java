@@ -44,6 +44,7 @@ public class Start extends JFrame implements ActionListener{
 	
 	public static JPanel contentPane;
 	public static JLayeredPane layeredPane;
+	private JButton btnIndietro;
 	private JLabel background;
 	private Sessione sess;
 	private Home h;
@@ -55,10 +56,12 @@ public class Start extends JFrame implements ActionListener{
 	private Conferimento conf;
 	private ScansioneTessera scanTessera;
 	private IstruzioniConferimento istrConferimento;
+	
 	//TIMER
 	private int seconds;
     private SimpleDateFormat df;
     private Timer timer;
+    private JButton button;
 
     private void startTimer() {
     	if(timer.isRunning()) {
@@ -68,6 +71,30 @@ public class Start extends JFrame implements ActionListener{
             timer.start();
             System.out.println("START");   
         }
+    }
+    
+    private void timer() {
+    	//TIMER
+    			JLabel lblTimer = new JLabel("Timer Sessione");
+    			lblTimer.setBounds(0, 0, 281, 45);
+    			contentPane.add(lblTimer);
+    			lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
+    			lblTimer.setFont(new Font("Tahoma", Font.PLAIN, 30));
+    			
+    			timer = new Timer(1000, new ActionListener() {
+    	            public void actionPerformed(ActionEvent e) {
+    	            	if (seconds >= 0) {
+    	            	System.out.println(seconds);
+    	                lblTimer.setText(String.valueOf(seconds));
+    	                seconds--;
+    	            	}else {
+    	            		System.out.println("TEMPO SCADUTO");
+    	            		timer.stop();            		
+    	            		//salvare impostazioni
+    	            		switchPanel(sess.getJPanelSessione());
+    	            	}
+    	            }
+    	        });
     }
 	
 	private void creaJFrame() {
@@ -84,28 +111,19 @@ public class Start extends JFrame implements ActionListener{
 		layeredPane.setBounds(0, 0, 1045, 699);
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
+				
+		timer();
 		
-		//TIMER
-		JLabel lblTimer = new JLabel("Timer Sessione");
-		lblTimer.setBounds(0, 0, 281, 45);
-		contentPane.add(lblTimer);
-		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTimer.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		button = new JButton("", new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
+		button.setBounds(938, 11, 97, 87);
+		button.setContentAreaFilled(false);
+		button.addActionListener(this);
+		contentPane.add(button);
 		
-		timer = new Timer(1000, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	if (seconds >= 0) {
-            	System.out.println(seconds);
-                lblTimer.setText(String.valueOf(seconds));
-                seconds--;
-            	}else {
-            		System.out.println("TEMPO SCADUTO");
-            		timer.stop();            		
-            		//salvare impostazioni
-            		switchPanel(sess.getJPanelSessione());
-            	}
-            }
-        });
+//		scanbtnIndietro = new JButton("",
+//				new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
+//		scanbtnIndietro
+//				.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
 		
 	}
 	
@@ -167,9 +185,9 @@ public class Start extends JFrame implements ActionListener{
 	
 	
 	private void addActionListnerScansione() {
-		c.getbtnIndietro().addActionListener(this);
+		//c.getbtnIndietro().addActionListener(this);
 		c.getbtnAvviaScansione().addActionListener(this);
-		//c.getbtnChiudiSessione().addActionListener(this);
+//		c.getbtnChiudiSessione().addActionListener(this);
 	}
 	
 	private void addActionListnerRitiroPremio() {
@@ -203,6 +221,11 @@ public class Start extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+				
+		if(e.getSource() == button) {
+			switchPanel(h.getJPanelHome());
+		}
+		
 		//SESSIONE
 		if(e.getSource() == sess.getsessionebtnAvviaSessione()) {
 			switchPanel(h.getJPanelHome());
