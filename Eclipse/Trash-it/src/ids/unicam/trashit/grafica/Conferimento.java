@@ -3,28 +3,21 @@ package ids.unicam.trashit.grafica;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class Conferimento extends JPanel {
+public class Conferimento {
 
-	JPanel conferimento;
-	JLabel conflblScansioneProdotto;	
-	JButton confbtnProdottoVisualizzatoErrato;
-	JButton confbtnProdottoVisualizzatoCorretto;
-	JLabel conflblImmagineProdotto;
-	JLabel conflblLogo;
-	JButton confbtnProblemiAssistenza;	
-	JButton confbtnInfo;			
-	JButton confbtnChiudiSessione;
+	private JPanel conferimento;
+	private JLabel conflblScansioneProdotto;	
+	private JButton confbtnProdottoVisualizzatoErrato;
+	private JButton confbtnProdottoVisualizzatoCorretto;
+	private JLabel conflblImmagineProdotto;
+	private Home h;
+
 	
 	private void lblScansioneProdotto() {
 		conflblScansioneProdotto = new JLabel("CONFERIMENTO PRODOTTO");
@@ -97,9 +90,17 @@ public class Conferimento extends JPanel {
 		conferimento.add(conflblImmagineProdotto);
 	}
 	
+	public JButton getConfbtnProdottoVisualizzatoErrato() {
+		return this.confbtnProdottoVisualizzatoErrato;
+	}
+
+	public JButton getConfbtnProdottoVisualizzatoCorretto() {
+		return this.confbtnProdottoVisualizzatoCorretto;
+	}
+	
 	//da fare metodo set immagine prodotto da database
 	
-	private void setJPanelConferimento() {
+	public void setJPanelConferimento() {
 		conferimento = new JPanel();
 		conferimento.setOpaque(false);
 		conferimento.setLayout(null);
@@ -107,14 +108,13 @@ public class Conferimento extends JPanel {
 		btnProdottoVisualizzatoErrato();			
 		btnProdottoVisualizzatoCorretto();		
 		lblImmagineProdotto();
-		Home.lblLogo(conferimento);
-		Home.btnProblemiAssistenza(conferimento);
-		Home.btnInfo(conferimento);
-		Home.btnChiudiSessione(conferimento);	
+		h.lblLogo(conferimento);
+		h.btnProblemiAssistenza(conferimento);
+		h.btnInfo(conferimento);
+		h.btnChiudiSessione(conferimento);	
 	}
 	
-	public JPanel getJPanelConferimento() {
-		setJPanelConferimento();		
+	public JPanel getJPanelConferimento() {	
 		return this.conferimento;
 	}
 }
