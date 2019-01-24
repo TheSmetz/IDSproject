@@ -17,6 +17,8 @@ import ids.unicam.trashit.grafica.Conferimento;
 import ids.unicam.trashit.grafica.GuiMain;
 import ids.unicam.trashit.grafica.Home;
 import ids.unicam.trashit.grafica.IstruzioniConferimento;
+import ids.unicam.trashit.grafica.Registrazione;
+import ids.unicam.trashit.grafica.RitiroPremio;
 import ids.unicam.trashit.grafica.Scansione;
 import ids.unicam.trashit.grafica.ScansioneTessera;
 import ids.unicam.trashit.grafica.Sessione;
@@ -54,14 +56,21 @@ public class Start extends JFrame {
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
 		
-		Home h=new Home();		
-		layeredPane.add(h.getPanelHome());
+		RitiroPremio f=new RitiroPremio();
+		layeredPane.add(f.getJPanelRitiroPremio());
 		
-		Sessione s = new Sessione();
-		layeredPane.add(s.getJPanelSessione());
 		
-		Scansione c =new Scansione();
-		layeredPane.add(c.getJPanelScansione());
+//		Registrazione r=new Registrazione();
+//		layeredPane.add(r.getJPanelRegistrazione());
+		
+//		Home h=new Home();		
+//		layeredPane.add(h.getPanelHome());
+//		
+//		Sessione s = new Sessione();
+//		layeredPane.add(s.getJPanelSessione());
+//		
+//		Scansione c =new Scansione();
+//		layeredPane.add(c.getJPanelScansione());
 		
 //		About a = new About();
 //		layeredPane.add(a.getJPanelAbout());
