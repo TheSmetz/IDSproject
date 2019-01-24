@@ -223,7 +223,7 @@ public class Home{
 		btnInfo(home);	
 	}
 	
-	public void creaPanelHome() {
+	public void setJPanelHome() {
 		setjPanel();
 		creaAllBtn();
 		creaAllLbl();	
