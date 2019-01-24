@@ -20,22 +20,20 @@ import ids.unicam.trashit.grafica.Home;
 
 public class Scansione extends JPanel {
 
-	public static JPanel scansione;
-	public JLabel scanlblScansionaProdotto;
+	private JPanel scansione;
+	private JLabel scanlblScansionaProdotto;
 	private JTextField scantxtInputBarcode;
 	private JButton scanbtnAvviaScansione;
 	private JLabel scantxtBarcode;
-	private JButton scanbtnChiudiSessione;
-	public static JButton scanbtnIndietro;
-	ActionListener action;
+	private JButton scanbtnIndietro;
+	private Home h;
 
-	public static void btnIndietro(JPanel wherePanel) {
+	public void btnIndietro(JPanel wherePanel) {
 		scanbtnIndietro = new JButton("",
 				new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
 		scanbtnIndietro
 				.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
 		scanbtnIndietro.setBounds(938, 11, 97, 87);
-
 		scanbtnIndietro.setOpaque(false);
 		scanbtnIndietro.setBorder(null);
 		scanbtnIndietro.setContentAreaFilled(false);
@@ -52,8 +50,10 @@ public class Scansione extends JPanel {
 		});
 		wherePanel.add(scanbtnIndietro);
 	}
-
-
+	
+	public JButton getBtnIndietro() {
+		return scanbtnIndietro;
+	}
 
 	private void lblBarcode() {
 		scantxtBarcode = new JLabel();
@@ -170,26 +170,28 @@ public class Scansione extends JPanel {
 
 	}
 
-	private void setJPanelScansione() {
+	@SuppressWarnings("unused") //CONTROLLARE
+	public void setJPanelScansione() {
 		scansione = new JPanel();
 		scansione.setOpaque(false);
 		scansione.setLayout(null);
 		scansione.setVisible(true);
 		btnIndietro(scansione);
 		lblBenvenuto();
-		Home.btnInfo(scansione);
-		Home.lblLogo(scansione);
-		Home.btnProblemiAssistenza(scansione);
+		h=new Home();
+		h.btnInfo(scansione);
+		h.lblLogo(scansione);
+		h.btnProblemiAssistenza(scansione);
+		h.btnChiudiSessione(scansione);
 		btnAvviaScansione();
 		lblScanProdotto();
 		txtBarcode();
 		lblInputBackground();
 		lblBarcode();
-		Home.btnChiudiSessione(scansione);
+		
 	}	
 
 	public JPanel getJPanelScansione() {
-		setJPanelScansione();
 		return scansione;
 	}
 
