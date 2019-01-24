@@ -85,16 +85,17 @@ public class About {
 	}
 	
 	@SuppressWarnings("unused")
-	private void setJPanelAbout() {
+	public void setJPanelAbout() {
 		about = new JPanel();
 		about.setLayout(null);
 		about.setOpaque(false);
 		lblInformazioniTrashit();
 		btnProblemiAssistenza();
+		h = new Home();
 		h.btnChiudiSessione(about);
+		h.lblLogo(this.about);
 		textPaneInfo();
 		btnHomePage(about);
-		h.lblLogo(this.about);
 	}
 	
 	public JPanel getJPanelAbout() {
