@@ -16,22 +16,20 @@ import javax.swing.text.StyleConstants;
 
 import ids.unicam.trashit.start.Start;
 
-public class Home extends JPanel implements ActionListener{
+public class Home{
 	
 	//COMPONENTI
-	public static JPanel contentPane;
-//	public static JLayeredPane layeredPane;
-	public static JPanel home;
-	JLabel homelblBenvenuto;
-	JLabel homelblSelezionaOperazione;
-	JButton homebtnScansione;
-	JButton homebtnRitiroPremio;
-	public static  JButton homebtnProblemiAssistenza;
-	public static  JButton homebtnInfo;
-	public static  JLabel homelblLogo;
-	JButton homebtnCreaTessera;
-	JLabel homelblSeiNuovo;
-	public static JButton homebtnChiudiSessione;
+	private JPanel home;
+	private JLabel homelblBenvenuto;
+	private JLabel homelblSelezionaOperazione;
+	private JButton homebtnScansione;
+	private JButton homebtnRitiroPremio;
+	private JButton homebtnProblemiAssistenza;
+	private JButton homebtnInfo;
+	private JLabel homelblLogo;
+	private JButton homebtnCreaTessera;
+	private JLabel homelblSeiNuovo;
+	private JButton homebtnChiudiSessione;
 	
 //	public static ActionListener action;
 	
@@ -53,7 +51,23 @@ public class Home extends JPanel implements ActionListener{
 		home.setLayout(null);
 	}
 
-	private void lblSelezionaOperazione() {
+	public JButton gethomebtnChiudiSessione() {
+		return homebtnChiudiSessione;
+	}
+	
+	public JButton gethomebtnInfo() {
+		return homebtnInfo;
+	}
+	
+	public JButton getHomebtnCreaTessera() {
+		return homebtnCreaTessera;
+	}
+	
+	public JButton getHomebtnProblemiAssistenza() {
+		return homebtnProblemiAssistenza;
+}
+
+	private void lblBenvenuto() {
 		homelblBenvenuto = new JLabel("BENVENUTO");
 		homelblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblBenvenuto.setForeground(Color.BLACK);
@@ -72,29 +86,23 @@ public class Home extends JPanel implements ActionListener{
 		homebtnScansione.setContentAreaFilled(false);
 		homebtnScansione.setBorderPainted(false);
 		homebtnScansione.setBounds(416, 167, 629, 82);
-//		homebtnScansione.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-				
-			//	ScansionaProdotto h = new ScansionaProdotto();
-				
-			//	h.setVisible(true);
-				
-//				switchPanel(scansione);
-//				seconds = 30;
-//			}
-//		});
-		homebtnScansione.addActionListener(this);
+		homebtnScansione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			Start.switchPanel(Scansione.scansione);
+			}
+		});
 		home.add(homebtnScansione);
 	}
 	
 	private void btnRitiroPremio() {
 		homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-//		homebtnRitiroPremio.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
+		homebtnRitiroPremio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Start.switchPanel(RitiroPremio.ritiroPremio);
 //				switchPanel(scansioneTessera);
 //				seconds = 30;
-//			}
-//		});
+			}
+		});
 		homebtnRitiroPremio.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnRitiroPremio.setMargin(new Insets(0, 0, 0, 0));
 		homebtnRitiroPremio.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -108,7 +116,7 @@ public class Home extends JPanel implements ActionListener{
 		StyleConstants.setAlignment(centerT, StyleConstants.ALIGN_CENTER);
 		}
 	
-	public static void btnProblemiAssistenza(JPanel wherePanel) {
+	public void btnProblemiAssistenza(JPanel wherePanel) {
 		homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -127,7 +135,7 @@ public class Home extends JPanel implements ActionListener{
 		wherePanel.add(homebtnProblemiAssistenza);
 	}
 	
-	public static void btnInfo(JPanel wherePanel) {
+	public void btnInfo(JPanel wherePanel) {
 		homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		homebtnInfo.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -147,7 +155,7 @@ public class Home extends JPanel implements ActionListener{
 		wherePanel.add(homebtnInfo);
 	}
 	
-	public static void lblLogo(JPanel wherePanel) {
+	public void lblLogo(JPanel wherePanel) {
 		homelblLogo = new JLabel("");
 		homelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		homelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -155,7 +163,7 @@ public class Home extends JPanel implements ActionListener{
 		wherePanel.add(homelblLogo);
 	}
 	
-	public static void btnChiudiSessione(JPanel wherePanel) {
+	public void btnChiudiSessione(JPanel wherePanel) {
 		homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 //		homebtnChiudiSessione.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -176,7 +184,6 @@ public class Home extends JPanel implements ActionListener{
 	}
 	
 	private void btnCreaTessera() {
-
 		JButton homebtnCreaTessera = new JButton("CREA TESSERA", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
 		homebtnCreaTessera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -202,8 +209,18 @@ public class Home extends JPanel implements ActionListener{
 		homelblSeiNuovo.setBounds(416, 400, 629, 40);
 		home.add(homelblSeiNuovo);
 	}
-
+	
+	private void lblSelezionaOperazione() {
+	homelblSelezionaOperazione = new JLabel("Seleziona un'operazione");
+	homelblSelezionaOperazione.setHorizontalAlignment(SwingConstants.CENTER);
+	homelblSelezionaOperazione.setForeground(Color.BLACK);
+	homelblSelezionaOperazione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
+	homelblSelezionaOperazione.setBounds(416, 97, 629, 57);
+	home.add(homelblSelezionaOperazione);
+	}
+	
 	private void creaAllLbl() {
+		lblBenvenuto();
 		lblSelezionaOperazione();
 		lblLogo(home);
 		lblSeiNuovo();
@@ -227,19 +244,18 @@ public class Home extends JPanel implements ActionListener{
 	}
 	
 	public JPanel getPanelHome() {
-		creaPanelHome();
 		return home;
 }
 
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == homebtnScansione) {
-			Start.switchPanel(Scansione.scansione);
-		}else if (e.getSource() == homebtnChiudiSessione) {
-			Start.switchPanel(Scansione.scansione);
-		}
-		
-	}
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		if(e.getSource() == homebtnScansione) {
+//			Start.switchPanel(Scansione.scansione);
+//		}else if (e.getSource() == homebtnChiudiSessione) {
+//			Start.switchPanel(Scansione.scansione);
+//		}
+//		
+//	}
 
 }
