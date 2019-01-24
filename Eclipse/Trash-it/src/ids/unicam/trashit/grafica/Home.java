@@ -14,8 +14,6 @@ import javax.swing.SwingConstants;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-import ids.unicam.trashit.start.Start;
-
 public class Home{
 	
 	//COMPONENTI
@@ -31,20 +29,6 @@ public class Home{
 	private JLabel homelblSeiNuovo;
 	private JButton homebtnChiudiSessione;
 	
-//	public static ActionListener action;
-	
-//	public void listnerHome() {
-//		action = new ActionListener() {			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				if(e.getSource() == homebtnScansione) {
-//					System.out.println("BELLAAAAAA");
-//				}
-//			}
-//		};
-//	}
-
-	
 	private void setjPanel() {
 		home = new JPanel();
 		home.setOpaque(false);
@@ -53,6 +37,10 @@ public class Home{
 	
 	public JButton gethomebtnScansione() {
 		return homebtnScansione;
+	}
+	
+	public JButton gethomebtnRitiroPremio() {
+		return homebtnRitiroPremio;
 	}
 
 	public JButton gethomebtnChiudiSessione() {
@@ -239,7 +227,6 @@ public class Home{
 		setjPanel();
 		creaAllBtn();
 		creaAllLbl();	
-		//listnerHome();
 	}
 	
 	public JPanel getJPanelHome() {

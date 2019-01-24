@@ -69,37 +69,37 @@ public class Start extends JFrame implements ActionListener{
 	private void creaJPanels() {
 		h = new Home();		
 		h.creaPanelHome();
-		layeredPane.add(h.getPanelHome());
+		layeredPane.add(h.getJPanelHome());
 		
-		c = new Scansione();
-		layeredPane.add(c.getJPanelScansione());
-		
-		sess = new Sessione();
-		layeredPane.add(sess.getJPanelSessione());
-		
-		ritPremio = new RitiroPremio();
-		layeredPane.add(ritPremio.getJPanelRitiroPremio());
-		
-		reg = new Registrazione();
-		layeredPane.add(reg.getJPanelRegistrazione());
-		
-		ab = new About();
-		layeredPane.add(ab.getJPanelAbout());
-		
-		conf = new Conferimento();
-		layeredPane.add(conf.getJPanelConferimento());
-
-		scanTessera = new ScansioneTessera();
-		layeredPane.add(scanTessera.getJPanelScansioneTessera());
-		
-		istrConferimento = new IstruzioniConferimento();
-		layeredPane.add(istrConferimento.getJPanelIstruzioni());
+//		c = new Scansione();
+//		layeredPane.add(c.getJPanelScansione());
+//		
+//		sess = new Sessione();
+//		layeredPane.add(sess.getJPanelSessione());
+//		
+//		ritPremio = new RitiroPremio();
+//		layeredPane.add(ritPremio.getJPanelRitiroPremio());
+//		
+//		reg = new Registrazione();
+//		layeredPane.add(reg.getJPanelRegistrazione());
+//		
+//		ab = new About();
+//		layeredPane.add(ab.getJPanelAbout());
+//		
+//		conf = new Conferimento();
+//		layeredPane.add(conf.getJPanelConferimento());
+//
+//		scanTessera = new ScansioneTessera();
+//		layeredPane.add(scanTessera.getJPanelScansioneTessera());
+//		
+//		istrConferimento = new IstruzioniConferimento();
+//		layeredPane.add(istrConferimento.getJPanelIstruzioni());
 	}
 	
 	private void addActionListnerHome() {
 		h.gethomebtnScansione().addActionListener(this);
-		//ritiro
-		//crea tessera
+		h.gethomebtnRitiroPremio().addActionListener(this);//ritiro
+		h.getHomebtnCreaTessera().addActionListener(this);//crea tessera
 		h.gethomebtnInfo().addActionListener(this);
 		h.getHomebtnProblemiAssistenza().addActionListener(this);
 		h.gethomebtnChiudiSessione().addActionListener(this);
