@@ -3,7 +3,6 @@ package ids.unicam.trashit.grafica;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
-
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,6 +25,7 @@ public class RitiroPremio {
 	private JLabel ritirolblRitiroPremio;
 	private JLabel ritirolblSelezionePremio;
 	private Home h;
+	private Scansione s;
 
 
 	private void lblSelezionePremio() {
@@ -113,11 +113,13 @@ public class RitiroPremio {
 //	}
 	
 	@SuppressWarnings("unused")
-	private void setJPanelRitiro() {
+	public void setJPanelRitiro() {
 		ritiroPremio = new JPanel();
 		ritiroPremio.setLayout(null);		
 		ritiroPremio.setOpaque(false);
 		h=new Home();
+		s=new Scansione();
+		s.btnIndietro(ritiroPremio);
 		h.lblLogo(ritiroPremio);
 		h.btnInfo(ritiroPremio);
 		h.btnProblemiAssistenza(ritiroPremio);

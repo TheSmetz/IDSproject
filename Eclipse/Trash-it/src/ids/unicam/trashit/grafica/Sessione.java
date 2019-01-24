@@ -8,22 +8,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class Sessione extends JPanel {
+public class Sessione {
 	
-	public static JPanel sessione;
-	JLabel sessionelblLogo;
-	JLabel sessionelblSessione;
-	JButton sessionebtnAvviaScansione;
-	JLabel sesslblFreccia;
+	public JPanel sessione;
+	private JLabel sessionelblLogo;
+	private JLabel sessionelblSessione;
+	private JButton sessionebtnAvviaScansione;
+	private JLabel sesslblFreccia;
+	
 	
 	private void lblLogo() {
-		JLabel sessionelblLogo = new JLabel(""); 
+		sessionelblLogo = new JLabel(""); 
 		sessionelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logog.png")));
 		sessionelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		sessionelblLogo.setBounds(0, 68, 1045, 505);
@@ -32,7 +31,7 @@ public class Sessione extends JPanel {
 	
 	
 	private void lblSessione() {
-		JLabel sessionelblSessione = new JLabel("Guadagna PREMI salvando l'ambiente!");
+		sessionelblSessione = new JLabel("Guadagna PREMI salvando l'ambiente!");
 		sessionelblSessione.setHorizontalAlignment(SwingConstants.CENTER);
 		sessionelblSessione.setForeground(Color.BLACK);
 		sessionelblSessione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 35));
@@ -41,7 +40,7 @@ public class Sessione extends JPanel {
 	}
 	
 	private void btnAvviaSessione() {
-		JButton sessionebtnAvviaScansione = new JButton("AVVIA SESSIONE", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
+		sessionebtnAvviaScansione = new JButton("AVVIA SESSIONE", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
 	    sessionebtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			//	switchPanel(home);
@@ -62,14 +61,15 @@ public class Sessione extends JPanel {
 	}
 	
 	private void lblFreccia() {
-		JLabel sesslblFreccia = new JLabel("");
+		sesslblFreccia = new JLabel("");
 		sesslblFreccia.setToolTipText("");
 		sesslblFreccia.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/freccia.gif")));
 		sesslblFreccia.setBounds(728, 54, 240, 598);
 		sessione.add(sesslblFreccia);
 	}
 	
-	private void setJPanelSessione() {
+	@SuppressWarnings("unused")
+	public void setJPanelSessione() {
 		sessione = new JPanel();
 		sessione.setOpaque(true);
 		sessione.setLayout(null);
@@ -80,8 +80,7 @@ public class Sessione extends JPanel {
 		lblFreccia();
 	}
 	
-	public JPanel getJPanelSessione() {
-		setJPanelSessione();		
+	public JPanel getJPanelSessione() {		
 		return sessione;		
 	}
 
