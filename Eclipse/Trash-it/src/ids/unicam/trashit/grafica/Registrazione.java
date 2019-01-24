@@ -9,10 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -20,12 +17,9 @@ import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JDateChooser;
 
-import ids.unicam.trashit.console.AggiuntaDB;
-import ids.unicam.trashit.console.Tessera;
-
-public class Registrazione extends JFrame {
+public class Registrazione {
 	
-	public JPanel registrazione;
+	private JPanel registrazione;
 	private JTextField regtxtCodiceFiscale;
 	private JTextField regtextFieldNome;
 	private JTextField regtextFieldCognome;
@@ -38,32 +32,10 @@ public class Registrazione extends JFrame {
 	private JLabel reglblCognome;
 	private JLabel reglblNome;
 	private JLabel reglblCF;
+	private Home h;
+	private Scansione s;
 
-
-	private void setJPanelRegistrazione() {
-		registrazione = new JPanel();
-		registrazione.setOpaque(false);
-		registrazione.setLayout(null);	
-		lblCF();
-		lblNome();
-		lblCognome();
-		Home.btnProblemiAssistenza(registrazione);
-		Home.btnInfo(registrazione);
-		Home.lblLogo(registrazione);
-		Home.btnChiudiSessione(registrazione);
-		dateChooser();
-		txtCodiceFiscale();
-		lblSfondoCodiceFiscale();
-		Scansione.btnIndietro(registrazione);
-		btnStampaTessera();
-        txtPaneRegistrazioneTessera();	
-		txtFieldNome();
-		lblDataDiNascita();
-		txtFieldCognome();
-		lblSfondoNome();
-		lblSfondoCognome();
-		
-	}
+	
 
 	private void lblCF() {
 		reglblCF = new JLabel("Codice Fiscale:");
@@ -216,10 +188,39 @@ public class Registrazione extends JFrame {
 		reglblSfondoCognome.setBounds(620, 280, 425, 68);
 		registrazione.add(reglblSfondoCognome);
 	}
+	
+	public JButton getRegbtnStampaTessera() {
+		return this.regbtnStampaTessera;
+	}
+	
+	public void setJPanelRegistrazione() {
+		registrazione = new JPanel();
+		registrazione.setOpaque(false);
+		registrazione.setLayout(null);	
+		lblCF();
+		lblNome();
+		lblCognome();
+		h=new Home();
+		h.btnProblemiAssistenza(registrazione);
+		h.btnInfo(registrazione);
+		h.lblLogo(registrazione);
+		h.btnChiudiSessione(registrazione);
+		dateChooser();
+		txtCodiceFiscale();
+		lblSfondoCodiceFiscale();
+		s=new Scansione();
+		s.btnIndietro(registrazione);
+		btnStampaTessera();
+        txtPaneRegistrazioneTessera();	
+		txtFieldNome();
+		lblDataDiNascita();
+		txtFieldCognome();
+		lblSfondoNome();
+		lblSfondoCognome();
+	}
+	
 	public  JPanel getJPanelRegistrazione() {
-		setJPanelRegistrazione();
-		return registrazione;
-		
+		return this.registrazione;
 	}
 	
 }
