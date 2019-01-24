@@ -36,7 +36,6 @@ public class Assistenza {
 		assistenza.add(asstxtpnTelefonoEmail);
 	}
 	
-	@SuppressWarnings("unused")
 	public void setJPanelAssistenza() {
 		assistenza = new JPanel();
 		assistenza.setLayout(null);

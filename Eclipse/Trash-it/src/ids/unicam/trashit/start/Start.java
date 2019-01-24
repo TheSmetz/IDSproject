@@ -6,6 +6,7 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import ids.unicam.trashit.grafica.About;
+import ids.unicam.trashit.grafica.Assistenza;
 import ids.unicam.trashit.grafica.Conferimento;
 import ids.unicam.trashit.grafica.GuiMain;
 import ids.unicam.trashit.grafica.Home;
@@ -28,10 +30,13 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.JLayeredPane;
+
+import javax.swing.Timer;
 
 
 
@@ -45,10 +50,25 @@ public class Start extends JFrame implements ActionListener{
 	private Scansione c;
 	private RitiroPremio ritPremio;
 	private Registrazione reg;
+	private Assistenza ass;
 	private About ab;
 	private Conferimento conf;
 	private ScansioneTessera scanTessera;
 	private IstruzioniConferimento istrConferimento;
+	//TIMER
+	private int seconds;
+    private SimpleDateFormat df;
+    private Timer timer;
+
+    private void startTimer() {
+    	if(timer.isRunning()) {
+            timer.stop();
+            System.out.println("STOP");
+        }else {
+            timer.start();
+            System.out.println("START");   
+        }
+    }
 	
 	private void creaJFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/aaa.png")));
@@ -64,6 +84,29 @@ public class Start extends JFrame implements ActionListener{
 		layeredPane.setBounds(0, 0, 1045, 699);
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
+		
+		//TIMER
+		JLabel lblTimer = new JLabel("Timer Sessione");
+		lblTimer.setBounds(0, 0, 281, 45);
+		contentPane.add(lblTimer);
+		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTimer.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		
+		timer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	if (seconds >= 0) {
+            	System.out.println(seconds);
+                lblTimer.setText(String.valueOf(seconds));
+                seconds--;
+            	}else {
+            		System.out.println("TEMPO SCADUTO");
+            		timer.stop();            		
+            		//salvare impostazioni
+            		switchPanel(sess.getJPanelSessione());
+            	}
+            }
+        });
+		
 	}
 	
 	private void creaJPanels() {
@@ -83,22 +126,34 @@ public class Start extends JFrame implements ActionListener{
 		ritPremio = new RitiroPremio();
 		ritPremio.setJPanelRitiro();
 		layeredPane.add(ritPremio.getJPanelRitiroPremio());
-//		
-//		reg = new Registrazione();
-//		layeredPane.add(reg.getJPanelRegistrazione());
-//		
+		
+		reg = new Registrazione();
+		reg.setJPanelRegistrazione();
+		layeredPane.add(reg.getJPanelRegistrazione());
+		
 		ab = new About();
 		ab.setJPanelAbout();
 		layeredPane.add(ab.getJPanelAbout());
-//		
-//		conf = new Conferimento();
-//		layeredPane.add(conf.getJPanelConferimento());
-//
-//		scanTessera = new ScansioneTessera();
-//		layeredPane.add(scanTessera.getJPanelScansioneTessera());
-//		
-//		istrConferimento = new IstruzioniConferimento();
-//		layeredPane.add(istrConferimento.getJPanelIstruzioni());
+		
+		ass = new Assistenza();
+		ass.setJPanelAssistenza();
+		layeredPane.add(ass.getJPanelAssistenza());
+		
+		conf = new Conferimento();
+		conf.setJPanelConferimento();
+		layeredPane.add(conf.getJPanelConferimento());
+
+		scanTessera = new ScansioneTessera();
+		scanTessera.setJPanelScansioneTessera();
+		layeredPane.add(scanTessera.getJPanelScansioneTessera());
+		
+		istrConferimento = new IstruzioniConferimento();
+		istrConferimento.setJPanelIstruzioni();
+		layeredPane.add(istrConferimento.getJPanelIstruzioni());
+	}
+	
+	private void addActionListnerSessione() {
+		sess.getsessionebtnAvviaSessione().addActionListener(this);
 	}
 	
 	private void addActionListnerHome() {
@@ -108,53 +163,96 @@ public class Start extends JFrame implements ActionListener{
 		h.gethomebtnInfo().addActionListener(this);
 		h.getHomebtnProblemiAssistenza().addActionListener(this);
 		h.gethomebtnChiudiSessione().addActionListener(this);
-	}
+	}	
 	
-	private void addActionListnerSessione() {
-		sess.getsessionebtnAvviaSessione().addActionListener(this);
-	}
 	
 	private void addActionListnerScansione() {
-		c.getBtnIndietro().addActionListener(this);
+		c.getbtnIndietro().addActionListener(this);
+		c.getbtnAvviaScansione().addActionListener(this);
 		//c.getbtnChiudiSessione().addActionListener(this);
-	}
-	
-	private void addActionListnerAbout() {
-		ab.getaboutbtnHomePage().addActionListener(this);
 	}
 	
 	private void addActionListnerRitiroPremio() {
 		ritPremio.getritirobtnRitira().addActionListener(this);
 	}
 	
+	private void addActionListnerAbout() {
+		ab.getaboutbtnHomePage().addActionListener(this);
+	}
+	
+	private void addActionListnerAssistenza() {
+	}
+	
+	private void addActionListnerConferimento() {
+		conf.getbtnProdottoVisualizzatoCorretto().addActionListener(this);
+		conf.getbtnProdottoVisualizzatoErrato().addActionListener(this);
+	}
+	
+	private void addActionListnerIstruzioniConferimento() {
+		istrConferimento.getIstrbtnNuovaScansione().addActionListener(this);
+	}
+	
+	private void addActionListnerRegistrazione() {
+		reg.getRegbtnStampaTessera().addActionListener(this);
+	}
+	
+	private void addActionListnerScansioneTessera() {
+	}
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//SESSIONE
 		if(e.getSource() == sess.getsessionebtnAvviaSessione()) {
 			switchPanel(h.getJPanelHome());
+			seconds = 30;
+			startTimer();
 		}
 		
 		//HOME
 		if (e.getSource() == h.gethomebtnScansione()) {
-			System.out.println("SCANSIONE");
 			switchPanel(c.getJPanelScansione());
+			seconds = 30;
 		}else if (e.getSource() == h.gethomebtnRitiroPremio()) {
 			switchPanel(ritPremio.getJPanelRitiroPremio());
+			seconds = 30;
 		}else if (e.getSource() == h.getHomebtnCreaTessera()) {
-			System.out.println("TESSERA");
+			switchPanel(reg.getJPanelRegistrazione());
+			seconds = 120;
 		}else if (e.getSource() == h.gethomebtnInfo()) {
 			switchPanel(ab.getJPanelAbout());
+			seconds = 30;
 		}else if (e.getSource() == h.getHomebtnProblemiAssistenza()) {
-			System.out.println("PROBLEMI");
+			switchPanel(ass.getJPanelAssistenza());
+			seconds = 30;
 		}else if (e.getSource() == h.gethomebtnChiudiSessione()) {
 			switchPanel(sess.getJPanelSessione());
+			seconds = 30;
 		}
 		
 		//SCANSIONE
-		if (e.getSource() == c.getBtnIndietro()) {
+		if (e.getSource() == c.getbtnIndietro()) {
 			switchPanel(h.getJPanelHome());
-//		}else if (e.getSource() == c.getbtnChiudiSessione()) {
-//			switchPanel(sess.getJPanelSessione());
+			seconds = 30;
+		}else if (e.getSource() == c.getbtnAvviaScansione()) {
+			switchPanel(conf.getJPanelConferimento());
+			seconds = 30;
+		}
+		
+		//CONFERIMENTO
+		if (e.getSource() == conf.getbtnProdottoVisualizzatoCorretto()) {
+			switchPanel(istrConferimento.getJPanelIstruzioni());
+			seconds = 60;
+		} else if (e.getSource() == conf.getbtnProdottoVisualizzatoErrato()) {
+			switchPanel(c.getJPanelScansione());
+			seconds = 30;
+		}
+		
+		//ISTRUZIONI CONFERIMENTO
+		if (e.getSource() == istrConferimento.getIstrbtnNuovaScansione()) {
+			switchPanel(c.getJPanelScansione());
+			seconds = 30;
 		}
 		
 		//RITIRO PREMIO
@@ -162,10 +260,16 @@ public class Start extends JFrame implements ActionListener{
 			System.out.println("+++STAMPA BIGLIETTO+++");
 		}
 		
+		//REGISTRAZIONE
+		if (e.getSource() == reg.getRegbtnStampaTessera()) {
+			System.out.println("AGGIUNTA AL DB E STAMPA TESSERA");
+		}
+		
 		//ABOUT
 		if (e.getSource() == ab.getaboutbtnHomePage()) {
 			System.out.println("HOME");
 			switchPanel(h.getJPanelHome());
+			seconds = 30;
 		}
 	}
 	
@@ -190,6 +294,11 @@ public class Start extends JFrame implements ActionListener{
 		addActionListnerHome();
 		addActionListnerScansione();
 		addActionListnerRitiroPremio();
+		addActionListnerAssistenza();
+		addActionListnerConferimento();
+		addActionListnerIstruzioniConferimento();
+		addActionListnerRegistrazione();
+		addActionListnerScansioneTessera();
 		addActionListnerAbout();
 		background();	
 	}

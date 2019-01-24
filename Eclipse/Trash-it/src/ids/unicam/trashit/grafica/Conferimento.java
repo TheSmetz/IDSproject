@@ -90,11 +90,11 @@ public class Conferimento {
 		conferimento.add(conflblImmagineProdotto);
 	}
 	
-	public JButton getConfbtnProdottoVisualizzatoErrato() {
+	public JButton getbtnProdottoVisualizzatoErrato() {
 		return this.confbtnProdottoVisualizzatoErrato;
 	}
 
-	public JButton getConfbtnProdottoVisualizzatoCorretto() {
+	public JButton getbtnProdottoVisualizzatoCorretto() {
 		return this.confbtnProdottoVisualizzatoCorretto;
 	}
 	

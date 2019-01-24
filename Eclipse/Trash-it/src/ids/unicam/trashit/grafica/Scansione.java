@@ -27,6 +27,14 @@ public class Scansione extends JPanel {
 	private JLabel scantxtBarcode;
 	private JButton scanbtnIndietro;
 	private Home h;
+	
+	public JButton getbtnIndietro() {
+		return this.scanbtnIndietro;
+	}
+	
+	public JButton getbtnAvviaScansione() {
+		return this.scanbtnAvviaScansione;
+	}
 
 	public void btnIndietro(JPanel wherePanel) {
 		scanbtnIndietro = new JButton("",
@@ -51,10 +59,6 @@ public class Scansione extends JPanel {
 		wherePanel.add(scanbtnIndietro);
 	}
 	
-	public JButton getBtnIndietro() {
-		return scanbtnIndietro;
-	}
-
 	private void lblBarcode() {
 		scantxtBarcode = new JLabel();
 		scantxtBarcode.setHorizontalAlignment(SwingConstants.CENTER);
