@@ -171,13 +171,13 @@ public class Home{
 	}
 	
 	private void btnCreaTessera() {
-		JButton homebtnCreaTessera = new JButton("CREA TESSERA", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
-		homebtnCreaTessera.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		homebtnCreaTessera = new JButton("CREA TESSERA", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
+//		homebtnCreaTessera.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
 //				switchPanel(registrazione);
 //				seconds = 60;
-			}
-		});
+//			}
+//		});
 		homebtnCreaTessera.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnCreaTessera.setMargin(new Insets(0, 0, 0, 0));
 		homebtnCreaTessera.setHorizontalTextPosition(SwingConstants.CENTER);

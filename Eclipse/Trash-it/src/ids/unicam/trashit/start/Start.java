@@ -71,9 +71,9 @@ public class Start extends JFrame implements ActionListener{
 		h.setJPanelHome();
 		layeredPane.add(h.getJPanelHome());
 		
-//		c = new Scansione();
-//		c.setJPanelScansione();
-//		layeredPane.add(c.getJPanelScansione());
+		c = new Scansione();
+		c.setJPanelScansione();
+		layeredPane.add(c.getJPanelScansione());
 //		
 //		sess = new Sessione();
 //		layeredPane.add(sess.getJPanelSessione());
@@ -99,27 +99,38 @@ public class Start extends JFrame implements ActionListener{
 	
 	private void addActionListnerHome() {
 		h.gethomebtnScansione().addActionListener(this);
-		h.gethomebtnRitiroPremio().addActionListener(this);//ritiro
-		h.getHomebtnCreaTessera().addActionListener(this);//crea tessera
+		h.gethomebtnRitiroPremio().addActionListener(this);
+		h.getHomebtnCreaTessera().addActionListener(this);
 		h.gethomebtnInfo().addActionListener(this);
 		h.getHomebtnProblemiAssistenza().addActionListener(this);
 		h.gethomebtnChiudiSessione().addActionListener(this);
 	}
 	
+	private void addActionListnerScansione() {
+		c.getBtnIndietro().addActionListener(this);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//HOME
 		if (e.getSource() == h.gethomebtnScansione()) {
-			//switchPanel(c.getJPanelScansione());
+			System.out.println("SCANSIONE");
+			switchPanel(c.getJPanelScansione());
 		}else if (e.getSource() == h.gethomebtnRitiroPremio()) {
-			
+			System.out.println("PREMIO");
 		}else if (e.getSource() == h.getHomebtnCreaTessera()) {
-			
+			System.out.println("TESSERA");
 		}else if (e.getSource() == h.gethomebtnInfo()) {
-			
+			System.out.println("INFO");
 		}else if (e.getSource() == h.getHomebtnProblemiAssistenza()) {
-			
+			System.out.println("PROBLEMI");
 		}else if (e.getSource() == h.gethomebtnChiudiSessione()) {
-			
+			System.out.println("SESSIONE");
+		}
+		
+		//SCANSIONE
+		if (e.getSource() == c.getBtnIndietro()) {
+			switchPanel(h.getJPanelHome());
 		}
 	}
 	
@@ -141,6 +152,7 @@ public class Start extends JFrame implements ActionListener{
 		creaJFrame();
 		creaJPanels();
 		addActionListnerHome();
+		addActionListnerScansione();
 		background();	
 	}
 	
