@@ -5,32 +5,27 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
-import ids.unicam.trashit.console.Tessera;
 
-public class ScansioneTessera extends JFrame {
+public class ScansioneTessera {
 
-	JPanel scansioneTessera;
-	JLabel scanTesseralblBenvenuto;
-	JButton scanTesserabtnInfo;
-	JTextPane scanTesseratxtpnErr;
-	JLabel scanTesseralblScansionaProdotto;
-	JLabel scanTesseralblInputBackground;
-	JButton scanTesserabtnProblemiAssistenza;
-	JLabel scanTesseratxtBarcode;
-	JButton scanTesserabtnAvviaScansione;
-	JTextField scanTesseratxtInputCodice;
-
+	private JPanel scansioneTessera;
+	private JLabel scanTesseralblBenvenuto;
+	private JTextPane scanTesseratxtpnErr;
+	private JLabel scanTesseralblScansionaProdotto;
+	private JLabel scanTesseralblInputBackground;
+	private JLabel scanTesseratxtBarcode;
+	private JButton scanTesserabtnAvviaScansione;
+	private JTextField scanTesseratxtInputCodice;
+	private Home h;
+	private Scansione s;
 
 	private void lblInputBackground() {
 		scanTesseralblInputBackground = new JLabel("");
@@ -38,7 +33,6 @@ public class ScansioneTessera extends JFrame {
 		scanTesseralblInputBackground.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
 		scanTesseralblInputBackground.setBounds(430, 357, 615, 96);
 		scansioneTessera.add(scanTesseralblInputBackground);
-		
 	}
 
 	private void txtBarcode() {
@@ -125,15 +119,17 @@ public class ScansioneTessera extends JFrame {
 		scansioneTessera.add(scanTesseratxtInputCodice);
 	}
 
-	private void setJPanelScansioneTessera() {
+	public void setJPanelScansioneTessera() {
 		scansioneTessera = new JPanel();
 		scansioneTessera.setOpaque(false);
-		scansioneTessera.setLayout(null);		
-		Home.btnInfo(scansioneTessera);		
-		Home.lblLogo(scansioneTessera);
-		Home.btnProblemiAssistenza(scansioneTessera);
-		Home.btnChiudiSessione(scansioneTessera);
-		Scansione.btnIndietro(scansioneTessera);	
+		scansioneTessera.setLayout(null);
+		h = new Home();
+		h.btnInfo(scansioneTessera);		
+		h.lblLogo(scansioneTessera);
+		h.btnProblemiAssistenza(scansioneTessera);
+		h.btnChiudiSessione(scansioneTessera);
+		s = new Scansione();
+		s.btnIndietro(scansioneTessera);	
 		txtInputCodice();
 		lblBenvenuto();
 		txtTesseraErrata();		
@@ -143,9 +139,12 @@ public class ScansioneTessera extends JFrame {
 		lblInputBackground();
 	}
 	
+	public JButton getScanTesserabtnAvviaScansione() {
+		return this.scanTesserabtnAvviaScansione;
+	}
+	
 	public JPanel getJPanelScansioneTessera() {
-		setJPanelScansioneTessera();
-		return scansioneTessera;
+		return this.scansioneTessera;
 	}
 	
 }
