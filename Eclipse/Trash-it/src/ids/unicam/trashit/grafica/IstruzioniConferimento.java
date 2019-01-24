@@ -8,18 +8,17 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class IstruzioniConferimento extends JPanel {
-	JPanel istruzioneConf;
-	JLabel istrlblConferimentoProdotto;
-	JButton istrbtnNuovaScansione;
-	JLabel istrlblDescrizione;
-	JLabel istrlblPunti;
+public class IstruzioniConferimento{
+	private JPanel istruzioneConf;
+	private JLabel istrlblConferimentoProdotto;
+	private JButton istrbtnNuovaScansione;
+	private JLabel istrlblDescrizione;
+	private JLabel istrlblPunti;
+	private Home h;
 	
 
 	private void btnNuovaScansione() {
@@ -72,26 +71,28 @@ public class IstruzioniConferimento extends JPanel {
 		
 	}
 
-	private void setJPanelIstruzioni() {
+	public void setJPanelIstruzioni() {
 		istruzioneConf = new JPanel();
 		istruzioneConf.setOpaque(false);
 		istruzioneConf.setLayout(null);
-		
 		//String newLine = System.getProperty("line.separator");
 		lblConferimentoProdotto();
-		Home.btnProblemiAssistenza(istruzioneConf);
-		Home.btnInfo(istruzioneConf);
-		Home.lblLogo(istruzioneConf);
+		h = new Home();
+		h.btnProblemiAssistenza(istruzioneConf);
+		h.btnInfo(istruzioneConf);
+		h.lblLogo(istruzioneConf);
+		h.btnChiudiSessione(istruzioneConf);	
 		lblDescrizione();
 		lblPunti();
 		btnNuovaScansione();
-		Home.btnChiudiSessione(istruzioneConf);	
+		
 	}
 	
+	public JButton getIstrbtnNuovaScansione() {
+		return this.istrbtnNuovaScansione;
+	}
 	
 	public JPanel getJPanelIstruzioni() {
-		setJPanelIstruzioni();
-		return istruzioneConf;
-		
+		return this.istruzioneConf;
 	}
 }
