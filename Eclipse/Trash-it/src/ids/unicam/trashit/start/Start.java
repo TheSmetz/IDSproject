@@ -85,8 +85,9 @@ public class Start extends JFrame implements ActionListener{
 //		reg = new Registrazione();
 //		layeredPane.add(reg.getJPanelRegistrazione());
 //		
-//		ab = new About();
-//		layeredPane.add(ab.getJPanelAbout());
+		ab = new About();
+		ab.setJPanelAbout();
+		layeredPane.add(ab.getJPanelAbout());
 //		
 //		conf = new Conferimento();
 //		layeredPane.add(conf.getJPanelConferimento());
@@ -111,6 +112,14 @@ public class Start extends JFrame implements ActionListener{
 		c.getBtnIndietro().addActionListener(this);
 	}
 	
+	private void addActionListnerAbout() {
+		ab.getaboutbtnHomePage().addActionListener(this);
+	}
+	
+	private void addActionListnerRitiroPremio() {
+		ritPremio.getritirobtnRitira().addActionListener(this);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//HOME
@@ -122,7 +131,7 @@ public class Start extends JFrame implements ActionListener{
 		}else if (e.getSource() == h.getHomebtnCreaTessera()) {
 			System.out.println("TESSERA");
 		}else if (e.getSource() == h.gethomebtnInfo()) {
-			System.out.println("INFO");
+			switchPanel(ab.getJPanelAbout());
 		}else if (e.getSource() == h.getHomebtnProblemiAssistenza()) {
 			System.out.println("PROBLEMI");
 		}else if (e.getSource() == h.gethomebtnChiudiSessione()) {
@@ -131,6 +140,17 @@ public class Start extends JFrame implements ActionListener{
 		
 		//SCANSIONE
 		if (e.getSource() == c.getBtnIndietro()) {
+			switchPanel(h.getJPanelHome());
+		}
+		
+		//RITIRO PREMIO
+		if(e.getSource() == ritPremio.getritirobtnRitira()) {
+			System.out.println("+++STAMPA BIGLIETTO+++");
+		}
+		
+		//ABOUT
+		if (e.getSource() == ab.getaboutbtnHomePage()) {
+			System.out.println("HOME");
 			switchPanel(h.getJPanelHome());
 		}
 	}
@@ -154,6 +174,8 @@ public class Start extends JFrame implements ActionListener{
 		creaJPanels();
 		addActionListnerHome();
 		addActionListnerScansione();
+		addActionListnerRitiroPremio();
+		addActionListnerAbout();
 		background();	
 	}
 	

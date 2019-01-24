@@ -112,7 +112,6 @@ public class RitiroPremio {
 //		ritiroPremio.add(label);
 //	}
 	
-	@SuppressWarnings("unused")
 	public void setJPanelRitiro() {
 		ritiroPremio = new JPanel();
 		ritiroPremio.setLayout(null);		
@@ -132,8 +131,12 @@ public class RitiroPremio {
 //		lblCoupon();
 	}
 	
+	public JButton getritirobtnRitira() {
+		return this.ritirobtnRitira;
+	}
+	
 	public JPanel getJPanelRitiroPremio() {
-		return ritiroPremio;
+		return this.ritiroPremio;
 		
 	}
 	

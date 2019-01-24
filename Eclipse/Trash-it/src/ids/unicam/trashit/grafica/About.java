@@ -20,6 +20,10 @@ public class About {
 	private JButton aboutbtnHomePage;
 	private Home h;
 	
+	public JButton getaboutbtnHomePage() {
+		return aboutbtnHomePage;
+	}
+	
 	private void lblInformazioniTrashit() {
 		aboutlblInformazioniTrashit = new JLabel("INFORMAZIONI TRASH-IT");
 		aboutlblInformazioniTrashit.setHorizontalAlignment(SwingConstants.CENTER);
@@ -81,10 +85,9 @@ public class About {
 		aboutbtnHomePage.setContentAreaFilled(false);
 		aboutbtnHomePage.setBorderPainted(false);
 		aboutbtnHomePage.setBounds(416, 509, 629, 57);
-		wherePanel.add(aboutbtnHomePage);
+		about.add(aboutbtnHomePage);
 	}
 	
-	@SuppressWarnings("unused")
 	public void setJPanelAbout() {
 		about = new JPanel();
 		about.setLayout(null);

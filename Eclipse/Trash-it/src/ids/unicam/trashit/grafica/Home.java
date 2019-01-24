@@ -36,27 +36,27 @@ public class Home{
 	}
 	
 	public JButton gethomebtnScansione() {
-		return homebtnScansione;
+		return this.homebtnScansione;
 	}
 	
 	public JButton gethomebtnRitiroPremio() {
-		return homebtnRitiroPremio;
+		return this.homebtnRitiroPremio;
 	}
 
 	public JButton gethomebtnChiudiSessione() {
-		return homebtnChiudiSessione;
+		return this.homebtnChiudiSessione;
 	}
 	
 	public JButton gethomebtnInfo() {
-		return homebtnInfo;
+		return this.homebtnInfo;
 	}
 	
 	public JButton getHomebtnCreaTessera() {
-		return homebtnCreaTessera;
+		return this.homebtnCreaTessera;
 	}
 	
 	public JButton getHomebtnProblemiAssistenza() {
-		return homebtnProblemiAssistenza;
+		return this.homebtnProblemiAssistenza;
 }
 
 	private void lblBenvenuto() {
