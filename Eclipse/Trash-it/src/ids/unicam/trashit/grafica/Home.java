@@ -50,6 +50,10 @@ public class Home{
 		home.setOpaque(false);
 		home.setLayout(null);
 	}
+	
+	public JButton gethomebtnScansione() {
+		return homebtnScansione;
+	}
 
 	public JButton gethomebtnChiudiSessione() {
 		return homebtnChiudiSessione;
@@ -86,23 +90,18 @@ public class Home{
 		homebtnScansione.setContentAreaFilled(false);
 		homebtnScansione.setBorderPainted(false);
 		homebtnScansione.setBounds(416, 167, 629, 82);
-		homebtnScansione.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			Start.switchPanel(Scansione.scansione);
-			}
-		});
 		home.add(homebtnScansione);
 	}
 	
 	private void btnRitiroPremio() {
 		homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-		homebtnRitiroPremio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Start.switchPanel(RitiroPremio.ritiroPremio);
+//		homebtnRitiroPremio.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				Start.switchPanel(RitiroPremio.ritiroPremio);
 //				switchPanel(scansioneTessera);
 //				seconds = 30;
-			}
-		});
+//			}
+//		});
 		homebtnRitiroPremio.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnRitiroPremio.setMargin(new Insets(0, 0, 0, 0));
 		homebtnRitiroPremio.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -245,17 +244,5 @@ public class Home{
 	
 	public JPanel getPanelHome() {
 		return home;
-}
-
-
-//	@Override
-//	public void actionPerformed(ActionEvent e) {
-//		if(e.getSource() == homebtnScansione) {
-//			Start.switchPanel(Scansione.scansione);
-//		}else if (e.getSource() == homebtnChiudiSessione) {
-//			Start.switchPanel(Scansione.scansione);
-//		}
-//		
-//	}
-
+	}
 }

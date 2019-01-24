@@ -35,13 +35,22 @@ import javax.swing.JLayeredPane;
 
 
 
-public class Start extends JFrame {
+public class Start extends JFrame implements ActionListener{
 	
 	public static JPanel contentPane;
 	public static JLayeredPane layeredPane;
 	private JLabel background;
+	private Sessione sess;
+	private Home h;
+	private Scansione c;
+	private RitiroPremio ritPremio;
+	private Registrazione reg;
+	private About ab;
+	private Conferimento conf;
+	private ScansioneTessera scanTessera;
+	private IstruzioniConferimento istrConferimento;
 	
-	public Start() {
+	private void creaJFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/aaa.png")));
 		setTitle("Trash-it");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,42 +64,52 @@ public class Start extends JFrame {
 		layeredPane.setBounds(0, 0, 1045, 699);
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
+	}
+	
+	private void creaJPanels() {
+		h = new Home();		
+		h.creaPanelHome();
+		layeredPane.add(h.getPanelHome());
 		
-		RitiroPremio f=new RitiroPremio();
-		layeredPane.add(f.getJPanelRitiroPremio());
+		c = new Scansione();
+		layeredPane.add(c.getJPanelScansione());
 		
+		sess = new Sessione();
+		layeredPane.add(sess.getJPanelSessione());
 		
-//		Registrazione r=new Registrazione();
-//		layeredPane.add(r.getJPanelRegistrazione());
+		ritPremio = new RitiroPremio();
+		layeredPane.add(ritPremio.getJPanelRitiroPremio());
 		
-//		Home h=new Home();		
-//		layeredPane.add(h.getPanelHome());
-//		
-//		Sessione s = new Sessione();
-//		layeredPane.add(s.getJPanelSessione());
-//		
-//		Scansione c =new Scansione();
-//		layeredPane.add(c.getJPanelScansione());
+		reg = new Registrazione();
+		layeredPane.add(reg.getJPanelRegistrazione());
 		
-//		About a = new About();
-//		layeredPane.add(a.getJPanelAbout());
+		ab = new About();
+		layeredPane.add(ab.getJPanelAbout());
+		
+		conf = new Conferimento();
+		layeredPane.add(conf.getJPanelConferimento());
 
-//		About a = new About();
-//		layeredPane.add(a.getJPanelAbout());
+		scanTessera = new ScansioneTessera();
+		layeredPane.add(scanTessera.getJPanelScansioneTessera());
 		
-//		Conferimento c = new Conferimento();
-//		layeredPane.add(c.getJPanelConferimento());
-
-//		ScansioneTessera t = new ScansioneTessera();
-//		layeredPane.add(t.getJPanelScansioneTessera());
-		
-//		IstruzioniConferimento d = new IstruzioniConferimento();
-//		layeredPane.add(d.getJPanelIstruzioni());
-
-		
-		background();
-
-		
+		istrConferimento = new IstruzioniConferimento();
+		layeredPane.add(istrConferimento.getJPanelIstruzioni());
+	}
+	
+	private void addActionListnerHome() {
+		h.gethomebtnScansione().addActionListener(this);
+		//ritiro
+		//crea tessera
+		h.gethomebtnInfo().addActionListener(this);
+		h.getHomebtnProblemiAssistenza().addActionListener(this);
+		h.gethomebtnChiudiSessione().addActionListener(this);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == .homebtnScansione) {
+			switchPanel(c.scansione);
+		}
 	}
 	
 	public static void switchPanel(JPanel panelName) {
@@ -106,6 +125,15 @@ public class Start extends JFrame {
 		background.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/home.jpg")));
 		contentPane.add(background);
 	}
+	
+	public Start() {
+		creaJFrame();
+		creaJPanels();
+		addActionListnerHome();
+		background();	
+	}
+	
+	
 	
     public static void main(String[] args) throws Exception{
         EventQueue.invokeLater(new Runnable() {
