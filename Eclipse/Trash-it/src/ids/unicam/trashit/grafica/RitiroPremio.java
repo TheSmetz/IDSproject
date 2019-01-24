@@ -17,37 +17,20 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
 public class RitiroPremio extends JPanel{
-	JPanel ritiroPremio;
-	JLabel label;
-	JLabel RitirolblCoupon;
-	ButtonGroup buoniSconto;
-	JRadioButton ritirooption10;
-	JRadioButton ritirooption30;
-	JRadioButton ritirooption50;
-	JRadioButton ritirooption75;
-	JButton ritirobtnRitira;
-	JLabel ritirolblPuntiTessera;
-	JLabel ritirolblRitiroPremio;
-	JLabel ritirolblSelezionePremio;
-	JButton ritirobtnChiudiSessione;
-	JLabel ritirolblLogo;
-	
+	private JPanel ritiroPremio;
+	private JLabel label;
+	private JLabel RitirolblCoupon; //DA CONTROLLARE
+	private ButtonGroup buoniSconto;
+	private JRadioButton ritirooption10;
+	private JRadioButton ritirooption30;
+	private JRadioButton ritirooption50;
+	private JRadioButton ritirooption75;
+	private JButton ritirobtnRitira;
+	private JLabel ritirolblPuntiTessera;
+	private JLabel ritirolblRitiroPremio;
+	private JLabel ritirolblSelezionePremio;
+	private Home h;
 
-	private void setJPanelRitiro() {
-		ritiroPremio = new JPanel();
-		ritiroPremio.setLayout(null);		
-		ritiroPremio.setOpaque(false);
-		Home.lblLogo(ritiroPremio);
-		Home.btnInfo(ritiroPremio);
-		Home.btnProblemiAssistenza(ritiroPremio);
-		Home.btnChiudiSessione(ritiroPremio);
-		lblSelezionePremio();
-		lblRitiroPremio();
-		lblPuntiTessera();
-		btnRitira();
-		btnsSconti();
-//		lblCoupon();
-	}
 
 	private void lblSelezionePremio() {
 		ritirolblSelezionePremio = new JLabel("Seleziona un premio");
@@ -131,10 +114,27 @@ public class RitiroPremio extends JPanel{
 		label.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/ccc.png")));
 		label.setBounds(609, 248, 424, 199);
 		ritiroPremio.add(label);
-		
 	}
+	
+	@SuppressWarnings("unused")
+	private void setJPanelRitiro() {
+		ritiroPremio = new JPanel();
+		ritiroPremio.setLayout(null);		
+		ritiroPremio.setOpaque(false);
+		h=new Home();
+		h.lblLogo(ritiroPremio);
+		h.btnInfo(ritiroPremio);
+		h.btnProblemiAssistenza(ritiroPremio);
+		h.btnChiudiSessione(ritiroPremio);
+		lblSelezionePremio();
+		lblRitiroPremio();
+		lblPuntiTessera();
+		btnRitira();
+		btnsSconti();
+//		lblCoupon();
+	}
+	
 	public JPanel getJPanelRitiroPremio() {
-		setJPanelRitiro();
 		return ritiroPremio;
 		
 	}
