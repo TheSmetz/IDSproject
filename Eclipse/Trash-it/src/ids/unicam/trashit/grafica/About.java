@@ -6,22 +6,19 @@ import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
-public class About extends JPanel {
-	public About() {
-	}
-	
-	JPanel about;
-	JLabel aboutlblInformazioniTrashit;
-	JButton aboutbtnProblemiAssistenza;
-	JTextPane abouttextPaneInfo;
-	static JButton aboutbtnHomePage;
+public class About {
+
+	private JPanel about;
+	private JLabel aboutlblInformazioniTrashit;
+	private JButton aboutbtnProblemiAssistenza;
+	private JTextPane abouttextPaneInfo;
+	private JButton aboutbtnHomePage;
+	private Home h;
 	
 	private void lblInformazioniTrashit() {
 		aboutlblInformazioniTrashit = new JLabel("INFORMAZIONI TRASH-IT");
@@ -67,7 +64,7 @@ public class About extends JPanel {
 		about.add(abouttextPaneInfo);
 	}
 
-	public static void btnHomePage(JPanel wherePanel) {
+	public void btnHomePage(JPanel wherePanel) {
 		aboutbtnHomePage = new JButton("Home Page", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 //		aboutbtnHome.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
@@ -87,21 +84,20 @@ public class About extends JPanel {
 		wherePanel.add(aboutbtnHomePage);
 	}
 	
+	@SuppressWarnings("unused")
 	private void setJPanelAbout() {
 		about = new JPanel();
 		about.setLayout(null);
 		about.setOpaque(false);
 		lblInformazioniTrashit();
 		btnProblemiAssistenza();
-		Home.btnChiudiSessione(about);
+		h.btnChiudiSessione(about);
 		textPaneInfo();
 		btnHomePage(about);
-		Home.lblLogo(this.about);
+		h.lblLogo(this.about);
 	}
 	
 	public JPanel getJPanelAbout() {
-		setJPanelAbout();
-		
 		return about;
 	}
 

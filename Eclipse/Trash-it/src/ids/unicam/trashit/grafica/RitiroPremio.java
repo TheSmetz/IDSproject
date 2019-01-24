@@ -3,23 +3,19 @@ package ids.unicam.trashit.grafica;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
-public class RitiroPremio extends JPanel{
+public class RitiroPremio {
 	private JPanel ritiroPremio;
-	private JLabel label;
-	private JLabel RitirolblCoupon; //DA CONTROLLARE
+	//private JLabel label;
+	//private JLabel RitirolblCoupon; //DA CONTROLLARE
 	private ButtonGroup buoniSconto;
 	private JRadioButton ritirooption10;
 	private JRadioButton ritirooption30;
@@ -109,12 +105,12 @@ public class RitiroPremio extends JPanel{
 		
 	}
 
-	private void lblCoupon() {
-		RitirolblCoupon = new JLabel("");
-		label.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/ccc.png")));
-		label.setBounds(609, 248, 424, 199);
-		ritiroPremio.add(label);
-	}
+//	private void lblCoupon() {
+//		RitirolblCoupon = new JLabel("");
+//		label.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/ccc.png")));
+//		label.setBounds(609, 248, 424, 199);
+//		ritiroPremio.add(label);
+//	}
 	
 	@SuppressWarnings("unused")
 	private void setJPanelRitiro() {
