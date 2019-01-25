@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ids.unicam.trashit.grafica.Home;
+import ids.unicam.trashit.start.Start;
 
 public class Scansione extends JPanel {
 
@@ -47,12 +48,7 @@ public class Scansione extends JPanel {
 		scanbtnIndietro.setContentAreaFilled(false);
 		scanbtnIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Home.home.removeAll();
-//            	scansione.removeAll();
-//				Home.home.add(homepage.setta());
-//            	Home.home.revalidate();
-//            	Home.home.repaint();
-				// switchPanel(home);
+				Start.switchPanel(Home.home);
 				// seconds = 30;
 			}
 		});

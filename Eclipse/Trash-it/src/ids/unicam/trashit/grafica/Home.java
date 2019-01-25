@@ -14,10 +14,12 @@ import javax.swing.SwingConstants;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import ids.unicam.trashit.start.Start;
+
 public class Home{
 	
 	//COMPONENTI
-	private JPanel home;
+	static JPanel home;
 	private JLabel homelblBenvenuto;
 	private JLabel homelblSelezionaOperazione;
 	private JButton homebtnScansione;
@@ -152,12 +154,12 @@ public class Home{
 	
 	public void btnChiudiSessione(JPanel wherePanel) {
 		homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
-//		homebtnChiudiSessione.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				switchPanel(sessione);
-//				timer.stop();
-//			}
-//		});
+		homebtnChiudiSessione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Start.switchPanel(Sessione.sessione);
+				//timer.stop();
+			}
+		});
 		homebtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnChiudiSessione.setOpaque(false);
 		homebtnChiudiSessione.setMargin(new Insets(0, 0, 0, 0));

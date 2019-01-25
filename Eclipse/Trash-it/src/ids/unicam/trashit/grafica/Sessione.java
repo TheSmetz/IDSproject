@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 
 public class Sessione {
 	
-	private JPanel sessione;
+	static JPanel sessione;
 	private JLabel sessionelblLogo;
 	private JLabel sessionelblSessione;
 	private JButton sessionebtnAvviaSessione;
@@ -82,8 +82,8 @@ public class Sessione {
 		lblFreccia();
 	}
 	
-	public JPanel getJPanelSessione() {		
-		return this.sessione;		
+	public static JPanel getJPanelSessione() {		
+		return sessione;		
 	}
 
 }

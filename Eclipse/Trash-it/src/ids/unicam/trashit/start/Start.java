@@ -44,9 +44,8 @@ public class Start extends JFrame implements ActionListener{
 	
 	public static JPanel contentPane;
 	public static JLayeredPane layeredPane;
-	private JButton btnIndietro;
 	private JLabel background;
-	private Sessione sess;
+	public Sessione sess;
 	private Home h;
 	private Scansione c;
 	private RitiroPremio ritPremio;
@@ -60,7 +59,7 @@ public class Start extends JFrame implements ActionListener{
 	//TIMER
 	private int seconds;
     private SimpleDateFormat df;
-    private Timer timer;
+    public Timer timer;
     private JButton button;
 
     private void startTimer() {
@@ -112,19 +111,7 @@ public class Start extends JFrame implements ActionListener{
 		contentPane.add(layeredPane);
 		layeredPane.setLayout(new CardLayout(0, 0));
 				
-		timer();
-		
-		button = new JButton("", new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
-		button.setBounds(938, 11, 97, 87);
-		button.setContentAreaFilled(false);
-		button.addActionListener(this);
-		contentPane.add(button);
-		
-//		scanbtnIndietro = new JButton("",
-//				new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
-//		scanbtnIndietro
-//				.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
-		
+		timer();	
 	}
 	
 	private void creaJPanels() {
@@ -180,14 +167,12 @@ public class Start extends JFrame implements ActionListener{
 		h.getHomebtnCreaTessera().addActionListener(this);
 		h.gethomebtnInfo().addActionListener(this);
 		h.getHomebtnProblemiAssistenza().addActionListener(this);
-		h.gethomebtnChiudiSessione().addActionListener(this);
 	}	
 	
 	
 	private void addActionListnerScansione() {
 		//c.getbtnIndietro().addActionListener(this);
-		c.getbtnAvviaScansione().addActionListener(this);
-//		c.getbtnChiudiSessione().addActionListener(this);
+		c.getbtnAvviaScansione().addActionListener(this);	
 	}
 	
 	private void addActionListnerRitiroPremio() {
@@ -199,25 +184,28 @@ public class Start extends JFrame implements ActionListener{
 	}
 	
 	private void addActionListnerAssistenza() {
+	
 	}
 	
 	private void addActionListnerConferimento() {
 		conf.getbtnProdottoVisualizzatoCorretto().addActionListener(this);
 		conf.getbtnProdottoVisualizzatoErrato().addActionListener(this);
+	
 	}
 	
 	private void addActionListnerIstruzioniConferimento() {
 		istrConferimento.getIstrbtnNuovaScansione().addActionListener(this);
+	
 	}
 	
 	private void addActionListnerRegistrazione() {
 		reg.getRegbtnStampaTessera().addActionListener(this);
+	
 	}
 	
 	private void addActionListnerScansioneTessera() {
+	
 	}
-	
-	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -249,16 +237,10 @@ public class Start extends JFrame implements ActionListener{
 		}else if (e.getSource() == h.getHomebtnProblemiAssistenza()) {
 			switchPanel(ass.getJPanelAssistenza());
 			seconds = 30;
-		}else if (e.getSource() == h.gethomebtnChiudiSessione()) {
-			switchPanel(sess.getJPanelSessione());
-			seconds = 30;
 		}
 		
 		//SCANSIONE
-		if (e.getSource() == c.getbtnIndietro()) {
-			switchPanel(h.getJPanelHome());
-			seconds = 30;
-		}else if (e.getSource() == c.getbtnAvviaScansione()) {
+		if (e.getSource() == c.getbtnAvviaScansione()) {
 			switchPanel(conf.getJPanelConferimento());
 			seconds = 30;
 		}
