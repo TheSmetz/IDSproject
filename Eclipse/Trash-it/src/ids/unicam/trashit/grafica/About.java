@@ -3,6 +3,8 @@ package ids.unicam.trashit.grafica;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,9 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import ids.unicam.trashit.start.Start;
+
 public class About {
 
-	private JPanel about;
+	public static JPanel about;
 	private JLabel aboutlblInformazioniTrashit;
 	private JButton aboutbtnProblemiAssistenza;
 	private JTextPane abouttextPaneInfo;
@@ -35,12 +39,12 @@ public class About {
 	
 	private void btnProblemiAssistenza() {
 		aboutbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-//		aboutbtnProblemiAssistenza.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				switchPanel(assistenza);
-//				seconds = 30;
-//			}
-//		});
+		aboutbtnProblemiAssistenza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Start.switchPanel(Assistenza.assistenza);
+				//seconds = 30;
+			}
+		});
 		aboutbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
 		aboutbtnProblemiAssistenza.setOpaque(false);
 		aboutbtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
@@ -70,12 +74,12 @@ public class About {
 
 	public void btnHomePage(JPanel wherePanel) {
 		aboutbtnHomePage = new JButton("Home Page", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-//		aboutbtnHome.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				switchPanel(home);
-//				seconds = 30;
-//			}
-//		});
+		aboutbtnHomePage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Start.switchPanel(Home.home);
+				//seconds = 30;
+			}
+		});
 		aboutbtnHomePage.setVerticalTextPosition(SwingConstants.CENTER);
 		aboutbtnHomePage.setOpaque(false);
 		aboutbtnHomePage.setMargin(new Insets(0, 0, 0, 0));
@@ -96,7 +100,7 @@ public class About {
 		btnProblemiAssistenza();
 		h = new Home();
 		h.btnChiudiSessione(about);
-		h.lblLogo(this.about);
+		h.lblLogo(about);
 		textPaneInfo();
 		btnHomePage(about);
 	}
@@ -104,15 +108,5 @@ public class About {
 	public JPanel getJPanelAbout() {
 		return about;
 	}
-
-
-
-
-
-
-	
-
-
-
 	
 }

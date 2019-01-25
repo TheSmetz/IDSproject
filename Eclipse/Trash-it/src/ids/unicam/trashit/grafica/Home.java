@@ -80,18 +80,23 @@ public class Home{
 		homebtnScansione.setContentAreaFilled(false);
 		homebtnScansione.setBorderPainted(false);
 		homebtnScansione.setBounds(416, 167, 629, 82);
+		homebtnScansione.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Start.switchPanel(Scansione.scansione);
+				//seconds = 30;
+			}
+		});
 		home.add(homebtnScansione);
 	}
 	
 	private void btnRitiroPremio() {
 		homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-//		homebtnRitiroPremio.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				Start.switchPanel(RitiroPremio.ritiroPremio);
-//				switchPanel(scansioneTessera);
-//				seconds = 30;
-//			}
-//		});
+		homebtnRitiroPremio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Start.switchPanel(ScansioneTessera.scansioneTessera);
+				//seconds = 30;
+			}
+		});
 		homebtnRitiroPremio.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnRitiroPremio.setMargin(new Insets(0, 0, 0, 0));
 		homebtnRitiroPremio.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -107,12 +112,12 @@ public class Home{
 	
 	public void btnProblemiAssistenza(JPanel wherePanel) {
 		homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-//		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				switchPanel(assistenza);
-//				seconds = 30;
-//			}
-//		});
+		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Start.switchPanel(Assistenza.assistenza);
+				//seconds = 30;
+			}
+		});
 		homebtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnProblemiAssistenza.setMargin(new Insets(0, 0, 0, 0));
 		homebtnProblemiAssistenza.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -126,12 +131,12 @@ public class Home{
 	
 	public void btnInfo(JPanel wherePanel) {
 		homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
-//		homebtnInfo.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				switchPanel(about);
-//				seconds = 30;
-//			}
-//		});
+		homebtnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Start.switchPanel(About.about);
+				//seconds = 30;
+			}
+		});
 		homebtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnInfo.setOpaque(false);
 		homebtnInfo.setMargin(new Insets(0, 0, 0, 0));
@@ -174,12 +179,12 @@ public class Home{
 	
 	private void btnCreaTessera() {
 		homebtnCreaTessera = new JButton("CREA TESSERA", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
-//		homebtnCreaTessera.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				switchPanel(registrazione);
-//				seconds = 60;
-//			}
-//		});
+		homebtnCreaTessera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Start.switchPanel(Registrazione.registrazione);
+				//seconds = 60;
+			}
+		});
 		homebtnCreaTessera.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnCreaTessera.setMargin(new Insets(0, 0, 0, 0));
 		homebtnCreaTessera.setHorizontalTextPosition(SwingConstants.CENTER);

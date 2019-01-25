@@ -13,10 +13,13 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import ids.unicam.trashit.console.Tessera;
+import ids.unicam.trashit.start.Start;
+
 
 public class ScansioneTessera {
 
-	private JPanel scansioneTessera;
+	public static JPanel scansioneTessera;
 	private JLabel scanTesseralblBenvenuto;
 	private JTextPane scanTesseratxtpnErr;
 	private JLabel scanTesseralblScansionaProdotto;
@@ -26,6 +29,8 @@ public class ScansioneTessera {
 	private JTextField scanTesseratxtInputCodice;
 	private Home h;
 	private Scansione s;
+	@SuppressWarnings("unused")
+	private int puntiTessera;
 
 	private void lblInputBackground() {
 		scanTesseralblInputBackground = new JLabel("");
@@ -60,26 +65,24 @@ public class ScansioneTessera {
 		scanTesserabtnAvviaScansione = new JButton("Avvia scansione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//                seconds = 30;
-//                idTessera = scanTesseratxtInputCodice.getText();
-//                tesseraScansionata = new Tessera(idTessera);
-//                if (tesseraScansionata.verificaPresenza()) {
-//                    puntiTessera = tesseraScansionata.getPunti();
-//                    ritirolblPuntiTessera.setText("Punti tessera: "+String.valueOf(puntiTessera));
-//                    switchPanel(ritiroPremio);
-//                }else {
-//                    scanTesseratxtpnErr.setText("Attenzione riconoscimento fallito \n      "
-//                                                 + "Vi invitiamo a riprovare");
-//                    scanTesseratxtInputCodice.setText("");
-//                }
+                //seconds = 30;
+                String idTessera = scanTesseratxtInputCodice.getText();
+                Tessera tesseraScansionata = new Tessera(idTessera);
+                if (tesseraScansionata.verificaPresenza()) {
+                    puntiTessera = tesseraScansionata.getPunti();
+                  //  ritirolblPuntiTessera.setText("Punti tessera: "+String.valueOf(puntiTessera));
+                    Start.switchPanel(RitiroPremio.ritiroPremio);
+                }else {
+                    scanTesseratxtpnErr.setText("Attenzione riconoscimento fallito \n      "
+                                                 + "Vi invitiamo a riprovare");
+                    scanTesseratxtInputCodice.setText("");
+                }
             }
 		});
 		scanTesserabtnAvviaScansione.setVerticalTextPosition(JButton.CENTER);
 		scanTesserabtnAvviaScansione.setHorizontalTextPosition(JButton.CENTER);
 		scanTesserabtnAvviaScansione.setBorderPainted(false);
 		scanTesserabtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
-		// btnScansionaProdotto.setIcon(new
-		// ImageIcon(Main.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
 		scanTesserabtnAvviaScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		scanTesserabtnAvviaScansione.setForeground(Color.BLACK);
 		scanTesserabtnAvviaScansione.setContentAreaFilled(false);
@@ -144,7 +147,7 @@ public class ScansioneTessera {
 	}
 	
 	public JPanel getJPanelScansioneTessera() {
-		return this.scansioneTessera;
+		return scansioneTessera;
 	}
 	
 }

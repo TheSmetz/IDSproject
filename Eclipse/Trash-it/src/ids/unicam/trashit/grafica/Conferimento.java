@@ -3,19 +3,24 @@ package ids.unicam.trashit.grafica;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import ids.unicam.trashit.start.Start;
+
 public class Conferimento {
 
-	private JPanel conferimento;
+	public static JPanel conferimento;
 	private JLabel conflblScansioneProdotto;	
 	private JButton confbtnProdottoVisualizzatoErrato;
 	private JButton confbtnProdottoVisualizzatoCorretto;
-	private JLabel conflblImmagineProdotto;
+	public static JLabel conflblImmagineProdotto;
 	private Home h;
 
 	
@@ -37,12 +42,12 @@ public class Conferimento {
 		confbtnProdottoVisualizzatoErrato.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		confbtnProdottoVisualizzatoErrato.setForeground(Color.BLACK);
 		confbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
-//		confbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				switchPanel(scansione);
-//				seconds = 30;
-//			}
-//		});
+		confbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Start.switchPanel(Scansione.scansione);
+			//	seconds = 30;
+			}
+		});
 		confbtnProdottoVisualizzatoErrato.setOpaque(false);
 		confbtnProdottoVisualizzatoErrato.setForeground(Color.BLACK);
 		confbtnProdottoVisualizzatoErrato.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
@@ -61,19 +66,13 @@ public class Conferimento {
 		confbtnProdottoVisualizzatoCorretto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		confbtnProdottoVisualizzatoCorretto.setForeground(Color.BLACK);
 		confbtnProdottoVisualizzatoCorretto.setContentAreaFilled(false);
-//		confbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				switchPanel(istruzioneConf);
-//				seconds = 30;
-//				
-//				// prendo il valore dalla variabile globale				
-//				istrlblPunti.setText("Punti guadagnati: " + String.valueOf(prodottoScansionato.getPunti()));
-//				
-//				//DA AGGIUNGERE DESCRIZIONE
-//				istrlblDescrizione.setText(prodottoScansionato.getDescrizione());
-//			}
-//
-//		});
+		confbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Start.switchPanel(IstruzioniConferimento.istruzioneConf);
+				//seconds = 30;
+			}
+
+		});
 		confbtnProdottoVisualizzatoCorretto.setOpaque(false);
 		confbtnProdottoVisualizzatoCorretto.setForeground(Color.BLACK);
 		confbtnProdottoVisualizzatoCorretto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
@@ -116,6 +115,6 @@ public class Conferimento {
 	}
 	
 	public JPanel getJPanelConferimento() {	
-		return this.conferimento;
+		return conferimento;
 	}
 }

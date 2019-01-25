@@ -10,7 +10,7 @@ import javax.swing.SwingConstants;
 
 public class Assistenza {
 
-	private JPanel assistenza;
+	public static JPanel assistenza;
 	private JLabel asslblAssistenza;
 	private JTextPane asstxtpnTelefonoEmail;
 	private Home h;
@@ -51,6 +51,6 @@ public class Assistenza {
 	}
 	
 	public JPanel getJPanelAssistenza() {
-		return this.assistenza;
+		return assistenza;
 	}
 }

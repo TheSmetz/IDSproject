@@ -61,11 +61,8 @@ public class Tessera{
 		return presenza;
 	}
 
-	public void getDati() {
-		System.out.println("--- " + this.idtessera + " ---"+
-				 "\nNome: " + this.nome +
-				"\nCognome: " + this.cognome +
-				"\nNascita: " + this.nascita +
+	public String getDati() {
+		return ("--- " + this.idtessera + " ---"+
 				"\nPunti: " + this.punti);
 	}
 	

@@ -6,10 +6,13 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -17,9 +20,13 @@ import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JDateChooser;
 
+import ids.unicam.trashit.console.AggiuntaDB;
+import ids.unicam.trashit.console.Tessera;
+import ids.unicam.trashit.start.Start;
+
 public class Registrazione {
 	
-	private JPanel registrazione;
+	public static JPanel registrazione;
 	private JTextField regtxtCodiceFiscale;
 	private JTextField regtextFieldNome;
 	private JTextField regtextFieldCognome;
@@ -34,6 +41,7 @@ public class Registrazione {
 	private JLabel reglblCF;
 	private Home h;
 	private Scansione s;
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	
 
@@ -95,27 +103,30 @@ public class Registrazione {
 		regbtnStampaTessera = new JButton("Stampa tessera", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
 		regbtnStampaTessera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				
-//				//verifica input corretti
-//				if (regtxtCodiceFiscale.getText() !=null && regtextFieldNome.getText() !=null && regtextFieldCognome.getText() !=null && regdateChooser.getDate()!=null) {
-//					//verifica tessera già nel db
-//					tesseraGui = new Tessera(regtxtCodiceFiscale.getText());
-//					if(tesseraGui.verificaPresenza()==false) { //non presente nel db
-//						AggiuntaDB aggiungiTessera = new AggiuntaDB();
-//						nascitaTessera = sdf.format(regdateChooser.getDate());
-//						//System.out.println(nascitaTessera);
-//						aggiungiTessera.registrazioneTessera(regtxtCodiceFiscale.getText(), 
-//								regtextFieldNome.getText(), regtextFieldCognome.getText(), nascitaTessera);
-//					} else {
-//						//popup-tessera già presente
-//						System.out.println("TESSERA GIA' NEL DB");
-//						JOptionPane.showMessageDialog(registrazione, "TESSERA GIA' NEL DATABASE.");
-//						switchPanel(home);
-//						seconds = 30;
-//					}
-//				}else {
-//					JOptionPane.showMessageDialog(registrazione, "Tutti i campi devono essere compilati");
-//				}
+				
+				//verifica input corretti
+				if (regtxtCodiceFiscale.getText() !=null && regtextFieldNome.getText() !=null && regtextFieldCognome.getText() !=null && regdateChooser.getDate()!=null) {
+					//verifica tessera già nel db
+					Tessera tesseraGui = new Tessera(regtxtCodiceFiscale.getText());
+					if(tesseraGui.verificaPresenza()==false) { //non presente nel db
+						AggiuntaDB aggiungiTessera = new AggiuntaDB();
+						String nascitaTessera = sdf.format(regdateChooser.getDate());
+						//System.out.println(nascitaTessera);
+						aggiungiTessera.registrazioneTessera(regtxtCodiceFiscale.getText(), 
+								regtextFieldNome.getText(), regtextFieldCognome.getText(), nascitaTessera);
+						JOptionPane.showMessageDialog(registrazione, tesseraGui.getDati());
+					
+					} else {
+						//popup-tessera già presente
+						System.out.println("TESSERA GIA' NEL DB"); 
+						JOptionPane.showMessageDialog(registrazione, "TESSERA GIA' NEL DATABASE.");
+						
+						Start.switchPanel(Home.home);
+						//seconds = 30;
+					}
+				}else {
+					JOptionPane.showMessageDialog(registrazione, "Tutti i campi devono essere compilati");
+				}
 			}
 		});
 		regbtnStampaTessera.setVerticalTextPosition(SwingConstants.CENTER);
@@ -220,7 +231,7 @@ public class Registrazione {
 	}
 	
 	public  JPanel getJPanelRegistrazione() {
-		return this.registrazione;
+		return registrazione;
 	}
 	
 }

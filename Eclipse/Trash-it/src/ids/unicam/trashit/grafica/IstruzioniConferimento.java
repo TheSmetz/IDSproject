@@ -13,12 +13,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class IstruzioniConferimento{
-	private JPanel istruzioneConf;
+	public static JPanel istruzioneConf;
 	private JLabel istrlblConferimentoProdotto;
 	private JButton istrbtnNuovaScansione;
 	private JLabel istrlblDescrizione;
 	private JLabel istrlblPunti;
 	private Home h;
+	private Scansione s;
 	
 
 	private void btnNuovaScansione() {
@@ -47,6 +48,7 @@ public class IstruzioniConferimento{
 		istrlblPunti.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		istrlblPunti.setHorizontalAlignment(SwingConstants.CENTER);
 		istrlblPunti.setBounds(417, 258, 628, 69);
+		//istrlblPunti.setText("Punti guadagnati: " + s.getProdotto().getPunti());
 		istruzioneConf.add(istrlblPunti);
 		
 		
@@ -57,6 +59,7 @@ public class IstruzioniConferimento{
 		istrlblDescrizione.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		istrlblDescrizione.setHorizontalAlignment(SwingConstants.CENTER);
 		istrlblDescrizione.setBounds(416, 137, 629, 136);
+		//istrlblDescrizione.setText("Descrizione " + s.getProdotto().getPunti());
 		istruzioneConf.add(istrlblDescrizione);
 		
 	}
@@ -75,6 +78,7 @@ public class IstruzioniConferimento{
 		istruzioneConf = new JPanel();
 		istruzioneConf.setOpaque(false);
 		istruzioneConf.setLayout(null);
+		
 		//String newLine = System.getProperty("line.separator");
 		lblConferimentoProdotto();
 		h = new Home();
@@ -85,6 +89,11 @@ public class IstruzioniConferimento{
 		lblDescrizione();
 		lblPunti();
 		btnNuovaScansione();
+		// prendo il valore dalla variabile globale				
+
+		
+		//DA AGGIUNGERE DESCRIZIONE
+		
 		
 	}
 	
@@ -93,6 +102,6 @@ public class IstruzioniConferimento{
 	}
 	
 	public JPanel getJPanelIstruzioni() {
-		return this.istruzioneConf;
+		return istruzioneConf;
 	}
 }

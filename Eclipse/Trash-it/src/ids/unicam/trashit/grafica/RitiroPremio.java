@@ -12,7 +12,7 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
 public class RitiroPremio {
-	private JPanel ritiroPremio;
+	public static JPanel ritiroPremio;
 	//private JLabel label;
 	//private JLabel RitirolblCoupon; //DA CONTROLLARE
 	private ButtonGroup buoniSconto;
