@@ -12,7 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import ids.unicam.trashit.start.Start;
+
+
 
 public class Sessione {
 	
@@ -48,7 +49,7 @@ public class Sessione {
 		sessionebtnAvviaSessione = new JButton("AVVIA SESSIONE", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
 		sessionebtnAvviaSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Start.switchPanel(Home.home);
+				GestoreGrafica.switchPanel(Home.home);
 			//	seconds = 30;
 			//	startTimer();			
 			}

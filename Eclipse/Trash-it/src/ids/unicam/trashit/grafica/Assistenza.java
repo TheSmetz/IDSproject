@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
-
 public class Assistenza {
 
 	public static JPanel assistenza;
@@ -35,21 +34,21 @@ public class Assistenza {
 		asstxtpnTelefonoEmail.setBounds(450, 86, 629, 100);
 		assistenza.add(asstxtpnTelefonoEmail);
 	}
-	
+
 	public void setJPanelAssistenza() {
 		assistenza = new JPanel();
 		assistenza.setLayout(null);
 		assistenza.setOpaque(false);
 		lblAssistenza();
-		txtpnTelefonoEmail();	
-		h=new Home();
-		h.btnInfo(assistenza);		
+		txtpnTelefonoEmail();
+		h = new Home();
+		h.btnInfo(assistenza);
 		h.lblLogo(assistenza);
 		h.btnChiudiSessione(assistenza);
-		a=new About();
+		a = new About();
 		a.btnHomePage(assistenza);
 	}
-	
+
 	public JPanel getJPanelAssistenza() {
 		return assistenza;
 	}

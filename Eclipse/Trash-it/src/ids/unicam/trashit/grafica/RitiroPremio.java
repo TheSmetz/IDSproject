@@ -16,12 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
-import ids.unicam.trashit.console.Tessera;
-import ids.unicam.trashit.start.Start;
-
 public class RitiroPremio {
 	public static JPanel ritiroPremio;
-	private JLabel RitirolblCoupon; 
+	private JLabel RitirolblCoupon;
 	private ButtonGroup buoniSconto;
 	private JRadioButton ritirooption10;
 	private JRadioButton ritirooption30;
@@ -33,10 +30,7 @@ public class RitiroPremio {
 	private JLabel ritirolblSelezionePremio;
 	private Home h;
 	private Scansione s;
-	private int costoSconto=0;
-
-	
-
+	private int costoSconto = 0;
 
 	private void lblSelezionePremio() {
 		ritirolblSelezionePremio = new JLabel("Seleziona un premio");
@@ -54,10 +48,9 @@ public class RitiroPremio {
 		ritirolblRitiroPremio.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
 		ritirolblRitiroPremio.setBounds(416, 0, 629, 57);
 		ritiroPremio.add(ritirolblRitiroPremio);
-		
+
 	}
-	
-	
+
 	public static void lblPuntiTessera() {
 		ritirolblPuntiTessera = new JLabel();
 		ritirolblPuntiTessera.setHorizontalAlignment(SwingConstants.CENTER);
@@ -65,11 +58,12 @@ public class RitiroPremio {
 		ritirolblPuntiTessera.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
 		ritirolblPuntiTessera.setBounds(416, 113, 629, 57);
 		ritiroPremio.add(ritirolblPuntiTessera);
-		
+
 	}
 
 	private void btnRitira() {
-		ritirobtnRitira = new JButton("Ritira", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		ritirobtnRitira = new JButton("Ritira",
+				new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		ritirobtnRitira.setVerticalTextPosition(SwingConstants.CENTER);
 		ritirobtnRitira.setOpaque(false);
 		ritirobtnRitira.setMargin(new Insets(0, 0, 0, 0));
@@ -81,24 +75,24 @@ public class RitiroPremio {
 		ritirobtnRitira.setBounds(416, 526, 629, 57);
 		ritirobtnRitira.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					try {
-						if(ScansioneTessera.tesseraScansionata.addebitoPunti(costoSconto, true)) {
+				try {
+					if (ScansioneTessera.tesseraScansionata.addebitoPunti(costoSconto, true)) {
 						JOptionPane.showMessageDialog(ritiroPremio, "Punti buono sottratti, Stampa in corso del buono");
-						}
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		ritiroPremio.add(ritirobtnRitira);
-		
-	}
-	
-	private void setCostoSconto(int cs) {
-		this.costoSconto=cs;
+
 	}
 
-	private void btnsSconti() {  //DA CONTROLLARE
+	private void setCostoSconto(int cs) {
+		this.costoSconto = cs;
+	}
+
+	private void btnsSconti() { // DA CONTROLLARE
 		ritirooption10 = new JRadioButton(" 10%");
 		ritirooption10.setFont(new Font("Dialog", Font.PLAIN, 30));
 		ritirooption10.setBounds(465, 250, 127, 50);
@@ -109,7 +103,7 @@ public class RitiroPremio {
 			}
 		});
 		ritiroPremio.add(ritirooption10);
-		
+
 		ritirooption30 = new JRadioButton(" 30%");
 		ritirooption30.setFont(new Font("Dialog", Font.PLAIN, 30));
 		ritirooption30.setBounds(465, 300, 127, 50);
@@ -120,7 +114,7 @@ public class RitiroPremio {
 			}
 		});
 		ritiroPremio.add(ritirooption30);
-		
+
 		ritirooption50 = new JRadioButton(" 50%");
 		ritirooption50.setFont(new Font("Dialog", Font.PLAIN, 30));
 		ritirooption50.setBounds(465, 350, 127, 50);
@@ -131,7 +125,7 @@ public class RitiroPremio {
 			}
 		});
 		ritiroPremio.add(ritirooption50);
-		
+
 		ritirooption75 = new JRadioButton(" 75%");
 		ritirooption75.setFont(new Font("Dialog", Font.PLAIN, 30));
 		ritirooption75.setBounds(465, 400, 127, 50);
@@ -142,13 +136,13 @@ public class RitiroPremio {
 			}
 		});
 		ritiroPremio.add(ritirooption75);
-		
+
 		buoniSconto = new ButtonGroup();
 		buoniSconto.add(ritirooption10);
 		buoniSconto.add(ritirooption30);
 		buoniSconto.add(ritirooption50);
 		buoniSconto.add(ritirooption75);
-		
+
 	}
 
 	private void lblCoupon() {
@@ -157,13 +151,13 @@ public class RitiroPremio {
 		RitirolblCoupon.setBounds(609, 248, 424, 199);
 		ritiroPremio.add(RitirolblCoupon);
 	}
-	
+
 	public void setJPanelRitiro() {
 		ritiroPremio = new JPanel();
-		ritiroPremio.setLayout(null);		
+		ritiroPremio.setLayout(null);
 		ritiroPremio.setOpaque(false);
-		h=new Home();
-		s=new Scansione();
+		h = new Home();
+		s = new Scansione();
 		s.btnIndietro(ritiroPremio);
 		h.lblLogo(ritiroPremio);
 		h.btnInfo(ritiroPremio);
@@ -176,14 +170,14 @@ public class RitiroPremio {
 		btnsSconti();
 		lblCoupon();
 	}
-	
+
 	public JButton getritirobtnRitira() {
 		return this.ritirobtnRitira;
 	}
-	
+
 	public JPanel getJPanelRitiroPremio() {
 		return ritiroPremio;
-		
+
 	}
-	
+
 }

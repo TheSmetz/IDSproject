@@ -7,7 +7,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,7 +21,7 @@ import com.toedter.calendar.JDateChooser;
 
 import ids.unicam.trashit.console.AggiuntaDB;
 import ids.unicam.trashit.console.Tessera;
-import ids.unicam.trashit.start.Start;
+
 
 public class Registrazione {
 	
@@ -126,7 +125,7 @@ public class Registrazione {
 						resetCampi();
 					} else {
 						JOptionPane.showMessageDialog(registrazione, "TESSERA GIA' NEL DATABASE.");
-						Start.switchPanel(Home.home);
+						GestoreGrafica.switchPanel(Home.home);
 						//seconds = 30;
 					}
 				}else {

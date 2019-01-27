@@ -14,7 +14,6 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import ids.unicam.trashit.console.Tessera;
-import ids.unicam.trashit.start.Start;
 
 public class ScansioneTessera {
 
@@ -75,7 +74,7 @@ public class ScansioneTessera {
 					RitiroPremio.ritirolblRitiroPremio.setText("Benvenuto " + String.valueOf(
 							tesseraScansionata.getNome() + " " + String.valueOf(tesseraScansionata.getCognome())));
 					RitiroPremio.ritirolblPuntiTessera.setText("Punti tessera: " + String.valueOf(puntiTessera));
-					Start.switchPanel(RitiroPremio.ritiroPremio);
+					GestoreGrafica.switchPanel(RitiroPremio.ritiroPremio);
 				} else {
 					scanTesseratxtpnErr
 							.setText("Attenzione riconoscimento fallito \n      " + "Vi invitiamo a riprovare");

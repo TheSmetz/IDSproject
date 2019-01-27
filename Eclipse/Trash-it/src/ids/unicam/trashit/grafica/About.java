@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
-import ids.unicam.trashit.start.Start;
+
 
 public class About {
 
@@ -41,7 +41,7 @@ public class About {
 		aboutbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		aboutbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Start.switchPanel(Assistenza.assistenza);
+				GestoreGrafica.switchPanel(Assistenza.assistenza);
 				//seconds = 30;
 			}
 		});
@@ -76,7 +76,7 @@ public class About {
 		aboutbtnHomePage = new JButton("Home Page", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		aboutbtnHomePage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Start.switchPanel(Home.home);
+				GestoreGrafica.switchPanel(Home.home);
 				//seconds = 30;
 			}
 		});

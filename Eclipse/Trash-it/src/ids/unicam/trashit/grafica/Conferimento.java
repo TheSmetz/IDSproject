@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import ids.unicam.trashit.start.Start;
 
 public class Conferimento {
 
@@ -44,7 +43,7 @@ public class Conferimento {
 		confbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
 		confbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Start.switchPanel(Scansione.scansione);
+				GestoreGrafica.switchPanel(Scansione.scansione);
 			//	seconds = 30;
 			}
 		});
@@ -68,7 +67,7 @@ public class Conferimento {
 		confbtnProdottoVisualizzatoCorretto.setContentAreaFilled(false);
 		confbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Start.switchPanel(IstruzioniConferimento.istruzioneConf);
+				GestoreGrafica.switchPanel(IstruzioniConferimento.istruzioneConf);
 				//seconds = 30;
 			}
 

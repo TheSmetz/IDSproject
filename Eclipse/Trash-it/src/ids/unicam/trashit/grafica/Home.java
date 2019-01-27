@@ -14,7 +14,6 @@ import javax.swing.SwingConstants;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-import ids.unicam.trashit.start.Start;
 
 public class Home{
 	
@@ -82,7 +81,7 @@ public class Home{
 		homebtnScansione.setBounds(416, 167, 629, 82);
 		homebtnScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Start.switchPanel(Scansione.scansione);
+				GestoreGrafica.switchPanel(Scansione.scansione);
 				//seconds = 30;
 			}
 		});
@@ -93,7 +92,7 @@ public class Home{
 		homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnRitiroPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Start.switchPanel(ScansioneTessera.scansioneTessera);
+				GestoreGrafica.switchPanel(ScansioneTessera.scansioneTessera);
 				//seconds = 30;
 			}
 		});
@@ -114,7 +113,7 @@ public class Home{
 		homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Start.switchPanel(Assistenza.assistenza);
+				GestoreGrafica.switchPanel(Assistenza.assistenza);
 				//seconds = 30;
 			}
 		});
@@ -133,7 +132,7 @@ public class Home{
 		homebtnInfo = new JButton("About us", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Start.switchPanel(About.about);
+				GestoreGrafica.switchPanel(About.about);
 				//seconds = 30;
 			}
 		});
@@ -161,7 +160,7 @@ public class Home{
 		homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		homebtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Start.switchPanel(Sessione.sessione);
+				GestoreGrafica.switchPanel(Sessione.sessione);
 				//timer.stop();
 			}
 		});
@@ -181,7 +180,7 @@ public class Home{
 		homebtnCreaTessera = new JButton("CREA TESSERA", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
 		homebtnCreaTessera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Start.switchPanel(Registrazione.registrazione);
+				GestoreGrafica.switchPanel(Registrazione.registrazione);
 				//seconds = 60;
 			}
 		});

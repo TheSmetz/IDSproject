@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import ids.unicam.trashit.start.Start;
 
 public class IstruzioniConferimento{
 	public static JPanel istruzioneConf;
@@ -26,7 +25,7 @@ public class IstruzioniConferimento{
 		 istrbtnNuovaScansione = new JButton("Nuova scansione", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		 istrbtnNuovaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Start.switchPanel(Scansione.scansione);
+				GestoreGrafica.switchPanel(Scansione.scansione);
 //				seconds = 30;
 			}
 		});
