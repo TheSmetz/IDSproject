@@ -3,29 +3,39 @@ package ids.unicam.trashit.grafica;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
+import ids.unicam.trashit.console.Tessera;
+import ids.unicam.trashit.start.Start;
+
 public class RitiroPremio {
 	public static JPanel ritiroPremio;
-	//private JLabel label;
-	//private JLabel RitirolblCoupon; //DA CONTROLLARE
+	private JLabel RitirolblCoupon; 
 	private ButtonGroup buoniSconto;
 	private JRadioButton ritirooption10;
 	private JRadioButton ritirooption30;
 	private JRadioButton ritirooption50;
 	private JRadioButton ritirooption75;
 	private JButton ritirobtnRitira;
-	private JLabel ritirolblPuntiTessera;
-	private JLabel ritirolblRitiroPremio;
+	static JLabel ritirolblPuntiTessera;
+	static JLabel ritirolblRitiroPremio;
 	private JLabel ritirolblSelezionePremio;
 	private Home h;
 	private Scansione s;
+	private int costoSconto=0;
+
+	
 
 
 	private void lblSelezionePremio() {
@@ -38,7 +48,7 @@ public class RitiroPremio {
 	}
 
 	private void lblRitiroPremio() {
-		ritirolblRitiroPremio = new JLabel("RITIRO PREMI");
+		ritirolblRitiroPremio = new JLabel();
 		ritirolblRitiroPremio.setHorizontalAlignment(SwingConstants.CENTER);
 		ritirolblRitiroPremio.setForeground(Color.BLACK);
 		ritirolblRitiroPremio.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
@@ -46,9 +56,10 @@ public class RitiroPremio {
 		ritiroPremio.add(ritirolblRitiroPremio);
 		
 	}
-
-	private void lblPuntiTessera() {
-		ritirolblPuntiTessera = new JLabel("Punti tessera: ");
+	
+	
+	public static void lblPuntiTessera() {
+		ritirolblPuntiTessera = new JLabel();
 		ritirolblPuntiTessera.setHorizontalAlignment(SwingConstants.CENTER);
 		ritirolblPuntiTessera.setForeground(Color.BLACK);
 		ritirolblPuntiTessera.setFont(new Font("Segoe UI Semibold", Font.BOLD, 28));
@@ -58,7 +69,7 @@ public class RitiroPremio {
 	}
 
 	private void btnRitira() {
-		ritirobtnRitira = new JButton("Ritira", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		ritirobtnRitira = new JButton("Ritira", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		ritirobtnRitira.setVerticalTextPosition(SwingConstants.CENTER);
 		ritirobtnRitira.setOpaque(false);
 		ritirobtnRitira.setMargin(new Insets(0, 0, 0, 0));
@@ -68,8 +79,23 @@ public class RitiroPremio {
 		ritirobtnRitira.setContentAreaFilled(false);
 		ritirobtnRitira.setBorderPainted(false);
 		ritirobtnRitira.setBounds(416, 526, 629, 57);
+		ritirobtnRitira.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+					try {
+						if(ScansioneTessera.tesseraScansionata.addebitoPunti(costoSconto, true)) {
+						JOptionPane.showMessageDialog(ritiroPremio, "Punti buono sottratti, Stampa in corso del buono");
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+			}
+		});
 		ritiroPremio.add(ritirobtnRitira);
 		
+	}
+	
+	private void setCostoSconto(int cs) {
+		this.costoSconto=cs;
 	}
 
 	private void btnsSconti() {  //DA CONTROLLARE
@@ -77,24 +103,44 @@ public class RitiroPremio {
 		ritirooption10.setFont(new Font("Dialog", Font.PLAIN, 30));
 		ritirooption10.setBounds(465, 250, 127, 50);
 		ritirooption10.setOpaque(false);
+		ritirooption10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setCostoSconto(10);
+			}
+		});
 		ritiroPremio.add(ritirooption10);
 		
 		ritirooption30 = new JRadioButton(" 30%");
 		ritirooption30.setFont(new Font("Dialog", Font.PLAIN, 30));
 		ritirooption30.setBounds(465, 300, 127, 50);
 		ritirooption30.setOpaque(false);
+		ritirooption30.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setCostoSconto(30);
+			}
+		});
 		ritiroPremio.add(ritirooption30);
 		
 		ritirooption50 = new JRadioButton(" 50%");
 		ritirooption50.setFont(new Font("Dialog", Font.PLAIN, 30));
 		ritirooption50.setBounds(465, 350, 127, 50);
 		ritirooption50.setOpaque(false);
+		ritirooption50.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setCostoSconto(50);
+			}
+		});
 		ritiroPremio.add(ritirooption50);
 		
 		ritirooption75 = new JRadioButton(" 75%");
 		ritirooption75.setFont(new Font("Dialog", Font.PLAIN, 30));
 		ritirooption75.setBounds(465, 400, 127, 50);
 		ritirooption75.setOpaque(false);
+		ritirooption75.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setCostoSconto(75);
+			}
+		});
 		ritiroPremio.add(ritirooption75);
 		
 		buoniSconto = new ButtonGroup();
@@ -105,12 +151,12 @@ public class RitiroPremio {
 		
 	}
 
-//	private void lblCoupon() {
-//		RitirolblCoupon = new JLabel("");
-//		label.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/ccc.png")));
-//		label.setBounds(609, 248, 424, 199);
-//		ritiroPremio.add(label);
-//	}
+	private void lblCoupon() {
+		RitirolblCoupon = new JLabel("");
+		RitirolblCoupon.setIcon(new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/ccc.png")));
+		RitirolblCoupon.setBounds(609, 248, 424, 199);
+		ritiroPremio.add(RitirolblCoupon);
+	}
 	
 	public void setJPanelRitiro() {
 		ritiroPremio = new JPanel();
@@ -128,7 +174,7 @@ public class RitiroPremio {
 		lblPuntiTessera();
 		btnRitira();
 		btnsSconti();
-//		lblCoupon();
+		lblCoupon();
 	}
 	
 	public JButton getritirobtnRitira() {
@@ -136,7 +182,7 @@ public class RitiroPremio {
 	}
 	
 	public JPanel getJPanelRitiroPremio() {
-		return this.ritiroPremio;
+		return ritiroPremio;
 		
 	}
 	

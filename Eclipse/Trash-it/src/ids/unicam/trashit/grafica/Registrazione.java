@@ -93,19 +93,27 @@ public class Registrazione {
 
 	private void lblSfondoCodiceFiscale() {
 		reglblSfondoCodiceFiscale = new JLabel("");
-		reglblSfondoCodiceFiscale.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
+		reglblSfondoCodiceFiscale.setIcon(new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
 		reglblSfondoCodiceFiscale.setHorizontalAlignment(SwingConstants.CENTER);
 		reglblSfondoCodiceFiscale.setBounds(620, 130, 425, 68);
 		registrazione.add(reglblSfondoCodiceFiscale);
 	}
+	
+	private void resetCampi() {
+		regtxtCodiceFiscale.setText(null);
+		regdateChooser.setDate(null);
+		regtextFieldCognome.setText(null);
+		regtextFieldNome.setText(null);
+		
+	}
 
 	private void btnStampaTessera() {
-		regbtnStampaTessera = new JButton("Stampa tessera", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
+		regbtnStampaTessera = new JButton("Stampa tessera", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
 		regbtnStampaTessera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				//verifica input corretti
-				if (regtxtCodiceFiscale.getText() !=null && regtextFieldNome.getText() !=null && regtextFieldCognome.getText() !=null && regdateChooser.getDate()!=null) {
+				if (regtxtCodiceFiscale.getText() !=null && regtextFieldNome.getText() !=null && regtextFieldCognome.getText() !=null && regdateChooser.getDate()!=null && regtxtCodiceFiscale.getText().length()==16) {
 					//verifica tessera già nel db
 					Tessera tesseraGui = new Tessera(regtxtCodiceFiscale.getText());
 					if(tesseraGui.verificaPresenza()==false) { //non presente nel db
@@ -115,17 +123,14 @@ public class Registrazione {
 						aggiungiTessera.registrazioneTessera(regtxtCodiceFiscale.getText(), 
 								regtextFieldNome.getText(), regtextFieldCognome.getText(), nascitaTessera);
 						JOptionPane.showMessageDialog(registrazione, tesseraGui.getDati());
-					
+						resetCampi();
 					} else {
-						//popup-tessera già presente
-						System.out.println("TESSERA GIA' NEL DB"); 
 						JOptionPane.showMessageDialog(registrazione, "TESSERA GIA' NEL DATABASE.");
-						
 						Start.switchPanel(Home.home);
 						//seconds = 30;
 					}
 				}else {
-					JOptionPane.showMessageDialog(registrazione, "Tutti i campi devono essere compilati");
+					JOptionPane.showMessageDialog(registrazione, "Tutti i campi devono essere compilati correttamente");
 				}
 			}
 		});
@@ -185,7 +190,7 @@ public class Registrazione {
 
 	private void lblSfondoNome() {
 		JLabel reglblSfondoNome = new JLabel("");
-		reglblSfondoNome.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
+		reglblSfondoNome.setIcon(new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
 		reglblSfondoNome.setHorizontalAlignment(SwingConstants.CENTER);
 		reglblSfondoNome.setBounds(620, 202, 429, 68);
 		registrazione.add(reglblSfondoNome);
@@ -194,7 +199,7 @@ public class Registrazione {
 
 	private void lblSfondoCognome() {
 		reglblSfondoCognome = new JLabel("");
-		reglblSfondoCognome.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
+		reglblSfondoCognome.setIcon(new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/whitebutton.png")));
 		reglblSfondoCognome.setHorizontalAlignment(SwingConstants.CENTER);
 		reglblSfondoCognome.setBounds(620, 280, 425, 68);
 		registrazione.add(reglblSfondoCognome);
@@ -228,6 +233,8 @@ public class Registrazione {
 		txtFieldCognome();
 		lblSfondoNome();
 		lblSfondoCognome();
+		
+		
 	}
 	
 	public  JPanel getJPanelRegistrazione() {

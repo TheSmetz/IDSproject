@@ -71,7 +71,7 @@ public class Home{
 	}
 	
 	private void btnScansione() {
-		homebtnScansione = new JButton("SCANSIONA PRODOTTO", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		homebtnScansione = new JButton("SCANSIONA PRODOTTO", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnScansione.setVerticalTextPosition(SwingConstants.CENTER);
 		homebtnScansione.setMargin(new Insets(0, 0, 0, 0));
 		homebtnScansione.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -90,7 +90,7 @@ public class Home{
 	}
 	
 	private void btnRitiroPremio() {
-		homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnRitiroPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Start.switchPanel(ScansioneTessera.scansioneTessera);
@@ -111,7 +111,7 @@ public class Home{
 		}
 	
 	public void btnProblemiAssistenza(JPanel wherePanel) {
-		homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Start.switchPanel(Assistenza.assistenza);
@@ -130,7 +130,7 @@ public class Home{
 	}
 	
 	public void btnInfo(JPanel wherePanel) {
-		homebtnInfo = new JButton("About us", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		homebtnInfo = new JButton("About us", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Start.switchPanel(About.about);
@@ -151,14 +151,14 @@ public class Home{
 	
 	public void lblLogo(JPanel wherePanel) {
 		homelblLogo = new JLabel("");
-		homelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
+		homelblLogo.setIcon(new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
 		homelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblLogo.setBounds(0, 0, 418, 488);
 		wherePanel.add(homelblLogo);
 	}
 	
 	public void btnChiudiSessione(JPanel wherePanel) {
-		homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
+		homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		homebtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Start.switchPanel(Sessione.sessione);
@@ -178,7 +178,7 @@ public class Home{
 	}
 	
 	private void btnCreaTessera() {
-		homebtnCreaTessera = new JButton("CREA TESSERA", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
+		homebtnCreaTessera = new JButton("CREA TESSERA", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
 		homebtnCreaTessera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Start.switchPanel(Registrazione.registrazione);

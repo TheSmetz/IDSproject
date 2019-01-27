@@ -90,7 +90,7 @@ public class Start extends JFrame {
 
 	private void creaJFrame() {
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/aaa.png")));
+				.getImage(getClass().getResource("/ids/unicam/trashit/grafica/immagini/aaa.png")));
 		setTitle("Trash-it");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 746);
@@ -120,6 +120,10 @@ public class Start extends JFrame {
 		c = new Scansione();
 		c.setJPanelScansione();
 		layeredPane.add(c.getJPanelScansione());
+		
+		scanTessera = new ScansioneTessera();
+		scanTessera.setJPanelScansioneTessera();
+		layeredPane.add(scanTessera.getJPanelScansioneTessera());
 
 		ritPremio = new RitiroPremio();
 		ritPremio.setJPanelRitiro();
@@ -141,134 +145,10 @@ public class Start extends JFrame {
 		conf.setJPanelConferimento();
 		layeredPane.add(conf.getJPanelConferimento());
 
-		scanTessera = new ScansioneTessera();
-		scanTessera.setJPanelScansioneTessera();
-		layeredPane.add(scanTessera.getJPanelScansioneTessera());
-
 		istrConferimento = new IstruzioniConferimento();
 		istrConferimento.setJPanelIstruzioni();
 		layeredPane.add(istrConferimento.getJPanelIstruzioni());
 	}
-//
-//	private void addActionListnerSessione() {
-//		sess.getsessionebtnAvviaSessione().addActionListener(this);
-//	}
-//
-//	private void addActionListnerHome() {
-//		h.gethomebtnScansione().addActionListener(this);
-//		h.gethomebtnRitiroPremio().addActionListener(this);
-//		h.getHomebtnCreaTessera().addActionListener(this);
-//		h.gethomebtnInfo().addActionListener(this);
-//		h.getHomebtnProblemiAssistenza().addActionListener(this);
-//	}
-//
-//	private void addActionListnerScansione() {
-//		// c.getbtnIndietro().addActionListener(this);
-//		c.getbtnAvviaScansione().addActionListener(this);
-//	}
-//
-//	private void addActionListnerRitiroPremio() {
-//		ritPremio.getritirobtnRitira().addActionListener(this);
-//	}
-//
-//	private void addActionListnerAbout() {
-//		ab.getaboutbtnHomePage().addActionListener(this);
-//	}
-//
-//	private void addActionListnerAssistenza() {
-//
-//	}
-//
-//	private void addActionListnerConferimento() {
-//		conf.getbtnProdottoVisualizzatoCorretto().addActionListener(this);
-//		conf.getbtnProdottoVisualizzatoErrato().addActionListener(this);
-//
-//	}
-//
-//	private void addActionListnerIstruzioniConferimento() {
-//		istrConferimento.getIstrbtnNuovaScansione().addActionListener(this);
-//
-//	}
-//
-//	private void addActionListnerRegistrazione() {
-//		reg.getRegbtnStampaTessera().addActionListener(this);
-//
-//	}
-//
-//	private void addActionListnerScansioneTessera() {
-//
-//	}
-//
-//	@Override
-//	public void actionPerformed(ActionEvent e) {
-//
-//		if (e.getSource() == button) {
-//			switchPanel(h.getJPanelHome());
-//		}
-//
-//		// SESSIONE
-//		if (e.getSource() == sess.getsessionebtnAvviaSessione()) {
-//			switchPanel(h.getJPanelHome());
-//			seconds = 30;
-//			startTimer();
-//		}
-//
-//		// HOME
-//		if (e.getSource() == h.gethomebtnScansione()) {
-//			switchPanel(c.getJPanelScansione());
-//			seconds = 30;
-//		} else if (e.getSource() == h.gethomebtnRitiroPremio()) {
-//			switchPanel(ritPremio.getJPanelRitiroPremio());
-//			seconds = 30;
-//		} else if (e.getSource() == h.getHomebtnCreaTessera()) {
-//			switchPanel(reg.getJPanelRegistrazione());
-//			seconds = 120;
-//		} else if (e.getSource() == h.gethomebtnInfo()) {
-//			switchPanel(ab.getJPanelAbout());
-//			seconds = 30;
-//		} else if (e.getSource() == h.getHomebtnProblemiAssistenza()) {
-//			switchPanel(ass.getJPanelAssistenza());
-//			seconds = 30;
-//		}
-//
-//		// SCANSIONE
-//		if (e.getSource() == c.getbtnAvviaScansione()) {
-//			switchPanel(conf.getJPanelConferimento());
-//			seconds = 30;
-//		}
-//
-//		// CONFERIMENTO
-//		if (e.getSource() == conf.getbtnProdottoVisualizzatoCorretto()) {
-//			switchPanel(istrConferimento.getJPanelIstruzioni());
-//			seconds = 60;
-//		} else if (e.getSource() == conf.getbtnProdottoVisualizzatoErrato()) {
-//			switchPanel(c.getJPanelScansione());
-//			seconds = 30;
-//		}
-//
-//		// ISTRUZIONI CONFERIMENTO
-//		if (e.getSource() == istrConferimento.getIstrbtnNuovaScansione()) {
-//			switchPanel(c.getJPanelScansione());
-//			seconds = 30;
-//		}
-//
-//		// RITIRO PREMIO
-//		if (e.getSource() == ritPremio.getritirobtnRitira()) {
-//			System.out.println("+++STAMPA BIGLIETTO+++");
-//		}
-//
-//		// REGISTRAZIONE
-//		if (e.getSource() == reg.getRegbtnStampaTessera()) {
-//			System.out.println("AGGIUNTA AL DB E STAMPA TESSERA");
-//		}
-//
-//		// ABOUT
-//		if (e.getSource() == ab.getaboutbtnHomePage()) {
-//			System.out.println("HOME");
-//			switchPanel(h.getJPanelHome());
-//			seconds = 30;
-//		}
-//	}
 
 	public static void switchPanel(JPanel panelName) {
 		layeredPane.removeAll();
@@ -280,23 +160,13 @@ public class Start extends JFrame {
 	private void background() {
 		background = new JLabel("");
 		background.setBounds(0, -14, 1045, 761);
-		background.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/home.jpg")));
+		background.setIcon(new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/home.jpg")));
 		contentPane.add(background);
 	}
 
 	public Start() {
 		creaJFrame();
 		creaJPanels();
-//		addActionListnerSessione();
-//		addActionListnerHome();
-//		addActionListnerScansione();
-//		addActionListnerRitiroPremio();
-//		addActionListnerAssistenza();
-//		addActionListnerConferimento();
-//		addActionListnerIstruzioniConferimento();
-//		addActionListnerRegistrazione();
-//		addActionListnerScansioneTessera();
-//		addActionListnerAbout();
 		background();
 	}
 

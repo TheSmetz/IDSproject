@@ -53,9 +53,9 @@ public class Scansione {
 
 	public void btnIndietro(JPanel wherePanel) {
 		scanbtnIndietro = new JButton("",
-				new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
+				new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
 		scanbtnIndietro
-				.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
+				.setIcon(new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
 		scanbtnIndietro.setBounds(938, 11, 97, 87);
 		scanbtnIndietro.setOpaque(false);
 		scanbtnIndietro.setBorder(null);
@@ -84,7 +84,7 @@ public class Scansione {
 		scanlblInputBackground = new JLabel("");
 		scanlblInputBackground.setHorizontalAlignment(SwingConstants.CENTER);
 		scanlblInputBackground.setIcon(
-				new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonsmall.png")));
+				new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonsmall.png")));
 		scanlblInputBackground.setBounds(430, 357, 615, 96);
 		scansione.add(scanlblInputBackground);
 
@@ -112,19 +112,18 @@ public class Scansione {
 	private void btnAvviaScansione() { // DA RIDURRE
 		
 		scanbtnAvviaScansione = new JButton("Avvia scansione",
-				new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+				new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanbtnAvviaScansione.setVerticalTextPosition(JButton.CENTER);
 		scanbtnAvviaScansione.setHorizontalTextPosition(JButton.CENTER);
 		scanbtnAvviaScansione.setBorderPainted(false);
 		scanbtnAvviaScansione.setMargin(new Insets(0, 0, 0, 0));
-		// btnScansionaProdotto.setIcon(new
-		// ImageIcon(Main.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
 		scanbtnAvviaScansione.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
 		scanbtnAvviaScansione.setForeground(Color.BLACK);
 		scanbtnAvviaScansione.setContentAreaFilled(false);
 		scanbtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				scanProdotto();
+				scantxtInputBarcode.setText("");
 			}
 		});
 		scanbtnAvviaScansione.setBounds(416, 212, 629, 96);

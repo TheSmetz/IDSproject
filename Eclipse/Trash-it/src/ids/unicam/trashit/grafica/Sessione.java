@@ -28,7 +28,7 @@ public class Sessione {
 	
 	private void lblLogo() {
 		sessionelblLogo = new JLabel(""); 
-		sessionelblLogo.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/logog.png")));
+		sessionelblLogo.setIcon(new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/logog.png")));
 		sessionelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		sessionelblLogo.setBounds(0, 68, 1045, 505);
 		sessione.add(sessionelblLogo);
@@ -45,7 +45,7 @@ public class Sessione {
 	}
 	
 	private void btnAvviaSessione() {
-		sessionebtnAvviaSessione = new JButton("AVVIA SESSIONE", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
+		sessionebtnAvviaSessione = new JButton("AVVIA SESSIONE", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
 		sessionebtnAvviaSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Start.switchPanel(Home.home);
@@ -68,7 +68,7 @@ public class Sessione {
 	private void lblFreccia() {
 		sesslblFreccia = new JLabel("");
 		sesslblFreccia.setToolTipText("");
-		sesslblFreccia.setIcon(new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/freccia.gif")));
+		sesslblFreccia.setIcon(new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/freccia.gif")));
 		sesslblFreccia.setBounds(728, 54, 240, 598);
 		sessione.add(sesslblFreccia);
 	}

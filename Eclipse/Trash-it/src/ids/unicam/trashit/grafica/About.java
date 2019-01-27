@@ -38,7 +38,7 @@ public class About {
 	}
 	
 	private void btnProblemiAssistenza() {
-		aboutbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		aboutbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		aboutbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Start.switchPanel(Assistenza.assistenza);
@@ -73,7 +73,7 @@ public class About {
 	}
 
 	public void btnHomePage(JPanel wherePanel) {
-		aboutbtnHomePage = new JButton("Home Page", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		aboutbtnHomePage = new JButton("Home Page", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		aboutbtnHomePage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Start.switchPanel(Home.home);

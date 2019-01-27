@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import ids.unicam.trashit.start.Start;
+
 public class IstruzioniConferimento{
 	public static JPanel istruzioneConf;
 	private JLabel istrlblConferimentoProdotto;
@@ -20,13 +22,12 @@ public class IstruzioniConferimento{
 	private JLabel istrlblPunti;
 	private Home h;
 	private Scansione s;
-	
 
 	private void btnNuovaScansione() {
-		 istrbtnNuovaScansione = new JButton("Nuova scansione", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		 istrbtnNuovaScansione = new JButton("Nuova scansione", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		 istrbtnNuovaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				switchPanel(scansione);
+				Start.switchPanel(Scansione.scansione);
 //				seconds = 30;
 			}
 		});
@@ -48,6 +49,7 @@ public class IstruzioniConferimento{
 		istrlblPunti.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		istrlblPunti.setHorizontalAlignment(SwingConstants.CENTER);
 		istrlblPunti.setBounds(417, 258, 628, 69);
+		
 		//istrlblPunti.setText("Punti guadagnati: " + s.getProdotto().getPunti());
 		istruzioneConf.add(istrlblPunti);
 		

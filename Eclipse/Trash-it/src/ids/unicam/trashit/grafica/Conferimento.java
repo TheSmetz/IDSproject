@@ -34,7 +34,7 @@ public class Conferimento {
 	}
 
 	private void btnProdottoVisualizzatoErrato() {
-		confbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonSmall.png")));
+		confbtnProdottoVisualizzatoErrato = new JButton("Prodotto errato", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonSmall.png")));
 		confbtnProdottoVisualizzatoErrato.setVerticalTextPosition(JButton.CENTER);
 		confbtnProdottoVisualizzatoErrato.setHorizontalTextPosition(JButton.CENTER);
 		confbtnProdottoVisualizzatoErrato.setBorderPainted(false);
@@ -58,7 +58,7 @@ public class Conferimento {
 	}
 
 	private void btnProdottoVisualizzatoCorretto() {
-		confbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", new ImageIcon(GuiMain.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+		confbtnProdottoVisualizzatoCorretto = new JButton("Prodotto corretto", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		confbtnProdottoVisualizzatoCorretto.setVerticalTextPosition(JButton.CENTER);
 		confbtnProdottoVisualizzatoCorretto.setHorizontalTextPosition(JButton.CENTER);
 		confbtnProdottoVisualizzatoCorretto.setBorderPainted(false);
