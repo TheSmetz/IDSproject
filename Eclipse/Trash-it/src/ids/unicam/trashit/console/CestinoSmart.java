@@ -21,7 +21,14 @@ public class CestinoSmart {
 		}
 		return conferimento;
 	}
-
+	
+	public void svuotaTuttiCestini() {
+		carta.svuotaCestino();
+		plastica.svuotaCestino();
+		vetro.svuotaCestino();
+		indifferenziato.svuotaCestino();
+	}
+	
 	public boolean controlloIntegrita() {
 		if (carta.isIntegrita() == true && plastica.isIntegrita() == true && vetro.isIntegrita() == true
 				&& indifferenziato.isIntegrita() == true) {

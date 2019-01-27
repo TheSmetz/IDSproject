@@ -19,8 +19,8 @@ import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JDateChooser;
 
-import ids.unicam.trashit.console.AggiuntaDB;
 import ids.unicam.trashit.console.Tessera;
+import ids.unicam.trashit.database.AggiuntaDB;
 
 
 public class Registrazione {

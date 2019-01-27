@@ -5,12 +5,15 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import ids.unicam.trashit.console.Tessera;
 
 
 public class Conferimento {
@@ -44,6 +47,7 @@ public class Conferimento {
 		confbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Scansione.scansione);
+				
 			//	seconds = 30;
 			}
 		});
@@ -68,6 +72,12 @@ public class Conferimento {
 		confbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(IstruzioniConferimento.istruzioneConf);
+				Tessera t=new Tessera(Scansione.getBarcodeSessione());
+				try {
+					t.accreditoPunti(Scansione.prodottoScansionato.getPunti(), true);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				//seconds = 30;
 			}
 

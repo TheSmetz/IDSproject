@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -13,12 +15,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ids.unicam.trashit.console.CestinoSmart;
+import ids.unicam.trashit.console.Materiale;
 import ids.unicam.trashit.console.Policy;
 import ids.unicam.trashit.console.Prodotto;
+import ids.unicam.trashit.console.Tessera;
 import ids.unicam.trashit.grafica.Home;
 
 public class Scansione {
@@ -32,13 +37,21 @@ public class Scansione {
 	private Home h;
 	private String barcode;
 	public static Prodotto prodottoScansionato;
-	private CestinoSmart cestinoS;
 	private ImageIcon image;
 	private Image im;
 	private Image myImg;
 	private ImageIcon newImage;
 	private JLabel scanlblInputBackground;
 	private JLabel scanlblBenvenuto;
+	private final String filename = "src\\ids\\unicam\\trashit\\grafica\\txt\\ProdottiDaAggiungere.txt";
+	private FileWriter fw;
+	private BufferedWriter bw;
+
+	private static String BARCODEsessione;
+
+	public static String getBarcodeSessione() {
+		return BARCODEsessione;
+	}
 
 	public JButton getbtnIndietro() {
 		return this.scanbtnIndietro;
@@ -118,8 +131,21 @@ public class Scansione {
 		scanbtnAvviaScansione.setContentAreaFilled(false);
 		scanbtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				scanProdotto();
+				
+				barcode = scantxtInputBarcode.getText();
+				if(barcode.length()==0) {
+					JOptionPane.showMessageDialog(scansione, "Barcode non rilevato");
+				}else if (Assistenza.cestinoS.controlloVuoto()){
+				try {
+					scanProdotto();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				scantxtInputBarcode.setText("");
+				}else {
+					JOptionPane.showMessageDialog(scansione, "Cestino pieno, necessaria assistenza");
+					GestoreGrafica.switchPanel(Assistenza.assistenza);
+					}
 			}
 		});
 		scanbtnAvviaScansione.setBounds(416, 212, 629, 96);
@@ -135,39 +161,81 @@ public class Scansione {
 		Conferimento.conflblImmagineProdotto.setIcon(newImage);
 	}
 
-	public void scanProdotto() {
-		// leggo il barcode in input
-		barcode = scantxtInputBarcode.getText();
-		// prodotto
+	public void scanProdotto() throws IOException {
 		prodottoScansionato = new Prodotto(barcode);
-		// VERIFICARE CORRETTEZZA CODICE A BARRE
-		if (prodottoScansionato.isPresenza()) {
-			// policy
-			Policy policyProdotto = new Policy("AP", prodottoScansionato);
-			prodottoScansionato.getDati();
-			// cestinosmart
-			cestinoS = new CestinoSmart();
-			try {
-				cestinoS.conferimentoProdotto(prodottoScansionato);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			prodottoScansionato.getDati();
-			setImmagineProdotto();
-			IstruzioniConferimento.istrlblPunti.setText("Punti guadagnati: " + prodottoScansionato.getPunti());
-			IstruzioniConferimento.istrlblDescrizione.setText("Descrizione: " + prodottoScansionato.getDescrizione());
-			// prodotto nel db allora procedo con il conferimento
-			GestoreGrafica.switchPanel(Conferimento.conferimento);
-			// timer
+		boolean flag1 = barcode.substring(0, 1).matches("\\d"); // Controllo che i primi 3 caratteri non siano numeri
+		boolean flag2 = barcode.substring(1, 2).matches("\\d"); // Questo per vedere se viene scannerizzata una tessera
+																// o un prodotto
+		boolean flag3 = barcode.substring(2, 3).matches("\\d");
+
+		if (!flag1 && !flag2 && !flag3) {
+			gestioneTessera(barcode);
 		} else {
-			JOptionPane.showMessageDialog(scansione,
-					"Prodotto sbagliato o non presente nel DB, invia notifica per aggiungerlo");
-			System.out.println("\nProdotto non presente nel DB, invia notifica per aggiungerlo");
+			if (prodottoScansionato.isPresenza()) {
+				Policy policyProdotto = new Policy("AP", prodottoScansionato);
+				try {
+					Assistenza.cestinoS.conferimentoProdotto(prodottoScansionato);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				setImmagineProdotto();
+				if (policyProdotto.isUtilizzoPunti()) {
+					@SuppressWarnings("unused")  //nel caso in cui non si scannerizza la tessera ma si butti solo i prodotti
+					Tessera tesseraScansionata = new Tessera(BARCODEsessione);
+					IstruzioniConferimento.istrlblPunti.setText("Punti Prodotto: " + prodottoScansionato.getPunti());
+				} else {
+					IstruzioniConferimento.istrlblPunti
+							.setText("L'area in cui ti trovi non prevede l'utilizzo dei punti");
+				}
+				IstruzioniConferimento.istrlblDescrizione
+						.setText("Descrizione : " + prodottoScansionato.getDescrizione());
+				// prodotto nel db allora procedo con il conferimento
+				GestoreGrafica.switchPanel(Conferimento.conferimento);
+				// timer
+			} else {
+				JOptionPane.showMessageDialog(scansione,
+						"Prodotto non presente nel DB, invia notifica per aggiungerlo");
+				aggiungiProdotto();
+			}
+		}
+	}
+	
+
+	private void gestioneTessera(String input) {
+		// controollo
+		JOptionPane.showMessageDialog(scansione, "Tessera autenticata per l'acquisizione dei punti");
+		BARCODEsessione = input;
+
+	}
+
+	private void aggiungiProdotto() {
+		try {
+			fw = new FileWriter(filename, true);
+			bw = new BufferedWriter(fw);
+			bw.write("- " + scantxtInputBarcode.getText() + "\n");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (bw != null)
+					bw.close();
+				if (fw != null)
+					fw.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 
-	public Prodotto getProdotto() {
-		return Scansione.prodottoScansionato;
+	private void lblAttenzioneTessera() {
+		JTextArea txtrNbAutenticarsiPrima = new JTextArea();
+		txtrNbAutenticarsiPrima.setFont(new Font("Monospaced", Font.BOLD, 18));
+		txtrNbAutenticarsiPrima.setEditable(false);
+		txtrNbAutenticarsiPrima.setText(
+				"               !ATTENZIONE! \r\nSCANSIONARE PRIMA LA TESSERA, POI I PRODOTTI,\r\n     AFFINCHE' I PUNTI VENGANO ACCREDITATI");
+		txtrNbAutenticarsiPrima.setBounds(502, 472, 504, 125);
+		txtrNbAutenticarsiPrima.setOpaque(false);
+		scansione.add(txtrNbAutenticarsiPrima);
 	}
 
 	private void lblBenvenuto() {
@@ -178,6 +246,10 @@ public class Scansione {
 		scanlblBenvenuto.setBounds(426, 0, 619, 49);
 		scansione.add(scanlblBenvenuto);
 
+	}
+
+	public Prodotto getProdotto() {
+		return Scansione.prodottoScansionato;
 	}
 
 	// CONTROLLARE
@@ -198,6 +270,7 @@ public class Scansione {
 		txtBarcode();
 		lblInputBackground();
 		lblBarcode();
+		lblAttenzioneTessera();
 	}
 
 	public JPanel getJPanelScansione() {
