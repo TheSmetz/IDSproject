@@ -18,10 +18,9 @@ public class IstruzioniConferimento{
 	public static JPanel istruzioneConf;
 	private JLabel istrlblConferimentoProdotto;
 	private JButton istrbtnNuovaScansione;
-	private JLabel istrlblDescrizione;
-	private JLabel istrlblPunti;
+	static JLabel istrlblDescrizione;
+	static JLabel istrlblPunti;
 	private Home h;
-	private Scansione s;
 
 	private void btnNuovaScansione() {
 		 istrbtnNuovaScansione = new JButton("Nuova scansione", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
@@ -44,7 +43,7 @@ public class IstruzioniConferimento{
 		
 	}
 
-	private void lblPunti() {
+	public void lblPunti() {
 		istrlblPunti = new JLabel("Punti guadagnati");
 		istrlblPunti.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		istrlblPunti.setHorizontalAlignment(SwingConstants.CENTER);

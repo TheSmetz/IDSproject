@@ -159,7 +159,8 @@ public class Scansione {
             }
             prodottoScansionato.getDati();
             setImmagineProdotto();
-            
+            IstruzioniConferimento.istrlblPunti.setText("Punti guadagnati: " + prodottoScansionato.getPunti());
+            IstruzioniConferimento.istrlblDescrizione.setText("Descrizione: " + prodottoScansionato.getDescrizione());
             //prodotto nel db allora procedo con il conferimento
             Start.switchPanel(Conferimento.conferimento);
             //timer
