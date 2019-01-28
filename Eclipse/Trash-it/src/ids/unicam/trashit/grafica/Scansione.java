@@ -40,6 +40,7 @@ public class Scansione {
 	private ImageIcon newImage;
 	private JLabel scanlblInputBackground;
 	private JLabel scanlblBenvenuto;
+	private JTextArea txtrNbAutenticarsiPrima;
 	private final String filename = "src\\ids\\unicam\\trashit\\grafica\\txt\\ProdottiDaAggiungere.txt";
 	private FileWriter fw;
 	private BufferedWriter bw;
@@ -249,6 +250,8 @@ public class Scansione {
 		JOptionPane.showMessageDialog(scansione, "Tessera autenticata per l'acquisizione dei punti");
 		tesseraScansionata = new Tessera(codiceTessera);
 		tesseraLetta = true;
+//		scanlblBenvenuto.setText("Benvenuto "+tesseraScansionata.getNome()+" "+tesseraScansionata.getCognome());
+//		txtrNbAutenticarsiPrima.setText("TESSERA AUTENTICATA");
 		GestoreGrafica.startTimer(60);
 	}
 	
@@ -276,7 +279,7 @@ public class Scansione {
 	}
 
 	private void lblAttenzioneTessera() {
-		JTextArea txtrNbAutenticarsiPrima = new JTextArea();
+		txtrNbAutenticarsiPrima = new JTextArea();
 		txtrNbAutenticarsiPrima.setFont(new Font("Monospaced", Font.BOLD, 18));
 		txtrNbAutenticarsiPrima.setEditable(false);
 		txtrNbAutenticarsiPrima.setText(
