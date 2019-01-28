@@ -50,9 +50,9 @@ public class GestoreGrafica extends JFrame {
 		seconds = durata;
 		if (timer.isRunning()) {
 			timer.stop();
-			System.out.println("STOP");				
+			//System.out.println("STOP");				
 			timer.start();
-			System.out.println("START");
+			//System.out.println("START");
 		} else {
 			timer.start();			
 		}
@@ -69,11 +69,11 @@ public class GestoreGrafica extends JFrame {
 		timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (seconds >= 0) {
-					System.out.println(seconds);
+					//System.out.println(seconds);
 					lblTimer.setText(String.valueOf(seconds));
 					seconds--;
 				} else {
-					System.out.println("TEMPO SCADUTO");
+					//System.out.println("TEMPO SCADUTO");
 					timer.stop();
 					// salvare impostazioni
 					switchPanel(Sessione.sessione);

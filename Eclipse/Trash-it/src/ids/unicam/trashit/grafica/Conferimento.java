@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import ids.unicam.trashit.console.CestinoSmart;
 import ids.unicam.trashit.console.Statistica;
 import ids.unicam.trashit.console.Tessera;
 
@@ -26,6 +27,7 @@ public class Conferimento {
 	public static JLabel conflblImmagineProdotto;
 	private Home h;
 	
+	public static CestinoSmart cestinoSessione = new CestinoSmart();
 	public static Statistica statisticaSessione;
 	
 	private void lblScansioneProdotto() {
@@ -71,15 +73,26 @@ public class Conferimento {
 		confbtnProdottoVisualizzatoCorretto.setForeground(Color.BLACK);
 		confbtnProdottoVisualizzatoCorretto.setContentAreaFilled(false);
 		confbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {				
+				if (Scansione.policyProdotto.isUtilizzoPunti()) {	//se la città prevede l'accredito lo faccio sulla tessera (se inserita)
+					IstruzioniConferimento.istrlblPunti.setText("Punti Prodotto: " + Scansione.prodottoCorrente.getPunti());
+					if (Scansione.tesseraLetta) {
+						try {
+							//guadagno punti
+							Scansione.tesseraScansionata.accreditoPunti(Scansione.prodottoCorrente.getPunti(), true);
+							//aggiorna statistica
+							statisticaSessione = new Statistica(Scansione.prodottoCorrente.getcodiceABarre(), Scansione.tesseraScansionata.getIdTessera());
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}						
+					}
+				} else {
+					IstruzioniConferimento.istrlblPunti.setText("L'area in cui ti trovi non prevede l'utilizzo dei punti");
+				}
+				IstruzioniConferimento.istrlblDescrizione.setText("Descrizione : " + Scansione.prodottoCorrente.getDescrizione());	//descrizione prodotto				
+				
 				GestoreGrafica.switchPanel(IstruzioniConferimento.istruzioneConf);
 				GestoreGrafica.startTimer(30);
-				try {
-					Scansione.tesseraScansionata.accreditoPunti(Scansione.prodottoScansionato.getPunti(), true);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-				//seconds = 30;
 			}
 
 		});

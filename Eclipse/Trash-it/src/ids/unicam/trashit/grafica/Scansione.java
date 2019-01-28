@@ -19,8 +19,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import ids.unicam.trashit.console.CestinoSmart;
-import ids.unicam.trashit.console.Materiale;
 import ids.unicam.trashit.console.Policy;
 import ids.unicam.trashit.console.Prodotto;
 import ids.unicam.trashit.console.Statistica;
@@ -36,8 +34,6 @@ public class Scansione {
 	private JLabel scantxtBarcode;
 	private JButton scanbtnIndietro;
 	private Home h;
-	private String barcodeInput;
-	public static Prodotto prodottoScansionato;
 	private ImageIcon image;
 	private Image im;
 	private Image myImg;
@@ -48,13 +44,15 @@ public class Scansione {
 	private FileWriter fw;
 	private BufferedWriter bw;
 	
-	//
-	private static String BARCODEsessione;
-	private static String TESSERAsessione;
+	//Tessera sessione
+	private static String barcodeInput;
 	public static Tessera tesseraScansionata;
+	public static boolean tesseraLetta = false;
+	public static Prodotto prodottoCorrente;
+	public static Policy policyProdotto;
 
 	public static String getBarcodeSessione() {
-		return BARCODEsessione;
+		return barcodeInput;
 	}
 
 	public JButton getbtnIndietro() {
@@ -138,13 +136,14 @@ public class Scansione {
 				barcodeInput = scantxtInputBarcode.getText();
 				if(barcodeInput.length()==0) {
 					JOptionPane.showMessageDialog(scansione, "Barcode non rilevato");
-				}else if (Assistenza.cestinoS.controlloVuoto()){
-				try {
-					scanProdotto();
-				} catch (IOException e) {
-					e.printStackTrace();
 				}
-				scantxtInputBarcode.setText("");
+				if (Conferimento.cestinoSessione.controlloVuoto()){	//cestino vuoto
+					try {
+						scanProdotto();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					scantxtInputBarcode.setText("");
 				}else {
 					JOptionPane.showMessageDialog(scansione, "Cestino pieno, necessaria assistenza");
 					GestoreGrafica.switchPanel(Assistenza.assistenza);
@@ -157,7 +156,7 @@ public class Scansione {
 	}
 
 	private void setImmagineProdotto() {
-		image = new ImageIcon(prodottoScansionato.getImmagine());
+		image = new ImageIcon(prodottoCorrente.getImmagine());
 		im = image.getImage();
 		myImg = im.getScaledInstance(Conferimento.conflblImmagineProdotto.getWidth(),
 				Conferimento.conflblImmagineProdotto.getHeight(), Image.SCALE_SMOOTH);
@@ -166,59 +165,95 @@ public class Scansione {
 	}
 
 	public void scanProdotto() throws IOException {
-//		prodottoScansionato = new Prodotto(barcode);
-		boolean flag1 = barcodeInput.substring(0, 1).matches("\\d"); // Controllo che i primi 3 caratteri non siano numeri
-		boolean flag2 = barcodeInput.substring(1, 2).matches("\\d"); // Questo per vedere se viene scannerizzata una tessera
-																// o un prodotto
-		boolean flag3 = barcodeInput.substring(2, 3).matches("\\d");
-
-		if (!flag1 && !flag2 && !flag3) {
-			TESSERAsessione = barcodeInput;
-			gestioneTessera(TESSERAsessione);
-		} else {
+//		boolean flag1 = barcodeInput.substring(0, 1).matches("\\d"); // Controllo che i primi 3 caratteri non siano numeri
+//		boolean flag2 = barcodeInput.substring(1, 2).matches("\\d"); // Questo per vedere se viene scannerizzata una tessera
+//																// o un prodotto
+//		boolean flag3 = barcodeInput.substring(2, 3).matches("\\d");
+//
+//		if (!flag1 && !flag2 && !flag3) {
+//			TESSERAsessione = barcodeInput;
+//			gestioneTessera(TESSERAsessione);
+//		} else {
 			//se prodotto
-			BARCODEsessione = barcodeInput;
-			prodottoScansionato = new Prodotto(BARCODEsessione);
-			if (prodottoScansionato.isPresenza()) {
-				//prodotto valido
-				Policy policyProdotto = new Policy("AP", prodottoScansionato);
+//			BARCODEsessione = barcodeInput;
+//			prodottoScansionato = new Prodotto(BARCODEsessione);
+//			if (prodottoScansionato.isPresenza()) {
+//				//prodotto valido
+//				Policy policyProdotto = new Policy("AP", prodottoScansionato);
+//				try {
+//					//assistenza? perche non su confermineto?
+//					//recupero descrizione su dove buttare prodotto
+//					Assistenza.cestinoS.conferimentoProdotto(prodottoScansionato);
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//				setImmagineProdotto();
+//				if (policyProdotto.isUtilizzoPunti()) {
+////					@SuppressWarnings("unused")  //nel caso in cui non si scannerizza la tessera ma si butti solo i prodotti
+////					tesseraScansionata = new Tessera(BARCODEsessione);
+//					IstruzioniConferimento.istrlblPunti.setText("Punti Prodotto: " + prodottoScansionato.getPunti());
+//				} else {
+//					IstruzioniConferimento.istrlblPunti.setText("L'area in cui ti trovi non prevede l'utilizzo dei punti");
+//				}
+//				IstruzioniConferimento.istrlblDescrizione.setText("Descrizione : " + prodottoScansionato.getDescrizione());
+//				// prodotto nel db allora procedo con il conferimento
+//				//da passare a conferimento: prodotto, tessera(se scannerizzata)
+//				Conferimento.statisticaSessione = new Statistica(prodottoScansionato.getcodiceABarre(), tesseraScansionata.getIdTessera());
+//				GestoreGrafica.switchPanel(Conferimento.conferimento);
+//				GestoreGrafica.startTimer(60);
+//				// timer
+//			} else {
+//				JOptionPane.showMessageDialog(scansione,
+//						"Prodotto non presente nel DB, invia notifica per aggiungerlo");
+//				aggiungiProdotto();
+//			}
+//		}
+
+		if (barcodeInput.length()==16 && checkTessera(barcodeInput)) {	//tessera
+			gestioneTessera(barcodeInput);
+		} else {	//prodotto
+			prodottoCorrente = new Prodotto(barcodeInput);
+			if (prodottoCorrente.isPresenza()) {	//esiste
+				policyProdotto = new Policy("AP", prodottoCorrente);
 				try {
-					//assistenza? perche non su confermineto?
-					//recupero descrizione su dove buttare prodotto
-					Assistenza.cestinoS.conferimentoProdotto(prodottoScansionato);
+					Conferimento.cestinoSessione.conferimentoProdotto(prodottoCorrente);	//recupero descrizione su dove buttare prodotto
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				setImmagineProdotto();
-				if (policyProdotto.isUtilizzoPunti()) {
-//					@SuppressWarnings("unused")  //nel caso in cui non si scannerizza la tessera ma si butti solo i prodotti
-//					tesseraScansionata = new Tessera(BARCODEsessione);
-					IstruzioniConferimento.istrlblPunti.setText("Punti Prodotto: " + prodottoScansionato.getPunti());
-				} else {
-					IstruzioniConferimento.istrlblPunti.setText("L'area in cui ti trovi non prevede l'utilizzo dei punti");
-				}
-				IstruzioniConferimento.istrlblDescrizione.setText("Descrizione : " + prodottoScansionato.getDescrizione());
-				// prodotto nel db allora procedo con il conferimento
-				//da passare a conferimento: prodotto, tessera(se scannerizzata)
-				Conferimento.statisticaSessione = new Statistica(prodottoScansionato.getcodiceABarre(), tesseraScansionata.getIdTessera());
 				GestoreGrafica.switchPanel(Conferimento.conferimento);
 				GestoreGrafica.startTimer(60);
-				// timer
 			} else {
-				JOptionPane.showMessageDialog(scansione,
-						"Prodotto non presente nel DB, invia notifica per aggiungerlo");
-				aggiungiProdotto();
+				JOptionPane.showMessageDialog(scansione, "Prodotto non presente nel DB, invia notifica per aggiungerlo");
+				//aggiungiProdotto();
+				//pagina aggiunta prodotto?
 			}
-		}
+		}		
+	}
+	
+	private boolean checkTessera(String code) {
+		boolean flag1 = code.substring(0,5).matches("[a-zA-Z]+");
+		boolean flag2 = code.substring(6,7).matches("\\d+");
+		boolean flag3 = Character.isLetter(code.charAt(8));
+		boolean flag4 = code.substring(9,10).matches("\\d+");
+		boolean flag5 = Character.isLetter(code.charAt(11));
+		boolean flag6 = code.substring(12,14).matches("\\d+");
+		boolean flag7 = Character.isLetter(code.charAt(15));
+		if(code.length() == 16 && flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7) {
+			return true;
+		}else return false;
 	}
 	
 
 	private void gestioneTessera(String codiceTessera) {
-		// controollo
 		JOptionPane.showMessageDialog(scansione, "Tessera autenticata per l'acquisizione dei punti");
 		tesseraScansionata = new Tessera(codiceTessera);
+		tesseraLetta = true;
 		GestoreGrafica.startTimer(60);
-
+	}
+	
+	public static boolean tesseraLetta() {
+		return tesseraLetta;
 	}
 
 	private void aggiungiProdotto() {
@@ -262,7 +297,7 @@ public class Scansione {
 	}
 
 	public Prodotto getProdotto() {
-		return Scansione.prodottoScansionato;
+		return Scansione.prodottoCorrente;
 	}
 
 	// CONTROLLARE
