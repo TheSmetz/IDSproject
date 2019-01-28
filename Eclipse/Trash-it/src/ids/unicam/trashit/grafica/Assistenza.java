@@ -14,16 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
-import ids.unicam.trashit.console.CestinoSmart;
-
 public class Assistenza {
 
 	public static JPanel assistenza;
 	private JLabel asslblAssistenza;
 	private JTextPane asstxtpnTelefonoEmail;
-	private Home h;
-	private About a;
-	public static CestinoSmart cestinoS = new CestinoSmart();
 	private JButton btnSvuotaCestini;
 
 	private void lblAssistenza() {
@@ -51,7 +46,7 @@ public class Assistenza {
 		btnSvuotaCestini.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(assistenza, "Cestini svuotati, il macchinario può ricominciare a funzionare correttamente");
-				cestinoS.svuotaTuttiCestini();
+				Conferimento.cestinoSessione.svuotaTuttiCestini();
 				GestoreGrafica.startTimer(30);
 			}
 		});
@@ -73,12 +68,10 @@ public class Assistenza {
 		assistenza.setOpaque(false);
 		lblAssistenza();
 		txtpnTelefonoEmail();
-		h = new Home();
-		h.btnInfo(assistenza);
-		h.lblLogo(assistenza);
-		h.btnChiudiSessione(assistenza);
-		a = new About();
-		a.btnHomePage(assistenza);
+		Home.btnInfo(assistenza);
+		Home.lblLogo(assistenza);
+		Home.btnChiudiSessione(assistenza);
+		About.btnHomePage(assistenza);
 		btnSvuotaCestini();
 	}
 

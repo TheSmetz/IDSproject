@@ -21,12 +21,7 @@ public class About {
 	private JLabel aboutlblInformazioniTrashit;
 	private JButton aboutbtnProblemiAssistenza;
 	private JTextPane abouttextPaneInfo;
-	private JButton aboutbtnHomePage;
-	private Home h;
-	
-	public JButton getaboutbtnHomePage() {
-		return aboutbtnHomePage;
-	}
+	private static JButton aboutbtnHomePage;
 	
 	private void lblInformazioniTrashit() {
 		aboutlblInformazioniTrashit = new JLabel("INFORMAZIONI TRASH-IT");
@@ -72,8 +67,8 @@ public class About {
 		about.add(abouttextPaneInfo);
 	}
 
-	public void btnHomePage(JPanel wherePanel) {
-		aboutbtnHomePage = new JButton("Home Page", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+	public static void btnHomePage(JPanel wherePanel) {
+		aboutbtnHomePage = new JButton("Home Page", new ImageIcon(About.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		aboutbtnHomePage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Home.home);
@@ -98,9 +93,8 @@ public class About {
 		about.setOpaque(false);
 		lblInformazioniTrashit();
 		btnProblemiAssistenza();
-		h = new Home();
-		h.btnChiudiSessione(about);
-		h.lblLogo(about);
+		Home.btnChiudiSessione(about);
+		Home.lblLogo(about);
 		textPaneInfo();
 		btnHomePage(about);
 	}

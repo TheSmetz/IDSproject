@@ -38,8 +38,6 @@ public class Registrazione {
 	private JLabel reglblCognome;
 	private JLabel reglblNome;
 	private JLabel reglblCF;
-	private Home h;
-	private Scansione s;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	private Tessera tesseraNuova;
@@ -219,16 +217,14 @@ public class Registrazione {
 		lblCF();
 		lblNome();
 		lblCognome();
-		h=new Home();
-		h.btnProblemiAssistenza(registrazione);
-		h.btnInfo(registrazione);
-		h.lblLogo(registrazione);
-		h.btnChiudiSessione(registrazione);
+		Home.btnProblemiAssistenza(registrazione);
+		Home.btnInfo(registrazione);
+		Home.lblLogo(registrazione);
+		Home.btnChiudiSessione(registrazione);
 		dateChooser();
 		txtCodiceFiscale();
 		lblSfondoCodiceFiscale();
-		s=new Scansione();
-		s.btnIndietro(registrazione);
+		Scansione.btnIndietro(registrazione);
 		btnStampaTessera();
         txtPaneRegistrazioneTessera();	
 		txtFieldNome();

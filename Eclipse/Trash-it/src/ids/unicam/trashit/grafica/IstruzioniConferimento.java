@@ -10,16 +10,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 
 public class IstruzioniConferimento{
 	public static JPanel istruzioneConf;
 	private JLabel istrlblConferimentoProdotto;
 	private JButton istrbtnNuovaScansione;
-	static JLabel istrlblDescrizione;
-	static JLabel istrlblPunti;
-	private Home h;
+	private SimpleAttributeSet attribs;
+	public static JLabel istrlblPunti;
+	public static JTextPane istrlblDescrizione;
+
 
 	private void btnNuovaScansione() {
 		 istrbtnNuovaScansione = new JButton("Nuova scansione", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
@@ -47,21 +51,21 @@ public class IstruzioniConferimento{
 		istrlblPunti.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		istrlblPunti.setHorizontalAlignment(SwingConstants.CENTER);
 		istrlblPunti.setBounds(417, 258, 628, 69);
-		
-		//istrlblPunti.setText("Punti guadagnati: " + s.getProdotto().getPunti());
 		istruzioneConf.add(istrlblPunti);
 		
 		
 	}
 
 	private void lblDescrizione() {
-		istrlblDescrizione = new JLabel("descrizione prodotto");
-		istrlblDescrizione.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		istrlblDescrizione.setHorizontalAlignment(SwingConstants.CENTER);
+		istrlblDescrizione = new JTextPane();	
+		attribs = new SimpleAttributeSet();
+		istrlblDescrizione.setEditable(false);
 		istrlblDescrizione.setBounds(416, 137, 629, 136);
-		//istrlblDescrizione.setText("Descrizione " + s.getProdotto().getPunti());
+		istrlblDescrizione.setOpaque(false);
+		StyleConstants.setAlignment(attribs , StyleConstants.ALIGN_CENTER);
+		istrlblDescrizione.setParagraphAttributes(attribs,false);
+		istrlblDescrizione.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		istruzioneConf.add(istrlblDescrizione);
-		
 	}
 
 	private void lblConferimentoProdotto() {
@@ -71,21 +75,17 @@ public class IstruzioniConferimento{
 		istrlblConferimentoProdotto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
 		istrlblConferimentoProdotto.setBounds(416, 0, 629, 57);
 		istruzioneConf.add(istrlblConferimentoProdotto);
-		
 	}
 
 	public void setJPanelIstruzioni() {
 		istruzioneConf = new JPanel();
 		istruzioneConf.setOpaque(false);
 		istruzioneConf.setLayout(null);
-		
-		//String newLine = System.getProperty("line.separator");
 		lblConferimentoProdotto();
-		h = new Home();
-		h.btnProblemiAssistenza(istruzioneConf);
-		h.btnInfo(istruzioneConf);
-		h.lblLogo(istruzioneConf);
-		h.btnChiudiSessione(istruzioneConf);	
+		Home.btnProblemiAssistenza(istruzioneConf);
+		Home.btnInfo(istruzioneConf);
+		Home.lblLogo(istruzioneConf);
+		Home.btnChiudiSessione(istruzioneConf);	
 		lblDescrizione();
 		lblPunti();
 		btnNuovaScansione();

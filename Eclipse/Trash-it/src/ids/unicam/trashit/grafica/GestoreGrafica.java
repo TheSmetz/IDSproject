@@ -28,6 +28,7 @@ import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLayeredPane;
 
+@SuppressWarnings("serial")
 public class GestoreGrafica extends JFrame {
 	public static JPanel contentPane;
 	public static JLayeredPane layeredPane;
@@ -49,10 +50,8 @@ public class GestoreGrafica extends JFrame {
 	public static void startTimer(int durata) {
 		seconds = durata;
 		if (timer.isRunning()) {
-			timer.stop();
-			//System.out.println("STOP");				
+			timer.stop();			
 			timer.start();
-			//System.out.println("START");
 		} else {
 			timer.start();			
 		}
@@ -69,11 +68,9 @@ public class GestoreGrafica extends JFrame {
 		timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (seconds >= 0) {
-					//System.out.println(seconds);
 					lblTimer.setText(String.valueOf(seconds));
 					seconds--;
 				} else {
-					//System.out.println("TEMPO SCADUTO");
 					timer.stop();
 					// salvare impostazioni
 					switchPanel(Sessione.sessione);
@@ -104,7 +101,7 @@ public class GestoreGrafica extends JFrame {
 	private void creaJPanels() {
 		sess = new Sessione();
 		sess.setJPanelSessione();
-		layeredPane.add(Sessione.sessione);
+		layeredPane.add(sess.getJPanelSessione());
 
 		h = new Home();
 		h.setJPanelHome();

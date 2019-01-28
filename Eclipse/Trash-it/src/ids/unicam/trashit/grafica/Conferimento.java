@@ -15,7 +15,6 @@ import javax.swing.SwingConstants;
 
 import ids.unicam.trashit.console.CestinoSmart;
 import ids.unicam.trashit.console.Statistica;
-import ids.unicam.trashit.console.Tessera;
 
 
 public class Conferimento {
@@ -25,8 +24,6 @@ public class Conferimento {
 	private JButton confbtnProdottoVisualizzatoErrato;
 	private JButton confbtnProdottoVisualizzatoCorretto;
 	public static JLabel conflblImmagineProdotto;
-	private Home h;
-	
 	public static CestinoSmart cestinoSessione = new CestinoSmart();
 	public static Statistica statisticaSessione;
 	
@@ -89,7 +86,7 @@ public class Conferimento {
 				} else {
 					IstruzioniConferimento.istrlblPunti.setText("L'area in cui ti trovi non prevede l'utilizzo dei punti");
 				}
-				IstruzioniConferimento.istrlblDescrizione.setText("Descrizione : " + Scansione.prodottoCorrente.getDescrizione());	//descrizione prodotto				
+				IstruzioniConferimento.istrlblDescrizione.setText(Scansione.prodottoCorrente.getDescrizione());	//descrizione prodotto				
 				
 				GestoreGrafica.switchPanel(IstruzioniConferimento.istruzioneConf);
 				GestoreGrafica.startTimer(30);
@@ -121,7 +118,6 @@ public class Conferimento {
 	}
 	
 	//da fare metodo set immagine prodotto da database
-	
 	public void setJPanelConferimento() {
 		conferimento = new JPanel();
 		conferimento.setOpaque(false);
@@ -129,12 +125,11 @@ public class Conferimento {
 		lblScansioneProdotto();		
 		btnProdottoVisualizzatoErrato();			
 		btnProdottoVisualizzatoCorretto();		
-		lblImmagineProdotto();
-		h=new Home();
-		h.lblLogo(conferimento);
-		h.btnProblemiAssistenza(conferimento);
-		h.btnInfo(conferimento);
-		h.btnChiudiSessione(conferimento);	
+		lblImmagineProdotto();	
+		Home.lblLogo(conferimento);
+		Home.btnProblemiAssistenza(conferimento);
+		Home.btnInfo(conferimento);
+		Home.btnChiudiSessione(conferimento);	
 	}
 	
 	public JPanel getJPanelConferimento() {	

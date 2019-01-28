@@ -58,23 +58,19 @@ public class CestinoSmart {
 				switch (p.getCollocazioneCestini().get(i)) {
 				case carta:
 					carta.aumentaCapienza();
-					//System.out.println("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.carta);
-					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.carta);
+					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.carta+"\n");
 					continue;
 				case plastica:
 					plastica.aumentaCapienza();
-					//System.out.println("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.plastica);
-					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.plastica);
+					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.plastica+"\n");
 					continue;
 				case vetro:
 					vetro.aumentaCapienza();
-					//System.out.println("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.vetro);
-					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.vetro);
+					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.vetro+"\n");
 					continue;
 				case indifferenziato:
 					indifferenziato.aumentaCapienza();
-					//System.out.println("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.indifferenziato);
-					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.indifferenziato);
+					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.indifferenziato+"\n");
 					continue;
 				}
 			} else throw new IOException("Cestini Pieni");

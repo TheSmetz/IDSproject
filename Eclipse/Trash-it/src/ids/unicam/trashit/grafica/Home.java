@@ -16,19 +16,17 @@ import javax.swing.text.StyleConstants;
 
 
 public class Home{
-	
-	//COMPONENTI
-	static JPanel home;
+	public static JPanel home;
 	private JLabel homelblBenvenuto;
 	private JLabel homelblSelezionaOperazione;
 	private JButton homebtnScansione;
 	private JButton homebtnRitiroPremio;
-	private JButton homebtnProblemiAssistenza;
-	private JButton homebtnInfo;
-	private JLabel homelblLogo;
+	private static JButton homebtnProblemiAssistenza;
+	private static JButton homebtnInfo;
+	private static JLabel homelblLogo;
 	private JButton homebtnCreaTessera;
 	private JLabel homelblSeiNuovo;
-	private JButton homebtnChiudiSessione;
+	private static JButton homebtnChiudiSessione;
 	
 	private void setjPanel() {
 		home = new JPanel();
@@ -36,30 +34,6 @@ public class Home{
 		home.setLayout(null);
 	}
 	
-	public JButton gethomebtnScansione() {
-		return this.homebtnScansione;
-	}
-	
-	public JButton gethomebtnRitiroPremio() {
-		return this.homebtnRitiroPremio;
-	}
-
-	public JButton gethomebtnChiudiSessione() {
-		return this.homebtnChiudiSessione;
-	}
-	
-	public JButton gethomebtnInfo() {
-		return this.homebtnInfo;
-	}
-	
-	public JButton getHomebtnCreaTessera() {
-		return this.homebtnCreaTessera;
-	}
-	
-	public JButton getHomebtnProblemiAssistenza() {
-		return this.homebtnProblemiAssistenza;
-}
-
 	private void lblBenvenuto() {
 		homelblBenvenuto = new JLabel("BENVENUTO");
 		homelblBenvenuto.setHorizontalAlignment(SwingConstants.CENTER);
@@ -109,8 +83,8 @@ public class Home{
 		StyleConstants.setAlignment(centerT, StyleConstants.ALIGN_CENTER);
 		}
 	
-	public void btnProblemiAssistenza(JPanel wherePanel) {
-		homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+	public static void btnProblemiAssistenza(JPanel wherePanel) {
+		homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Assistenza.assistenza);
@@ -128,8 +102,8 @@ public class Home{
 		wherePanel.add(homebtnProblemiAssistenza);
 	}
 	
-	public void btnInfo(JPanel wherePanel) {
-		homebtnInfo = new JButton("About us", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
+	public static void btnInfo(JPanel wherePanel) {
+		homebtnInfo = new JButton("About us", new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(About.about);
@@ -148,16 +122,16 @@ public class Home{
 		wherePanel.add(homebtnInfo);
 	}
 	
-	public void lblLogo(JPanel wherePanel) {
-		homelblLogo = new JLabel("");
-		homelblLogo.setIcon(new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/logo.png")));
+	public static void lblLogo(JPanel wherePanel) {
+		homelblLogo = new JLabel(""); 
+		homelblLogo.setIcon(new ImageIcon(Home.class.getResource(("/ids/unicam/trashit/grafica/immagini/logo.png"))));
 		homelblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblLogo.setBounds(0, 0, 418, 488);
 		wherePanel.add(homelblLogo);
 	}
 	
-	public void btnChiudiSessione(JPanel wherePanel) {
-		homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
+	public static void btnChiudiSessione(JPanel wherePanel) {
+		homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		homebtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Sessione.sessione);
@@ -216,8 +190,7 @@ public class Home{
 		lblBenvenuto();
 		lblSelezionaOperazione();
 		lblLogo(home);
-		lblSeiNuovo();
-		
+		lblSeiNuovo();	
 	}
 
 	private void creaAllBtn() {

@@ -21,7 +21,6 @@ import javax.swing.SwingConstants;
 
 import ids.unicam.trashit.console.Policy;
 import ids.unicam.trashit.console.Prodotto;
-import ids.unicam.trashit.console.Statistica;
 import ids.unicam.trashit.console.Tessera;
 import ids.unicam.trashit.grafica.Home;
 
@@ -32,42 +31,28 @@ public class Scansione {
 	private JTextField scantxtInputBarcode;
 	private JButton scanbtnAvviaScansione;
 	private JLabel scantxtBarcode;
-	private JButton scanbtnIndietro;
-	private Home h;
+	private static JButton scanbtnIndietro;
 	private ImageIcon image;
-	private Image im;
+	private Image im; //DA CONTROLLARE TUTTE STE IMG
 	private Image myImg;
 	private ImageIcon newImage;
 	private JLabel scanlblInputBackground;
-	private JLabel scanlblBenvenuto;
-	private JTextArea txtrNbAutenticarsiPrima;
+	private static JLabel scanlblBenvenuto;
+	private static JTextArea txtrNbAutenticarsiPrima;
 	private final String filename = "src\\ids\\unicam\\trashit\\grafica\\txt\\ProdottiDaAggiungere.txt";
 	private FileWriter fw;
-	private BufferedWriter bw;
-	
+	private BufferedWriter bw;	
 	//Tessera sessione
-	private static String barcodeInput;
+	private static String input;
 	public static Tessera tesseraScansionata;
 	public static boolean tesseraLetta = false;
 	public static Prodotto prodottoCorrente;
 	public static Policy policyProdotto;
 
-	public static String getBarcodeSessione() {
-		return barcodeInput;
-	}
-
-	public JButton getbtnIndietro() {
-		return this.scanbtnIndietro;
-	}
-
-	public JButton getbtnAvviaScansione() {
-		return this.scanbtnAvviaScansione;
-	}
-
-	public void btnIndietro(JPanel wherePanel) {
+	public static void btnIndietro(JPanel wherePanel) {
 		scanbtnIndietro = new JButton("",
-				new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
-		scanbtnIndietro.setIcon(new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
+				new ImageIcon(Scansione.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
+		scanbtnIndietro.setIcon(new ImageIcon(Scansione.class.getResource("/ids/unicam/trashit/grafica/immagini/fv.png")));
 		scanbtnIndietro.setBounds(938, 11, 97, 87);
 		scanbtnIndietro.setOpaque(false);
 		scanbtnIndietro.setBorder(null);
@@ -90,7 +75,6 @@ public class Scansione {
 		scantxtBarcode.setBounds(426, 321, 619, 49);
 		scantxtBarcode.setOpaque(false);
 		scansione.add(scantxtBarcode);
-
 	}
 
 	private void lblInputBackground() {
@@ -100,7 +84,6 @@ public class Scansione {
 				new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/whitebuttonsmall.png")));
 		scanlblInputBackground.setBounds(430, 357, 615, 96);
 		scansione.add(scanlblInputBackground);
-
 	}
 
 	private void txtBarcode() {
@@ -134,11 +117,12 @@ public class Scansione {
 		scanbtnAvviaScansione.setForeground(Color.BLACK);
 		scanbtnAvviaScansione.setContentAreaFilled(false);
 		scanbtnAvviaScansione.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {				
-				barcodeInput = scantxtInputBarcode.getText();
-				if(barcodeInput.length()==0) {
+			public void actionPerformed(ActionEvent arg0) {	
+				GestoreGrafica.startTimer(30);
+				input = scantxtInputBarcode.getText();
+				if(input.length()==0) {
 					JOptionPane.showMessageDialog(scansione, "Barcode non rilevato");
-				}
+				}else {
 				if (Conferimento.cestinoSessione.controlloVuoto()){	//cestino vuoto
 					try {
 						scanProdotto();
@@ -150,8 +134,8 @@ public class Scansione {
 					JOptionPane.showMessageDialog(scansione, "Cestino pieno, necessaria assistenza");
 					resetCampi();
 					GestoreGrafica.switchPanel(Assistenza.assistenza);
-					GestoreGrafica.startTimer(30);
 					}
+			}
 			}
 		});
 		scanbtnAvviaScansione.setBounds(416, 212, 629, 96);
@@ -168,56 +152,10 @@ public class Scansione {
 	}
 
 	public void scanProdotto() throws IOException {
-//		boolean flag1 = barcodeInput.substring(0, 1).matches("\\d"); // Controllo che i primi 3 caratteri non siano numeri
-//		boolean flag2 = barcodeInput.substring(1, 2).matches("\\d"); // Questo per vedere se viene scannerizzata una tessera
-//																// o un prodotto
-//		boolean flag3 = barcodeInput.substring(2, 3).matches("\\d");
-//
-//		if (!flag1 && !flag2 && !flag3) {
-//			TESSERAsessione = barcodeInput;
-//			gestioneTessera(TESSERAsessione);
-//		} else {
-			//se prodotto
-//			BARCODEsessione = barcodeInput;
-//			prodottoScansionato = new Prodotto(BARCODEsessione);
-//			if (prodottoScansionato.isPresenza()) {
-//				//prodotto valido
-//				Policy policyProdotto = new Policy("AP", prodottoScansionato);
-//				try {
-//					//assistenza? perche non su confermineto?
-//					//recupero descrizione su dove buttare prodotto
-//					Assistenza.cestinoS.conferimentoProdotto(prodottoScansionato);
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//				setImmagineProdotto();
-//				if (policyProdotto.isUtilizzoPunti()) {
-////					@SuppressWarnings("unused")  //nel caso in cui non si scannerizza la tessera ma si butti solo i prodotti
-////					tesseraScansionata = new Tessera(BARCODEsessione);
-//					IstruzioniConferimento.istrlblPunti.setText("Punti Prodotto: " + prodottoScansionato.getPunti());
-//				} else {
-//					IstruzioniConferimento.istrlblPunti.setText("L'area in cui ti trovi non prevede l'utilizzo dei punti");
-//				}
-//				IstruzioniConferimento.istrlblDescrizione.setText("Descrizione : " + prodottoScansionato.getDescrizione());
-//				// prodotto nel db allora procedo con il conferimento
-//				//da passare a conferimento: prodotto, tessera(se scannerizzata)
-//				Conferimento.statisticaSessione = new Statistica(prodottoScansionato.getcodiceABarre(), tesseraScansionata.getIdTessera());
-//				GestoreGrafica.switchPanel(Conferimento.conferimento);
-//				GestoreGrafica.startTimer(60);
-//				// timer
-//			} else {
-//				JOptionPane.showMessageDialog(scansione,
-//						"Prodotto non presente nel DB, invia notifica per aggiungerlo");
-//				aggiungiProdotto();
-//			}
-//		}
-		
-//		Tessera t = new Tessera(barcodeInput);
-//		System.out.println(t.verificaPresenza());
-		if (barcodeInput.length()==16 && checkTessera(barcodeInput)) {	//tessera
-			gestioneTessera(barcodeInput);
+		if (input.length()==16 && checkTessera(input)) {	//tessera
+			gestioneTessera(input);
 		} else {	//prodotto
-			prodottoCorrente = new Prodotto(barcodeInput);
+			prodottoCorrente = new Prodotto(input);
 			if (prodottoCorrente.isPresenza()) {	//esiste
 				policyProdotto = new Policy("AP", prodottoCorrente);
 				try {
@@ -231,8 +169,7 @@ public class Scansione {
 				GestoreGrafica.startTimer(60);
 			} else {
 				JOptionPane.showMessageDialog(scansione, "Prodotto non presente nel DB, invia notifica per aggiungerlo");
-				//aggiungiProdotto();
-				//pagina aggiunta prodotto?
+				aggiungiProdotto();
 			}
 		}		
 	}
@@ -252,7 +189,6 @@ public class Scansione {
 	
 
 	private void gestioneTessera(String codiceTessera) {
-		//JOptionPane.showMessageDialog(scansione, "Tessera autenticata per l'acquisizione dei punti");
 		tesseraScansionata = new Tessera(codiceTessera);
 		tesseraLetta = true;
 		scanlblBenvenuto.setText("Benvenuto "+tesseraScansionata.getNome()+" "+tesseraScansionata.getCognome());
@@ -260,7 +196,7 @@ public class Scansione {
 		GestoreGrafica.startTimer(60);
 	}
 	
-	private void resetCampi() {
+	private static void resetCampi() {
 		scanlblBenvenuto.setText("Benvenuto");
 		txtrNbAutenticarsiPrima.setText(
 				"               !ATTENZIONE! \r\nSCANSIONARE PRIMA LA TESSERA, POI I PRODOTTI,\r\n     AFFINCHE' I PUNTI VENGANO ACCREDITATI");
@@ -307,7 +243,6 @@ public class Scansione {
 		scanlblBenvenuto.setFont(new Font("Segoe UI Semibold", Font.BOLD, 30));
 		scanlblBenvenuto.setBounds(426, 0, 619, 49);
 		scansione.add(scanlblBenvenuto);
-
 	}
 
 	public Prodotto getProdotto() {
@@ -322,11 +257,10 @@ public class Scansione {
 		scansione.setVisible(true);
 		btnIndietro(scansione);
 		lblBenvenuto();
-		h = new Home();
-		h.btnInfo(scansione);
-		h.lblLogo(scansione);
-		h.btnProblemiAssistenza(scansione);
-		h.btnChiudiSessione(scansione);
+		Home.btnInfo(scansione);
+		Home.lblLogo(scansione);
+		Home.btnProblemiAssistenza(scansione);
+		Home.btnChiudiSessione(scansione);
 		btnAvviaScansione();
 		lblScanProdotto();
 		txtBarcode();

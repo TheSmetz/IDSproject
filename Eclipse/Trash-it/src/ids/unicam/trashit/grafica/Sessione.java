@@ -12,9 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-
-
-
 public class Sessione {
 	
 	public static JPanel sessione;
@@ -50,9 +47,7 @@ public class Sessione {
 		sessionebtnAvviaSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Home.home);
-				GestoreGrafica.startTimer(30);
-//				seconds = 30;
-//				startTimer();			
+				GestoreGrafica.startTimer(30);		
 			}
 		});
 		
@@ -86,8 +81,9 @@ public class Sessione {
 		lblFreccia();
 	}
 	
-	public static JPanel getJPanelSessione() {		
-		return sessione;		
+	public JPanel getJPanelSessione() {
+		return sessione;
 	}
+	
 
 }

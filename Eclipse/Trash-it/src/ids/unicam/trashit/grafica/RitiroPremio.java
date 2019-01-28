@@ -28,8 +28,6 @@ public class RitiroPremio {
 	static JLabel ritirolblPuntiTessera;
 	static JLabel ritirolblRitiroPremio;
 	private JLabel ritirolblSelezionePremio;
-	private Home h;
-	private Scansione s;
 	private int costoSconto = 0;
 
 	private void lblSelezionePremio() {
@@ -156,13 +154,11 @@ public class RitiroPremio {
 		ritiroPremio = new JPanel();
 		ritiroPremio.setLayout(null);
 		ritiroPremio.setOpaque(false);
-		h = new Home();
-		s = new Scansione();
-		s.btnIndietro(ritiroPremio);
-		h.lblLogo(ritiroPremio);
-		h.btnInfo(ritiroPremio);
-		h.btnProblemiAssistenza(ritiroPremio);
-		h.btnChiudiSessione(ritiroPremio);
+		Scansione.btnIndietro(ritiroPremio);
+		Home.lblLogo(ritiroPremio);
+		Home.btnInfo(ritiroPremio);
+		Home.btnProblemiAssistenza(ritiroPremio);
+		Home.btnChiudiSessione(ritiroPremio);
 		lblSelezionePremio();
 		lblRitiroPremio();
 		lblPuntiTessera();
