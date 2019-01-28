@@ -27,7 +27,7 @@ public class ScansioneTessera {
 	private JTextField scanTesseratxtInputCodice;
 	private Home h;
 	private Scansione s;
-	static Tessera tesseraScansionata;
+	public static Tessera tesseraScansionata;
 	@SuppressWarnings("unused")
 	private int puntiTessera;
 
