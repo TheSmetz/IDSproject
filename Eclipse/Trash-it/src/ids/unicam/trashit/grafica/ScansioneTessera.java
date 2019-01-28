@@ -25,11 +25,7 @@ public class ScansioneTessera {
 	private JLabel scanTesseratxtBarcode;
 	private JButton scanTesserabtnAvviaScansione;
 	private JTextField scanTesseratxtInputCodice;
-	private Home h;
-	private Scansione s;
 	public static Tessera tesseraScansionata;
-	@SuppressWarnings("unused")
-	private int puntiTessera;
 
 	private void lblInputBackground() {
 		scanTesseralblInputBackground = new JLabel("");
@@ -69,10 +65,9 @@ public class ScansioneTessera {
 				String idTessera = scanTesseratxtInputCodice.getText();
 				tesseraScansionata = new Tessera(idTessera);
 				if (tesseraScansionata.verificaPresenza()) {
-					puntiTessera = tesseraScansionata.getPunti();
 					RitiroPremio.ritirolblRitiroPremio.setText("Benvenuto " + String.valueOf(
 							tesseraScansionata.getNome() + " " + String.valueOf(tesseraScansionata.getCognome())));
-					RitiroPremio.ritirolblPuntiTessera.setText("Punti tessera: " + String.valueOf(puntiTessera));
+					RitiroPremio.ritirolblPuntiTessera.setText("Punti tessera: " + String.valueOf(tesseraScansionata.getPunti()));
 					GestoreGrafica.switchPanel(RitiroPremio.ritiroPremio);
 					GestoreGrafica.startTimer(60);
 				} else {
@@ -133,13 +128,11 @@ public class ScansioneTessera {
 		scansioneTessera = new JPanel();
 		scansioneTessera.setOpaque(false);
 		scansioneTessera.setLayout(null);
-		h = new Home();
-		h.btnInfo(scansioneTessera);
-		h.lblLogo(scansioneTessera);
-		h.btnProblemiAssistenza(scansioneTessera);
-		h.btnChiudiSessione(scansioneTessera);
-		s = new Scansione();
-		s.btnIndietro(scansioneTessera);
+		Home.btnInfo(scansioneTessera);
+		Home.lblLogo(scansioneTessera);
+		Home.btnProblemiAssistenza(scansioneTessera);
+		Home.btnChiudiSessione(scansioneTessera);
+		Scansione.btnIndietro(scansioneTessera);
 		txtInputCodice();
 		lblBenvenuto();
 		txtTesseraErrata();
