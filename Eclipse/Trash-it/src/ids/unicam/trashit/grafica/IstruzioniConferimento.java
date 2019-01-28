@@ -26,7 +26,7 @@ public class IstruzioniConferimento{
 		 istrbtnNuovaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Scansione.scansione);
-//				seconds = 30;
+				GestoreGrafica.startTimer(30);
 			}
 		});
 		istrbtnNuovaScansione.setVerticalTextPosition(SwingConstants.CENTER);

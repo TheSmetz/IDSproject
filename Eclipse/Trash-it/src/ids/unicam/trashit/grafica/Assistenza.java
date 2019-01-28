@@ -52,7 +52,7 @@ public class Assistenza {
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(assistenza, "Cestini svuotati, il macchinario può ricominciare a funzionare correttamente");
 				cestinoS.svuotaTuttiCestini();
-				//seconds = 60;
+				GestoreGrafica.startTimer(30);
 			}
 		});
 		btnSvuotaCestini.setVerticalTextPosition(SwingConstants.CENTER);

@@ -82,7 +82,7 @@ public class Home{
 		homebtnScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				GestoreGrafica.switchPanel(Scansione.scansione);
-				//seconds = 30;
+				GestoreGrafica.startTimer(60);
 			}
 		});
 		home.add(homebtnScansione);
@@ -93,7 +93,7 @@ public class Home{
 		homebtnRitiroPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				GestoreGrafica.switchPanel(ScansioneTessera.scansioneTessera);
-				//seconds = 30;
+				GestoreGrafica.startTimer(60);
 			}
 		});
 		homebtnRitiroPremio.setVerticalTextPosition(SwingConstants.CENTER);
@@ -114,7 +114,7 @@ public class Home{
 		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Assistenza.assistenza);
-				//seconds = 30;
+				GestoreGrafica.startTimer(30);
 			}
 		});
 		homebtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -133,7 +133,7 @@ public class Home{
 		homebtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(About.about);
-				//seconds = 30;
+				GestoreGrafica.startTimer(30);
 			}
 		});
 		homebtnInfo.setVerticalTextPosition(SwingConstants.CENTER);
@@ -161,7 +161,7 @@ public class Home{
 		homebtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Sessione.sessione);
-				//timer.stop();
+				GestoreGrafica.timer.stop();
 			}
 		});
 		homebtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -181,7 +181,7 @@ public class Home{
 		homebtnCreaTessera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				GestoreGrafica.switchPanel(Registrazione.registrazione);
-				//seconds = 60;
+				GestoreGrafica.startTimer(60);
 			}
 		});
 		homebtnCreaTessera.setVerticalTextPosition(SwingConstants.CENTER);

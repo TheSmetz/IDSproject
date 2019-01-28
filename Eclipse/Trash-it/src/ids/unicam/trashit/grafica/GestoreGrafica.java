@@ -43,16 +43,18 @@ public class GestoreGrafica extends JFrame {
 	private ScansioneTessera scanTessera;
 	private IstruzioniConferimento istrConferimento;
 	// TIMER
-	private int seconds;
-	public Timer timer;
-
-	private void startTimer() {
+	private static int seconds;
+	public static Timer timer;
+	
+	public static void startTimer(int durata) {
+		seconds = durata;
 		if (timer.isRunning()) {
 			timer.stop();
-			System.out.println("STOP");
-		} else {
+			System.out.println("STOP");				
 			timer.start();
 			System.out.println("START");
+		} else {
+			timer.start();			
 		}
 	}
 

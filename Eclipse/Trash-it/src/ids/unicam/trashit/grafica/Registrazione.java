@@ -126,7 +126,7 @@ public class Registrazione {
 					} else {
 						JOptionPane.showMessageDialog(registrazione, "TESSERA GIA' NEL DATABASE.");
 						GestoreGrafica.switchPanel(Home.home);
-						//seconds = 30;
+						GestoreGrafica.startTimer(30);
 					}
 				}else {
 					JOptionPane.showMessageDialog(registrazione, "Tutti i campi devono essere compilati correttamente");

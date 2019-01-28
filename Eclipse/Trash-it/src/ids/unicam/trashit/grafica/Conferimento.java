@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import ids.unicam.trashit.console.Statistica;
 import ids.unicam.trashit.console.Tessera;
 
 
@@ -24,7 +25,8 @@ public class Conferimento {
 	private JButton confbtnProdottoVisualizzatoCorretto;
 	public static JLabel conflblImmagineProdotto;
 	private Home h;
-
+	
+	public static Statistica statisticaSessione;
 	
 	private void lblScansioneProdotto() {
 		conflblScansioneProdotto = new JLabel("CONFERIMENTO PRODOTTO");
@@ -47,8 +49,7 @@ public class Conferimento {
 		confbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Scansione.scansione);
-				
-			//	seconds = 30;
+				GestoreGrafica.startTimer(30);
 			}
 		});
 		confbtnProdottoVisualizzatoErrato.setOpaque(false);
@@ -72,9 +73,9 @@ public class Conferimento {
 		confbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(IstruzioniConferimento.istruzioneConf);
-				Tessera t=new Tessera(Scansione.getBarcodeSessione());
+				GestoreGrafica.startTimer(30);
 				try {
-					t.accreditoPunti(Scansione.prodottoScansionato.getPunti(), true);
+					Scansione.tesseraScansionata.accreditoPunti(Scansione.prodottoScansionato.getPunti(), true);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}

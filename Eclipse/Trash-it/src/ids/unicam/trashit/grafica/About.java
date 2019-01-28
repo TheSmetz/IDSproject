@@ -42,7 +42,7 @@ public class About {
 		aboutbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Assistenza.assistenza);
-				//seconds = 30;
+				GestoreGrafica.startTimer(30);
 			}
 		});
 		aboutbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -77,7 +77,7 @@ public class About {
 		aboutbtnHomePage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Home.home);
-				//seconds = 30;
+				GestoreGrafica.startTimer(30);
 			}
 		});
 		aboutbtnHomePage.setVerticalTextPosition(SwingConstants.CENTER);

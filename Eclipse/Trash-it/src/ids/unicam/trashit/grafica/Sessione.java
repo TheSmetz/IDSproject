@@ -50,8 +50,9 @@ public class Sessione {
 		sessionebtnAvviaSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Home.home);
-			//	seconds = 30;
-			//	startTimer();			
+				GestoreGrafica.startTimer(30);
+//				seconds = 30;
+//				startTimer();			
 			}
 		});
 		

@@ -23,6 +23,7 @@ import ids.unicam.trashit.console.CestinoSmart;
 import ids.unicam.trashit.console.Materiale;
 import ids.unicam.trashit.console.Policy;
 import ids.unicam.trashit.console.Prodotto;
+import ids.unicam.trashit.console.Statistica;
 import ids.unicam.trashit.console.Tessera;
 import ids.unicam.trashit.grafica.Home;
 
@@ -35,7 +36,7 @@ public class Scansione {
 	private JLabel scantxtBarcode;
 	private JButton scanbtnIndietro;
 	private Home h;
-	private String barcode;
+	private String barcodeInput;
 	public static Prodotto prodottoScansionato;
 	private ImageIcon image;
 	private Image im;
@@ -46,8 +47,11 @@ public class Scansione {
 	private final String filename = "src\\ids\\unicam\\trashit\\grafica\\txt\\ProdottiDaAggiungere.txt";
 	private FileWriter fw;
 	private BufferedWriter bw;
-
+	
+	//
 	private static String BARCODEsessione;
+	private static String TESSERAsessione;
+	public static Tessera tesseraScansionata;
 
 	public static String getBarcodeSessione() {
 		return BARCODEsessione;
@@ -72,7 +76,7 @@ public class Scansione {
 		scanbtnIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Home.home);
-				// seconds = 30;
+				GestoreGrafica.startTimer(30);
 			}
 		});
 		wherePanel.add(scanbtnIndietro);
@@ -130,10 +134,9 @@ public class Scansione {
 		scanbtnAvviaScansione.setForeground(Color.BLACK);
 		scanbtnAvviaScansione.setContentAreaFilled(false);
 		scanbtnAvviaScansione.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				barcode = scantxtInputBarcode.getText();
-				if(barcode.length()==0) {
+			public void actionPerformed(ActionEvent arg0) {				
+				barcodeInput = scantxtInputBarcode.getText();
+				if(barcodeInput.length()==0) {
 					JOptionPane.showMessageDialog(scansione, "Barcode non rilevato");
 				}else if (Assistenza.cestinoS.controlloVuoto()){
 				try {
@@ -145,6 +148,7 @@ public class Scansione {
 				}else {
 					JOptionPane.showMessageDialog(scansione, "Cestino pieno, necessaria assistenza");
 					GestoreGrafica.switchPanel(Assistenza.assistenza);
+					GestoreGrafica.startTimer(30);
 					}
 			}
 		});
@@ -162,35 +166,43 @@ public class Scansione {
 	}
 
 	public void scanProdotto() throws IOException {
-		prodottoScansionato = new Prodotto(barcode);
-		boolean flag1 = barcode.substring(0, 1).matches("\\d"); // Controllo che i primi 3 caratteri non siano numeri
-		boolean flag2 = barcode.substring(1, 2).matches("\\d"); // Questo per vedere se viene scannerizzata una tessera
+//		prodottoScansionato = new Prodotto(barcode);
+		boolean flag1 = barcodeInput.substring(0, 1).matches("\\d"); // Controllo che i primi 3 caratteri non siano numeri
+		boolean flag2 = barcodeInput.substring(1, 2).matches("\\d"); // Questo per vedere se viene scannerizzata una tessera
 																// o un prodotto
-		boolean flag3 = barcode.substring(2, 3).matches("\\d");
+		boolean flag3 = barcodeInput.substring(2, 3).matches("\\d");
 
 		if (!flag1 && !flag2 && !flag3) {
-			gestioneTessera(barcode);
+			TESSERAsessione = barcodeInput;
+			gestioneTessera(TESSERAsessione);
 		} else {
+			//se prodotto
+			BARCODEsessione = barcodeInput;
+			prodottoScansionato = new Prodotto(BARCODEsessione);
 			if (prodottoScansionato.isPresenza()) {
+				//prodotto valido
 				Policy policyProdotto = new Policy("AP", prodottoScansionato);
 				try {
+					//assistenza? perche non su confermineto?
+					//recupero descrizione su dove buttare prodotto
 					Assistenza.cestinoS.conferimentoProdotto(prodottoScansionato);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				setImmagineProdotto();
 				if (policyProdotto.isUtilizzoPunti()) {
-					@SuppressWarnings("unused")  //nel caso in cui non si scannerizza la tessera ma si butti solo i prodotti
-					Tessera tesseraScansionata = new Tessera(BARCODEsessione);
+//					@SuppressWarnings("unused")  //nel caso in cui non si scannerizza la tessera ma si butti solo i prodotti
+//					tesseraScansionata = new Tessera(BARCODEsessione);
 					IstruzioniConferimento.istrlblPunti.setText("Punti Prodotto: " + prodottoScansionato.getPunti());
 				} else {
-					IstruzioniConferimento.istrlblPunti
-							.setText("L'area in cui ti trovi non prevede l'utilizzo dei punti");
+					IstruzioniConferimento.istrlblPunti.setText("L'area in cui ti trovi non prevede l'utilizzo dei punti");
 				}
-				IstruzioniConferimento.istrlblDescrizione
-						.setText("Descrizione : " + prodottoScansionato.getDescrizione());
+				IstruzioniConferimento.istrlblDescrizione.setText("Descrizione : " + prodottoScansionato.getDescrizione());
 				// prodotto nel db allora procedo con il conferimento
+				//da passare a conferimento: prodotto, tessera(se scannerizzata)
+				Conferimento.statisticaSessione = new Statistica(prodottoScansionato.getcodiceABarre(), tesseraScansionata.getIdTessera());
 				GestoreGrafica.switchPanel(Conferimento.conferimento);
+				GestoreGrafica.startTimer(60);
 				// timer
 			} else {
 				JOptionPane.showMessageDialog(scansione,
@@ -201,10 +213,11 @@ public class Scansione {
 	}
 	
 
-	private void gestioneTessera(String input) {
+	private void gestioneTessera(String codiceTessera) {
 		// controollo
 		JOptionPane.showMessageDialog(scansione, "Tessera autenticata per l'acquisizione dei punti");
-		BARCODEsessione = input;
+		tesseraScansionata = new Tessera(codiceTessera);
+		GestoreGrafica.startTimer(60);
 
 	}
 
