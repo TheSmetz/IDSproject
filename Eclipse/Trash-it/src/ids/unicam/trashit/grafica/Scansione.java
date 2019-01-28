@@ -74,6 +74,7 @@ public class Scansione {
 		scanbtnIndietro.setContentAreaFilled(false);
 		scanbtnIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				resetCampi();
 				GestoreGrafica.switchPanel(Home.home);
 				GestoreGrafica.startTimer(30);
 			}
@@ -147,6 +148,7 @@ public class Scansione {
 					scantxtInputBarcode.setText("");
 				}else {
 					JOptionPane.showMessageDialog(scansione, "Cestino pieno, necessaria assistenza");
+					resetCampi();
 					GestoreGrafica.switchPanel(Assistenza.assistenza);
 					GestoreGrafica.startTimer(30);
 					}
@@ -209,7 +211,9 @@ public class Scansione {
 //				aggiungiProdotto();
 //			}
 //		}
-
+		
+//		Tessera t = new Tessera(barcodeInput);
+//		System.out.println(t.verificaPresenza());
 		if (barcodeInput.length()==16 && checkTessera(barcodeInput)) {	//tessera
 			gestioneTessera(barcodeInput);
 		} else {	//prodotto
@@ -222,6 +226,7 @@ public class Scansione {
 					e.printStackTrace();
 				}
 				setImmagineProdotto();
+				resetCampi();
 				GestoreGrafica.switchPanel(Conferimento.conferimento);
 				GestoreGrafica.startTimer(60);
 			} else {
@@ -232,7 +237,7 @@ public class Scansione {
 		}		
 	}
 	
-	private boolean checkTessera(String code) {
+	public static boolean checkTessera(String code) {
 		boolean flag1 = code.substring(0,5).matches("[a-zA-Z]+");
 		boolean flag2 = code.substring(6,7).matches("\\d+");
 		boolean flag3 = Character.isLetter(code.charAt(8));
@@ -247,12 +252,18 @@ public class Scansione {
 	
 
 	private void gestioneTessera(String codiceTessera) {
-		JOptionPane.showMessageDialog(scansione, "Tessera autenticata per l'acquisizione dei punti");
+		//JOptionPane.showMessageDialog(scansione, "Tessera autenticata per l'acquisizione dei punti");
 		tesseraScansionata = new Tessera(codiceTessera);
 		tesseraLetta = true;
-//		scanlblBenvenuto.setText("Benvenuto "+tesseraScansionata.getNome()+" "+tesseraScansionata.getCognome());
-//		txtrNbAutenticarsiPrima.setText("TESSERA AUTENTICATA");
+		scanlblBenvenuto.setText("Benvenuto "+tesseraScansionata.getNome()+" "+tesseraScansionata.getCognome());
+		txtrNbAutenticarsiPrima.setText("\t    Tessera autenticata \n\t per l'acquisizione dei punti");
 		GestoreGrafica.startTimer(60);
+	}
+	
+	private void resetCampi() {
+		scanlblBenvenuto.setText("Benvenuto");
+		txtrNbAutenticarsiPrima.setText(
+				"               !ATTENZIONE! \r\nSCANSIONARE PRIMA LA TESSERA, POI I PRODOTTI,\r\n     AFFINCHE' I PUNTI VENGANO ACCREDITATI");
 	}
 	
 	public static boolean tesseraLetta() {

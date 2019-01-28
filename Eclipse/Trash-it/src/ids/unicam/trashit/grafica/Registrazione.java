@@ -42,7 +42,9 @@ public class Registrazione {
 	private Scansione s;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-	
+	private Tessera tesseraNuova;
+	private AggiuntaDB aggiuntaTessera;
+	private String nascitaTessera;
 
 	private void lblCF() {
 		reglblCF = new JLabel("Codice Fiscale:");
@@ -112,16 +114,18 @@ public class Registrazione {
 			public void actionPerformed(ActionEvent e) {
 				
 				//verifica input corretti
-				if (regtxtCodiceFiscale.getText() !=null && regtextFieldNome.getText() !=null && regtextFieldCognome.getText() !=null && regdateChooser.getDate()!=null && regtxtCodiceFiscale.getText().length()==16) {
+				if (regtxtCodiceFiscale.getText() !=null && regtextFieldNome.getText() !=null 
+						&& regtextFieldCognome.getText() !=null && regdateChooser.getDate()!=null 
+						&& regtxtCodiceFiscale.getText().length()==16 
+						&& Scansione.checkTessera(regtxtCodiceFiscale.getText())) {
 					//verifica tessera già nel db
-					Tessera tesseraGui = new Tessera(regtxtCodiceFiscale.getText());
-					if(tesseraGui.verificaPresenza()==false) { //non presente nel db
-						AggiuntaDB aggiungiTessera = new AggiuntaDB();
-						String nascitaTessera = sdf.format(regdateChooser.getDate());
-						//System.out.println(nascitaTessera);
-						aggiungiTessera.registrazioneTessera(regtxtCodiceFiscale.getText(), 
+					tesseraNuova = new Tessera(regtxtCodiceFiscale.getText());
+					if(!tesseraNuova.verificaPresenza()) { //non presente nel db
+						aggiuntaTessera = new AggiuntaDB();
+						nascitaTessera = sdf.format(regdateChooser.getDate());
+						aggiuntaTessera.registrazioneTessera(regtxtCodiceFiscale.getText(), 
 								regtextFieldNome.getText(), regtextFieldCognome.getText(), nascitaTessera);
-						JOptionPane.showMessageDialog(registrazione, tesseraGui.getDati());
+						JOptionPane.showMessageDialog(registrazione, tesseraNuova.getDati());
 						resetCampi();
 					} else {
 						JOptionPane.showMessageDialog(registrazione, "TESSERA GIA' NEL DATABASE.");

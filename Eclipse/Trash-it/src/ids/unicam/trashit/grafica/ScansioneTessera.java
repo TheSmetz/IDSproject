@@ -66,7 +66,6 @@ public class ScansioneTessera {
 				new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		scanTesserabtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// seconds = 30;
 				String idTessera = scanTesseratxtInputCodice.getText();
 				tesseraScansionata = new Tessera(idTessera);
 				if (tesseraScansionata.verificaPresenza()) {
