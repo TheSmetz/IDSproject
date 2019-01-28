@@ -25,7 +25,7 @@ public class Statistica {
 	
 	private String tempoAttuale () {
 		 Date dNow = new Date( );
-	      SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+	      SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
 	      System.out.println("Current Date: " + ft.format(dNow));
 		return ft.format(dNow);
 	}
