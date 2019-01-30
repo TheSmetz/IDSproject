@@ -71,7 +71,7 @@ public class Conferimento {
 		confbtnProdottoVisualizzatoCorretto.setContentAreaFilled(false);
 		confbtnProdottoVisualizzatoCorretto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				if (Scansione.policyProdotto.isUtilizzoPunti()) {	//se la città prevede l'accredito lo faccio sulla tessera (se inserita)
+				if (Home.policySessione.isUtilizzoPunti()) {	//se la città prevede l'accredito lo faccio sulla tessera (se inserita)
 					IstruzioniConferimento.istrlblPunti.setText("Punti Prodotto: " + Scansione.prodottoCorrente.getPunti());
 					if (Scansione.tesseraLetta) {
 						try {

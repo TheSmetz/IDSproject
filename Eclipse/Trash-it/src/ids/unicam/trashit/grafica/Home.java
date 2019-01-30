@@ -30,6 +30,11 @@ public class Home{
 	private JLabel homelblSeiNuovo;
 	private static JButton homebtnChiudiSessione;
 	public static String citta = "MC";	//DA QUI E' POSSIBILE CAMBIARE PROVINCIA
+	public static Policy policySessione;
+	
+	private void setRaccoltaPunti() {
+		policySessione = new Policy(citta);
+	}
 	
 	private void setjPanel() {
 		home = new JPanel();
@@ -174,7 +179,7 @@ public class Home{
 	}
 	
 	private void lblSeiNuovo() {
-		homelblSeiNuovo = new JLabel("Sei nuovo in Trash-it? Crea la tua tessera");
+		homelblSeiNuovo = new JLabel();
 		homelblSeiNuovo.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		homelblSeiNuovo.setHorizontalAlignment(SwingConstants.CENTER);
 		homelblSeiNuovo.setBounds(416, 400, 629, 40);
@@ -189,27 +194,28 @@ public class Home{
 	homelblSelezionaOperazione.setBounds(416, 97, 629, 57);
 	home.add(homelblSelezionaOperazione);
 	}
-	
-	private void creaAllLbl() {
+
+	private void creaAll() {
 		lblBenvenuto();
 		lblSelezionaOperazione();
 		lblLogo(home);
-		lblSeiNuovo();	
-	}
-
-	private void creaAllBtn() {
 		btnChiudiSessione(home);
-		btnCreaTessera();
 		btnScansione();
-		btnRitiroPremio();
+		lblSeiNuovo();
+		homelblSeiNuovo.setText("La tua provincia non prevede l'utilizzo dei punti");
+		if (policySessione.isUtilizzoPunti()) {
+			btnRitiroPremio();
+			btnCreaTessera();	
+			homelblSeiNuovo.setText("Sei nuovo in Trash-it? Crea la tua tessera");
+		}		
 		btnProblemiAssistenza(home);	
 		btnInfo(home);	
 	}
 	
 	public void setJPanelHome() {
+		setRaccoltaPunti();
 		setjPanel();
-		creaAllBtn();
-		creaAllLbl();	
+		creaAll();
 	}
 	
 	public JPanel getJPanelHome() {

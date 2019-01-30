@@ -47,7 +47,7 @@ public class Scansione {
 	public static Tessera tesseraScansionata;
 	public static boolean tesseraLetta = false;
 	public static Prodotto prodottoCorrente;
-	public static Policy policyProdotto;
+	//public static Policy policyProdotto;
 	
 
 	public static void btnIndietro(JPanel wherePanel) {
@@ -158,7 +158,7 @@ public class Scansione {
 		} else {	//prodotto
 			prodottoCorrente = new Prodotto(input);
 			if (prodottoCorrente.isPresenza()) {	//esiste
-				policyProdotto = new Policy(Home.citta, prodottoCorrente);
+				Home.policySessione.datiProdotto(prodottoCorrente);
 				try {
 					Conferimento.cestinoSessione.conferimentoProdotto(prodottoCorrente);	//recupero descrizione su dove buttare prodotto
 				} catch (IOException e) {
