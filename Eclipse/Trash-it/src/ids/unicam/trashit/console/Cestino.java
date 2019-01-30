@@ -1,5 +1,7 @@
 package ids.unicam.trashit.console;
 
+import javax.swing.JOptionPane;
+
 public class Cestino {
 
 	private String tipo;

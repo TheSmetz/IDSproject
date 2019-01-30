@@ -85,9 +85,11 @@ public class Conferimento {
 					}
 				} else {
 					IstruzioniConferimento.istrlblPunti.setText("L'area in cui ti trovi non prevede l'utilizzo dei punti");
+					
 				}
-				IstruzioniConferimento.istrlblDescrizione.setText(Scansione.prodottoCorrente.getDescrizione());	//descrizione prodotto				
 				
+				IstruzioniConferimento.istrlblDescrizione.setText(Scansione.prodottoCorrente.getDescrizione());	//descrizione prodotto	
+				System.out.println(Scansione.prodottoCorrente.getDescrizione());
 				GestoreGrafica.switchPanel(IstruzioniConferimento.istruzioneConf);
 				GestoreGrafica.startTimer(30);
 			}

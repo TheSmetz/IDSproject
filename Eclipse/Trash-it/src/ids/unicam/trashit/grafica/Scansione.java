@@ -41,13 +41,14 @@ public class Scansione {
 	private static JTextArea txtrNbAutenticarsiPrima;
 	private final String filename = "src\\ids\\unicam\\trashit\\grafica\\txt\\ProdottiDaAggiungere.txt";
 	private FileWriter fw;
-	private BufferedWriter bw;	
+	private BufferedWriter bw;
 	//Tessera sessione
 	private static String input;
 	public static Tessera tesseraScansionata;
 	public static boolean tesseraLetta = false;
 	public static Prodotto prodottoCorrente;
 	public static Policy policyProdotto;
+	
 
 	public static void btnIndietro(JPanel wherePanel) {
 		scanbtnIndietro = new JButton("",
@@ -157,7 +158,7 @@ public class Scansione {
 		} else {	//prodotto
 			prodottoCorrente = new Prodotto(input);
 			if (prodottoCorrente.isPresenza()) {	//esiste
-				policyProdotto = new Policy("AP", prodottoCorrente);
+				policyProdotto = new Policy(Home.citta, prodottoCorrente);
 				try {
 					Conferimento.cestinoSessione.conferimentoProdotto(prodottoCorrente);	//recupero descrizione su dove buttare prodotto
 				} catch (IOException e) {

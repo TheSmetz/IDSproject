@@ -14,7 +14,6 @@ public class CestinoSmart {
 
 	public String getArrayConferimento() {
 		String conferimento = "";
-
 		for (String s : arrayConferimento)
 		{
 		    conferimento += s + " ";
@@ -58,23 +57,28 @@ public class CestinoSmart {
 				switch (p.getCollocazioneCestini().get(i)) {
 				case carta:
 					carta.aumentaCapienza();
+					carta.apriBocchetta();
 					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.carta+"\n");
 					continue;
 				case plastica:
 					plastica.aumentaCapienza();
+					plastica.apriBocchetta();
 					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.plastica+"\n");
 					continue;
 				case vetro:
 					vetro.aumentaCapienza();
+					vetro.apriBocchetta();
 					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.vetro+"\n");
 					continue;
 				case indifferenziato:
 					indifferenziato.aumentaCapienza();
+					indifferenziato.apriBocchetta();
 					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.indifferenziato+"\n");
 					continue;
 				}
 			} else throw new IOException("Cestini Pieni");
 		}		
 		p.setDescrizione(getArrayConferimento());
+		arrayConferimento.clear();
 	}
 }

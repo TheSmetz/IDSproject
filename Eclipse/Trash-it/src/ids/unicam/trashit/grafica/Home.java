@@ -14,6 +14,8 @@ import javax.swing.SwingConstants;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import ids.unicam.trashit.console.Policy;
+
 
 public class Home{
 	public static JPanel home;
@@ -27,6 +29,7 @@ public class Home{
 	private JButton homebtnCreaTessera;
 	private JLabel homelblSeiNuovo;
 	private static JButton homebtnChiudiSessione;
+	public static String citta = "MC";	//DA QUI E' POSSIBILE CAMBIARE PROVINCIA
 	
 	private void setjPanel() {
 		home = new JPanel();
@@ -63,6 +66,7 @@ public class Home{
 	}
 	
 	private void btnRitiroPremio() {
+	//	if (Scansione.policyProdotto.isUtilizzoPunti()) {
 		homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnRitiroPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
