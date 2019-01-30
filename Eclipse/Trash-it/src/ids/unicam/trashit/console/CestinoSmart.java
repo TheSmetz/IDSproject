@@ -50,30 +50,37 @@ public class CestinoSmart {
 		} else
 			return false;
 	}
+	
+	public void chiudiBocchette() {
+		carta.chiudiBocchetta();
+		plastica.chiudiBocchetta();
+		indifferenziato.chiudiBocchetta();
+		vetro.chiudiBocchetta();
+	}
 
 	public void conferimentoProdotto(Prodotto p) throws IOException {
 		for (int i = 0; i < p.getCollocazioneCestini().size(); i++) {
 			if (controlloVuoto()) {
 				switch (p.getCollocazioneCestini().get(i)) {
 				case carta:
-					carta.aumentaCapienza();
 					carta.apriBocchetta();
 					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.carta+"\n");
+					carta.aumentaCapienza();
 					continue;
 				case plastica:
-					plastica.aumentaCapienza();
 					plastica.apriBocchetta();
 					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.plastica+"\n");
+					plastica.aumentaCapienza();
 					continue;
 				case vetro:
-					vetro.aumentaCapienza();
 					vetro.apriBocchetta();
 					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.vetro+"\n");
+					vetro.aumentaCapienza();
 					continue;
 				case indifferenziato:
-					indifferenziato.aumentaCapienza();
 					indifferenziato.apriBocchetta();
 					arrayConferimento.add("Gettare " + p.getArrayParti().get(i) + " in " + Materiale.indifferenziato+"\n");
+					indifferenziato.aumentaCapienza();
 					continue;
 				}
 			} else throw new IOException("Cestini Pieni");
