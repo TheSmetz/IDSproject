@@ -31,6 +31,7 @@ public class IstruzioniConferimento{
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(Scansione.scansione);
 				GestoreGrafica.startTimer(30);
+				Conferimento.cestinoSessione.chiudiBocchette();
 			}
 		});
 		istrbtnNuovaScansione.setVerticalTextPosition(SwingConstants.CENTER);
