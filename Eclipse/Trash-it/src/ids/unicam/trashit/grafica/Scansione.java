@@ -19,14 +19,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import ids.unicam.trashit.console.Policy;
 import ids.unicam.trashit.console.Prodotto;
 import ids.unicam.trashit.console.Tessera;
 import ids.unicam.trashit.grafica.Home;
 
 public class Scansione {
 
-	public static JPanel scansione;
+	private JPanel scansione;
 	private JLabel scanlblScansionaProdotto;
 	private JTextField scantxtInputBarcode;
 	private JButton scanbtnAvviaScansione;
@@ -60,9 +59,9 @@ public class Scansione {
 		scanbtnIndietro.setContentAreaFilled(false);
 		scanbtnIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				resetCampi();
-				GestoreGrafica.switchPanel(Home.home);
+				GestoreGrafica.switchPanel(GestoreGrafica.home.getJPanelHome());
 				GestoreGrafica.startTimer(30);
+				GestoreGrafica.registrazione.resetCampi();
 			}
 		});
 		wherePanel.add(scanbtnIndietro);
@@ -134,7 +133,7 @@ public class Scansione {
 				}else {
 					JOptionPane.showMessageDialog(scansione, "Cestino pieno, necessaria assistenza");
 					resetCampi();
-					GestoreGrafica.switchPanel(Assistenza.assistenza);
+					GestoreGrafica.switchPanel(GestoreGrafica.assistenza.getJPanelAssistenza());
 					}
 			}
 			}
@@ -165,24 +164,24 @@ public class Scansione {
 					e.printStackTrace();
 				}
 				setImmagineProdotto();
-				resetCampi();
-				GestoreGrafica.switchPanel(Conferimento.conferimento);
+				GestoreGrafica.switchPanel(GestoreGrafica.conferimento.getJPanelConferimento());
 				GestoreGrafica.startTimer(60);
 			} else {
-				JOptionPane.showMessageDialog(scansione, "Prodotto non presente nel DB, invia notifica per aggiungerlo");
+				JOptionPane.showMessageDialog(scansione, "Prodotto/Tessera errati oppure non presente nel DB, invia notifica per aggiungerlo");
 				aggiungiProdotto();
 			}
 		}		
 	}
 	
 	public static boolean checkTessera(String code) {
-		boolean flag1 = code.substring(0,5).matches("[a-zA-Z]+");
-		boolean flag2 = code.substring(6,7).matches("\\d+");
+		boolean flag1 = code.substring(0,6).matches("[a-zA-Z]+");
+		boolean flag2 = code.substring(6,8).matches("\\d+");
 		boolean flag3 = Character.isLetter(code.charAt(8));
-		boolean flag4 = code.substring(9,10).matches("\\d+");
+		boolean flag4 = code.substring(9,11).matches("\\d+");
 		boolean flag5 = Character.isLetter(code.charAt(11));
-		boolean flag6 = code.substring(12,14).matches("\\d+");
+		boolean flag6 = code.substring(12,15).matches("\\d+");
 		boolean flag7 = Character.isLetter(code.charAt(15));
+
 		if(code.length() == 16 && flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7) {
 			return true;
 		}else return false;
@@ -197,10 +196,16 @@ public class Scansione {
 		GestoreGrafica.startTimer(60);
 	}
 	
-	private static void resetCampi() {
+	public void resetCampi() {
 		scanlblBenvenuto.setText("Benvenuto");
 		txtrNbAutenticarsiPrima.setText(
 				"               !ATTENZIONE! \r\nSCANSIONARE PRIMA LA TESSERA, POI I PRODOTTI,\r\n     AFFINCHE' I PUNTI VENGANO ACCREDITATI");
+	}
+	
+	public void resetOggetti() {
+		tesseraLetta = false;
+		tesseraScansionata = null;
+		prodottoCorrente = null;
 	}
 	
 	public static boolean tesseraLetta() {

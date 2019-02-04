@@ -25,7 +25,7 @@ import ids.unicam.trashit.database.AggiuntaDB;
 
 public class Registrazione {
 	
-	public static JPanel registrazione;
+	private JPanel registrazione;
 	private JTextField regtxtCodiceFiscale;
 	private JTextField regtextFieldNome;
 	private JTextField regtextFieldCognome;
@@ -98,7 +98,7 @@ public class Registrazione {
 		registrazione.add(reglblSfondoCodiceFiscale);
 	}
 	
-	private void resetCampi() {
+	public void resetCampi() {
 		regtxtCodiceFiscale.setText(null);
 		regdateChooser.setDate(null);
 		regtextFieldCognome.setText(null);
@@ -117,6 +117,7 @@ public class Registrazione {
 						&& regtxtCodiceFiscale.getText().length()==16 
 						&& Scansione.checkTessera(regtxtCodiceFiscale.getText())) {
 					//verifica tessera già nel db
+					System.out.println("VERIFICA CF: "+Scansione.checkTessera(regtxtCodiceFiscale.getText()));
 					tesseraNuova = new Tessera(regtxtCodiceFiscale.getText());
 					if(!tesseraNuova.verificaPresenza()) { //non presente nel db
 						aggiuntaTessera = new AggiuntaDB();
@@ -127,11 +128,13 @@ public class Registrazione {
 						resetCampi();
 					} else {
 						JOptionPane.showMessageDialog(registrazione, "TESSERA GIA' NEL DATABASE.");
-						GestoreGrafica.switchPanel(Home.home);
+						GestoreGrafica.switchPanel(GestoreGrafica.home.getJPanelHome());
 						GestoreGrafica.startTimer(30);
+						resetCampi();
 					}
 				}else {
 					JOptionPane.showMessageDialog(registrazione, "Tutti i campi devono essere compilati correttamente");
+					resetCampi();
 				}
 			}
 		});

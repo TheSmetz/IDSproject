@@ -17,7 +17,7 @@ import ids.unicam.trashit.console.Tessera;
 
 public class ScansioneTessera {
 
-	public static JPanel scansioneTessera;
+	private JPanel scansioneTessera;
 	private JLabel scanTesseralblBenvenuto;
 	private JTextPane scanTesseratxtpnErr;
 	private JLabel scanTesseralblScansionaProdotto;
@@ -26,6 +26,10 @@ public class ScansioneTessera {
 	private JButton scanTesserabtnAvviaScansione;
 	private JTextField scanTesseratxtInputCodice;
 	public static Tessera tesseraScansionata;
+	
+	public void resetInputTessera() {
+		scanTesseratxtInputCodice.setText(null);
+	}
 
 	private void lblInputBackground() {
 		scanTesseralblInputBackground = new JLabel("");
@@ -68,7 +72,7 @@ public class ScansioneTessera {
 					RitiroPremio.ritirolblRitiroPremio.setText("Benvenuto " + String.valueOf(
 							tesseraScansionata.getNome() + " " + String.valueOf(tesseraScansionata.getCognome())));
 					RitiroPremio.ritirolblPuntiTessera.setText("Punti tessera: " + String.valueOf(tesseraScansionata.getPunti()));
-					GestoreGrafica.switchPanel(RitiroPremio.ritiroPremio);
+					GestoreGrafica.switchPanel(GestoreGrafica.ritiroPremio.getJPanelRitiroPremio());
 					GestoreGrafica.startTimer(60);
 				} else {
 					scanTesseratxtpnErr

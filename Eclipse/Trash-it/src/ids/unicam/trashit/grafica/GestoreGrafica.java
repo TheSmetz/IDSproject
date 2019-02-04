@@ -33,16 +33,16 @@ public class GestoreGrafica extends JFrame {
 	public static JPanel contentPane;
 	public static JLayeredPane layeredPane;
 	private JLabel background;
-	public Sessione sess;
-	private Home h;
-	private Scansione c;
-	private RitiroPremio ritPremio;
-	private Registrazione reg;
-	private Assistenza ass;
-	private About ab;
-	private Conferimento conf;
-	private ScansioneTessera scanTessera;
-	private IstruzioniConferimento istrConferimento;
+	public static Sessione sessione;
+	public static Home home;
+	public static Scansione scansione;
+	public static RitiroPremio ritiroPremio;
+	public static Registrazione registrazione;
+	public static Assistenza assistenza;
+	public static About about;
+	public static Conferimento conferimento;
+	public static ScansioneTessera scanTessera;
+	public static IstruzioniConferimento istruzioniConferimento;
 	// TIMER
 	private static int seconds;
 	public static Timer timer;
@@ -73,7 +73,7 @@ public class GestoreGrafica extends JFrame {
 				} else {
 					timer.stop();
 					// salvare impostazioni
-					switchPanel(Sessione.sessione);
+					switchPanel(sessione.getJPanelSessione());
 				}
 			}
 		});
@@ -99,45 +99,45 @@ public class GestoreGrafica extends JFrame {
 	}
 
 	private void creaJPanels() {
-		sess = new Sessione();
-		sess.setJPanelSessione();
-		layeredPane.add(sess.getJPanelSessione());
+		sessione = new Sessione();
+		sessione.setJPanelSessione();
+		layeredPane.add(sessione.getJPanelSessione());
 
-		h = new Home();
-		h.setJPanelHome();
-		layeredPane.add(h.getJPanelHome());
+		home = new Home();
+		home.setJPanelHome();
+		layeredPane.add(home.getJPanelHome());
 
-		c = new Scansione();
-		c.setJPanelScansione();
-		layeredPane.add(c.getJPanelScansione());
+		scansione = new Scansione();
+		scansione.setJPanelScansione();
+		layeredPane.add(scansione.getJPanelScansione());
 
 		scanTessera = new ScansioneTessera();
 		scanTessera.setJPanelScansioneTessera();
 		layeredPane.add(scanTessera.getJPanelScansioneTessera());
 
-		ritPremio = new RitiroPremio();
-		ritPremio.setJPanelRitiro();
-		layeredPane.add(ritPremio.getJPanelRitiroPremio());
+		ritiroPremio = new RitiroPremio();
+		ritiroPremio.setJPanelRitiro();
+		layeredPane.add(ritiroPremio.getJPanelRitiroPremio());
 
-		reg = new Registrazione();
-		reg.setJPanelRegistrazione();
-		layeredPane.add(reg.getJPanelRegistrazione());
+		registrazione = new Registrazione();
+		registrazione.setJPanelRegistrazione();
+		layeredPane.add(registrazione.getJPanelRegistrazione());
 
-		ab = new About();
-		ab.setJPanelAbout();
-		layeredPane.add(ab.getJPanelAbout());
+		about = new About();
+		about.setJPanelAbout();
+		layeredPane.add(about.getJPanelAbout());
 
-		ass = new Assistenza();
-		ass.setJPanelAssistenza();
-		layeredPane.add(ass.getJPanelAssistenza());
+		assistenza = new Assistenza();
+		assistenza.setJPanelAssistenza();
+		layeredPane.add(assistenza.getJPanelAssistenza());
 
-		conf = new Conferimento();
-		conf.setJPanelConferimento();
-		layeredPane.add(conf.getJPanelConferimento());
+		conferimento = new Conferimento();
+		conferimento.setJPanelConferimento();
+		layeredPane.add(conferimento.getJPanelConferimento());
 
-		istrConferimento = new IstruzioniConferimento();
-		istrConferimento.setJPanelIstruzioni();
-		layeredPane.add(istrConferimento.getJPanelIstruzioni());
+		istruzioniConferimento = new IstruzioniConferimento();
+		istruzioniConferimento.setJPanelIstruzioni();
+		layeredPane.add(istruzioniConferimento.getJPanelIstruzioni());
 	}
 
 	public static void switchPanel(JPanel panelName) {

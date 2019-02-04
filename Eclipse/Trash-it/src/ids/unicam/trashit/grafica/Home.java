@@ -18,7 +18,7 @@ import ids.unicam.trashit.console.Policy;
 
 
 public class Home{
-	public static JPanel home;
+	private JPanel home;
 	private JLabel homelblBenvenuto;
 	private JLabel homelblSelezionaOperazione;
 	private JButton homebtnScansione;
@@ -63,7 +63,7 @@ public class Home{
 		homebtnScansione.setBounds(416, 167, 629, 82);
 		homebtnScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GestoreGrafica.switchPanel(Scansione.scansione);
+				GestoreGrafica.switchPanel(GestoreGrafica.scansione.getJPanelScansione());
 				GestoreGrafica.startTimer(60);
 			}
 		});
@@ -74,7 +74,7 @@ public class Home{
 		homebtnRitiroPremio = new JButton("RITIRO PREMI", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnRitiroPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GestoreGrafica.switchPanel(ScansioneTessera.scansioneTessera);
+				GestoreGrafica.switchPanel(GestoreGrafica.scanTessera.getJPanelScansioneTessera());
 				GestoreGrafica.startTimer(60);
 			}
 		});
@@ -95,7 +95,7 @@ public class Home{
 		homebtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestoreGrafica.switchPanel(Assistenza.assistenza);
+				GestoreGrafica.switchPanel(GestoreGrafica.assistenza.getJPanelAssistenza());
 				GestoreGrafica.startTimer(30);
 			}
 		});
@@ -114,7 +114,7 @@ public class Home{
 		homebtnInfo = new JButton("About us", new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		homebtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestoreGrafica.switchPanel(About.about);
+				GestoreGrafica.switchPanel(GestoreGrafica.about.getJPanelAbout());
 				GestoreGrafica.startTimer(30);
 			}
 		});
@@ -142,8 +142,12 @@ public class Home{
 		homebtnChiudiSessione = new JButton("Chiudi sessione", new ImageIcon(Home.class.getResource("/ids/unicam/trashit/grafica/immagini/redbuttonSmall.png")));
 		homebtnChiudiSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestoreGrafica.switchPanel(Sessione.sessione);
+				GestoreGrafica.switchPanel(GestoreGrafica.sessione.getJPanelSessione());
 				GestoreGrafica.timer.stop();
+				GestoreGrafica.scansione.resetCampi();
+				GestoreGrafica.scansione.resetOggetti();
+				GestoreGrafica.scanTessera.resetInputTessera();
+				GestoreGrafica.registrazione.resetCampi();
 			}
 		});
 		homebtnChiudiSessione.setVerticalTextPosition(SwingConstants.CENTER);
@@ -162,7 +166,7 @@ public class Home{
 		homebtnCreaTessera = new JButton("CREA TESSERA", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/bluebuttonSmall.png")));
 		homebtnCreaTessera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GestoreGrafica.switchPanel(Registrazione.registrazione);
+				GestoreGrafica.switchPanel(GestoreGrafica.registrazione.getJPanelRegistrazione());
 				GestoreGrafica.startTimer(60);
 			}
 		});

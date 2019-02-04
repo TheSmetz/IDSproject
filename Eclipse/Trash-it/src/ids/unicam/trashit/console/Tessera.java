@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import ids.unicam.trashit.database.CreateConnection;
+import ids.unicam.trashit.grafica.GestoreGrafica;
 import ids.unicam.trashit.grafica.RitiroPremio;
 
 public class Tessera {
@@ -87,7 +88,7 @@ public class Tessera {
 
 	public boolean addebitoPunti(int adPunti, boolean utilizzoPunti) throws IOException {
 		if ((this.punti - adPunti) < 0) {
-			JOptionPane.showMessageDialog(RitiroPremio.ritiroPremio, "Punti Insufficenti");
+			JOptionPane.showMessageDialog(GestoreGrafica.ritiroPremio.getJPanelRitiroPremio(), "Punti Insufficenti");
 		return false;
 		} else {
 			this.punti -= adPunti;

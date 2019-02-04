@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 
 public class Assistenza {
 
-	public static JPanel assistenza;
+	private JPanel assistenza;
 	private JLabel asslblAssistenza;
 	private JTextPane asstxtpnTelefonoEmail;
 	private JButton btnSvuotaCestini;

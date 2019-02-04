@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 
 public class Sessione {
 	
-	public static JPanel sessione;
+	private JPanel sessione;
 	private JLabel sessionelblLogo;
 	private JLabel sessionelblSessione;
 	private JButton sessionebtnAvviaSessione;
@@ -46,7 +46,7 @@ public class Sessione {
 		sessionebtnAvviaSessione = new JButton("AVVIA SESSIONE", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbutton.png")));
 		sessionebtnAvviaSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestoreGrafica.switchPanel(Home.home);
+				GestoreGrafica.switchPanel(GestoreGrafica.home.getJPanelHome());
 				GestoreGrafica.startTimer(30);		
 			}
 		});

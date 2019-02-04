@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 
 public class About {
 
-	public static JPanel about;
+	private JPanel about;
 	private JLabel aboutlblInformazioniTrashit;
 	private JButton aboutbtnProblemiAssistenza;
 	private JTextPane abouttextPaneInfo;
@@ -36,7 +36,7 @@ public class About {
 		aboutbtnProblemiAssistenza = new JButton("Problemi? Assistenza", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		aboutbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestoreGrafica.switchPanel(Assistenza.assistenza);
+				GestoreGrafica.switchPanel(GestoreGrafica.assistenza.getJPanelAssistenza());
 				GestoreGrafica.startTimer(30);
 			}
 		});
@@ -71,7 +71,7 @@ public class About {
 		aboutbtnHomePage = new JButton("Home Page", new ImageIcon(About.class.getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		aboutbtnHomePage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestoreGrafica.switchPanel(Home.home);
+				GestoreGrafica.switchPanel(GestoreGrafica.home.getJPanelHome());
 				GestoreGrafica.startTimer(30);
 			}
 		});

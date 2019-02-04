@@ -17,7 +17,7 @@ import javax.swing.text.StyleConstants;
 
 
 public class IstruzioniConferimento{
-	public static JPanel istruzioneConf;
+	private JPanel istruzioneConf;
 	private JLabel istrlblConferimentoProdotto;
 	private JButton istrbtnNuovaScansione;
 	private SimpleAttributeSet attribs;
@@ -29,7 +29,7 @@ public class IstruzioniConferimento{
 		 istrbtnNuovaScansione = new JButton("Nuova scansione", new ImageIcon(getClass().getResource("/ids/unicam/trashit/grafica/immagini/greenbuttonSmall.png")));
 		 istrbtnNuovaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestoreGrafica.switchPanel(Scansione.scansione);
+				GestoreGrafica.switchPanel(GestoreGrafica.scansione.getJPanelScansione());
 				GestoreGrafica.startTimer(30);
 				Conferimento.cestinoSessione.chiudiBocchette();
 			}

@@ -19,7 +19,7 @@ import ids.unicam.trashit.console.Statistica;
 
 public class Conferimento {
 
-	public static JPanel conferimento;
+	private JPanel conferimento;
 	private JLabel conflblScansioneProdotto;	
 	private JButton confbtnProdottoVisualizzatoErrato;
 	private JButton confbtnProdottoVisualizzatoCorretto;
@@ -47,7 +47,7 @@ public class Conferimento {
 		confbtnProdottoVisualizzatoErrato.setContentAreaFilled(false);
 		confbtnProdottoVisualizzatoErrato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestoreGrafica.switchPanel(Scansione.scansione);
+				GestoreGrafica.switchPanel(GestoreGrafica.scansione.getJPanelScansione());
 				GestoreGrafica.startTimer(30);
 			}
 		});
@@ -82,6 +82,8 @@ public class Conferimento {
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}						
+					} else {
+						statisticaSessione = new Statistica(Scansione.prodottoCorrente.getcodiceABarre(), "UNREGISTERED");
 					}
 				} else {
 					IstruzioniConferimento.istrlblPunti.setText("L'area in cui ti trovi non prevede l'utilizzo dei punti");
@@ -90,7 +92,7 @@ public class Conferimento {
 				
 				IstruzioniConferimento.istrlblDescrizione.setText(Scansione.prodottoCorrente.getDescrizione());	//descrizione prodotto	
 				System.out.println(Scansione.prodottoCorrente.getDescrizione());
-				GestoreGrafica.switchPanel(IstruzioniConferimento.istruzioneConf);
+				GestoreGrafica.switchPanel(GestoreGrafica.istruzioniConferimento.getJPanelIstruzioni());
 				GestoreGrafica.startTimer(30);
 			}
 

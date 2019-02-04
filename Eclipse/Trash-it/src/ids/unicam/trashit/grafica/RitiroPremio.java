@@ -17,7 +17,7 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
 public class RitiroPremio {
-	public static JPanel ritiroPremio;
+	private static JPanel ritiroPremio;
 	private JLabel RitirolblCoupon;
 	private ButtonGroup buoniSconto;
 	private JRadioButton ritirooption10;
@@ -25,8 +25,8 @@ public class RitiroPremio {
 	private JRadioButton ritirooption50;
 	private JRadioButton ritirooption75;
 	private JButton ritirobtnRitira;
-	static JLabel ritirolblPuntiTessera;
-	static JLabel ritirolblRitiroPremio;
+	public static JLabel ritirolblPuntiTessera;
+	public static JLabel ritirolblRitiroPremio;
 	private JLabel ritirolblSelezionePremio;
 	private int costoSconto = 0;
 
@@ -75,6 +75,7 @@ public class RitiroPremio {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					if (ScansioneTessera.tesseraScansionata.addebitoPunti(costoSconto, true)) {
+						ritirolblPuntiTessera.setText("Punti tessera: " + String.valueOf(ScansioneTessera.tesseraScansionata.getPunti()));
 						JOptionPane.showMessageDialog(ritiroPremio, "Punti buono sottratti, Stampa in corso del buono");
 					}
 				} catch (IOException e) {
