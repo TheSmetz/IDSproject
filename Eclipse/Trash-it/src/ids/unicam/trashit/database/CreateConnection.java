@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.swing.JOptionPane;
+
 import java.sql.ResultSet;
 
 public class CreateConnection {
@@ -59,7 +62,7 @@ public class CreateConnection {
 			rsQuery = stmtProdotto.executeQuery(query);
 			
 		} catch (SQLException e) {
-			System.out.println("\nIMPOSSIBILE CONNETTERSI AL DATABASE \n");
+			JOptionPane.showMessageDialog(null, "Database offline", "Errore", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}	

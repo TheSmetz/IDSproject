@@ -98,13 +98,14 @@ public class GestoreGrafica extends JFrame {
 		timer();
 	}
 
-	private void creaJPanels() {
+	private void creaJPanels(String citta) {
 		sessione = new Sessione();
 		sessione.setJPanelSessione();
 		layeredPane.add(sessione.getJPanelSessione());
 
 		home = new Home();
 		home.setJPanelHome();
+		home.setCitta(citta);
 		layeredPane.add(home.getJPanelHome());
 
 		scansione = new Scansione();
@@ -154,9 +155,9 @@ public class GestoreGrafica extends JFrame {
 		contentPane.add(background);
 	}
 
-	public GestoreGrafica() {
+	public GestoreGrafica(String citta) {
 		creaJFrame();
-		creaJPanels();
+		creaJPanels(citta);
 		background();
 	}
 }

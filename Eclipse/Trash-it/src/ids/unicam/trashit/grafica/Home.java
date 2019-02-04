@@ -29,8 +29,12 @@ public class Home{
 	private JButton homebtnCreaTessera;
 	private JLabel homelblSeiNuovo;
 	private static JButton homebtnChiudiSessione;
-	public static String citta = "AP";	//DA QUI E' POSSIBILE CAMBIARE PROVINCIA
+	public static String citta;	//DA QUI E' POSSIBILE CAMBIARE PROVINCIA
 	public static Policy policySessione;
+	
+	public void setCitta(String cittaInput) {
+		citta = cittaInput;
+	}
 	
 	private void setRaccoltaPunti() {
 		policySessione = new Policy(citta);
