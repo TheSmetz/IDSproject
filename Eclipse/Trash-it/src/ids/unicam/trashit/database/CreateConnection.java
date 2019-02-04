@@ -59,6 +59,7 @@ public class CreateConnection {
 			rsQuery = stmtProdotto.executeQuery(query);
 			
 		} catch (SQLException e) {
+			System.out.println("\nIMPOSSIBILE CONNETTERSI AL DATABASE \n");
 			e.printStackTrace();
 		}
 	}	
