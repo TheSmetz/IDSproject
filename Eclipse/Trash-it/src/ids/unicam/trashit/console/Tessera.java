@@ -2,12 +2,10 @@ package ids.unicam.trashit.console;
 
 import java.io.IOException;
 import java.util.Date;
-
 import javax.swing.JOptionPane;
 
 import ids.unicam.trashit.database.CreateConnection;
 import ids.unicam.trashit.grafica.GestoreGrafica;
-import ids.unicam.trashit.grafica.RitiroPremio;
 
 public class Tessera {
 	private String idtessera;

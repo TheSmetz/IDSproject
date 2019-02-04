@@ -91,7 +91,7 @@ public class Conferimento {
 				}
 				
 				IstruzioniConferimento.istrlblDescrizione.setText(Scansione.prodottoCorrente.getDescrizione());	//descrizione prodotto	
-				System.out.println(Scansione.prodottoCorrente.getDescrizione());
+//				System.out.println(Scansione.prodottoCorrente.getDescrizione());
 				GestoreGrafica.switchPanel(GestoreGrafica.istruzioniConferimento.getJPanelIstruzioni());
 				GestoreGrafica.startTimer(30);
 			}

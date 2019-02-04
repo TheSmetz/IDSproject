@@ -117,13 +117,12 @@ public class Registrazione {
 						&& regtxtCodiceFiscale.getText().length()==16 
 						&& Scansione.checkTessera(regtxtCodiceFiscale.getText())) {
 					//verifica tessera già nel db
-					System.out.println("VERIFICA CF: "+Scansione.checkTessera(regtxtCodiceFiscale.getText()));
-					tesseraNuova = new Tessera(regtxtCodiceFiscale.getText());
+					tesseraNuova = new Tessera(regtxtCodiceFiscale.getText().toUpperCase());
 					if(!tesseraNuova.verificaPresenza()) { //non presente nel db
 						aggiuntaTessera = new AggiuntaDB();
 						nascitaTessera = sdf.format(regdateChooser.getDate());
-						aggiuntaTessera.registrazioneTessera(regtxtCodiceFiscale.getText(), 
-								regtextFieldNome.getText(), regtextFieldCognome.getText(), nascitaTessera);
+						aggiuntaTessera.registrazioneTessera(regtxtCodiceFiscale.getText().toUpperCase(), 
+								regtextFieldNome.getText().toLowerCase(), regtextFieldCognome.getText().toLowerCase(), nascitaTessera);
 						JOptionPane.showMessageDialog(registrazione, tesseraNuova.getDati());
 						resetCampi();
 					} else {

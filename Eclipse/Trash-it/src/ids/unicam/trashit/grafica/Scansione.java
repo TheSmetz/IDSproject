@@ -119,7 +119,7 @@ public class Scansione {
 		scanbtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {	
 				GestoreGrafica.startTimer(30);
-				input = scantxtInputBarcode.getText();
+				input = scantxtInputBarcode.getText().toUpperCase();
 				if(input.length()==0) {
 					JOptionPane.showMessageDialog(scansione, "Barcode non rilevato");
 				}else {
@@ -170,7 +170,7 @@ public class Scansione {
 				JOptionPane.showMessageDialog(scansione, "Prodotto/Tessera errati oppure non presente nel DB, invia notifica per aggiungerlo");
 				aggiungiProdotto();
 			}
-		}		
+		}
 	}
 	
 	public static boolean checkTessera(String code) {
@@ -213,22 +213,24 @@ public class Scansione {
 	}
 
 	private void aggiungiProdotto() {
-		try {
-			fw = new FileWriter(filename, true);
-			bw = new BufferedWriter(fw);
-			bw.write("- " + scantxtInputBarcode.getText() + "\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+		if (scantxtInputBarcode.getText().matches("\\d+") && scantxtInputBarcode.getText().length() <= 13) {
 			try {
-				if (bw != null)
-					bw.close();
-				if (fw != null)
-					fw.close();
-			} catch (IOException ex) {
-				ex.printStackTrace();
+				fw = new FileWriter(filename, true);
+				bw = new BufferedWriter(fw);
+				bw.write("- " + scantxtInputBarcode.getText() + "\n");
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (bw != null)
+						bw.close();
+					if (fw != null)
+						fw.close();
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
 			}
-		}
+		}		
 	}
 
 	private void lblAttenzioneTessera() {

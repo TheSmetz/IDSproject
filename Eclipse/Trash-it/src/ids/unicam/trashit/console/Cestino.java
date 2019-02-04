@@ -1,12 +1,13 @@
 package ids.unicam.trashit.console;
 
-
 public class Cestino {
 
+	@SuppressWarnings("unused")
 	private String tipo;
 	private boolean vuoto = true; // capienza = 100;
 	private int capienza;
 	private boolean integrita = true;
+	@SuppressWarnings("unused")
 	private boolean bocchetta;
 
 	public void aumentaCapienza() {
@@ -15,7 +16,6 @@ public class Cestino {
 		} else {
 			this.vuoto = false;
 		}
-		// ciao
 	}
 	
 	public void svuotaCestino() { //TECNICO
