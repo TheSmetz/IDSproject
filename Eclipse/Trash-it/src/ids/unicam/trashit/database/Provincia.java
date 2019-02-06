@@ -1,11 +1,9 @@
-package ids.unicam.trashit.start;
+package ids.unicam.trashit.database;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-
-import ids.unicam.trashit.database.CreateConnection;
 
 public class Provincia {
 	

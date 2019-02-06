@@ -2,6 +2,7 @@ package ids.unicam.trashit.start;
 
 import java.awt.EventQueue;
 
+import ids.unicam.trashit.database.Provincia;
 import ids.unicam.trashit.grafica.GestoreGrafica;
 
 public class Start {
