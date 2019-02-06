@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class CestinoSmart {
 
-	Cestino carta = new Cestino("carta");
-	Cestino plastica = new Cestino("plastica");
-	Cestino vetro = new Cestino("vetro");
-	Cestino indifferenziato = new Cestino("indifferenziato");
+	private Cestino carta = new Cestino("carta");
+	private Cestino plastica = new Cestino("plastica");
+	private Cestino vetro = new Cestino("vetro");
+	private Cestino indifferenziato = new Cestino("indifferenziato");
 	private ArrayList<String> arrayConferimento=new ArrayList<String>();
 	
 
