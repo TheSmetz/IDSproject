@@ -8,9 +8,9 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import ids.unicam.trashit.console.Tessera;
@@ -19,7 +19,6 @@ public class ScansioneTessera {
 
 	private JPanel scansioneTessera;
 	private JLabel scanTesseralblBenvenuto;
-	private JTextPane scanTesseratxtpnErr;
 	private JLabel scanTesseralblScansionaProdotto;
 	private JLabel scanTesseralblInputBackground;
 	private JLabel scanTesseratxtBarcode;
@@ -75,8 +74,7 @@ public class ScansioneTessera {
 					GestoreGrafica.switchPanel(GestoreGrafica.ritiroPremio.getJPanelRitiroPremio());
 					GestoreGrafica.startTimer(60);
 				} else {
-					scanTesseratxtpnErr
-							.setText("Attenzione riconoscimento fallito \n      " + "Vi invitiamo a riprovare");
+					JOptionPane.showMessageDialog(scansioneTessera, "Attenzione riconoscimento fallito \n      " + "Vi invitiamo a riprovare");
 					scanTesseratxtInputCodice.setText("");
 				}
 			}
@@ -95,17 +93,6 @@ public class ScansioneTessera {
 
 	public Tessera getTessera() {
 		return tesseraScansionata;
-	}
-
-	private void txtTesseraErrata() {
-		scanTesseratxtpnErr = new JTextPane();
-		scanTesseratxtpnErr.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		scanTesseratxtpnErr.setText(" ");
-		scanTesseratxtpnErr.setBounds(600, 484, 275, 66);
-		scanTesseratxtpnErr.setBackground(null);
-		scanTesseratxtpnErr.setBorder(null);
-		scanTesseratxtpnErr.setOpaque(false);
-		scansioneTessera.add(scanTesseratxtpnErr);
 	}
 
 	private void lblBenvenuto() {
@@ -139,7 +126,6 @@ public class ScansioneTessera {
 		Scansione.btnIndietro(scansioneTessera);
 		txtInputCodice();
 		lblBenvenuto();
-		txtTesseraErrata();
 		btnAvviaSessioneTessera();
 		lblScansionaProdotto();
 		txtBarcode();

@@ -98,14 +98,14 @@ public class GestoreGrafica extends JFrame {
 		timer();
 	}
 
-	private void creaJPanels(String citta) {
+	private void creaJPanels(String provincia) {
 		sessione = new Sessione();
 		sessione.setJPanelSessione();
 		layeredPane.add(sessione.getJPanelSessione());
 
 		home = new Home();
+		home.setProvincia(provincia);
 		home.setJPanelHome();
-		home.setCitta(citta);
 		layeredPane.add(home.getJPanelHome());
 
 		scansione = new Scansione();
