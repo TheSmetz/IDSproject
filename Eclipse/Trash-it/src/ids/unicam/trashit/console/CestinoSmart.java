@@ -12,7 +12,7 @@ public class CestinoSmart {
 	private ArrayList<String> arrayConferimento=new ArrayList<String>();
 	
 
-	public String getArrayConferimento() {
+	protected String getArrayConferimento() {
 		String conferimento = "";
 		for (String s : arrayConferimento)
 		{
@@ -28,7 +28,7 @@ public class CestinoSmart {
 		indifferenziato.svuotaCestino();
 	}
 	
-	public boolean controlloIntegrita() {
+	protected boolean controlloIntegrita() {
 		if (carta.isIntegrita() == true && plastica.isIntegrita() == true && vetro.isIntegrita() == true
 				&& indifferenziato.isIntegrita() == true) {
 			return true;
@@ -44,7 +44,7 @@ public class CestinoSmart {
 			return false;
 	}
 
-	public boolean controlloCestini() { // controllo generale sia vuoto sia integrità
+	protected boolean controlloCestini() { // controllo generale sia vuoto sia integrità
 		if (controlloIntegrita() == true && controlloVuoto() == false) {
 			return true;
 		} else

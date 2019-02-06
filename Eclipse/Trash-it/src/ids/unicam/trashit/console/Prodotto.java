@@ -23,33 +23,33 @@ public class Prodotto{
 		return descrizione;
 	}
 
-	public void setDescrizione(String descrizione) {
+	protected void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
 
 	
-	public ArrayList<Materiale> getCollocazioneCestini() {
+	protected ArrayList<Materiale> getCollocazioneCestini() {
 		return collocazioneCestini;
 	}
 
-	public void setCollocazioneCestini(ArrayList<Materiale> collocazioneCestini) {
+	protected void setCollocazioneCestini(ArrayList<Materiale> collocazioneCestini) {
 		this.collocazioneCestini = collocazioneCestini;
 	}
 
-	public void setComponenti(Materiale m) {
+	protected void setComponenti(Materiale m) {
 		if(!collocazioneCestini.contains(m))
 		collocazioneCestini.add(m);
 	}
 	
-	public ArrayList<String> getArrayParti() {
+	protected ArrayList<String> getArrayParti() {
 		return arrayParti;
 	}
 
-	public void setArrayParti(ArrayList<String> arrayParti) {
+	protected void setArrayParti(ArrayList<String> arrayParti) {
 		this.arrayParti = arrayParti;
 	}
 	
-	public int contaComponenti() {
+	protected int contaComponenti() {
 		return collocazioneCestini.size();	
 	}
 	
@@ -65,7 +65,7 @@ public class Prodotto{
 		return this.punti;
 	}
 
-	public void setPunti(int punti) {
+	protected void setPunti(int punti) {
 		this.punti = punti;
 	}
 
@@ -77,12 +77,8 @@ public class Prodotto{
 		return presenza;
 	}
 
-	public void setPresenza(boolean presenza) {
+	protected void setPresenza(boolean presenza) {
 		this.presenza = presenza;
-	}
-
-	public boolean verificaPresenza() {
-		return this.presenza;
 	}
 	
 	public void getComponenti() {
@@ -100,7 +96,7 @@ public class Prodotto{
 	}	
 	
 
-	public void creaConnessione() {
+	protected void creaConnessione() {
 		String query = "SELECT * FROM prodotto WHERE IDProdotto = '" + this.codiceABarre + "'";		
 		prodottoConnection.executeQuery(query);		
 		try {
@@ -117,7 +113,7 @@ public class Prodotto{
 		}					
 	}
 	
-	public void getDati() {
+	protected void getDati() {
 		System.out.println("--- " + this.nome + " ---"+
 				 "\nCodice a barre: " + this.codiceABarre +
 				"\nPunti: " + this.punti +

@@ -28,7 +28,7 @@ public class Policy {
 		this.zona = zona;
 	}
 
-	public void stampaNome() {
+	protected void stampaNome() {
 		System.out.println(prodotto.getNome());
 	}
 	
@@ -59,7 +59,7 @@ public class Policy {
 		}
 	}
 	
-	public void zonaDB() {		
+	protected void zonaDB() {		
 		String queryPunti = "SELECT raccoltaPunti FROM area WHERE IDarea = '" + this.zona + "'";
 		policyPunti.executeQuery(queryPunti);
 		
