@@ -8,7 +8,7 @@ import ids.unicam.trashit.database.CreateConnection;
 public class Prodotto{
 	
 	//attributi
-	private String codiceABarre; //id
+	private String codiceABarre;
 	private String nome;
 	//collocazione finali
 	private ArrayList<Materiale> collocazioneCestini=new ArrayList<Materiale>(); //Gestisce uno o piu componenti di un prodotto

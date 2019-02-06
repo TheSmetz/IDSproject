@@ -91,7 +91,7 @@ public class RitiroPremio {
 		this.costoSconto = cs;
 	}
 
-	private void btnsSconti() { // DA CONTROLLARE
+	private void btnsSconti() { 
 		ritirooption10 = new JRadioButton(" 10%");
 		ritirooption10.setFont(new Font("Dialog", Font.PLAIN, 30));
 		ritirooption10.setBounds(465, 250, 127, 50);

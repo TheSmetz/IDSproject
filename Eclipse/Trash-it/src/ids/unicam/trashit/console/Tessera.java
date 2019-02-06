@@ -97,8 +97,7 @@ public class Tessera {
 
 	public void ritiroPremio(int puntiPremio) throws IOException {
 		addebitoPunti(puntiPremio, true);
-		System.out.println("premio stampato yuppiii");
-		// STAMPA BUONO DA FARE
-	}
+		System.out.println("premio stampato");
+		}
 
 }

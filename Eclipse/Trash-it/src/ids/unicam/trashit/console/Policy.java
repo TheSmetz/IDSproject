@@ -49,11 +49,9 @@ public class Policy {
 			while(policyConnection.getRsQuery().next()) {
 				this.descrizione = policyConnection.getRsQuery().getString("policy.descrizione").toLowerCase();
 				prodotto.getCollocazioneCestini().add(Materiale.valueOf(this.descrizione));
-				//System.out.println("prima"+this.descrizione);
 				this.descrizione = policyConnection.getRsQuery().getString("componente.descrizione").toLowerCase();
 				prodotto.getArrayParti().add(this.descrizione);
-				//System.out.println("dopo"+this.descrizione);
-			}			
+				}			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -52,7 +52,6 @@ public class AggiuntaDB {
 			statement.setString(2, nomeProdotto);
 			statement.setInt(3, punti);
 			statement.setBinaryStream(4, (InputStream) fis, (int) (file.length()));
-			// tConnection.executeUpdate(queryAggiuntaProdotto);
 			statement.executeUpdate();
 			System.out.println("prodotto aggiunto correttamente");
 

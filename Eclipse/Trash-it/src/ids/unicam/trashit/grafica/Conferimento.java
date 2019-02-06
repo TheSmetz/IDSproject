@@ -91,7 +91,6 @@ public class Conferimento {
 				}
 				
 				IstruzioniConferimento.istrlblDescrizione.setText(Scansione.prodottoCorrente.getDescrizione());	//descrizione prodotto	
-//				System.out.println(Scansione.prodottoCorrente.getDescrizione());
 				GestoreGrafica.switchPanel(GestoreGrafica.istruzioniConferimento.getJPanelIstruzioni());
 				GestoreGrafica.startTimer(30);
 			}
@@ -121,7 +120,7 @@ public class Conferimento {
 		return this.confbtnProdottoVisualizzatoCorretto;
 	}
 	
-	//da fare metodo set immagine prodotto da database
+
 	public void setJPanelConferimento() {
 		conferimento = new JPanel();
 		conferimento.setOpaque(false);

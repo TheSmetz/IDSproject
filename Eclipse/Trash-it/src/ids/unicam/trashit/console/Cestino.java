@@ -4,7 +4,7 @@ public class Cestino {
 
 	@SuppressWarnings("unused")
 	private String tipo;
-	private boolean vuoto = true; // capienza = 100;
+	private boolean vuoto = true; 
 	private int capienza;
 	private boolean integrita = true;
 	@SuppressWarnings("unused")
@@ -18,11 +18,11 @@ public class Cestino {
 		}
 	}
 	
-	public void svuotaCestino() { //TECNICO
+	public void svuotaCestino() { 
 		this.capienza=0;
 	}
 	
-	public void riparaCestino() { //TECNICO
+	public void riparaCestino() { 
 		this.integrita=true;
 	}
 

@@ -44,7 +44,7 @@ public class CestinoSmart {
 			return false;
 	}
 
-	protected boolean controlloCestini() { // controllo generale sia vuoto sia integrità
+	protected boolean controlloCestini() {
 		if (controlloIntegrita() == true && controlloVuoto() == false) {
 			return true;
 		} else

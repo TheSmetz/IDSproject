@@ -46,7 +46,7 @@ public class Scansione {
 	public static Tessera tesseraScansionata;
 	public static boolean tesseraLetta = false;
 	public static Prodotto prodottoCorrente;
-	//public static Policy policyProdotto;
+
 	
 
 	public static void btnIndietro(JPanel wherePanel) {
@@ -257,7 +257,7 @@ public class Scansione {
 		return Scansione.prodottoCorrente;
 	}
 
-	// CONTROLLARE
+	
 	public void setJPanelScansione() {
 		scansione = new JPanel();
 		scansione.setOpaque(false);

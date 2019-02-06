@@ -79,16 +79,6 @@ public class CreateConnection {
 			e.printStackTrace();
 		}
 	}	
-	public static void main(String[] args) throws SQLException {
-		
-//		CreateConnection trash = new CreateConnection("dbtrash-it", "SELECT * FROM tessera");
-//		
-//		String cf;
-//		
-//		while (trash.rsQuery.next()) {	
-//			cf = trash.rsQuery.getString("IDtessera");
-//			System.out.println(cf);
-//		}		
-	}
+
 
 }
