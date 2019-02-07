@@ -19,7 +19,6 @@ public class AggiuntaDB {
 		queryAggiuntaTessera = "INSERT INTO tessera (IDtessera,nome,cognome,nascita,punti) " + "VALUES ('" + CF + "','"
 				+ nomeTessera + "','" + cognome + "','" + nascita + "',0)";
 		tConnection.executeUpdate(queryAggiuntaTessera);
-		System.out.println("tessera aggiunta correttamente");
 	}
 
 	public Connection getConnection() {
@@ -53,7 +52,6 @@ public class AggiuntaDB {
 			statement.setInt(3, punti);
 			statement.setBinaryStream(4, (InputStream) fis, (int) (file.length()));
 			statement.executeUpdate();
-			System.out.println("prodotto aggiunto correttamente");
 
 		} catch (FileNotFoundException e) {
 			System.out.println("FileNotFoundException: - " + e);

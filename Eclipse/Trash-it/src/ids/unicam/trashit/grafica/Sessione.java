@@ -47,7 +47,7 @@ public class Sessione {
 		sessionebtnAvviaSessione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(GestoreGrafica.home.getJPanelHome());
-				GestoreGrafica.startTimer(30);		
+				GestoreGrafica.startTimer(60);		
 			}
 		});
 		

@@ -68,7 +68,7 @@ public class Home{
 		homebtnScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				GestoreGrafica.switchPanel(GestoreGrafica.scansione.getJPanelScansione());
-				GestoreGrafica.startTimer(60);
+				GestoreGrafica.startTimer(120);
 			}
 		});
 		home.add(homebtnScansione);
@@ -79,7 +79,7 @@ public class Home{
 		homebtnRitiroPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				GestoreGrafica.switchPanel(GestoreGrafica.scanTessera.getJPanelScansioneTessera());
-				GestoreGrafica.startTimer(60);
+				GestoreGrafica.startTimer(120);
 			}
 		});
 		homebtnRitiroPremio.setVerticalTextPosition(SwingConstants.CENTER);
@@ -100,7 +100,7 @@ public class Home{
 		homebtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(GestoreGrafica.assistenza.getJPanelAssistenza());
-				GestoreGrafica.startTimer(30);
+				GestoreGrafica.startTimer(60);
 			}
 		});
 		homebtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -119,7 +119,7 @@ public class Home{
 		homebtnInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(GestoreGrafica.about.getJPanelAbout());
-				GestoreGrafica.startTimer(30);
+				GestoreGrafica.startTimer(60);
 			}
 		});
 		homebtnInfo.setVerticalTextPosition(SwingConstants.CENTER);

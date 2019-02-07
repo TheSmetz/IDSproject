@@ -128,7 +128,7 @@ public class Registrazione {
 					} else {
 						JOptionPane.showMessageDialog(registrazione, "TESSERA GIA' NEL DATABASE.");
 						GestoreGrafica.switchPanel(GestoreGrafica.home.getJPanelHome());
-						GestoreGrafica.startTimer(30);
+						GestoreGrafica.startTimer(120);
 						resetCampi();
 					}
 				}else {

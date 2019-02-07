@@ -44,7 +44,6 @@ public class Provincia {
 		    throw new IOException("Nessuna provincia inserita");
 		}
 		getProvincia((String) value);
-
 	}
 	
 	private void getProvincia(String cittaNome) {

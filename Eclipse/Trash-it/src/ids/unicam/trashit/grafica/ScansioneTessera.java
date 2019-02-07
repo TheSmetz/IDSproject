@@ -72,7 +72,7 @@ public class ScansioneTessera {
 							tesseraScansionata.getNome() + " " + String.valueOf(tesseraScansionata.getCognome())));
 					RitiroPremio.ritirolblPuntiTessera.setText("Punti tessera: " + String.valueOf(tesseraScansionata.getPunti()));
 					GestoreGrafica.switchPanel(GestoreGrafica.ritiroPremio.getJPanelRitiroPremio());
-					GestoreGrafica.startTimer(60);
+					GestoreGrafica.startTimer(120);
 				} else {
 					JOptionPane.showMessageDialog(scansioneTessera, "Attenzione riconoscimento fallito \n      " + "Vi invitiamo a riprovare");
 					scanTesseratxtInputCodice.setText("");

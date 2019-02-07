@@ -37,7 +37,7 @@ public class About {
 		aboutbtnProblemiAssistenza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(GestoreGrafica.assistenza.getJPanelAssistenza());
-				GestoreGrafica.startTimer(30);
+				GestoreGrafica.startTimer(120);
 			}
 		});
 		aboutbtnProblemiAssistenza.setVerticalTextPosition(SwingConstants.CENTER);
@@ -72,7 +72,7 @@ public class About {
 		aboutbtnHomePage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(GestoreGrafica.home.getJPanelHome());
-				GestoreGrafica.startTimer(30);
+				GestoreGrafica.startTimer(120);
 			}
 		});
 		aboutbtnHomePage.setVerticalTextPosition(SwingConstants.CENTER);

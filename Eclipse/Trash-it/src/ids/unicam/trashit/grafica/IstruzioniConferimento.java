@@ -30,7 +30,7 @@ public class IstruzioniConferimento{
 		 istrbtnNuovaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(GestoreGrafica.scansione.getJPanelScansione());
-				GestoreGrafica.startTimer(30);
+				GestoreGrafica.startTimer(120);
 				Conferimento.cestinoSessione.chiudiBocchette();
 			}
 		});

@@ -60,7 +60,7 @@ public class Scansione {
 		scanbtnIndietro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestoreGrafica.switchPanel(GestoreGrafica.home.getJPanelHome());
-				GestoreGrafica.startTimer(30);
+				GestoreGrafica.startTimer(60);
 				GestoreGrafica.registrazione.resetCampi();
 			}
 		});
@@ -118,7 +118,7 @@ public class Scansione {
 		scanbtnAvviaScansione.setContentAreaFilled(false);
 		scanbtnAvviaScansione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {	
-				GestoreGrafica.startTimer(30);
+				GestoreGrafica.startTimer(60);
 				input = scantxtInputBarcode.getText().toUpperCase();
 				if(input.length()==0) {
 					JOptionPane.showMessageDialog(scansione, "Barcode non rilevato");
@@ -165,7 +165,7 @@ public class Scansione {
 				}
 				setImmagineProdotto();
 				GestoreGrafica.switchPanel(GestoreGrafica.conferimento.getJPanelConferimento());
-				GestoreGrafica.startTimer(60);
+				GestoreGrafica.startTimer(120);
 			} else {
 				JOptionPane.showMessageDialog(scansione, "Prodotto/Tessera errati oppure non presente nel DB, invia notifica per aggiungerlo");
 				aggiungiProdotto();

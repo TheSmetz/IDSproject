@@ -20,13 +20,11 @@ public class Statistica {
 		String queryStatistica = "INSERT INTO statistica (prodottoID, tesseraID, orario) "
 				+ "VALUE ('" + this.prodottoID + "','" + this.tesseraID + "','" + this.orario + "')";		
 		statisticaConnection.executeUpdate(queryStatistica);
-		System.out.println(this.prodottoID + this.tesseraID);
 	}
 	
 	private String tempoAttuale () {
 		 Date dNow = new Date( );
 	      SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
-	      System.out.println("Current Date: " + ft.format(dNow));
 		return ft.format(dNow);
 	}
 }
