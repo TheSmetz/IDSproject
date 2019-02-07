@@ -1,5 +1,6 @@
 package ids.unicam.trashit.database;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ public class Provincia {
 	CreateConnection provinciaConnection = new CreateConnection();
 	private String provinciaCestino;
 	
-	public Provincia () {
+	public Provincia () throws IOException {
 		getDBOptions();
 		setProvincia();
 	}
@@ -29,16 +30,21 @@ public class Provincia {
 		}	
 	  }
 	
-	private void setProvincia() {
+	private void setProvincia() throws IOException {
 		Object[] options = arrayProvincia.toArray();
-		Object value = JOptionPane.showInputDialog(null, 
+		Object value=JOptionPane.showInputDialog(null, 
                 "Seleziona una provincia", 
                 "Provincia", 
                  JOptionPane.INFORMATION_MESSAGE, 
                  null,
                  options, 
                  options[0]);
+		if(value == null || (value != null && ("".equals(value))))   
+		{
+		    throw new IOException("Nessuna provincia inserita");
+		}
 		getProvincia((String) value);
+
 	}
 	
 	private void getProvincia(String cittaNome) {
